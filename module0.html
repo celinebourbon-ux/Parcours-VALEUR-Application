@@ -300,17 +300,17 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
 <!-- ── WIZARD PROGRESS BAR ── -->
 <div id="progress-bar">
   <a href="index.html" class="pb-back">&#8592; <span>Accueil</span></a>
-  <div class="wz-steps" id="wz-steps">
-    <div class="wz-step-circle active" data-step="1" id="wz-c1" title="Pourquoi vous sentez-vous comme ça ?">1</div>
-    <div class="wz-step-line" id="wz-l1"></div>
-    <div class="wz-step-circle" data-step="2" id="wz-c2" title="Votre cerveau a 300 000 ans d’avance">2</div>
-    <div class="wz-step-line" id="wz-l2"></div>
-    <div class="wz-step-circle" data-step="3" id="wz-c3" title="Votre vraie nature et vos masques">3</div>
-    <div class="wz-step-line" id="wz-l3"></div>
-    <div class="wz-step-circle" data-step="4" id="wz-c4" title="Les 7 visages de votre anxiété">4</div>
-    <div class="wz-step-line" id="wz-l4"></div>
-    <div class="wz-step-circle" data-step="5" id="wz-c5" title="Votre masque prioritaire">5</div>
-  </div>
+  <nav class="wz-steps" id="wz-steps" aria-label="Étape en cours">
+    <div class="wz-step-circle active" data-step="1" id="wz-c1" role="button" tabindex="0" aria-label="Étape 1 : Pourquoi vous sentez-vous comme ça ?" aria-current="step">1</div>
+    <div class="wz-step-line" id="wz-l1" aria-hidden="true"></div>
+    <div class="wz-step-circle" data-step="2" id="wz-c2" role="button" tabindex="-1" aria-label="Étape 2 : Votre cerveau a 300 000 ans d’avance">2</div>
+    <div class="wz-step-line" id="wz-l2" aria-hidden="true"></div>
+    <div class="wz-step-circle" data-step="3" id="wz-c3" role="button" tabindex="-1" aria-label="Étape 3 : Votre vraie nature et vos masques">3</div>
+    <div class="wz-step-line" id="wz-l3" aria-hidden="true"></div>
+    <div class="wz-step-circle" data-step="4" id="wz-c4" role="button" tabindex="-1" aria-label="Étape 4 : Les 7 visages de votre anxiété">4</div>
+    <div class="wz-step-line" id="wz-l4" aria-hidden="true"></div>
+    <div class="wz-step-circle" data-step="5" id="wz-c5" role="button" tabindex="-1" aria-label="Étape 5 : Votre masque prioritaire">5</div>
+  </nav>
 </div>
 
 <main>
@@ -826,8 +826,10 @@ function updateWizardHeader(n){
     var circle=document.getElementById('wz-c'+i);
     if(!circle)continue;
     circle.classList.remove('active','done');
+    circle.removeAttribute('aria-current');
+    circle.tabIndex=i<=n?0:-1;
     if(i<n){circle.classList.add('done');circle.textContent='✓';}
-    else if(i===n){circle.classList.add('active');circle.textContent=String(i);}
+    else if(i===n){circle.classList.add('active');circle.textContent=String(i);circle.setAttribute('aria-current','step');}
     else{circle.textContent=String(i);}
     if(i<totalSteps){var line=document.getElementById('wz-l'+i);if(line)line.classList.toggle('filled',i<n);}
   }
@@ -844,7 +846,7 @@ function showStep(n){
   if(prev)prev.style.visibility=n>1?'visible':'hidden';
   if(next)next.style.display=n===totalSteps?'none':'block';
   window.scrollTo(0,0);
-  setTimeout(onScroll,60);
+  setTimeout(onScroll,60); // brief delay ensures new step is visible before triggering scroll animations
 }
 
 function nextStep(){if(currentStep<totalSteps)showStep(currentStep+1);}
