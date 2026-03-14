@@ -27,34 +27,26 @@ body{font-family:'Jost',sans-serif;background:var(--navy);color:var(--text);min-
 .orb3{width:350px;height:350px;background:var(--gold);top:45%;left:55%;opacity:.05;animation-delay:-16s;}
 @keyframes drift{0%,100%{transform:translate(0,0);}33%{transform:translate(35px,-25px);}66%{transform:translate(-20px,35px);}}
 
-/* ── PROGRESS BAR ── */
+/* ── WIZARD PROGRESS BAR ── */
 #progress-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,13,26,.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,168,76,.15);padding:10px 20px;display:flex;align-items:center;gap:12px;}
 .pb-back{display:flex;align-items:center;gap:6px;background:var(--glass);border:1px solid var(--gb);border-radius:8px;padding:6px 12px;color:var(--text2);font-size:12px;letter-spacing:.5px;text-decoration:none;transition:all .3s;white-space:nowrap;flex-shrink:0;}
 .pb-back:hover{background:var(--gold-glow);border-color:var(--gold);color:var(--gold);}
-.pb-steps{display:flex;gap:6px;flex:1;align-items:center;}
-.pb-step{flex:1;height:34px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .5s cubic-bezier(.34,1.56,.64,1);}
-.pb-step.done{background:linear-gradient(135deg,var(--gold),var(--gold-light));border-color:var(--gold-light);box-shadow:0 2px 12px rgba(201,168,76,.35);cursor:pointer;}
-.pb-step.active{background:rgba(201,168,76,.1);border-color:var(--gold);animation:pb-pulse 2.5s ease-in-out infinite;}
-@keyframes pb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(201,168,76,.3);}50%{box-shadow:0 0 0 4px rgba(201,168,76,0);}}
-.pb-letter{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--muted);}
-.pb-step.done .pb-letter{color:#070D1A;}.pb-step.active .pb-letter{color:var(--gold);}
-.pb-pct{font-size:13px;font-weight:700;color:var(--gold);min-width:36px;text-align:right;}
-@media(max-width:480px){.pb-letter{font-size:9px;}.pb-step{height:26px;}#progress-bar{padding:8px 12px;gap:8px;}.pb-back span{display:none;}}
-
-/* ── DOT NAV ── */
-#dot-nav{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:500;display:flex;flex-direction:column;gap:8px;}
-.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .4s;}
-.dot.active{background:var(--gold);border-color:var(--gold);box-shadow:0 0 8px var(--gold-glow);transform:scale(1.4);}
-.dot:hover{background:rgba(201,168,76,.5);}
-@media(max-width:768px){#dot-nav{display:none;}}
+.wz-steps{display:flex;align-items:center;flex:1;}
+.wz-step-circle{width:30px;height:30px;border-radius:50%;border:2px solid rgba(255,255,255,.15);background:rgba(255,255,255,.04);display:flex;align-items:center;justify-content:center;font-family:'Jost',sans-serif;font-size:11px;font-weight:700;color:var(--muted);transition:all .4s cubic-bezier(.34,1.56,.64,1);flex-shrink:0;cursor:default;}
+.wz-step-circle.active{background:var(--gold);border-color:var(--gold);color:var(--navy);box-shadow:0 2px 12px rgba(201,168,76,.45);}
+.wz-step-circle.done{background:var(--gold);border-color:var(--gold-light);color:var(--navy);cursor:pointer;}
+.wz-step-line{flex:1;height:2px;background:rgba(255,255,255,.08);position:relative;margin:0 4px;border-radius:1px;overflow:hidden;}
+.wz-step-line::after{content:'';position:absolute;top:0;left:0;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold-light));width:0%;transition:width .5s ease;}
+.wz-step-line.filled::after{width:100%;}
+@media(max-width:480px){#progress-bar{padding:8px 12px;gap:8px;}.pb-back span{display:none;}.wz-step-circle{width:24px;height:24px;font-size:9px;}}
 
 /* ── SCROLL LINE ── */
 #scroll-line{position:fixed;top:54px;left:0;height:2px;z-index:999;background:linear-gradient(90deg,var(--gold),var(--gold-light));width:0%;transition:width .1s linear;}
 
 /* ── MAIN ── */
-main{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:78px 24px 140px;}
-@media(max-width:768px){main{padding:74px 18px 120px;}}
-@media(max-width:480px){main{padding:70px 14px 100px;}}
+main{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:78px 24px 160px;}
+@media(max-width:768px){main{padding:74px 18px 140px;}}
+@media(max-width:480px){main{padding:70px 14px 120px;}}
 
 /* ── SECTIONS ── */
 .section{padding:56px 0;opacity:0;transform:translateY(32px);transition:opacity .7s ease,transform .7s ease;}
@@ -287,34 +279,44 @@ main{position:relative;z-index:1;max-width:780px;margin:0 auto;padding:78px 24px
 /* ── FOOTER ── */
 footer{position:relative;z-index:1;text-align:center;padding:24px 20px;border-top:1px solid rgba(255,255,255,.05);}
 footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-transform:uppercase;}
+/* ── WIZARD STEPS ── */
+.wizard-step{display:none;}
+.wizard-step.active{display:block;}
+
+/* ── WIZARD NAVIGATION BAR ── */
+#wizard-nav{position:fixed;bottom:0;left:0;right:0;z-index:999;padding:0 24px;pointer-events:none;}
+#wizard-nav-inner{max-width:780px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;background:linear-gradient(to top,var(--navy) 60%,transparent);padding:20px 0 16px;pointer-events:all;}
+.btn-wz-prev{background:transparent;color:rgba(255,255,255,.5);border:1px solid rgba(255,255,255,.15);border-radius:50px;padding:13px 24px;font-family:'Jost',sans-serif;font-size:.9rem;cursor:pointer;transition:all .3s;line-height:1;}
+.btn-wz-prev:hover{border-color:rgba(255,255,255,.3);color:var(--text);}
+.btn-wz-next{background:linear-gradient(135deg,var(--gold),var(--gold-light));color:var(--navy);border:none;border-radius:50px;padding:14px 36px;font-family:'Jost',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;box-shadow:0 4px 20px rgba(201,168,76,.4);transition:all .3s;line-height:1;}
+.btn-wz-next:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,168,76,.5);}
+@media(max-width:480px){#wizard-nav{padding:0 16px;}.btn-wz-prev{padding:11px 18px;font-size:.85rem;}.btn-wz-next{padding:12px 28px;font-size:.9rem;}}
 </style>
 </head>
 <body>
 <div class="bg-aurora"><div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div></div>
 <div id="scroll-line"></div>
 
-<!-- ── BARRE DE PROGRESSION UNIFIÉE ── -->
+<!-- ── WIZARD PROGRESS BAR ── -->
 <div id="progress-bar">
   <a href="index.html" class="pb-back">&#8592; <span>Accueil</span></a>
-  <div class="pb-steps" id="pb-steps"></div>
-  <span class="pb-pct" id="pb-pct">0%</span>
+  <nav class="wz-steps" id="wz-steps" aria-label="Étape en cours">
+    <div class="wz-step-circle active" data-step="1" id="wz-c1" role="button" tabindex="0" aria-label="Étape 1 : Pourquoi vous sentez-vous comme ça ?" aria-current="step">1</div>
+    <div class="wz-step-line" id="wz-l1" aria-hidden="true"></div>
+    <div class="wz-step-circle" data-step="2" id="wz-c2" role="button" tabindex="-1" aria-label="Étape 2 : Votre cerveau a 300 000 ans d’avance">2</div>
+    <div class="wz-step-line" id="wz-l2" aria-hidden="true"></div>
+    <div class="wz-step-circle" data-step="3" id="wz-c3" role="button" tabindex="-1" aria-label="Étape 3 : Votre vraie nature et vos masques">3</div>
+    <div class="wz-step-line" id="wz-l3" aria-hidden="true"></div>
+    <div class="wz-step-circle" data-step="4" id="wz-c4" role="button" tabindex="-1" aria-label="Étape 4 : Les 7 visages de votre anxiété">4</div>
+    <div class="wz-step-line" id="wz-l4" aria-hidden="true"></div>
+    <div class="wz-step-circle" data-step="5" id="wz-c5" role="button" tabindex="-1" aria-label="Étape 5 : Votre masque prioritaire">5</div>
+  </nav>
 </div>
 
-<!-- ── NAVIGATION POINTS ── -->
-<nav id="dot-nav" aria-label="Navigation par sections">
-  <div class="dot active" data-section="0" title="Introduction"></div>
-  <div class="dot" data-section="1" title="Vous reconnaissez-vous"></div>
-  <div class="dot" data-section="2" title="Vidéo anxiété"></div>
-  <div class="dot" data-section="3" title="Cerveau archaïque"></div>
-  <div class="dot" data-section="4" title="La résistance"></div>
-  <div class="dot" data-section="5" title="Vraie nature & masques"></div>
-  <div class="dot" data-section="6" title="Les 7 visages"></div>
-  <div class="dot" data-section="7" title="Ce qui vous attend"></div>
-  <div class="dot" data-section="8" title="Votre masque prioritaire"></div>
-  <div class="dot" data-section="9" title="Terminer"></div>
-</nav>
-
 <main>
+
+<!-- ── WIZARD STEP 1 : Pourquoi vous sentez-vous comme ça ? ── -->
+<div class="wizard-step active" data-step="1">
 
 <!-- ── S0 : HERO ── -->
 <section class="section" data-s="0" id="s0">
@@ -329,10 +331,6 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
       <div style="font-size:.97rem;color:var(--text2);font-weight:300;">Environ 45 minutes &middot; &#224; votre rythme</div>
     </div>
   </div>
-  <button class="btn-next" onclick="scrollToNext('s1')">
-    Commencer le module
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
 
 <!-- ── S1 : ACCROCHE ── -->
@@ -351,10 +349,6 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
       <em style="color:var(--gold);">C&#8217;est une peur que personne ne vous a encore appris &#224; nommer.</em>
     </p>
   </div>
-  <button class="btn-next" onclick="scrollToNext('s2')">
-    Comprendre la biologie
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
 
 <!-- ── S2 : VIDÉO ANXIÉTÉ ── -->
@@ -369,11 +363,12 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
   <div class="glass">
     <p style="font-size:.97rem;color:var(--text2);line-height:1.85;font-weight:300;">Ce que vous venez de voir n&#8217;est pas th&#233;orique. C&#8217;est ce que votre corps traverse, souvent plusieurs fois par jour &#8212; sans que vous en ayez conscience. <strong style="color:var(--text)">La suite de ce module vous explique pourquoi, et surtout comment en sortir.</strong></p>
   </div>
-  <button class="btn-next" onclick="scrollToNext('s3')">
-    Le cerveau archa&iuml;que
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
+
+</div><!-- /wizard-step 1 -->
+
+<!-- ── WIZARD STEP 2 : Votre cerveau a 300 000 ans d’avance ── -->
+<div class="wizard-step" data-step="2">
 
 <!-- ── S3 : CERVEAU ARCHAÏQUE ── -->
 <section class="section" data-s="3" id="s3">
@@ -403,10 +398,6 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
   <div class="key-insight">
     <p>Vous n&#8217;avez pas un <em>probl&#232;me</em>.<br>Vous avez une <em>histoire</em> &#8212; et un cerveau qui a fait de son mieux pour vous prot&#233;ger.</p>
   </div>
-  <button class="btn-next" onclick="scrollToNext('s4')">
-    La formule de la souffrance
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
 
 <!-- ── S4 : FORMULE RÉSISTANCE ── -->
@@ -451,11 +442,12 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
     <div style="font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;">La bonne nouvelle</div>
     <p style="font-size:1rem;color:var(--text2);line-height:1.85;font-weight:300;">Vous ne contr&#244;lez pas l&#8217;arriv&#233;e des &#233;motions. Mais vous pouvez <strong style="color:var(--text)">r&#233;duire la r&#233;sistance</strong> &#8212; et c&#8217;est exactement ce que la m&#233;thode V.A.L.E.U.R&#169; vous apprend &#224; faire, &#233;tape par &#233;tape.</p>
   </div>
-  <button class="btn-next" onclick="scrollToNext('s5')">
-    D&#233;couvrir les masques
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
+
+</div><!-- /wizard-step 2 -->
+
+<!-- ── WIZARD STEP 3 : Votre vraie nature et vos masques ── -->
+<div class="wizard-step" data-step="3">
 
 <!-- ── S5 : VRAIE NATURE vs MASQUES ── -->
 <section class="section" data-s="5" id="s5">
@@ -585,11 +577,12 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
       <em>Ce parcours r&#233;pond &#224; cette question &#8212;<br>que personne ne vous a jamais pos&#233;e.</em>
     </p>
   </div>
-  <button class="btn-next" onclick="scrollToNext('s6')">
-    D&#233;couvrir les 7 visages
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
+
+</div><!-- /wizard-step 3 -->
+
+<!-- ── WIZARD STEP 4 : Les 7 visages de votre anxiété ── -->
+<div class="wizard-step" data-step="4">
 
 <!-- ── S6 : LES 7 MASQUES ── -->
 <section class="section" data-s="6" id="s6">
@@ -632,10 +625,6 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
       <span class="sci-badge">SHAI</span><span class="sci-badge">TAS-20</span><span class="sci-badge">IUS-12</span><span class="sci-badge">ECR-R</span><span class="sci-badge">LOC+NPI</span><span class="sci-badge">FMPS</span><span class="sci-badge">MSI</span>
     </div>
   </div>
-  <button class="btn-next" onclick="scrollToNext('s7')">
-    Ce que vous allez retrouver
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
 
 <!-- ── S7 : PROMESSES ── -->
@@ -657,11 +646,12 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
       <em style="color:var(--gold);">Il vous attend juste en dessous.</em>
     </p>
   </div>
-  <button class="btn-next" onclick="scrollToNext('s8')">
-    D&#233;couvrir mon masque prioritaire
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
+
+</div><!-- /wizard-step 4 -->
+
+<!-- ── WIZARD STEP 5 : Votre masque prioritaire + Validation ── -->
+<div class="wizard-step" data-step="5">
 
 <!-- ── S8 : MASQUE PRIORITAIRE ── -->
 <section class="section" data-s="8" id="s8">
@@ -727,10 +717,6 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
     </div>
   </div>
 
-  <button class="btn-next" onclick="scrollToNext('s9')" style="margin-top:32px;">
-    Terminer et d&#233;bloquer VOIR
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-  </button>
 </section>
 
 <!-- ── S9 : COMPLÉTER ── -->
@@ -755,6 +741,8 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
   </div>
 </section>
 
+</div><!-- /wizard-step 5 -->
+
 </main>
 <footer><p>&#169; C&#233;line Bourbon &#8212; M&#233;thode V.A.L.E.U.R&#169; &#8212; Tous droits r&#233;serv&#233;s &middot; Reproduction interdite</p></footer>
 
@@ -766,6 +754,14 @@ footer p{font-size:10px;letter-spacing:1.5px;color:rgba(138,155,181,.4);text-tra
     <p style="font-size:.92rem;color:var(--text2);line-height:1.75;margin-bottom:24px;">Lequel vous p&#232;se le plus au quotidien&#160;? Choisissez instinctivement &#8212; votre premi&#232;re r&#233;action est toujours la plus juste.</p>
     <div id="tie-choices" style="display:flex;flex-direction:column;gap:10px;"></div>
     <p style="font-size:.75rem;color:rgba(138,155,181,.4);margin-top:16px;text-align:center;">Ce choix peut &#234;tre modifi&#233; &#224; tout moment depuis votre espace.</p>
+  </div>
+</div>
+
+<!-- ── WIZARD NAVIGATION BAR ── -->
+<div id="wizard-nav">
+  <div id="wizard-nav-inner">
+    <button class="btn-wz-prev" id="wz-prev" onclick="prevStep()" style="visibility:hidden;">&#8592; Pr&#233;c&#233;dent</button>
+    <button class="btn-wz-next" id="wz-next" onclick="nextStep()">Suivant &#8594;</button>
   </div>
 </div>
 
@@ -821,24 +817,40 @@ const MD={
   violet:{emoji:'\uD83D\uDC9C',name:'Masque Violet',fear:'Peur de la perte d\u2019identit\u00e9',fait:'Vous portez tellement de masques que vous ne savez plus qui vous \u00eates vraiment.',aspire:'Vous aspirez \u00e0 vivre align\u00e9\u00b7e avec une identit\u00e9 qui vous appartient v\u00e9ritablement.',mirror:'Si vous pouviez \u00eatre totalement vous-m\u00eame, \u00e0 quoi ressemblerait votre vie\u00a0?',color:'#805AD5',bg:'rgba(128,90,213,.08)',border:'rgba(128,90,213,.25)',questions:['Qui \u00eates-vous vraiment, en dehors des r\u00f4les que vous jouez\u00a0?','Quand vous sentez-vous le plus \u00e9loign\u00e9\u00b7e de vous-m\u00eame\u00a0?','Quelle serait votre premi\u00e8re action si vous osiez \u00eatre pleinement vous-m\u00eame\u00a0?']}
 };
 
-/* ── NAVIGATION SECTIONS ── */
-function scrollToNext(id){
-  const el=document.getElementById(id);
-  if(el){el.scrollIntoView({behavior:'smooth',block:'start'});}
+/* ── WIZARD ── */
+var currentStep=1;
+var totalSteps=5;
+
+function updateWizardHeader(n){
+  for(var i=1;i<=totalSteps;i++){
+    var circle=document.getElementById('wz-c'+i);
+    if(!circle)continue;
+    circle.classList.remove('active','done');
+    circle.removeAttribute('aria-current');
+    circle.tabIndex=i<=n?0:-1;
+    if(i<n){circle.classList.add('done');circle.textContent='✓';}
+    else if(i===n){circle.classList.add('active');circle.textContent=String(i);circle.setAttribute('aria-current','step');}
+    else{circle.textContent=String(i);}
+    if(i<totalSteps){var line=document.getElementById('wz-l'+i);if(line)line.classList.toggle('filled',i<n);}
+  }
 }
 
-/* ── PROGRESS BAR ── */
-function renderProgress(){
-  const steps=document.getElementById('pb-steps');
-  const pct=document.getElementById('pb-pct');
-  const done=MODULES.filter(m=>isDone(m.key)).length;
-  pct.textContent=Math.round((done/MODULES.length)*100)+'%';
-  steps.innerHTML=MODULES.map(m=>{
-    const d=isDone(m.key);
-    return '<div class="pb-step'+(d?' done':'')+((!d&&!isDone(MODULES[MODULES.indexOf(m)-1]?.key||'x')&&done===MODULES.indexOf(m))?' active':'')
-      +'" title="'+m.letter+'"><span class="pb-letter">'+m.letter+'</span></div>';
-  }).join('');
+function showStep(n){
+  document.querySelectorAll('.wizard-step').forEach(function(s){s.classList.remove('active');});
+  var target=document.querySelector('.wizard-step[data-step="'+n+'"]');
+  if(target)target.classList.add('active');
+  currentStep=n;
+  updateWizardHeader(n);
+  var prev=document.getElementById('wz-prev');
+  var next=document.getElementById('wz-next');
+  if(prev)prev.style.visibility=n>1?'visible':'hidden';
+  if(next)next.style.display=n===totalSteps?'none':'block';
+  window.scrollTo(0,0);
+  setTimeout(onScroll,60); // brief delay ensures new step is visible before triggering scroll animations
 }
+
+function nextStep(){if(currentStep<totalSteps)showStep(currentStep+1);}
+function prevStep(){if(currentStep>1)showStep(currentStep-1);}
 
 /* ── SCROLL LINE ── */
 function updateScrollLine(){
@@ -847,27 +859,31 @@ function updateScrollLine(){
   el.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
 }
 
-/* ── SECTIONS VISIBILITY ── */
-const sections=document.querySelectorAll('.section');
-const dots=document.querySelectorAll('.dot');
-const accroches=document.querySelectorAll('.accroche');
-const brainCards=document.querySelectorAll('.brain-card');
-
+/* ── SECTIONS VISIBILITY (scoped to active wizard step) ── */
 function onScroll(){
   updateScrollLine();
-  sections.forEach(s=>{if(s.getBoundingClientRect().top<window.innerHeight*.85)s.classList.add('visible');});
-  accroches.forEach((a,i)=>{if(a.getBoundingClientRect().top<window.innerHeight*.9)setTimeout(()=>a.classList.add('in'),i*150);});
-  brainCards.forEach((c,i)=>{if(c.getBoundingClientRect().top<window.innerHeight*.88)setTimeout(()=>c.classList.add('in'),i*220);});
-  let active=0;
-  sections.forEach((s,i)=>{if(s.getBoundingClientRect().top<=window.innerHeight/2)active=i;});
-  dots.forEach((d,i)=>d.classList.toggle('active',i===active));
+  var activeStep=document.querySelector('.wizard-step.active');
+  if(!activeStep)return;
+  activeStep.querySelectorAll('.section').forEach(function(s){
+    if(s.getBoundingClientRect().top<window.innerHeight*.85)s.classList.add('visible');
+  });
+  activeStep.querySelectorAll('.accroche').forEach(function(a,i){
+    if(a.getBoundingClientRect().top<window.innerHeight*.9)setTimeout(function(){a.classList.add('in');},i*150);
+  });
+  activeStep.querySelectorAll('.brain-card').forEach(function(c,i){
+    if(c.getBoundingClientRect().top<window.innerHeight*.88)setTimeout(function(){c.classList.add('in');},i*220);
+  });
 }
-dots.forEach(d=>d.addEventListener('click',()=>{
-  const idx=+d.dataset.section;
-  sections[idx]?.scrollIntoView({behavior:'smooth',block:'start'});
-}));
 window.addEventListener('scroll',onScroll,{passive:true});
 window.addEventListener('resize',onScroll);
+
+/* ── WIZARD STEP CIRCLES CLICK (navigate back to completed steps) ── */
+document.querySelectorAll('.wz-step-circle').forEach(function(c){
+  c.addEventListener('click',function(){
+    var n=parseInt(this.dataset.step);
+    if(n<currentStep)showStep(n);
+  });
+});
 
 /* ── MASQUES TOGGLE ── */
 function toggleMask(el){
@@ -1034,7 +1050,6 @@ function renderJournal(){
 function completeModule(){
   markDone('module0_complete');
   markDone('module1'); // unlock VOIR
-  renderProgress();
   document.getElementById('unlock-preview').classList.add('show');
   launchConfetti();
   showToast('\uD83C\uDF89 Module 0 compl\u00e9t\u00e9 ! VOIR \uD83D\uDD34 d\u00e9bloqu\u00e9 !');
@@ -1062,9 +1077,7 @@ window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.heig
 
 /* ── INIT ── */
 document.addEventListener('DOMContentLoaded',async()=>{
-  renderProgress();
-  onScroll();
-  setTimeout(onScroll,150);
+  showStep(1);
   // Pré-remplir journal si entrée existante
   try{
     const existing=getJournalV3().find(e=>e.module===0);
@@ -1088,3 +1101,4 @@ document.addEventListener('DOMContentLoaded',async()=>{
 </script>
 </body>
 </html>
+___BEGIN___COMMAND_DONE_MARKER___0
