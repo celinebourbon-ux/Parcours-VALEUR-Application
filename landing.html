@@ -1,0 +1,1223 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>V.A.L.E.U.R© — Se libérer des 7 peurs qui empêchent d'être soi</title>
+<meta name="description" content="La méthode V.A.L.E.U.R© de Céline Bourbon, psychologue. Cartographiez vos défenses, identifiez vos peurs universelles, et devenez enfin vous-même.">
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Jost:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ═══════════════════════════════════════ RESET */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{
+  font-family:'Jost',sans-serif;
+  background:#06090f;
+  color:#c0cfe8;
+  overflow-x:hidden;
+  -webkit-user-select:none;
+  user-select:none;
+}
+img{pointer-events:none;-webkit-user-drag:none}
+
+/* ═══════════════════════════════════════ VARIABLES */
+:root{
+  --navy:   #06090f;
+  --n1:     #0a0f1e;
+  --n2:     #0e1628;
+  --n3:     #14202f;
+  --n4:     #1a2940;
+  --gold:   #c9a84c;
+  --gold2:  #e8cc7a;
+  --gold3:  #8a6b22;
+  --goldg:  rgba(201,168,76,.22);
+  --cream:  #f0e8d8;
+  --txt:    #96aac8;
+  --dim:    #3a506a;
+  --border: rgba(201,168,76,.1);
+
+  /* masques */
+  --rouge:  #c0392b;
+  --orange: #d35400;
+  --jaune:  #c9a100;
+  --vert:   #1a8c4e;
+  --bleu:   #1a6fa0;
+  --indigo: #6c3483;
+  --violet: #7d3c98;
+}
+
+/* ═══════════════════════════════════════ NAV */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:990;
+  height:62px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 40px;
+  background:rgba(6,9,15,.88);
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+  transition:background .3s;
+}
+.nav-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:700;
+  color:var(--gold);letter-spacing:4px;
+  white-space:nowrap;
+  text-shadow:0 0 30px var(--goldg);
+}
+.nav-logo sup{font-size:11px;vertical-align:super;letter-spacing:1px}
+.nav-links{display:flex;align-items:center;gap:32px}
+.nav-links a{
+  font-size:12px;font-weight:500;letter-spacing:1.5px;
+  text-transform:uppercase;color:var(--txt);
+  text-decoration:none;transition:color .2s;
+}
+.nav-links a:hover{color:var(--cream)}
+.nav-btn{
+  background:linear-gradient(135deg,var(--gold3),var(--gold));
+  color:var(--navy);border:none;border-radius:40px;
+  padding:9px 24px;
+  font-family:'Jost',sans-serif;font-size:12px;font-weight:700;
+  letter-spacing:1.5px;text-transform:uppercase;
+  cursor:pointer;text-decoration:none;
+  transition:all .3s;
+  box-shadow:0 4px 20px var(--goldg);
+}
+.nav-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.4)}
+
+/* ═══════════════════════════════════════ HERO */
+.hero{
+  min-height:100vh;
+  display:grid;place-items:center;
+  text-align:center;
+  padding:120px 24px 80px;
+  position:relative;overflow:hidden;
+}
+
+/* Canvas étoiles */
+#heroCanvas{
+  position:absolute;inset:0;
+  pointer-events:none;opacity:.5;
+}
+
+/* Orbes lumière */
+.hero-orb{
+  position:absolute;border-radius:50%;
+  filter:blur(90px);pointer-events:none;
+  animation:orbFloat 10s ease-in-out infinite alternate;
+}
+.orb1{width:600px;height:600px;top:-10%;left:-15%;
+  background:radial-gradient(circle,rgba(192,57,43,.12),transparent 70%)}
+.orb2{width:500px;height:500px;bottom:-10%;right:-10%;
+  background:radial-gradient(circle,rgba(108,52,131,.15),transparent 70%)}
+.orb3{width:400px;height:400px;top:40%;left:40%;
+  background:radial-gradient(circle,rgba(201,168,76,.07),transparent 70%)}
+
+@keyframes orbFloat{
+  from{transform:translate(0,0) scale(1)}
+  to  {transform:translate(30px,20px) scale(1.08)}
+}
+
+/* Grille fond */
+.hero-grid{
+  position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(201,168,76,.025) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(201,168,76,.025) 1px,transparent 1px);
+  background-size:80px 80px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black,transparent);
+}
+
+.hero-inner{position:relative;z-index:2;max-width:900px}
+
+.hero-eyebrow{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(201,168,76,.07);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:40px;padding:8px 22px;
+  font-size:11px;font-weight:600;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:40px;
+  animation:fadeDown .8s ease both;
+}
+.hero-eyebrow::before{
+  content:'';width:5px;height:5px;border-radius:50%;
+  background:var(--gold);
+  animation:blink 2s ease-in-out infinite;
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+
+.hero-h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(42px,8vw,96px);
+  font-weight:700;line-height:1.0;
+  color:var(--cream);
+  margin-bottom:30px;
+  animation:fadeUp .9s .1s ease both;
+}
+.hero-h1 .gold{color:var(--gold);font-style:italic}
+.hero-h1 .line-sm{
+  display:block;
+  font-size:clamp(18px,3vw,34px);
+  font-weight:300;font-style:italic;
+  color:var(--txt);
+  margin-bottom:8px;letter-spacing:1px;
+}
+
+.hero-sub{
+  font-size:clamp(15px,2vw,19px);
+  font-weight:300;line-height:1.8;
+  color:var(--txt);
+  max-width:620px;margin:0 auto 50px;
+  animation:fadeUp .9s .2s ease both;
+}
+
+.hero-ctas{
+  display:flex;gap:14px;flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:80px;
+  animation:fadeUp .9s .3s ease both;
+}
+
+.btn-hero{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:17px 46px;border-radius:50px;
+  font-family:'Jost',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:1.5px;
+  text-transform:uppercase;cursor:pointer;
+  text-decoration:none;border:none;
+  transition:all .35s ease;
+}
+.btn-hero.primary{
+  background:linear-gradient(135deg,var(--gold3),var(--gold),var(--gold2));
+  background-size:200% auto;
+  color:var(--navy);
+  box-shadow:0 6px 32px var(--goldg);
+}
+.btn-hero.primary:hover{
+  background-position:right;
+  transform:translateY(-3px);
+  box-shadow:0 14px 44px rgba(201,168,76,.45);
+}
+.btn-hero.ghost{
+  background:transparent;
+  border:1px solid rgba(192,211,240,.2);
+  color:var(--cream);
+}
+.btn-hero.ghost:hover{
+  border-color:var(--gold);color:var(--gold);
+  transform:translateY(-2px);
+}
+
+/* Scroll indicator */
+.hero-scroll{
+  display:flex;flex-direction:column;align-items:center;gap:8px;
+  animation:fadeUp .9s .7s ease both;
+}
+.hero-scroll span{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:var(--dim);
+}
+.scroll-stem{
+  width:1px;height:56px;
+  background:linear-gradient(to bottom,var(--gold),transparent);
+  animation:stemPulse 2.2s ease-in-out infinite;
+}
+@keyframes stemPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ═══════════════════════════════════════ RECONNAISSANCE */
+.recog{padding:100px 24px;text-align:center}
+.recog-inner{max-width:1100px;margin:0 auto}
+
+.tag{
+  font-size:10px;font-weight:600;letter-spacing:3.5px;
+  text-transform:uppercase;color:var(--gold);
+  display:block;margin-bottom:14px;
+}
+
+.h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(30px,5vw,56px);
+  font-weight:600;line-height:1.15;
+  color:var(--cream);margin-bottom:60px;
+}
+
+.recog-quotes{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(290px,1fr));
+  gap:2px;
+  border-radius:20px;overflow:hidden;
+}
+.q-item{
+  background:var(--n2);
+  padding:36px 32px;
+  position:relative;
+  transition:background .3s;
+}
+.q-item:hover{background:var(--n3)}
+.q-open{
+  position:absolute;top:16px;left:20px;
+  font-family:'Cormorant Garamond',serif;
+  font-size:80px;line-height:1;
+  color:var(--gold);opacity:.12;
+  pointer-events:none;
+}
+.q-text{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,2.2vw,22px);
+  font-style:italic;line-height:1.55;
+  color:var(--cream);
+  position:relative;z-index:1;
+}
+
+/* ═══════════════════════════════════════ LES 7 MASQUES */
+.masques{
+  padding:100px 24px;
+  background:linear-gradient(180deg,transparent,rgba(14,22,40,.6),transparent);
+}
+.masques-inner{max-width:1200px;margin:0 auto}
+.masques-head{text-align:center;margin-bottom:20px}
+.masques-intro{
+  font-size:17px;line-height:1.85;color:var(--txt);
+  max-width:660px;margin:18px auto 70px;
+}
+
+/* Roue / grille 7 masques */
+.masques-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+  gap:14px;
+}
+
+.mask-card{
+  background:var(--n2);
+  border-radius:18px;
+  border:1px solid rgba(255,255,255,.04);
+  padding:34px 28px;
+  position:relative;overflow:hidden;
+  transition:transform .35s ease,border-color .35s ease,box-shadow .35s ease;
+  cursor:default;
+}
+.mask-card::before{
+  content:'';
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--mc);
+  border-radius:18px 18px 0 0;
+}
+.mask-card::after{
+  content:'';
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 70% 50% at 50% 0%,color-mix(in srgb,var(--mc) 8%,transparent),transparent 60%);
+  opacity:0;transition:opacity .35s;
+  pointer-events:none;
+}
+.mask-card:hover{
+  transform:translateY(-8px);
+  border-color:color-mix(in srgb,var(--mc) 40%,transparent);
+  box-shadow:0 20px 50px rgba(0,0,0,.5);
+}
+.mask-card:hover::after{opacity:1}
+
+.mask-dot{
+  width:14px;height:14px;border-radius:50%;
+  background:var(--mc);
+  box-shadow:0 0 16px color-mix(in srgb,var(--mc) 60%,transparent);
+  margin-bottom:20px;
+}
+.mask-num{
+  font-size:10px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--mc);
+  margin-bottom:10px;display:block;
+  opacity:.85;
+}
+.mask-peur{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(20px,2.4vw,26px);
+  font-weight:700;color:var(--cream);
+  line-height:1.2;margin-bottom:14px;
+}
+.mask-mani{
+  font-size:13px;line-height:1.7;
+  color:var(--txt);font-weight:300;
+}
+.mask-quote{
+  margin-top:18px;padding-top:18px;
+  border-top:1px solid rgba(255,255,255,.05);
+  font-family:'Cormorant Garamond',serif;
+  font-size:15px;font-style:italic;
+  color:color-mix(in srgb,var(--mc) 70%,var(--cream));
+  line-height:1.5;
+}
+
+/* ═══════════════════════════════════════ QUESTIONNAIRE CTA */
+.qcta{padding:100px 24px;text-align:center}
+.qcta-box{
+  max-width:820px;margin:0 auto;
+  background:linear-gradient(135deg,var(--n2),var(--n3));
+  border:1px solid rgba(201,168,76,.18);
+  border-radius:28px;
+  padding:72px 56px;
+  position:relative;overflow:hidden;
+  box-shadow:0 0 100px rgba(201,168,76,.06);
+}
+.qcta-box::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 100%,rgba(201,168,76,.06),transparent 65%);
+  pointer-events:none;
+}
+/* Lignes décoratives diagonales */
+.qcta-box::after{
+  content:'';position:absolute;inset:0;
+  background:repeating-linear-gradient(
+    -45deg,
+    transparent,transparent 40px,
+    rgba(201,168,76,.012) 40px,rgba(201,168,76,.012) 41px
+  );
+  pointer-events:none;
+}
+
+.qcta-icon{
+  font-size:52px;margin-bottom:24px;
+  display:block;position:relative;z-index:1;
+  animation:iconFloat 4s ease-in-out infinite;
+}
+@keyframes iconFloat{
+  0%,100%{transform:translateY(0)}
+  50%   {transform:translateY(-8px)}
+}
+
+.qcta-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,4.5vw,48px);
+  font-weight:700;color:var(--cream);
+  line-height:1.2;margin-bottom:18px;
+  position:relative;z-index:1;
+}
+.qcta-sub{
+  font-size:16px;line-height:1.85;
+  color:var(--txt);max-width:580px;
+  margin:0 auto 28px;
+  position:relative;z-index:1;
+}
+
+.science-pills{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:8px;
+  margin-bottom:40px;position:relative;z-index:1;
+}
+.s-pill{
+  background:rgba(201,168,76,.07);
+  border:1px solid rgba(201,168,76,.18);
+  border-radius:20px;padding:5px 14px;
+  font-size:11px;font-weight:700;letter-spacing:1px;
+  color:var(--gold);text-transform:uppercase;
+}
+
+.qcta-promise{
+  font-size:14px;color:var(--dim);
+  margin-top:18px;line-height:1.7;
+  position:relative;z-index:1;
+}
+.qcta-promise span{color:rgba(201,168,76,.7)}
+
+/* ═══════════════════════════════════════ LA METHODE */
+.methode{padding:100px 24px}
+.methode-inner{max-width:1100px;margin:0 auto}
+.methode-head{text-align:center;margin-bottom:70px}
+.methode-sub{
+  font-size:17px;line-height:1.85;color:var(--txt);
+  max-width:600px;margin:18px auto 0;
+}
+
+.steps-wrap{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:0;
+  border-radius:20px;overflow:hidden;
+  border:1px solid rgba(201,168,76,.08);
+}
+@media(max-width:768px){.steps-wrap{grid-template-columns:1fr}}
+
+.step{
+  padding:44px 36px;
+  background:var(--n2);
+  border-right:1px solid rgba(255,255,255,.03);
+  border-bottom:1px solid rgba(255,255,255,.03);
+  position:relative;overflow:hidden;
+  transition:background .3s;
+}
+.step:hover{background:var(--n3)}
+.step:nth-child(3n){border-right:none}
+.step:nth-last-child(-n+3){border-bottom:none}
+
+.step-letter{
+  font-family:'Cormorant Garamond',serif;
+  font-size:80px;font-weight:700;line-height:1;
+  display:block;margin-bottom:14px;
+  -webkit-text-stroke:.5px currentColor;
+}
+.step:nth-child(1) .step-letter{color:var(--rouge)}
+.step:nth-child(2) .step-letter{color:var(--orange)}
+.step:nth-child(3) .step-letter{color:var(--jaune)}
+.step:nth-child(4) .step-letter{color:var(--vert)}
+.step:nth-child(5) .step-letter{color:var(--bleu)}
+.step:nth-child(6) .step-letter{color:var(--indigo)}
+
+.step-name{
+  font-size:12px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--cream);
+  margin-bottom:12px;display:block;
+}
+.step-desc{font-size:14px;line-height:1.7;color:var(--txt)}
+
+/* ═══════════════════════════════════════ CREDIBILITE */
+.cred{
+  padding:100px 24px;
+  background:linear-gradient(180deg,transparent,rgba(14,22,40,.5),transparent);
+  text-align:center;
+}
+.cred-inner{max-width:980px;margin:0 auto}
+
+.cred-cards{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:16px;margin:60px 0;
+}
+.cred-card{
+  background:var(--n2);
+  border:1px solid rgba(255,255,255,.04);
+  border-radius:18px;padding:36px 24px;
+  transition:border-color .3s,transform .3s;
+}
+.cred-card:hover{
+  border-color:rgba(201,168,76,.2);
+  transform:translateY(-4px);
+}
+.cred-ico{font-size:36px;margin-bottom:16px;display:block}
+.cred-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:21px;font-weight:600;color:var(--cream);
+  margin-bottom:10px;
+}
+.cred-txt{font-size:14px;line-height:1.7;color:var(--txt)}
+
+/* Livre */
+.book-strip{
+  display:inline-flex;align-items:center;gap:22px;
+  background:var(--n2);
+  border:1px solid rgba(201,168,76,.18);
+  border-radius:18px;padding:26px 40px;
+  text-align:left;
+  transition:all .3s;cursor:default;
+}
+.book-strip:hover{
+  border-color:rgba(201,168,76,.4);
+  transform:translateY(-3px);
+  box-shadow:0 10px 40px rgba(201,168,76,.1);
+}
+.book-emo{font-size:44px}
+.book-label{
+  font-size:10px;font-weight:700;letter-spacing:3px;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:5px;display:block;
+}
+.book-t{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-style:italic;color:var(--cream);
+}
+.book-pub{font-size:13px;color:var(--dim);margin-top:4px}
+
+/* ═══════════════════════════════════════ FAQ */
+.faq{padding:100px 24px}
+.faq-inner{max-width:760px;margin:0 auto}
+.faq-head{text-align:center;margin-bottom:60px}
+
+.faq-item{
+  border-bottom:1px solid rgba(255,255,255,.05);
+}
+.faq-q{
+  width:100%;background:none;border:none;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:16px;
+  padding:26px 0;
+  text-align:left;cursor:pointer;
+  font-family:'Jost',sans-serif;
+  font-size:17px;font-weight:500;color:var(--cream);
+  transition:color .2s;
+}
+.faq-q:hover{color:var(--gold)}
+.faq-arrow{
+  font-size:20px;color:var(--gold);
+  flex-shrink:0;transition:transform .3s;
+}
+.faq-item.open .faq-arrow{transform:rotate(45deg)}
+.faq-a{
+  max-height:0;overflow:hidden;
+  transition:max-height .4s ease,padding .3s ease;
+  font-size:15px;line-height:1.85;color:var(--txt);
+}
+.faq-item.open .faq-a{
+  max-height:300px;
+  padding-bottom:24px;
+}
+
+/* ═══════════════════════════════════════ FINAL CTA */
+.final{
+  padding:130px 24px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.final::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 100% 80% at 50% 100%,rgba(201,168,76,.08),transparent 60%);
+  pointer-events:none;
+}
+.final-h{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,7vw,80px);
+  font-weight:700;line-height:1.05;
+  color:var(--cream);
+  max-width:820px;margin:0 auto 24px;
+  position:relative;z-index:1;
+}
+.final-h .gold{color:var(--gold);font-style:italic}
+.final-sub{
+  font-size:18px;line-height:1.8;color:var(--txt);
+  max-width:500px;margin:0 auto 52px;
+  position:relative;z-index:1;
+}
+.final-acts{
+  display:flex;gap:14px;flex-wrap:wrap;
+  justify-content:center;
+  position:relative;z-index:1;
+}
+
+/* ═══════════════════════════════════════ FOOTER */
+footer{
+  border-top:1px solid var(--border);
+  padding:44px 40px;
+  display:flex;align-items:center;
+  justify-content:space-between;flex-wrap:wrap;gap:20px;
+}
+.ft-logo{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;font-weight:700;
+  color:var(--gold);letter-spacing:4px;
+  white-space:nowrap;
+}
+.ft-copy{
+  font-size:11px;color:var(--dim);
+  line-height:1.9;text-align:center;flex:1;
+}
+.ft-copy em{color:rgba(201,168,76,.5);font-style:normal}
+
+/* ═══════════════════════════════════════ MODAL */
+.modal-bg{
+  display:none;position:fixed;inset:0;z-index:9999;
+  background:rgba(6,9,15,.85);
+  backdrop-filter:blur(10px);
+  align-items:center;justify-content:center;
+  padding:24px;
+}
+.modal-bg.open{display:flex}
+.modal{
+  background:var(--n2);
+  border:1px solid rgba(201,168,76,.25);
+  border-radius:24px;
+  padding:56px 44px;
+  max-width:460px;width:100%;
+  text-align:center;
+  box-shadow:0 0 80px rgba(201,168,76,.1);
+  animation:modalIn .35s ease;
+  position:relative;
+}
+@keyframes modalIn{
+  from{opacity:0;transform:scale(.92) translateY(20px)}
+  to  {opacity:1;transform:none}
+}
+.modal-x{
+  position:absolute;top:14px;right:18px;
+  background:none;border:none;color:var(--dim);
+  font-size:22px;cursor:pointer;line-height:1;
+  transition:color .2s;
+}
+.modal-x:hover{color:var(--cream)}
+.modal-ico{font-size:46px;margin-bottom:20px;display:block}
+.modal-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:30px;font-weight:700;color:var(--cream);
+  margin-bottom:10px;
+}
+.modal-desc{font-size:15px;color:var(--txt);line-height:1.7;margin-bottom:32px}
+.modal-inp{
+  width:100%;
+  background:rgba(255,255,255,.03);
+  border:1px solid rgba(201,168,76,.18);
+  border-radius:12px;padding:14px 20px;
+  font-family:'Jost',sans-serif;font-size:18px;
+  font-weight:600;letter-spacing:4px;
+  color:var(--gold);text-align:center;
+  outline:none;transition:border-color .2s;
+  margin-bottom:14px;
+}
+.modal-inp:focus{border-color:var(--gold)}
+.modal-inp::placeholder{color:var(--dim);letter-spacing:1px;font-weight:300;font-size:14px}
+.modal-err{
+  font-size:13px;min-height:20px;
+  color:#e74c3c;margin-bottom:14px;
+}
+.modal-btn{
+  width:100%;
+  background:linear-gradient(135deg,var(--gold3),var(--gold));
+  color:var(--navy);border:none;border-radius:12px;
+  padding:16px;cursor:pointer;
+  font-family:'Jost',sans-serif;
+  font-size:14px;font-weight:700;letter-spacing:1px;
+  transition:all .3s;
+  box-shadow:0 6px 24px var(--goldg);
+}
+.modal-btn:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(201,168,76,.4)}
+.modal-hint{font-size:12px;color:var(--dim);margin-top:16px;line-height:1.7}
+
+/* ═══════════════════════════════════════ ANIMATIONS SCROLL */
+@keyframes fadeDown{from{opacity:0;transform:translateY(-16px)}to{opacity:1;transform:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
+.reveal{opacity:0;transform:translateY(36px);transition:opacity .75s ease,transform .75s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* ═══════════════════════════════════════ RESPONSIVE NAV */
+@media(max-width:680px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  footer{flex-direction:column;text-align:center;padding:32px 20px}
+  .qcta-box{padding:48px 28px}
+  .book-strip{flex-direction:column;text-align:center;padding:28px 24px}
+}
+</style>
+</head>
+
+<body>
+
+<!-- ░░ CANVAS ÉTOILES ░░ -->
+<canvas id="heroCanvas"></canvas>
+
+<!-- ════════════ NAV ════════════ -->
+<nav>
+  <div class="nav-logo">V.A.L.E.U.R<sup>©</sup></div>
+  <div class="nav-links">
+    <a href="#masques">Les 7 masques</a>
+    <a href="#methode">La méthode</a>
+    <a href="#faq">FAQ</a>
+    <a href="https://celinebourbon-ux.github.io/HomePageAppliValeur/index.html" style="color:var(--gold);font-weight:600">Mon espace ›</a>
+  </div>
+  <button class="nav-btn" onclick="openModal()">Commencer →</button>
+</nav>
+
+
+<!-- ════════════ HERO ════════════ -->
+<section class="hero">
+  <div class="hero-orb orb1"></div>
+  <div class="hero-orb orb2"></div>
+  <div class="hero-orb orb3"></div>
+  <div class="hero-grid"></div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Méthode créée par une psychologue</div>
+
+    <h1 class="hero-h1">
+      <span class="line-sm">Vous sentez que quelque chose en vous résiste ?</span>
+      Les <span class="gold">7 peurs</span><br>qui vous empêchent<br>d'être <em style="font-style:italic">vraiment</em> vous
+    </h1>
+
+    <p class="hero-sub">
+      Derrière l'anxiété, l'évitement et l'épuisement se cachent des peurs universelles.
+      La méthode V.A.L.E.U.R© révèle votre profil exact —
+      et vous guide vers la liberté d'être <em>soi</em>.
+    </p>
+
+    <div class="hero-ctas">
+      <button class="btn-hero primary" onclick="openModal()">
+        ✦ Découvrir mes masques
+      </button>
+      <a href="https://celinebourbon-ux.github.io/HomePageAppliValeur/index.html" class="btn-hero ghost">Mon tableau de bord →</a>
+    </div>
+
+    <div class="hero-scroll">
+      <span>Explorer</span>
+      <div class="scroll-stem"></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ RECONNAISSANCE ════════════ -->
+<section class="recog reveal">
+  <div class="recog-inner">
+    <span class="tag">Vous reconnaissez-vous ?</span>
+    <h2 class="h2">Ces pensées que<br>vous n'osez pas formuler</h2>
+
+    <div class="recog-quotes">
+      <div class="q-item"><div class="q-open">"</div>
+        <p class="q-text">Vous vous adaptez à tout le monde sauf à vous-même ?</p>
+      </div>
+      <div class="q-item"><div class="q-open">"</div>
+        <p class="q-text">Vous savez exactement ce que vous devriez faire… mais vous ne le faites pas ?</p>
+      </div>
+      <div class="q-item"><div class="q-open">"</div>
+        <p class="q-text">Vous fonctionnez parfaitement en surface, mais à l'intérieur quelque chose résiste ?</p>
+      </div>
+      <div class="q-item"><div class="q-open">"</div>
+        <p class="q-text">Vous avez l'impression de jouer un rôle dans votre propre vie ?</p>
+      </div>
+      <div class="q-item"><div class="q-open">"</div>
+        <p class="q-text">Et si votre anxiété n'était pas un problème, mais une peur déguisée ?</p>
+      </div>
+      <div class="q-item"><div class="q-open">"</div>
+        <p class="q-text">La protection que vous avez construite est devenue votre prison ?</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ LES 7 MASQUES ════════════ -->
+<section class="masques" id="masques">
+  <div class="masques-inner">
+    <div class="masques-head reveal">
+      <span class="tag">Cartographie de l'invisible</span>
+      <h2 class="h2">Les 7 masques de défense</h2>
+      <p class="masques-intro">
+        Chaque masque est une stratégie de survie construite autour d'une peur universelle.
+        Ce n'est pas une pathologie — c'est votre intelligence émotionnelle qui vous a protégé.
+        Il est temps de la voir pour s'en libérer.
+      </p>
+    </div>
+
+    <div class="masques-grid reveal">
+
+      <div class="mask-card" style="--mc:var(--rouge)">
+        <div class="mask-dot"></div>
+        <span class="mask-num">Masque Rouge · 01</span>
+        <h3 class="mask-peur">Peur de la mort & de la maladie</h3>
+        <p class="mask-mani">Hypervigilance somatique — votre corps est scruté en permanence. Chaque sensation devient un signal d'alarme.</p>
+        <p class="mask-quote">"Et si ce symptôme signifiait quelque chose de grave ?"</p>
+      </div>
+
+      <div class="mask-card" style="--mc:var(--orange)">
+        <div class="mask-dot"></div>
+        <span class="mask-num">Masque Orange · 02</span>
+        <h3 class="mask-peur">Peur de la souffrance psychique</h3>
+        <p class="mask-mani">Évitement émotionnel — vous avez appris à ne pas ressentir pour ne pas souffrir. Les émotions vous semblent dangereuses.</p>
+        <p class="mask-quote">"Je préfère ne pas y penser. Je vais bien."</p>
+      </div>
+
+      <div class="mask-card" style="--mc:var(--jaune)">
+        <div class="mask-dot"></div>
+        <span class="mask-num">Masque Jaune · 03</span>
+        <h3 class="mask-peur">Peur de l'inconnu & de l'incertitude</h3>
+        <p class="mask-mani">Obsession du contrôle — anticiper, planifier, tout maîtriser. L'imprévu est insupportable.</p>
+        <p class="mask-quote">"Si je prévois tout, rien de mauvais ne peut arriver."</p>
+      </div>
+
+      <div class="mask-card" style="--mc:var(--vert)">
+        <div class="mask-dot"></div>
+        <span class="mask-num">Masque Vert · 04</span>
+        <h3 class="mask-peur">Peur du rejet & de l'abandon</h3>
+        <p class="mask-mani">Insécurité relationnelle — vous donnez tout pour ne pas perdre l'autre. La dépendance affective s'installe.</p>
+        <p class="mask-quote">"Je dois être parfait pour mériter d'être aimé."</p>
+      </div>
+
+      <div class="mask-card" style="--mc:var(--bleu)">
+        <div class="mask-dot"></div>
+        <span class="mask-num">Masque Bleu · 05</span>
+        <h3 class="mask-peur">Peur de l'impuissance</h3>
+        <p class="mask-mani">Hypercontrôle relationnel — vous dirigez, organisez, protégez. Lâcher prise vous semble une capitulation.</p>
+        <p class="mask-quote">"Si je ne gère pas, tout va s'effondrer."</p>
+      </div>
+
+      <div class="mask-card" style="--mc:var(--indigo)">
+        <div class="mask-dot"></div>
+        <span class="mask-num">Masque Indigo · 06</span>
+        <h3 class="mask-peur">Peur de l'échec & de l'inadéquation</h3>
+        <p class="mask-mani">Anxiété de performance — vous vous surpassez pour prouver votre valeur. Le perfectionnisme épuise.</p>
+        <p class="mask-quote">"Je dois être le meilleur sinon je ne vaux rien."</p>
+      </div>
+
+      <div class="mask-card" style="--mc:var(--violet)">
+        <div class="mask-dot"></div>
+        <span class="mask-num">Masque Violet · 07</span>
+        <h3 class="mask-peur">Peur de la perte d'identité</h3>
+        <p class="mask-mani">Angoisse existentielle & faux self — vous ne savez plus qui vous êtes derrière tous vos rôles.</p>
+        <p class="mask-quote">"Je joue tellement de rôles que j'ai oublié le mien."</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ QUESTIONNAIRE ════════════ -->
+<section class="qcta reveal">
+  <div class="qcta-box">
+    <span class="qcta-icon">🎭</span>
+    <h2 class="qcta-title">Quel est votre masque dominant ?</h2>
+    <p class="qcta-sub">
+      Le questionnaire V.A.L.E.U.R© cartographie avec précision chirurgicale
+      la source de votre anxiété. En 15 minutes, vous obtenez votre profil complet
+      des 7 masques — une véritable révélation.
+    </p>
+
+    <div class="science-pills">
+      <span class="s-pill">SHAI</span>
+      <span class="s-pill">TAS-20</span>
+      <span class="s-pill">IUS-12</span>
+      <span class="s-pill">ECR-R</span>
+      <span class="s-pill">LOC+NPI</span>
+      <span class="s-pill">FMPS</span>
+      <span class="s-pill">MSI</span>
+    </div>
+
+    <button class="btn-hero primary" onclick="openModal()" style="font-size:15px;padding:19px 52px">
+      ✦ Passer le questionnaire — Gratuit
+    </button>
+
+    <p class="qcta-promise">
+      Validé par 7 échelles scientifiques reconnues · Résultats personnalisés<br>
+      Basé sur <span>"De la peur à la joie d'être soi"</span> · Éditions L'Harmattan
+    </p>
+  </div>
+</section>
+
+
+<!-- ════════════ LA MÉTHODE ════════════ -->
+<section class="methode" id="methode">
+  <div class="methode-inner">
+    <div class="methode-head reveal">
+      <span class="tag">6 étapes de transformation</span>
+      <h2 class="h2">La méthode V.A.L.E.U.R©</h2>
+      <p class="methode-sub">
+        Un parcours progressif, structuré et profondément humain
+        pour passer de la peur à la liberté d'être soi.
+      </p>
+    </div>
+
+    <div class="steps-wrap reveal">
+      <div class="step">
+        <span class="step-letter">V</span>
+        <span class="step-name">Voir</span>
+        <p class="step-desc">Identifier le masque actif et nommer le déclencheur. Voir ce qui se passe réellement — sans fuite.</p>
+      </div>
+      <div class="step">
+        <span class="step-letter">A</span>
+        <span class="step-name">Accueillir</span>
+        <p class="step-desc">Recevoir l'émotion sans la combattre. Créer un espace intérieur sécurisé et bienveillant.</p>
+      </div>
+      <div class="step">
+        <span class="step-letter">L</span>
+        <span class="step-name">Localiser</span>
+        <p class="step-desc">Trouver où cela se manifeste dans le corps. La sagesse somatique comme boussole fidèle.</p>
+      </div>
+      <div class="step">
+        <span class="step-letter">E</span>
+        <span class="step-name">Explorer</span>
+        <p class="step-desc">Explorer le conflit entre votre nature authentique et la peur. Mettre des mots sur la tension intérieure.</p>
+      </div>
+      <div class="step">
+        <span class="step-letter">U</span>
+        <span class="step-name">Unifier</span>
+        <p class="step-desc">Réconcilier les parties en conflit. Intégrer les opposés pour retrouver votre cohérence intime.</p>
+      </div>
+      <div class="step">
+        <span class="step-letter">R</span>
+        <span class="step-name">Renforcer</span>
+        <p class="step-desc">Ancrer la nouvelle posture avec des comportements choisis — et non plus subis par la peur.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ CRÉDIBILITÉ ════════════ -->
+<section class="cred reveal">
+  <div class="cred-inner">
+    <span class="tag">Pourquoi V.A.L.E.U.R©</span>
+    <h2 class="h2">Une méthode ancrée<br>dans la science, accessible à tous</h2>
+
+    <div class="cred-cards">
+      <div class="cred-card">
+        <span class="cred-ico">🔬</span>
+        <h3 class="cred-title">Fondements scientifiques</h3>
+        <p class="cred-txt">7 échelles validées en psychologie clinique pour une cartographie précise et fiable de votre profil de défense.</p>
+      </div>
+      <div class="cred-card">
+        <span class="cred-ico">🎓</span>
+        <h3 class="cred-title">Créée par une psychologue</h3>
+        <p class="cred-txt">Céline Bourbon a développé cette méthode au cœur de sa pratique clinique pour rendre la psychologie vraiment accessible.</p>
+      </div>
+      <div class="cred-card">
+        <span class="cred-ico">🌍</span>
+        <h3 class="cred-title">Universelle</h3>
+        <p class="cred-txt">Les 7 peurs sont communes à tout être humain. Pas besoin d'être "en crise" pour en bénéficier.</p>
+      </div>
+      <div class="cred-card">
+        <span class="cred-ico">✨</span>
+        <h3 class="cred-title">Transformative</h3>
+        <p class="cred-txt">Une expérience conçue pour marquer. Vous ne ressortirez pas de ce parcours comme vous y êtes entré.</p>
+      </div>
+    </div>
+
+    <div class="book-strip">
+      <span class="book-emo">📖</span>
+      <div>
+        <span class="book-label">Le livre fondateur</span>
+        <div class="book-t">"De la peur à la joie d'être soi"</div>
+        <div class="book-pub">Céline Bourbon, Psychologue · Éditions L'Harmattan</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ FAQ ════════════ -->
+<section class="faq reveal" id="faq">
+  <div class="faq-inner">
+    <div class="faq-head">
+      <span class="tag">Vos questions</span>
+      <h2 class="h2" style="margin-bottom:0">Questions fréquentes</h2>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Est-ce que ce parcours s'adresse à moi si je ne suis pas "en crise" ?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          Absolument. La méthode V.A.L.E.U.R© s'adresse à toute personne qui ressent que quelque chose l'empêche d'être pleinement elle-même — anxiété légère, évitement, perfectionnisme, peur du jugement… Vous n'avez pas besoin d'être "en crise" pour mériter de vous comprendre.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Combien de temps dure le parcours complet ?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          Le parcours comprend 7 modules de 20 à 40 minutes chacun. Vous pouvez le suivre à votre rythme, en une semaine intensive ou sur plusieurs semaines. Chaque module est conçu pour être autonome et immédiatement applicable.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Comment fonctionne le questionnaire des 7 masques ?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          Il est construit à partir de 7 échelles psychologiques validées (SHAI, TAS-20, IUS-12, ECR-R, LOC+NPI, FMPS, MSI). Il cartographie votre profil de défense sur chacun des 7 masques et identifie votre peur dominante avec une précision chirurgicale.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          En quoi est-ce différent d'une thérapie classique ?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          La méthode V.A.L.E.U.R© est un outil de connaissance de soi et de développement personnel — elle ne remplace pas un suivi thérapeutique si vous en avez besoin. Elle est conçue pour être accessible à tous, ludique, visuelle et autonome. Elle complète idéalement une thérapie ou peut être un premier pas vers la compréhension de soi.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Les résultats du questionnaire sont-ils confidentiels ?
+          <span class="faq-arrow">+</span>
+        </button>
+        <div class="faq-a">
+          Vos résultats vous appartiennent. Ils sont transmis à l'administrateur du programme à des fins de suivi pédagogique uniquement. Aucune donnée n'est partagée avec des tiers.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════ FINAL CTA ════════════ -->
+<section class="final reveal">
+  <h2 class="final-h">
+    Prêt à rencontrer<br>votre <span class="gold">vrai visage</span> ?
+  </h2>
+  <p class="final-sub">
+    Le questionnaire révèle votre profil en 15 minutes.
+    Le parcours vous libère pas à pas.
+    Il n'y a pas de meilleur moment que maintenant.
+  </p>
+  <div class="final-acts">
+    <button class="btn-hero primary" onclick="openModal()" style="font-size:15px;padding:19px 52px">
+      ✦ Passer le questionnaire
+    </button>
+    <a href="https://celinebourbon-ux.github.io/HomePageAppliValeur/index.html" class="btn-hero ghost">
+      Mon tableau de bord →
+    </a>
+  </div>
+</section>
+
+
+<!-- ════════════ FOOTER ════════════ -->
+<footer>
+  <div class="ft-logo">V.A.L.E.U.R©</div>
+  <p class="ft-copy">
+    Méthode V.A.L.E.U.R© · <em>Céline Bourbon, Psychologue</em><br>
+    <em>"De la peur à la joie d'être soi"</em> · Éditions L'Harmattan<br>
+    © 2025 · Tous droits réservés · Contenu propriétaire protégé · Reproduction interdite
+  </p>
+  <div style="font-size:11px;color:var(--dim);text-align:right;line-height:1.8">
+    Contact :<br>s'adresser à l'administrateur
+  </div>
+</footer>
+
+
+<!-- ════════════ MODAL ════════════ -->
+<div class="modal-bg" id="modal" onclick="handleBg(event)">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()">✕</button>
+    <span class="modal-ico">🔑</span>
+    <h3 class="modal-title">Espace membres</h3>
+    <p class="modal-desc">Entrez votre code d'accès pour découvrir votre profil et accéder au parcours V.A.L.E.U.R©.</p>
+    <input type="text" class="modal-inp" id="codeInput"
+      placeholder="Votre code d'accès"
+      maxlength="12" autocomplete="off"
+      onkeydown="if(event.key==='Enter')verify()">
+    <div class="modal-err" id="modalErr"></div>
+    <button class="modal-btn" onclick="verify()">Accéder au questionnaire →</button>
+    <div style="margin-top:20px;padding-top:20px;border-top:1px solid rgba(255,255,255,.06)">
+      <p style="font-size:12px;color:var(--dim);margin-bottom:12px;letter-spacing:.5px">Déjà membre ? Accédez directement à :</p>
+      <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
+        <a href="https://celinebourbon-ux.github.io/Questionnaire-Valeur-V4/"
+           style="font-size:12px;color:var(--gold);text-decoration:none;
+                  border:1px solid rgba(201,168,76,.2);border-radius:20px;
+                  padding:6px 16px;transition:all .2s"
+           onmouseover="this.style.background='rgba(201,168,76,.08)'"
+           onmouseout="this.style.background='transparent'">
+          🎭 Questionnaire
+        </a>
+        <a href="https://celinebourbon-ux.github.io/HomePageAppliValeur/index.html"
+           style="font-size:12px;color:var(--gold);text-decoration:none;
+                  border:1px solid rgba(201,168,76,.2);border-radius:20px;
+                  padding:6px 16px;transition:all .2s"
+           onmouseover="this.style.background='rgba(201,168,76,.08)'"
+           onmouseout="this.style.background='transparent'">
+          🏠 Tableau de bord
+        </a>
+      </div>
+    </div>
+    <p class="modal-hint">
+      Code fourni lors de votre inscription.<br>
+      Pour toute question, contactez l'administrateur du programme.
+    </p>
+  </div>
+</div>
+
+
+<!-- ════════════ JS ════════════ -->
+<script>
+/* ── Protection ── */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey&&['c','u','s','a','p'].includes(e.key.toLowerCase()))||
+     e.key==='F12'||
+     (e.ctrlKey&&e.shiftKey&&['i','j','c'].includes(e.key.toLowerCase())))
+    e.preventDefault();
+});
+
+/* ── Canvas étoiles ── */
+(function(){
+  const c=document.getElementById('heroCanvas');
+  const ctx=c.getContext('2d');
+  let W,H,stars=[];
+  function resize(){
+    W=c.width=window.innerWidth;
+    H=c.height=window.innerHeight;
+  }
+  function mkStars(){
+    stars=[];
+    for(let i=0;i<140;i++){
+      stars.push({
+        x:Math.random()*W,y:Math.random()*H,
+        r:Math.random()*.9+.15,
+        a:Math.random(),
+        da:(Math.random()*.004+.001)*(Math.random()<.5?1:-1)
+      });
+    }
+  }
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    stars.forEach(s=>{
+      s.a+=s.da;
+      if(s.a>1||s.a<0)s.da*=-1;
+      ctx.beginPath();
+      ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+      ctx.fillStyle=`rgba(201,168,76,${s.a*.6})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize',()=>{resize();mkStars()});
+  resize();mkStars();draw();
+})();
+
+/* ── Reveal scroll ── */
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{
+    if(e.isIntersecting)setTimeout(()=>e.target.classList.add('in'),i*80);
+  });
+},{threshold:.07});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+/* ── FAQ ── */
+function toggleFaq(btn){
+  const item=btn.closest('.faq-item');
+  const isOpen=item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(el=>el.classList.remove('open'));
+  if(!isOpen)item.classList.add('open');
+}
+
+/* ── Modal ── */
+function openModal(){
+  document.getElementById('modal').classList.add('open');
+  document.getElementById('codeInput').value='';
+  document.getElementById('modalErr').textContent='';
+  document.getElementById('modalErr').style.color='#e74c3c';
+  setTimeout(()=>document.getElementById('codeInput').focus(),150);
+}
+function closeModal(){document.getElementById('modal').classList.remove('open')}
+function handleBg(e){if(e.target===document.getElementById('modal'))closeModal()}
+function verify(){
+  const v=document.getElementById('codeInput').value.trim().toUpperCase();
+  const err=document.getElementById('modalErr');
+  if(!v){err.textContent='Veuillez entrer votre code.';return}
+  if(v==='VALEUR2025'){
+    err.style.color='#2ecc71';
+    err.textContent='✓ Code valide — redirection…';
+    setTimeout(()=>window.location.href='https://celinebourbon-ux.github.io/Questionnaire-Valeur-V4/',900);
+  } else {
+    err.style.color='#e74c3c';
+    err.textContent='Code incorrect. Contactez l\'administrateur.';
+    document.getElementById('codeInput').style.borderColor='#e74c3c';
+    setTimeout(()=>document.getElementById('codeInput').style.borderColor='',1600);
+  }
+}
+
+/* ── Smooth scroll ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{
+  a.addEventListener('click',e=>{
+    const t=document.querySelector(a.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'})}
+  });
+});
+</script>
+
+</body>
+</html>
