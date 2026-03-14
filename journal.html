@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>V.A.L.E.U.R© — Journal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ══ RESET ══ */
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    :root{
+      --navy:#070D1A;--navy2:#0D1526;--navy3:#0D1525;--navy-card:#111827;
+      --navy-border:rgba(255,255,255,.07);
+      --gold:#C9A84C;--gold-light:#F0D080;--gold-glow:rgba(201,168,76,.18);
+      --cream:#F2EDE6;--text:#E2E8F0;--muted:#94A3B8;
+      --glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);
+      --radius:16px;--radius-sm:10px;
+      --transition:all .25s ease;
+    }
+    html{scroll-behavior:smooth;}
+    body{
+      background:var(--navy);color:var(--text);
+      font-family:'Jost',sans-serif;font-size:15px;line-height:1.7;
+      min-height:100vh;padding-top:70px;
+    }
+
+    /* ══ AURORA ══ */
+    .bg-aurora{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;}
+    .orb{position:absolute;border-radius:50%;filter:blur(80px);opacity:.18;animation:orb-drift 18s ease-in-out infinite;}
+    .orb1{width:500px;height:500px;top:-100px;left:-100px;background:#C9A84C;animation-delay:0s;}
+    .orb2{width:400px;height:400px;bottom:-80px;right:-80px;background:#805AD5;animation-delay:-6s;}
+    .orb3{width:300px;height:300px;top:50%;left:50%;background:#3182CE;animation-delay:-12s;}
+    @keyframes orb-drift{0%,100%{transform:translate(0,0);}33%{transform:translate(30px,-20px);}66%{transform:translate(-20px,30px);}}
+
+    /* ══ TOPBAR ══ */
+    #valeur-progress-bar{position:fixed;top:0;left:0;right:0;z-index:200;}
+
+    /* ══ HEADER ══ */
+    .page-header{
+      position:fixed;top:0;left:0;right:0;z-index:190;
+      height:64px;display:flex;align-items:center;justify-content:space-between;
+      padding:0 20px;
+      background:rgba(7,13,26,.85);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--navy-border);
+    }
+    .logo{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:700;color:var(--gold);text-decoration:none;letter-spacing:.05em;}
+    .header-nav{display:flex;align-items:center;gap:6px;}
+    .header-nav a{
+      font-size:12px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;
+      color:var(--muted);text-decoration:none;padding:6px 14px;border-radius:50px;
+      border:1px solid transparent;transition:var(--transition);
+    }
+    .header-nav a:hover,.header-nav a.active{color:var(--gold);border-color:rgba(201,168,76,.3);background:rgba(201,168,76,.07);}
+
+    /* ══ SCROLL LINE ══ */
+    #scroll-line{position:fixed;top:64px;left:0;height:2px;z-index:191;
+      background:linear-gradient(90deg,var(--gold),var(--gold-light));
+      width:0%;transition:width .1s linear;}
+
+    /* ══ MAIN ══ */
+    main{position:relative;z-index:1;max-width:720px;margin:0 auto;padding:32px 16px 100px;}
+
+    /* ══ HERO ══ */
+    .page-hero{text-align:center;padding:40px 0 32px;}
+    .hero-eyebrow{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;}
+    .hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,7vw,3.5rem);font-weight:700;color:var(--cream);line-height:1.1;margin-bottom:10px;}
+    .hero-sub{font-size:15px;color:var(--muted);max-width:420px;margin:0 auto;}
+
+    /* ══ STATS ══ */
+    .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px;}
+    .stat-card{background:var(--glass);border:1px solid var(--navy-border);border-radius:var(--radius);padding:18px 12px;text-align:center;}
+    .stat-val{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);line-height:1;}
+    .stat-label{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px;}
+
+    /* ══ DIVIDER ══ */
+    .gold-divider{border:none;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);margin:24px 0;}
+
+    /* ══ NEW ENTRY BUTTON ══ */
+    .new-entry-btn{
+      display:flex;align-items:center;gap:14px;width:100%;text-align:left;
+      padding:18px 20px;
+      background:linear-gradient(135deg,rgba(201,168,76,.09),rgba(201,168,76,.03));
+      border:1px dashed rgba(201,168,76,.4);border-radius:var(--radius);
+      cursor:pointer;transition:var(--transition);margin-bottom:20px;
+    }
+    .new-entry-btn:hover{background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.06));transform:translateY(-2px);}
+    .new-entry-icon{font-size:1.6rem;}
+    .new-entry-label strong{display:block;font-size:14px;font-weight:600;color:var(--cream);}
+    .new-entry-label small{font-size:12px;color:var(--muted);}
+    .new-entry-plus{font-size:1.4rem;color:var(--gold);margin-left:auto;}
+
+    /* ══ FORM ══ */
+    .form-card{background:rgba(13,21,38,.8);border:1px solid rgba(201,168,76,.25);border-radius:var(--radius);padding:28px;margin-bottom:24px;display:none;}
+    .form-card.open{display:block;}
+    .form-card h3{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--cream);margin-bottom:20px;}
+    select,textarea{
+      width:100%;background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.1);border-radius:var(--radius-sm);
+      color:var(--text);font-family:'Jost',sans-serif;font-size:14px;
+      padding:12px 14px;resize:vertical;transition:var(--transition);
+    }
+    select{padding:12px 14px;cursor:pointer;}
+    select:focus,textarea:focus{outline:none;border-color:rgba(201,168,76,.4);background:rgba(255,255,255,.06);}
+    select option{background:#0D1526;}
+    .form-group{margin-bottom:16px;}
+    .valeur-steps{display:flex;flex-direction:column;gap:14px;margin:20px 0;}
+    .step-item label{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.3px;}
+    .step-letter{
+      width:26px;height:26px;border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--gold-light));
+      color:#070D1A;font-size:12px;font-weight:700;
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+    }
+    .form-actions{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap;}
+    .btn-primary{
+      background:linear-gradient(135deg,var(--gold),var(--gold-light));
+      color:#070D1A;font-family:'Jost',sans-serif;font-weight:700;font-size:14px;
+      border:none;border-radius:50px;padding:12px 28px;cursor:pointer;
+      box-shadow:0 4px 20px rgba(201,168,76,.3);transition:var(--transition);
+    }
+    .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(201,168,76,.45);}
+    .btn-secondary{
+      background:transparent;color:var(--muted);font-family:'Jost',sans-serif;
+      font-size:14px;border:1px solid rgba(255,255,255,.1);border-radius:50px;
+      padding:12px 24px;cursor:pointer;transition:var(--transition);
+    }
+    .btn-secondary:hover{border-color:rgba(255,255,255,.2);color:var(--text);}
+
+    /* ══ FILTER BAR ══ */
+    .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px;}
+    .filter-btn{
+      font-size:12px;font-weight:600;padding:6px 14px;border-radius:50px;
+      border:1px solid var(--navy-border);background:var(--glass);
+      color:var(--muted);cursor:pointer;transition:var(--transition);
+    }
+    .filter-btn:hover,.filter-btn.active{
+      background:rgba(201,168,76,.12);border-color:rgba(201,168,76,.35);color:var(--gold);
+    }
+
+    /* ══ ENTRIES ══ */
+    .entries-list{display:flex;flex-direction:column;gap:16px;}
+    .entry-card{
+      background:var(--glass);border:1px solid var(--navy-border);
+      border-radius:var(--radius);padding:20px;
+      animation:fade-in .3s ease;
+    }
+    @keyframes fade-in{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+    .entry-top{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+    .entry-masque-dot{
+      width:36px;height:36px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      font-size:1.1rem;flex-shrink:0;
+    }
+    .entry-meta{flex:1;}
+    .entry-masque-name{font-size:13px;font-weight:600;color:var(--cream);}
+    .entry-date{font-size:11px;color:var(--muted);}
+    .entry-delete{
+      background:transparent;border:1px solid rgba(255,255,255,.07);
+      border-radius:8px;padding:5px 10px;font-size:11px;color:var(--muted);
+      cursor:pointer;transition:var(--transition);
+    }
+    .entry-delete:hover{border-color:rgba(229,62,62,.4);color:#FC8181;}
+    .valeur-steps-display{display:flex;flex-direction:column;gap:8px;}
+    .step-row{display:flex;gap:10px;align-items:flex-start;}
+    .step-badge{
+      width:22px;height:22px;border-radius:50%;
+      background:rgba(201,168,76,.15);color:var(--gold);
+      font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;
+      flex-shrink:0;margin-top:2px;
+    }
+    .step-text{font-size:13px;color:rgba(242,237,230,.8);line-height:1.55;}
+    .empty-state{text-align:center;padding:48px 20px;color:var(--muted);}
+    .empty-state .empty-icon{font-size:3rem;margin-bottom:12px;opacity:.5;}
+    .empty-state p{font-size:14px;}
+
+    /* ══ FAB ══ */
+    #fab-journal{
+      position:fixed;bottom:28px;right:24px;z-index:300;
+      width:56px;height:56px;border-radius:50%;
+      background:linear-gradient(135deg,var(--gold),var(--gold-light));
+      border:none;cursor:pointer;font-size:20px;
+      box-shadow:0 8px 28px rgba(201,168,76,.45);
+      display:flex;align-items:center;justify-content:center;
+      transition:var(--transition);animation:fab-breathe 3s ease-in-out infinite;
+    }
+    #fab-journal:hover{transform:scale(1.1);}
+    @keyframes fab-breathe{
+      0%,100%{box-shadow:0 8px 28px rgba(201,168,76,.45),0 0 0 0 rgba(201,168,76,.35);}
+      50%{box-shadow:0 8px 28px rgba(201,168,76,.45),0 0 0 10px rgba(201,168,76,0);}
+    }
+
+    /* ══ TOAST ══ */
+    #toast{
+      position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+      background:rgba(13,21,38,.95);border:1px solid var(--gold);
+      border-radius:50px;padding:10px 24px;font-size:14px;color:var(--text);
+      z-index:500;opacity:0;transition:all .4s ease;pointer-events:none;
+      white-space:nowrap;
+    }
+    #toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+    /* ══ COPYRIGHT ══ */
+    .copyright{text-align:center;font-size:11px;color:var(--muted);padding:20px;border-top:1px solid var(--navy-border);margin-top:40px;}
+
+    /* ══ MASQUE COLORS ══ */
+    .m-rouge{background:rgba(229,62,62,.15);}
+    .m-orange{background:rgba(237,137,54,.15);}
+    .m-jaune{background:rgba(212,172,13,.15);}
+    .m-vert{background:rgba(56,161,105,.15);}
+    .m-bleu{background:rgba(49,130,206,.15);}
+    .m-indigo{background:rgba(128,90,213,.15);}
+    .m-violet{background:rgba(128,90,213,.15);}
+
+    /* ══ RESPONSIVE ══ */
+    @media(max-width:480px){
+      .stats-grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+      .header-nav a{font-size:11px;padding:5px 10px;}
+      .stat-val{font-size:1.5rem;}
+    }
+
+    /* ══ ANTI-COPY ══ */
+    body{-webkit-user-select:none;-moz-user-select:none;user-select:none;}
+    input,textarea,select{-webkit-user-select:text;-moz-user-select:text;user-select:text;}
+  </style>
+</head>
+<body>
+
+<!-- Aurora -->
+<div class="bg-aurora" aria-hidden="true">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<!-- Progress bar injecté par valeur-config.js -->
+<div id="valeur-progress-bar"></div>
+<div id="scroll-line"></div>
+
+<!-- Header -->
+<header class="page-header">
+  <a href="dashboard.html" class="logo">V·A·L·E·U·R©</a>
+  <nav class="header-nav">
+    <a href="dashboard.html">⌂ Accueil</a>
+    <a href="module0.html">📚 Modules</a>
+    <a href="journal.html" class="active">📓 Journal</a>
+  </nav>
+</header>
+
+<main>
+
+  <!-- Hero -->
+  <div class="page-hero">
+    <div class="hero-eyebrow">✦ Méthode V.A.L.E.U.R©</div>
+    <h1 class="hero-title">Mon Journal</h1>
+    <p class="hero-sub">Chaque observation est un pas vers votre nature authentique</p>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-grid" id="stats-grid">
+    <div class="stat-card">
+      <div class="stat-val" id="stat-total">0</div>
+      <div class="stat-label">Observations</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="stat-masque">—</div>
+      <div class="stat-label">Masque fréquent</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-val" id="stat-last">—</div>
+      <div class="stat-label">Dernière entrée</div>
+    </div>
+  </div>
+
+  <hr class="gold-divider">
+
+  <!-- New entry button -->
+  <button class="new-entry-btn" onclick="openForm()">
+    <span class="new-entry-icon">✍️</span>
+    <div class="new-entry-label">
+      <strong>Nouvelle observation</strong>
+      <small>Observer un masque actif — appliquer la méthode V.A.L.E.U.R©</small>
+    </div>
+    <span class="new-entry-plus">+</span>
+  </button>
+
+  <!-- Inline form -->
+  <div class="form-card" id="form-card">
+    <h3>Nouvelle Observation</h3>
+    <form id="journal-form" autocomplete="off">
+      <div class="form-group">
+        <select name="masque" id="select-masque" required>
+          <option value="">🎭 Quel masque détectez-vous ?</option>
+          <option value="rouge">🔴 Rouge — Peur de la mort / maladie</option>
+          <option value="orange">🟠 Orange — Peur de la souffrance</option>
+          <option value="jaune">🟡 Jaune — Peur de l'incertitude</option>
+          <option value="vert">🟢 Vert — Peur du rejet / abandon</option>
+          <option value="bleu">🔵 Bleu — Peur de l'impuissance</option>
+          <option value="indigo">🟣 Indigo — Peur de l'échec</option>
+          <option value="violet">💜 Violet — Peur de perdre son identité</option>
+        </select>
+      </div>
+      <div class="valeur-steps">
+        <div class="step-item">
+          <label><span class="step-letter">V</span> VOIR — le déclencheur</label>
+          <textarea name="V" placeholder="Quelle situation a activé ce masque ? Décrivez précisément le contexte." rows="3"></textarea>
+        </div>
+        <div class="step-item">
+          <label><span class="step-letter">A</span> ACCUEILLIR — l'émotion</label>
+          <textarea name="A" placeholder="Quelle émotion est présente ? Nommez-la sans la juger." rows="3"></textarea>
+        </div>
+        <div class="step-item">
+          <label><span class="step-letter">L</span> LOCALISER — dans le corps</label>
+          <textarea name="L" placeholder="Où ressentez-vous ça dans votre corps ? Décrivez la sensation physique." rows="3"></textarea>
+        </div>
+        <div class="step-item">
+          <label><span class="step-letter">E</span> EXPLORER — le conflit intérieur</label>
+          <textarea name="E" placeholder="'Une part de moi voudrait... mais une autre a peur de...'" rows="3"></textarea>
+        </div>
+        <div class="step-item">
+          <label><span class="step-letter">U</span> UNIFIER — la conscience</label>
+          <textarea name="U" placeholder="Comment réconciliez-vous ces deux parties ? Quelle action consciente choisissez-vous ?" rows="3"></textarea>
+        </div>
+        <div class="step-item">
+          <label><span class="step-letter">R</span> RENFORCER — l'ancrage</label>
+          <textarea name="R" placeholder="Comment allez-vous ancrer cette prise de conscience ? Un geste, une phrase, un engagement." rows="3"></textarea>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="submit" class="btn-primary">💾 Sauvegarder</button>
+        <button type="button" class="btn-secondary" onclick="closeForm()">Annuler</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Filter bar -->
+  <div class="filter-bar" id="filter-bar">
+    <button class="filter-btn active" onclick="setFilter('all',this)">Tout voir</button>
+    <button class="filter-btn" onclick="setFilter('rouge',this)">🔴 Rouge</button>
+    <button class="filter-btn" onclick="setFilter('orange',this)">🟠 Orange</button>
+    <button class="filter-btn" onclick="setFilter('jaune',this)">🟡 Jaune</button>
+    <button class="filter-btn" onclick="setFilter('vert',this)">🟢 Vert</button>
+    <button class="filter-btn" onclick="setFilter('bleu',this)">🔵 Bleu</button>
+    <button class="filter-btn" onclick="setFilter('indigo',this)">🟣 Indigo</button>
+    <button class="filter-btn" onclick="setFilter('violet',this)">💜 Violet</button>
+  </div>
+
+  <!-- Entries -->
+  <div class="entries-list" id="entries-list"></div>
+
+</main>
+
+<!-- FAB -->
+<button id="fab-journal" title="Nouvelle observation" onclick="openForm()">✍️</button>
+
+<!-- Toast -->
+<div id="toast"></div>
+
+<!-- Copyright -->
+<div class="copyright">
+  © Méthode V.A.L.E.U.R© — Céline Bourbon, Psychologue · <em>De la peur à la joie d'être soi</em>, Éditions L'Harmattan · Tous droits réservés · Reproduction interdite
+</div>
+
+<script src="valeur-config.js"></script>
+<script>
+/* ══ VALEUR JOURNAL — implémentation autonome ══ */
+var JOURNAL_KEY = 'valeur_journal_v2';
+var currentFilter = 'all';
+
+var MASQUES = {
+  rouge:  { emoji:'🔴', label:'Rouge',  color:'rgba(229,62,62,.15)',   hex:'#E53E3E' },
+  orange: { emoji:'🟠', label:'Orange', color:'rgba(237,137,54,.15)',  hex:'#ED8936' },
+  jaune:  { emoji:'🟡', label:'Jaune',  color:'rgba(212,172,13,.15)',  hex:'#D4AC0D' },
+  vert:   { emoji:'🟢', label:'Vert',   color:'rgba(56,161,105,.15)',  hex:'#38A169' },
+  bleu:   { emoji:'🔵', label:'Bleu',   color:'rgba(49,130,206,.15)',  hex:'#3182CE' },
+  indigo: { emoji:'🟣', label:'Indigo', color:'rgba(128,90,213,.15)', hex:'#805AD5' },
+  violet: { emoji:'💜', label:'Violet', color:'rgba(159,122,234,.15)','hex':'#9F7AEA' }
+};
+
+function getEntries() {
+  try { return JSON.parse(localStorage.getItem(JOURNAL_KEY) || '[]'); } catch(e) { return []; }
+}
+function saveEntries(arr) {
+  try { localStorage.setItem(JOURNAL_KEY, JSON.stringify(arr)); } catch(e) {}
+}
+function addEntry(entry) {
+  var arr = getEntries();
+  entry.id = Date.now() + '-' + Math.random().toString(36).slice(2,7);
+  entry.date = new Date().toISOString();
+  arr.unshift(entry);
+  saveEntries(arr);
+}
+function deleteEntry(id) {
+  var arr = getEntries().filter(function(e){ return e.id !== id; });
+  saveEntries(arr);
+}
+
+function openForm() {
+  var fc = document.getElementById('form-card');
+  fc.classList.add('open');
+  fc.scrollIntoView({ behavior:'smooth', block:'start' });
+}
+function closeForm() {
+  document.getElementById('form-card').classList.remove('open');
+  document.getElementById('journal-form').reset();
+}
+
+function setFilter(f, btn) {
+  currentFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderEntries();
+}
+
+function showToast(msg) {
+  var t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(function(){ t.classList.remove('show'); }, 3000);
+}
+
+function confetti() {
+  // Simple confetti burst
+  var colors = ['#C9A84C','#F0D080','#E53E3E','#38A169','#3182CE','#805AD5'];
+  for (var i = 0; i < 30; i++) {
+    (function(i){
+      setTimeout(function(){
+        var d = document.createElement('div');
+        d.style.cssText = 'position:fixed;top:50%;left:'+Math.random()*100+'vw;width:8px;height:8px;border-radius:2px;background:'+colors[Math.floor(Math.random()*colors.length)]+';z-index:9999;pointer-events:none;animation:cf-fall .8s ease-out forwards;';
+        document.body.appendChild(d);
+        setTimeout(function(){ d.remove(); }, 900);
+      }, i * 30);
+    })(i);
+  }
+  var style = document.createElement('style');
+  style.textContent = '@keyframes cf-fall{0%{transform:translateY(0) rotate(0);opacity:1;}100%{transform:translateY(60vh) rotate(360deg);opacity:0;}}';
+  document.head.appendChild(style);
+}
+
+function formatDate(iso) {
+  var d = new Date(iso);
+  var today = new Date();
+  var diff = Math.floor((today - d) / (1000*60*60*24));
+  if (diff === 0) return "Aujourd'hui";
+  if (diff === 1) return "Hier";
+  return "Il y a " + diff + "j";
+}
+
+function renderStats() {
+  var all = getEntries();
+  document.getElementById('stat-total').textContent = all.length;
+  if (all.length) {
+    var counts = {};
+    all.forEach(function(e){ counts[e.masque] = (counts[e.masque]||0)+1; });
+    var top = Object.keys(counts).reduce(function(a,b){ return counts[a]>counts[b]?a:b; });
+    var m = MASQUES[top];
+    document.getElementById('stat-masque').textContent = m ? m.emoji : top;
+    document.getElementById('stat-last').textContent = formatDate(all[0].date);
+  }
+}
+
+function renderEntries() {
+  renderStats();
+  var all = getEntries();
+  var filtered = currentFilter === 'all' ? all : all.filter(function(e){ return e.masque === currentFilter; });
+  var list = document.getElementById('entries-list');
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="empty-state"><div class="empty-icon">📓</div><p>' +
+      (all.length ? 'Aucune entrée pour ce masque.' : 'Votre journal est vide.<br>Commencez votre première observation !') +
+      '</p></div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(function(e) {
+    var m = MASQUES[e.masque] || { emoji:'🎭', label: e.masque, color: 'rgba(255,255,255,.05)' };
+    var steps = [
+      { l:'V', t:'Voir', v:e.V },
+      { l:'A', t:'Accueillir', v:e.A },
+      { l:'L', t:'Localiser', v:e.L },
+      { l:'E', t:'Explorer', v:e.E },
+      { l:'U', t:'Unifier', v:e.U },
+      { l:'R', t:'Renforcer', v:e.R }
+    ].filter(function(s){ return s.v && s.v.trim(); });
+
+    return '<div class="entry-card" id="entry-' + e.id + '">' +
+      '<div class="entry-top">' +
+        '<div class="entry-masque-dot m-' + e.masque + '">' + m.emoji + '</div>' +
+        '<div class="entry-meta">' +
+          '<div class="entry-masque-name">Masque ' + m.label + '</div>' +
+          '<div class="entry-date">' + formatDate(e.date) + ' · ' + new Date(e.date).toLocaleDateString('fr-FR') + '</div>' +
+        '</div>' +
+        '<button class="entry-delete" onclick="confirmDelete(\'' + e.id + '\')">✕ Supprimer</button>' +
+      '</div>' +
+      (steps.length ? '<div class="valeur-steps-display">' +
+        steps.map(function(s){
+          return '<div class="step-row">' +
+            '<div class="step-badge">' + s.l + '</div>' +
+            '<div class="step-text"><strong>' + s.t + '</strong> · ' + escHtml(s.v) + '</div>' +
+          '</div>';
+        }).join('') +
+      '</div>' : '') +
+    '</div>';
+  }).join('');
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+
+function confirmDelete(id) {
+  if (confirm('Supprimer cette observation ?')) {
+    deleteEntry(id);
+    showToast('Entrée supprimée');
+    renderEntries();
+  }
+}
+
+// Form submit
+document.getElementById('journal-form').addEventListener('submit', function(e) {
+  e.preventDefault();
+  var masque = document.getElementById('select-masque').value;
+  if (!masque) { showToast('⚠️ Sélectionnez un masque'); return; }
+  var data = new FormData(this);
+  addEntry({
+    masque: masque,
+    V: data.get('V'), A: data.get('A'), L: data.get('L'),
+    E: data.get('E'), U: data.get('U'), R: data.get('R')
+  });
+  this.reset();
+  closeForm();
+  confetti();
+  showToast('✨ Observation sauvegardée !');
+  renderEntries();
+});
+
+// Scroll line
+window.addEventListener('scroll', function(){
+  var doc = document.documentElement;
+  var pct = (doc.scrollTop||document.body.scrollTop)/(doc.scrollHeight-doc.clientHeight)*100;
+  var sl = document.getElementById('scroll-line');
+  if (sl) sl.style.width = Math.min(pct,100)+'%';
+}, {passive:true});
+
+// Anti-copy
+document.addEventListener('contextmenu', function(e){ e.preventDefault(); });
+document.addEventListener('selectstart', function(e){
+  if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT'||e.target.tagName==='SELECT') return;
+  e.preventDefault();
+});
+document.addEventListener('copy', function(e){
+  if(e.target.tagName==='TEXTAREA'||e.target.tagName==='INPUT') return;
+  e.preventDefault();
+});
+
+// Init
+document.addEventListener('DOMContentLoaded', function(){
+  if (typeof VALEUR_PROGRESS !== 'undefined') {
+    try { VALEUR_PROGRESS.render(''); } catch(err) {}
+  }
+  renderEntries();
+});
+</script>
+</body>
+</html>

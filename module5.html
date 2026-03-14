@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Module 5 — Unifier · V.A.L.E.U.R©</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#C9A84C;--gold-light:#F0D080;--gold-glow:rgba(201,168,76,.22);
+  --navy:#070D1A;--navy2:#0D1526;--navy3:#131F35;--navy4:#1A2845;
+  --glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);
+  --text:#F2EDE6;--muted:#8A9BB5;--text2:#C8D6E8;
+  --blue:#3182CE;--blue-light:#63B3ED;--blue-glow:rgba(49,130,206,.25);
+  --red:#E53E3E;--orange:#ED8936;--yellow:#D69E2E;
+  --green:#38A169;--indigo:#5A67D8;--violet:#805AD5;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--navy);color:var(--text);
+  font-family:'Jost',sans-serif;font-weight:300;
+  overflow-x:hidden;
+  -webkit-user-select:none;-moz-user-select:none;user-select:none;
+}
+
+/* ── SCROLL LINE ── */
+/* ── PROGRESS BAR ── */
+#progress-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,13,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(49,130,206,.15);padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.pb-back{display:flex;align-items:center;gap:6px;background:var(--glass);border:1px solid var(--gb);border-radius:8px;padding:6px 12px;color:var(--muted);font-size:12px;letter-spacing:.5px;text-decoration:none;transition:all .3s;white-space:nowrap;flex-shrink:0;}
+.pb-back:hover{border-color:var(--blue-light);color:var(--blue-light);}
+.pb-steps{display:flex;gap:6px;flex:1;align-items:center;}
+.pb-step{flex:1;height:30px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .5s cubic-bezier(.34,1.56,.64,1);}
+.pb-step.done{background:linear-gradient(135deg,var(--gold),var(--gold-light));border-color:var(--gold-light);cursor:pointer;}
+.pb-step.active{background:rgba(49,130,206,.1);border-color:var(--blue-light);animation:pb-pulse 2.5s ease-in-out infinite;}
+@keyframes pb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(49,130,206,.3);}50%{box-shadow:0 0 0 4px rgba(49,130,206,0);}}
+.pb-letter{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--muted);}
+.pb-step.done .pb-letter{color:#070D1A;}
+.pb-step.active .pb-letter{color:var(--blue-light);}
+.pb-pct{font-size:13px;font-weight:700;color:var(--gold);min-width:36px;text-align:right;}
+@media(max-width:480px){.pb-letter{font-size:9px;}.pb-step{height:24px;}#progress-bar{padding:8px 12px;gap:8px;}.pb-back span{display:none;}}
+/* ── AURORA ── */
+.aurora{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.18;animation:drift 18s ease-in-out infinite}
+.orb1{width:700px;height:700px;background:var(--blue);top:-200px;right:-150px;animation-delay:0s}
+.orb2{width:600px;height:600px;background:var(--indigo);bottom:-150px;left:-150px;animation-delay:-6s}
+.orb3{width:500px;height:500px;background:var(--gold);top:40%;left:50%;animation-delay:-12s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.1)}66%{transform:translate(-40px,60px) scale(.9)}}
+
+/* ── DOT NAV ── */
+#dot-nav{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:900;display:flex;flex-direction:column;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);background:transparent;cursor:pointer;transition:all .3s;position:relative}
+.dot.active{background:var(--blue);border-color:var(--blue);box-shadow:0 0 10px var(--blue-glow)}
+.dot:hover::after{content:attr(data-label);position:absolute;right:20px;top:50%;transform:translateY(-50%);background:rgba(13,21,38,.95);color:var(--text);font-size:.7rem;white-space:nowrap;padding:4px 10px;border-radius:6px;border:1px solid var(--gb);pointer-events:none}
+@media(max-width:768px){#dot-nav{display:none}}
+
+/* ── SECTIONS ── */
+section{
+  min-height:100vh;padding:80px 20px 60px;
+  display:flex;flex-direction:column;position:relative;z-index:1;
+  opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;
+}
+section.visible{opacity:1;transform:translateY(0)}
+.container{width:100%;max-width:760px;margin:0 auto}
+
+/* ── GLASS ── */
+.glass{background:var(--glass);backdrop-filter:blur(20px);border:1px solid var(--gb);border-radius:20px;padding:32px;transition:transform .3s,box-shadow .3s}
+.glass:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.glass-blue{background:rgba(49,130,206,.08);border-color:rgba(49,130,206,.25)}
+.glass-gold{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.3)}
+
+/* ── HERO ── */
+#s0{background:radial-gradient(ellipse at 70% 40%,rgba(49,130,206,.14) 0%,transparent 60%)}
+.module-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(49,130,206,.12);border:1px solid rgba(49,130,206,.35);border-radius:30px;padding:8px 20px;margin-bottom:28px;font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--blue-light)}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,9vw,6rem);font-weight:300;line-height:1;color:var(--text);margin-bottom:12px}
+.hero-title span{color:var(--blue-light);font-style:italic}
+.hero-sub{font-size:1.05rem;color:var(--muted);max-width:560px;line-height:1.7;margin-bottom:32px}
+.hero-quote{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;color:var(--blue-light);border-left:3px solid var(--blue);padding:16px 24px;background:rgba(49,130,206,.07);border-radius:0 12px 12px 0;max-width:560px;margin-bottom:36px;line-height:1.6}
+.stats-row{display:flex;gap:20px;flex-wrap:wrap}
+.stat{text-align:center;background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:16px 24px}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--blue-light)}
+.stat-l{font-size:.72rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+
+/* ── SECTION TITLES ── */
+.s-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--blue-light);margin-bottom:10px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;color:var(--text);margin-bottom:8px;line-height:1.2}
+.section-intro{color:var(--muted);line-height:1.75;margin-bottom:28px;font-size:.95rem}
+
+/* ── AVANT / APRES ── */
+.avant-apres{display:grid;grid-template-columns:1fr auto 1fr;gap:0;align-items:stretch;margin-bottom:24px}
+@media(max-width:600px){.avant-apres{grid-template-columns:1fr;gap:12px}}
+.av-card{border-radius:16px;padding:24px}
+.av-avant{background:rgba(229,62,62,.07);border:1px solid rgba(229,62,62,.2)}
+.av-apres{background:rgba(49,130,206,.08);border:1px solid rgba(49,130,206,.25)}
+.av-title{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;margin-bottom:12px}
+.av-title.rouge{color:#FC8181}
+.av-title.bleue{color:var(--blue-light)}
+.av-line{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.av-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+.av-dot.r{background:#FC8181}
+.av-dot.b{background:var(--blue-light)}
+.av-text{font-size:.83rem;color:var(--muted);line-height:1.5}
+.arrow-col{display:flex;align-items:center;justify-content:center;padding:0 16px;font-size:1.5rem;color:var(--gold)}
+@media(max-width:600px){.arrow-col{transform:rotate(90deg);padding:4px 0}}
+
+/* ── 3 QUESTIONS ── */
+.q-card{border-radius:16px;padding:24px;margin-bottom:16px}
+.q-card-1{background:rgba(49,130,206,.07);border:1px solid rgba(49,130,206,.2)}
+.q-card-2{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2)}
+.q-card-3{background:rgba(56,161,105,.07);border:1px solid rgba(56,161,105,.2)}
+.q-num{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;line-height:1;margin-bottom:6px}
+.q-num.blue{color:rgba(49,130,206,.5)}
+.q-num.gold{color:rgba(201,168,76,.5)}
+.q-num.green{color:rgba(56,161,105,.5)}
+.q-title{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--text);margin-bottom:4px}
+.q-sub{font-size:.83rem;color:var(--muted);margin-bottom:14px;line-height:1.55}
+.q-example{font-size:.8rem;color:var(--muted);font-style:italic;margin-bottom:12px;padding:10px 14px;background:rgba(255,255,255,.03);border-radius:8px;border-left:2px solid rgba(255,255,255,.1)}
+.q-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Jost',sans-serif;font-size:.88rem;resize:vertical;min-height:60px;outline:none;transition:border .3s}
+.q-input:focus{border-color:rgba(49,130,206,.5);background:rgba(49,130,206,.05)}
+
+/* ── FORMULE J'AI PEUR ET ── */
+.formule-header{text-align:center;margin-bottom:28px}
+.formule-badge{
+  display:inline-block;padding:12px 28px;
+  background:linear-gradient(135deg,rgba(49,130,206,.15),rgba(201,168,76,.1));
+  border:1px solid rgba(49,130,206,.35);border-radius:50px;
+  font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-style:italic;
+  color:var(--blue-light);margin-bottom:16px;
+}
+.formule-sub{font-size:.85rem;color:var(--muted);line-height:1.6}
+.formule-ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:24px}
+@media(max-width:600px){.formule-ex-grid{grid-template-columns:1fr}}
+.formule-ex{background:rgba(255,255,255,.03);border:1px solid var(--gb);border-radius:12px;padding:14px 16px;font-size:.83rem;color:var(--muted);line-height:1.6}
+.formule-ex strong{color:var(--blue-light)}
+.formule-ex em{color:var(--gold-light)}
+.ma-formule{background:rgba(49,130,206,.07);border:1px solid rgba(49,130,206,.25);border-radius:14px;padding:20px}
+.mf-label{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:12px}
+.mf-template{font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:2;color:var(--text);font-style:italic}
+.mf-input{background:transparent;border:none;border-bottom:1.5px solid rgba(49,130,206,.4);color:var(--blue-light);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;outline:none;padding:2px 4px;min-width:140px;transition:border .3s}
+.mf-input:focus{border-color:var(--blue-light)}
+
+/* ── PROCESSUS 4 ÉTAPES ── */
+.process-steps{display:flex;flex-direction:column;gap:0}
+.proc-row{display:grid;grid-template-columns:60px 1fr;gap:0;align-items:start;position:relative}
+.proc-row:not(:last-child)::before{content:'';position:absolute;left:29px;top:62px;bottom:0;width:2px;background:linear-gradient(to bottom,rgba(49,130,206,.4),rgba(49,130,206,.1))}
+.proc-bubble{width:60px;height:60px;border-radius:50%;background:rgba(49,130,206,.15);border:2px solid rgba(49,130,206,.4);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--blue-light);position:relative;z-index:1}
+.proc-content{padding:8px 0 36px 20px}
+.proc-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);margin-bottom:6px}
+.proc-desc{font-size:.83rem;color:var(--muted);margin-bottom:14px;line-height:1.6}
+
+/* ── BESOINS SPLIT ── */
+.besoins-split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px}
+@media(max-width:540px){.besoins-split{grid-template-columns:1fr}}
+.besoin-card{border-radius:12px;padding:16px}
+.bc-masque{background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.15)}
+.bc-valeur{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18)}
+.bc-title{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:8px}
+.bc-title.r{color:#FC8181}
+.bc-title.g{color:var(--gold-light)}
+.bc-input{width:100%;background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:8px;padding:8px 12px;color:var(--text);font-family:'Jost',sans-serif;font-size:.83rem;outline:none;transition:border .3s}
+.bc-input:focus{border-color:rgba(49,130,206,.4);background:rgba(49,130,206,.04)}
+
+/* ── PONTS ── */
+.pont-items{display:flex;flex-direction:column;gap:8px;margin-bottom:12px}
+.pont-item{display:flex;align-items:flex-start;gap:10px;padding:10px 12px;background:rgba(255,255,255,.03);border:1px solid var(--gb);border-radius:10px}
+.pont-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.pont-input{background:transparent;border:none;flex:1;color:var(--text);font-family:'Jost',sans-serif;font-size:.85rem;outline:none}
+.pont-input::placeholder{color:rgba(138,155,181,.4)}
+
+/* ── ECHELLE ── */
+.echelle-wrap{margin:16px 0}
+.echelle-label{font-size:.78rem;color:var(--muted);margin-bottom:8px}
+.echelle-row{display:flex;align-items:center;gap:12px}
+.echelle-track{flex:1;height:6px;background:rgba(255,255,255,.08);border-radius:3px;position:relative;cursor:pointer}
+.echelle-fill{height:100%;border-radius:3px;transition:width .3s;background:linear-gradient(90deg,var(--blue),var(--blue-light))}
+.echelle-thumb{width:18px;height:18px;border-radius:50%;background:var(--blue-light);border:2px solid #fff;position:absolute;top:50%;transform:translateY(-50%);cursor:grab;box-shadow:0 2px 8px rgba(49,130,206,.4)}
+.echelle-val{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--blue-light);min-width:36px;text-align:right}
+.echelle-ticks{display:flex;justify-content:space-between;padding:0 0;margin-top:4px}
+.echelle-tick{font-size:.65rem;color:rgba(138,155,181,.4)}
+
+/* ── COMPROMIS ── */
+.compromis-box{background:linear-gradient(135deg,rgba(49,130,206,.1),rgba(201,168,76,.07));border:1px solid rgba(49,130,206,.25);border-radius:14px;padding:20px;margin-top:12px}
+.cb-head{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.cb-icon{font-size:1.4rem}
+.cb-title{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--blue-light)}
+.cb-sub{font-size:.8rem;color:var(--muted);margin-bottom:12px;font-style:italic}
+
+/* ── ACTE DE FIDELITE ── */
+.fidelite-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:540px){.fidelite-split{grid-template-columns:1fr}}
+.fid-card{border-radius:14px;padding:20px;text-align:center}
+.fid-ancienne{background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.15)}
+.fid-nouvelle{background:rgba(49,130,206,.08);border:1px solid rgba(49,130,206,.25)}
+.fid-label{font-size:.7rem;letter-spacing:.13em;text-transform:uppercase;margin-bottom:10px}
+.fid-label.r{color:#FC8181}
+.fid-label.b{color:var(--blue-light)}
+.fid-text{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;line-height:1.6;color:var(--muted)}
+.arrow-down{text-align:center;font-size:1.8rem;color:var(--gold);margin:4px 0;grid-column:1/-1}
+
+/* ── CHECKLIST ── */
+.checklist{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.check-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer}
+.check-box{width:22px;height:22px;border-radius:6px;flex-shrink:0;border:1.5px solid rgba(49,130,206,.4);background:transparent;display:flex;align-items:center;justify-content:center;transition:all .25s;margin-top:1px}
+.check-item.checked .check-box{background:var(--blue);border-color:var(--blue)}
+.check-item.checked .check-box::after{content:'✓';color:#fff;font-size:.75rem;font-weight:700}
+.check-text{font-size:.88rem;color:var(--muted);line-height:1.5;transition:color .25s}
+.check-item.checked .check-text{color:var(--text);text-decoration:line-through;opacity:.6}
+
+/* ── BTNS ── */
+.btn-primary{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--blue),#2B6CB0);border:none;border-radius:50px;padding:16px 36px;color:#fff;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:500;cursor:pointer;transition:all .3s;letter-spacing:.06em;box-shadow:0 8px 30px rgba(49,130,206,.3)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(49,130,206,.45)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1px solid rgba(49,130,206,.4);border-radius:50px;padding:12px 28px;color:var(--blue-light);font-family:'Jost',sans-serif;font-size:.85rem;cursor:pointer;transition:all .3s}
+.btn-secondary:hover{background:rgba(49,130,206,.1);border-color:var(--blue)}
+
+/* ── JOURNAL FAB ── */
+#journal-fab{position:fixed;bottom:28px;right:28px;z-index:800;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gold-light));border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.4rem;box-shadow:0 8px 25px rgba(201,168,76,.35);transition:all .3s}
+#journal-fab:hover{transform:scale(1.08);box-shadow:0 12px 35px rgba(201,168,76,.5)}
+#journal-panel{position:fixed;bottom:100px;right:28px;z-index:800;width:min(420px,calc(100vw - 40px));background:rgba(13,21,38,.97);backdrop-filter:blur(30px);border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:24px;display:none;flex-direction:column;gap:16px;box-shadow:0 20px 60px rgba(0,0,0,.5)}
+#journal-panel.open{display:flex}
+.jp-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold-light)}
+.jp-date{font-size:.72rem;color:var(--muted)}
+#journal-text{background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:12px;padding:12px;color:var(--text);font-family:'Jost',sans-serif;font-size:.85rem;resize:none;height:120px;outline:none}
+.jp-footer{display:flex;gap:8px;justify-content:flex-end}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(49,130,206,.15);border:1px solid rgba(49,130,206,.4);backdrop-filter:blur(20px);border-radius:30px;padding:12px 24px;font-size:.85rem;color:var(--blue-light);opacity:0;transition:all .4s;z-index:2000;pointer-events:none;white-space:nowrap}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── CONFETTI ── */
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:9999;display:none}
+
+/* ── FINAL ── */
+.final-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+@media(max-width:600px){.final-grid{grid-template-columns:1fr}}
+.final-card{background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:22px;text-align:center}
+.fc-icon{font-size:2rem;margin-bottom:10px}
+.fc-title{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--blue-light);margin-bottom:6px}
+.fc-text{font-size:.8rem;color:var(--muted);line-height:1.5}
+.nav-arrows{display:flex;gap:12px;align-items:center;flex-wrap:wrap;justify-content:center}
+.copyright-footer{text-align:center;padding:8px;font-size:.65rem;color:rgba(138,155,181,.3);letter-spacing:.1em}
+
+@media(max-width:600px){.glass{padding:20px}section{padding:70px 16px 50px}}
+
+/* ── BTN NEXT ── */
+.btn-next{display:flex;align-items:center;justify-content:center;gap:10px;margin:36px auto 0;width:100%;max-width:420px;background:linear-gradient(135deg,rgba(49,130,206,.12),rgba(49,130,206,.05));border:1px solid rgba(49,130,206,.3);border-radius:14px;padding:16px 28px;font-family:'Jost',sans-serif;font-size:.97rem;font-weight:500;color:var(--blue-light);cursor:pointer;transition:all .4s cubic-bezier(.34,1.2,.64,1);}
+.btn-next:hover{background:rgba(49,130,206,.18);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 24px rgba(49,130,206,.2);}
+.btn-next .bn-arrow{transition:transform .3s;font-size:1.1rem;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+/* ── JOURNAL MODULE ── */
+.journal-module{margin:40px 0 0;border-radius:22px;overflow:hidden;border:1px solid rgba(49,130,206,.2);background:rgba(255,255,255,.02);}
+.jm-header{background:linear-gradient(135deg,rgba(49,130,206,.08),rgba(49,130,206,.03));border-bottom:1px solid rgba(49,130,206,.12);padding:22px 28px;display:flex;align-items:center;gap:14px;}
+.jm-header-icon{font-size:1.5rem;}
+.jm-header-text h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:var(--text);margin-bottom:3px;}
+.jm-header-text p{font-size:.8rem;color:var(--muted);letter-spacing:.5px;}
+.jm-memo{border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-memo-toggle{width:100%;background:none;border:none;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;color:var(--text2);letter-spacing:.5px;text-align:left;}
+.jm-memo-toggle span{display:flex;align-items:center;gap:10px;}
+.jm-memo-chevron{font-size:.75rem;color:var(--muted);transition:transform .3s;}
+.jm-memo.open .jm-memo-chevron{transform:rotate(180deg);}
+.jm-memo-body{display:none;padding:0 28px 22px;}
+.jm-memo.open .jm-memo-body{display:block;}
+.jm-memo-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.jm-memo-item:last-child{border-bottom:none;}
+.jm-memo-num{width:26px;height:26px;border-radius:50%;background:rgba(49,130,206,.1);border:1px solid rgba(49,130,206,.2);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--blue-light);flex-shrink:0;}
+.jm-memo-text{font-size:.88rem;color:var(--text2);line-height:1.65;}
+.jm-memo-text strong{color:var(--text);}
+.jm-questions{padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-q-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--blue-light);margin-bottom:18px;font-weight:600;}
+.jm-q-item{margin-bottom:18px;}
+.jm-q-item:last-child{margin-bottom:0;}
+.jm-q-text{font-size:.88rem;color:var(--text2);line-height:1.6;margin-bottom:8px;font-style:italic;}
+.jm-q-textarea{width:100%;min-height:72px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.6;}
+.jm-q-textarea:focus{border-color:rgba(49,130,206,.3);}
+.jm-q-textarea::placeholder{color:rgba(255,255,255,.18);}
+.jm-libre{padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-libre-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;}
+.jm-libre-textarea{width:100%;min-height:100px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.65;}
+.jm-libre-textarea:focus{border-color:rgba(201,168,76,.25);}
+.jm-libre-textarea::placeholder{color:rgba(255,255,255,.15);}
+.jm-actions{padding:20px 28px;display:flex;align-items:center;gap:12px;}
+.jm-save-btn{flex:1;background:linear-gradient(135deg,rgba(49,130,206,.15),rgba(49,130,206,.06));border:1px solid rgba(49,130,206,.3);border-radius:12px;padding:14px 20px;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:600;color:var(--blue-light);cursor:pointer;transition:all .3s;}
+.jm-save-btn:hover{background:rgba(49,130,206,.22);}
+.jm-saved{display:none;padding:12px 28px 18px;font-size:.85rem;color:#4aab7a;background:rgba(74,171,122,.06);border-top:1px solid rgba(74,171,122,.15);}
+.jm-saved.show{display:flex;align-items:center;gap:8px;}
+
+/* ── HERO UNIFIED ── */
+.module-hero-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;padding:8px 18px;border-radius:100px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);}
+.mhb-dot{width:8px;height:8px;border-radius:50%;background:var(--gold, #C9A84C);box-shadow:0 0 8px rgba(201,168,76,.6);animation:glow-pulse 2s ease-in-out infinite;}
+@keyframes glow-pulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(201,168,76,.6);}50%{opacity:.6;box-shadow:0 0 14px rgba(201,168,76,.9);}}
+.mhb-text{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold,#C9A84C);font-weight:600;}
+.hero-big-letter{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,14vw,9rem);font-weight:300;color:transparent;background:linear-gradient(135deg,#C9A84C 0%,#F0D080 50%,#D4AF37 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;display:block;margin-bottom:8px;}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.5rem);font-weight:300;font-style:italic;color:var(--gold,#C9A84C);margin-bottom:20px;}
+.hero-meta-pill{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:100px;padding:7px 16px;font-size:.8rem;color:var(--muted);}
+.hero-meta-pill span{font-size:.9rem;}
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+<!-- PROGRESS BAR -->
+<div id="progress-bar">
+  <a href="index.html" class="pb-back">← <span>Tableau de bord</span></a>
+  <div class="pb-steps" id="pb-steps"></div>
+
+
+  <span class="pb-pct" id="pb-pct">0%</span>
+</div>
+
+<!-- AURORA -->
+<div class="aurora">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<!-- DOT NAV -->
+<div id="dot-nav">
+  <div class="dot active" data-s="0" data-label="Accueil" onclick="goTo(0)"></div>
+  <div class="dot" data-s="1" data-label="Avant / Après" onclick="goTo(1)"></div>
+  <div class="dot" data-s="2" data-label="3 Questions" onclick="goTo(2)"></div>
+  <div class="dot" data-s="3" data-label="Formule magique" onclick="goTo(3)"></div>
+  <div class="dot" data-s="4" data-label="Processus" onclick="goTo(4)"></div>
+  <div class="dot" data-s="5" data-label="Acte de fidélité" onclick="goTo(5)"></div>
+  <div class="dot" data-s="6" data-label="Terminer" onclick="goTo(6)"></div>
+</div>
+
+<!-- ══ S0 — HERO ══ -->
+<section class="section" data-s="0" id="s0">
+  <div class="module-hero-badge" style="background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.25);">
+    <span class="mhb-dot" style="background:#C9A84C;box-shadow:0 0 8px rgba(201,168,76,.6);"></span>
+    <span class="mhb-text" style="color:#C9A84C;">Module 5 · U comme UNIFIER</span>
+  </div>
+  <span class="hero-big-letter">UNIFIER</span>
+  <div class="hero-subtitle">"Je réconcilie mes élans intérieurs"</div>
+  <p class="s-lead">Vous avez exploré le conflit. Maintenant vient l'acte le plus libérateur : réconcilier les deux parts en vous. Non pas supprimer le masque — mais créer une alliance entre le besoin de sécurité et le désir d'authenticité.</p>
+  <div class="hero-meta" style="display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 24px;">
+      <div class="hero-meta-pill"><span>⏱</span> ~45 minutes</div>
+      <div class="hero-meta-pill"><span>🤝</span> Phrase d'unification</div>
+      <div class="hero-meta-pill"><span>✦</span> Acte de réconciliation</div>
+  </div>
+  <button class="btn-next" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"><span>Commencer l'unification</span><span class="bn-arrow">→</span></button>
+</section>
+
+<!-- ══ S1 — AVANT / APRÈS ══ -->
+<section id="s1">
+  <div class="container">
+    <p class="s-label">Le cœur de la transformation</p>
+    <h2 class="s-title">Ce qui change avec l&rsquo;unification</h2>
+    <p class="section-intro">Avant l&rsquo;unification, vos deux élans intérieurs sont en guerre. Après, ils deviennent alliés. Ce n&rsquo;est pas la paix par la capitulation — c&rsquo;est la paix par l&rsquo;intelligence.</p>
+
+    <div class="avant-apres" style="margin-bottom:24px">
+      <div class="av-card av-avant">
+        <div class="av-title rouge">⚡ Avant unification</div>
+        <div class="av-line"><div class="av-dot r"></div><div class="av-text">Masque : &ldquo;Tu dois être parfait pour mériter d&rsquo;être aimé&rdquo;</div></div>
+        <div class="av-line"><div class="av-dot r"></div><div class="av-text">Valeur : &ldquo;Tu mérites d&rsquo;être aimé pour qui tu es&rdquo;</div></div>
+        <div class="av-line"><div class="av-dot r"></div><div class="av-text">Résultat : conflit, paralysie, souffrance</div></div>
+      </div>
+      <div class="arrow-col">→</div>
+      <div class="av-card av-apres">
+        <div class="av-title bleue">✨ Après unification</div>
+        <div class="av-line"><div class="av-dot b"></div><div class="av-text">Nouvelle réponse : &ldquo;Je peux accueillir mon imperfection et être aimé·e ici et maintenant pour qui je suis, sans masque&rdquo;</div></div>
+        <div class="av-line"><div class="av-dot b"></div><div class="av-text">Résultat : alignement, paix intérieure, liberté</div></div>
+      </div>
+    </div>
+
+    <div class="glass glass-blue">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.8;color:var(--text);font-style:italic;text-align:center">
+        &ldquo;Unifier n&rsquo;est pas nier la peur.<br>
+        C&rsquo;est <span style="color:var(--blue-light)">l&rsquo;intégrer</span> sans la laisser gouverner.&rdquo;
+      </p>
+    </div>
+
+    <div style="margin-top:28px">
+      <button class="btn-next" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"><span>Les 3 questions d'unification</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S2 — 3 QUESTIONS D'UNIFICATION ══ -->
+<section id="s2">
+  <div class="container">
+    <p class="s-label">Exercice 1 · Les 3 questions essentielles</p>
+    <h2 class="s-title">Comprendre, chercher, agir</h2>
+    <p class="section-intro">Ces trois questions guident la transformation : ne pas blâmer le masque, comprendre son besoin légitime — puis trouver une voie plus sage pour l&rsquo;honorer.</p>
+
+    <div class="q-card q-card-1">
+      <div class="q-num blue">01</div>
+      <div class="q-title">Qu&rsquo;est-ce que mon masque essaie <em>vraiment</em> de faire ?</div>
+      <div class="q-sub">Ne blâmez pas. Comprenez. Le masque cherche à satisfaire un besoin <strong style="color:var(--text)">légitime</strong> (sécurité, amour, reconnaissance). Le problème n&rsquo;est pas le besoin — c&rsquo;est la <strong style="color:var(--text)">stratégie figée</strong> qui n&rsquo;est plus adaptée aujourd&rsquo;hui.</div>
+      <div class="q-example">Ex&nbsp;: &ldquo;Mon masque vert essaie de me protéger du rejet en me rendant indispensable — il cherche à garantir mon appartenance, mon besoin fondamental de lien.&rdquo;</div>
+      <textarea class="q-input" placeholder="Mon masque essaie vraiment de..." rows="3"></textarea>
+    </div>
+
+    <div class="q-card q-card-2">
+      <div class="q-num gold">02</div>
+      <div class="q-title">Comment satisfaire ce besoin <em>autrement</em> ?</div>
+      <div class="q-sub">Cherchez une <strong style="color:var(--text)">nouvelle stratégie</strong>, alignée avec vos valeurs. L&rsquo;objectif n&rsquo;est pas de supprimer le besoin, mais de trouver une façon plus saine de le nourrir.</div>
+      <div class="q-example">Ancien automatisme : &ldquo;Appeler constamment, me rendre indispensable&rdquo;<br>Nouvelle stratégie : &ldquo;Communiquer honnêtement sur mon besoin, puis faire confiance. Cultiver ma sécurité interne.&rdquo;</div>
+      <div style="margin-bottom:10px">
+        <label style="font-size:.75rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px">Mon ancien automatisme</label>
+        <textarea class="q-input" placeholder="Ce que je faisais avant..." rows="2"></textarea>
+      </div>
+      <div>
+        <label style="font-size:.75rem;color:var(--gold);letter-spacing:.1em;text-transform:uppercase;display:block;margin-bottom:6px">Ma nouvelle stratégie</label>
+        <textarea class="q-input" style="border-color:rgba(201,168,76,.3)" placeholder="Ce que je choisis désormais..." rows="3"></textarea>
+      </div>
+    </div>
+
+    <div class="q-card q-card-3">
+      <div class="q-num green">03</div>
+      <div class="q-title">Quelle action puis-je faire <em>maintenant</em> ?</div>
+      <div class="q-sub">Pas demain. Maintenant. Dans les 30 prochaines minutes. Cette action dit : <strong style="color:var(--text)">&ldquo;Je choisis ma valeur malgré la peur.&rdquo;</strong> C&rsquo;est la décision qui libère.</div>
+      <div class="q-example">Ex&nbsp;: &ldquo;Envoyer un message honnête à mon partenaire sur ce que je ressens, sans accusation — puis éteindre mon téléphone 1h.&rdquo;</div>
+      <textarea class="q-input" style="border-color:rgba(56,161,105,.3)" placeholder="Mon action concrète dans les 30 prochaines minutes..." rows="3"></textarea>
+    </div>
+
+    <div style="margin-top:24px">
+      <button class="btn-next" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"><span>La formule magique</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S3 — FORMULE J'AI PEUR ET ══ -->
+<section id="s3">
+  <div class="container">
+    <p class="s-label">Exercice 2 · La formule d&rsquo;unification</p>
+    <h2 class="s-title">La formule magique : &ldquo;J&rsquo;ai peur ET...&rdquo;</h2>
+    <div class="formule-header">
+      <div class="formule-badge">&ldquo;J&rsquo;ai [peur / limite] ET [je peux quand même...]&rdquo;</div>
+      <p class="formule-sub">Cette structure reconnaît deux réalités simultanément — votre peur ET votre capacité à la traverser.<br>Ce n&rsquo;est pas nier la peur. C&rsquo;est l&rsquo;intégrer <em>sans</em> la laisser gouverner.</p>
+    </div>
+
+    <div class="glass" style="margin-bottom:24px">
+      <p style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:14px">Exemples par masque</p>
+      <div class="formule-ex-grid">
+        <div class="formule-ex">🟢 <strong>J&rsquo;ai peur d&rsquo;être rejeté</strong> ET <em>je peux exprimer mon besoin</em></div>
+        <div class="formule-ex">🔷 <strong>Je suis imparfait</strong> ET <em>j&rsquo;ai de la valeur</em></div>
+        <div class="formule-ex">🟠 <strong>J&rsquo;ai de l&rsquo;anxiété</strong> ET <em>je peux agir quand même</em></div>
+        <div class="formule-ex">💜 <strong>Je suis vulnérable</strong> ET <em>je suis résilient·e</em></div>
+        <div class="formule-ex">🔴 <strong>J&rsquo;ai peur d&rsquo;être malade</strong> ET <em>mon corps sait se réguler</em></div>
+        <div class="formule-ex">🟡 <strong>J&rsquo;ai besoin de contrôle</strong> ET <em>je peux lâcher-prise sur l&rsquo;incertitude</em></div>
+        <div class="formule-ex" style="grid-column:1/-1">🔵 <strong>J&rsquo;ai peur de l&rsquo;impuissance</strong> ET <em>je peux choisir ma réponse face à ce que je ne contrôle pas</em></div>
+      </div>
+    </div>
+
+    <div class="ma-formule">
+      <div class="mf-label">Ma phrase d&rsquo;unification personnelle</div>
+      <div class="mf-template">
+        J&rsquo;ai peur de&nbsp;
+        <input class="mf-input" id="mf1" placeholder="votre peur" style="width:180px"/>
+        &nbsp;ET je peux quand même&nbsp;
+        <input class="mf-input" id="mf2" placeholder="votre capacité" style="width:220px"/>.
+      </div>
+      <div style="margin-top:16px">
+        <p style="font-size:.75rem;color:var(--muted);margin-bottom:8px">Notez d&rsquo;autres phrases d&rsquo;unification si plusieurs masques sont actifs&nbsp;:</p>
+        <textarea class="q-input" placeholder="J&rsquo;ai peur de... ET je peux quand même...&#10;J&rsquo;ai peur de... ET je peux quand même..." rows="4"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top:24px">
+      <button class="btn-next" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"><span>Le processus complet</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S4 — PROCESSUS 4 ÉTAPES ══ -->
+<section id="s4">
+  <div class="container">
+    <p class="s-label">Exercice 3 · Processus d&rsquo;unification</p>
+    <h2 class="s-title">Créer des ponts</h2>
+    <p class="section-intro">Quatre étapes pour construire l&rsquo;alliance entre sécurité et authenticité. Prenez le temps d&rsquo;aller lentement — chaque étape est une couche de transformation.</p>
+
+    <div class="glass">
+      <div class="process-steps">
+
+        <!-- ÉTAPE 1 -->
+        <div class="proc-row">
+          <div class="proc-bubble">1</div>
+          <div class="proc-content">
+            <div class="proc-title">Identifier les besoins des deux parties</div>
+            <div class="proc-desc">Sans hiérarchie, sans jugement. Les deux besoins sont légitimes — le masque cherche la sécurité, la valeur cherche l&rsquo;expression. Notez-les séparément.</div>
+            <div class="besoins-split">
+              <div class="besoin-card bc-masque">
+                <div class="bc-title r">🎭 Besoins du masque (sécurité)</div>
+                <textarea class="bc-input" placeholder="Ce dont mon masque a besoin pour se sentir en sécurité..." rows="3" style="resize:vertical"></textarea>
+              </div>
+              <div class="besoin-card bc-valeur">
+                <div class="bc-title g">✨ Besoins de la valeur (expression)</div>
+                <textarea class="bc-input" placeholder="Ce que ma valeur profonde cherche à exprimer..." rows="3" style="resize:vertical"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 2 -->
+        <div class="proc-row">
+          <div class="proc-bubble">2</div>
+          <div class="proc-content">
+            <div class="proc-title">Créer des ponts</div>
+            <div class="proc-desc">Cherchez les conditions qui permettent aux deux parties de coexister. Que faut-il pour que le masque se sente assez en sécurité pour &ldquo;lâcher du lest&rdquo; ?</div>
+            <div class="pont-items">
+              <div class="pont-item">
+                <div class="pont-icon">🔒</div>
+                <input class="pont-input" placeholder="Condition de sécurité nécessaire..." />
+              </div>
+              <div class="pont-item">
+                <div class="pont-icon">🌱</div>
+                <input class="pont-input" placeholder="Opportunité d&rsquo;expression progressive..." />
+              </div>
+              <div class="pont-item">
+                <div class="pont-icon">💪</div>
+                <input class="pont-input" placeholder="Ressource disponible en moi (courage, soutien, outil...)..." />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 3 -->
+        <div class="proc-row">
+          <div class="proc-bubble">3</div>
+          <div class="proc-content">
+            <div class="proc-title">Mon échelle de confort</div>
+            <div class="proc-desc">Évaluez où vous en êtes et où vous voulez aller. Commencez par des actions à 3/10 — pas besoin d&rsquo;être héroïque. Le changement se construit par petits pas.</div>
+            <div class="echelle-wrap">
+              <div class="echelle-label">Niveau actuel de confort avec ma valeur</div>
+              <div class="echelle-row">
+                <input type="range" min="0" max="10" value="3" id="sl-actuel" oninput="updateSlider('actuel')" style="flex:1;accent-color:var(--blue)"/>
+                <div class="echelle-val" id="sv-actuel">3</div>
+                <span style="font-size:.75rem;color:var(--muted)">/10</span>
+              </div>
+              <div class="echelle-ticks">
+                <span class="echelle-tick">0 — bloqué·e</span>
+                <span class="echelle-tick">5</span>
+                <span class="echelle-tick">10 — libre</span>
+              </div>
+            </div>
+            <div class="echelle-wrap">
+              <div class="echelle-label">Niveau souhaité dans les 30 jours</div>
+              <div class="echelle-row">
+                <input type="range" min="0" max="10" value="6" id="sl-souhaite" oninput="updateSlider('souhaite')" style="flex:1;accent-color:var(--gold)"/>
+                <div class="echelle-val" id="sv-souhaite" style="color:var(--gold-light)">6</div>
+                <span style="font-size:.75rem;color:var(--muted)">/10</span>
+              </div>
+              <div class="echelle-ticks">
+                <span class="echelle-tick">0 — bloqué·e</span>
+                <span class="echelle-tick">5</span>
+                <span class="echelle-tick">10 — libre</span>
+              </div>
+            </div>
+            <div style="background:rgba(49,130,206,.06);border:1px solid rgba(49,130,206,.15);border-radius:10px;padding:12px 16px;margin-top:12px">
+              <p style="font-size:.8rem;color:var(--muted)">📌 <strong style="color:var(--text)">Conseil</strong>&nbsp;: Commencez par des actions à <span style="color:var(--blue-light)">3/10 de difficulté</span>. Le cerveau a besoin de petites victoires pour créer de nouvelles autoroutes neuronales.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ÉTAPE 4 -->
+        <div class="proc-row">
+          <div class="proc-bubble">4</div>
+          <div class="proc-content">
+            <div class="proc-title">Trouver le compromis unificateur</div>
+            <div class="proc-desc">La plus petite action que vous pouvez poser <em>maintenant</em> pour exprimer votre valeur en toute sécurité. Pas la parfaite — la possible.</div>
+            <div class="compromis-box">
+              <div class="cb-head">
+                <div class="cb-icon">🎯</div>
+                <div class="cb-title">Mon compromis unificateur</div>
+              </div>
+              <div class="cb-sub">Cette action honore à la fois le besoin du masque (sécurité) et la valeur authentique (expression). Elle est concrète, faisable, et disponible maintenant.</div>
+              <textarea class="q-input" placeholder="La plus petite action possible pour exprimer ma valeur tout en respectant mon besoin de sécurité..." rows="3"></textarea>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div style="margin-top:24px">
+      <button class="btn-next" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"><span>L'acte de fidélité</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S5 — ACTE DE FIDÉLITÉ ══ -->
+<section id="s5">
+  <div class="container">
+    <p class="s-label">La décision fondamentale</p>
+    <h2 class="s-title">Unifier est un acte de fidélité</h2>
+    <p class="section-intro">Fidélité à votre valeur authentique — pas à votre réflexe de survie. C&rsquo;est une décision consciente. Pas facile. Mais c&rsquo;est cela qui libère.</p>
+
+    <div class="fidelite-split" style="margin-bottom:8px">
+      <div class="fid-card fid-ancienne">
+        <div class="fid-label r">Ancienne fidélité</div>
+        <div class="fid-text">&ldquo;Je protège mon masque&rdquo;<br>&ldquo;Je reste petit·e, en sécurité&rdquo;<br>&ldquo;Je survie au lieu de vivre&rdquo;</div>
+      </div>
+      <div class="fid-card fid-nouvelle">
+        <div class="fid-label b">Nouvelle fidélité</div>
+        <div class="fid-text">&ldquo;Je protège ma valeur authentique&rdquo;<br>&ldquo;Je grandis vers qui je veux être&rdquo;<br>&ldquo;Je choisis ma valeur malgré la peur&rdquo;</div>
+      </div>
+    </div>
+
+    <div style="text-align:center;font-size:1.6rem;color:var(--gold);margin:4px 0 16px">↓</div>
+
+    <div class="glass glass-blue" style="margin-bottom:24px;text-align:center">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-style:italic;color:var(--blue-light);margin-bottom:8px">C&rsquo;est une décision consciente.</p>
+      <p style="font-size:.9rem;color:var(--muted)">Pas facile. Mais c&rsquo;est <strong style="color:var(--text)">cela</strong> qui libère.</p>
+    </div>
+
+    <div class="glass" style="margin-bottom:24px">
+      <p style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:16px">Mon engagement d&rsquo;unification</p>
+      <textarea class="q-input" placeholder="Je m&rsquo;engage à honorer ma valeur de... en faisant... même si j&rsquo;ai peur de... Je choisis d&rsquo;être fidèle à..." rows="4"></textarea>
+      <div style="margin-top:16px;background:rgba(49,130,206,.06);border:1px solid rgba(49,130,206,.15);border-radius:10px;padding:14px 16px">
+        <p style="font-size:.78rem;color:var(--muted);line-height:1.65">💡 <strong style="color:var(--text)">Rappel des règles d&rsquo;or</strong><br>
+        · Chaque masque cache une valeur bafouée<br>
+        · Chaque émotion désagréable est un message<br>
+        · Chaque conflit intérieur est une opportunité de changement<br>
+        · La résistance indique toujours la direction de la croissance</p>
+      </div>
+    </div>
+
+    <div class="glass">
+      <p style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--blue);margin-bottom:16px">Checklist UNIFIER — suis-je prêt·e ?</p>
+      <div class="checklist">
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">J&rsquo;ai compris ce que le masque essaie vraiment de protéger</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">J&rsquo;ai trouvé une nouvelle stratégie qui satisfait ce besoin</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Cette nouvelle stratégie honore ma valeur authentique</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">J&rsquo;ai créé ma phrase d&rsquo;unification &ldquo;J&rsquo;ai peur ET...&rdquo;</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">J&rsquo;ai identifié une action concrète à poser maintenant</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Je sens un alignement intérieur (même si la peur est encore là)</div>
+        </div>
+        <div class="check-item" onclick="toggleCheck(this)">
+          <div class="check-box"></div>
+          <div class="check-text">Je reconnais que c&rsquo;est un acte de fidélité envers moi</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn-next" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"><span>Bilan et complétion</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══ S6-J — JOURNAL ══ -->
+<section id="s6j">
+  <div class="container">
+    <p class="s-label" style="color:var(--blue-light)">Mon journal de bord</p>
+    <h2 class="s-title" style="font-family:'Cormorant Garamond',serif;font-weight:300;">Ancrer<br><em style="color:var(--blue-light)">ce qui compte</em></h2>
+
+    <div class="journal-module" id="jm-module5">
+      <div class="jm-header">
+        <span class="jm-header-icon">📓</span>
+        <div class="jm-header-text">
+          <h3>Mon Journal de bord — UNIFIER</h3>
+          <p>Sauvegardé dans votre parcours complet · Exportable en PDF en fin de parcours</p>
+        </div>
+      </div>
+      <div class="jm-memo" id="jm-memo-m5">
+        <button class="jm-memo-toggle" onclick="toggleMemo('jm-memo-m5')">
+          <span>🗂 Mémo — Les 5 concepts essentiels d'UNIFIER</span>
+          <span class="jm-memo-chevron">▾</span>
+        </button>
+        <div class="jm-memo-body">
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">1</div>
+            <div class="jm-memo-text"><strong>L'unification n'est pas la suppression</strong> — On ne cherche pas à éliminer le masque. On réconcilie les deux parties : la partie qui a besoin de sécurité ET la partie qui aspire à l'authenticité.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">2</div>
+            <div class="jm-memo-text"><strong>La phrase d'unification</strong> — Une formule en deux temps : "Je comprends que [masque] a besoin de [peur] ET je choisis [valeur profonde]." Cette phrase crée un pont entre les deux parties en conflit.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">3</div>
+            <div class="jm-memo-text"><strong>L'acte de réconciliation</strong> — Une action concrète, petite mais réelle, qui honore à la fois la sécurité du masque et la valeur authentique. Commence à 3/10 de difficulté.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">4</div>
+            <div class="jm-memo-text"><strong>Les 3 questions d'unification</strong> — 1/ Qu'est-ce que le masque a besoin d'entendre ? 2/ Quelle valeur profonde veux-je honorer ? 3/ Quelle action réconciliatrice puis-je faire aujourd'hui ?</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">5</div>
+            <div class="jm-memo-text"><strong>La fidélité à soi</strong> — Unifier, c'est choisir la fidélité à sa nature profonde malgré la peur. Pas un grand geste héroïque — une micro-décision quotidienne qui change tout sur le long terme.</div>
+          </div>
+        </div>
+      </div>
+      <div class="jm-questions">
+        <div class="jm-q-label">✍️ Mon bilan — Module 5 · UNIFIER</div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">Ma phrase d'unification personnelle…</div>
+          <textarea class="jm-q-textarea" id="jm-q1-m5" placeholder="Je comprends que [mon masque] a besoin de... ET je choisis..."></textarea>
+        </div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">L'acte de réconciliation que je m'engage à faire…</div>
+          <textarea class="jm-q-textarea" id="jm-q2-m5" placeholder="Une action concrète, petite, qui honore à la fois ma sécurité et ma valeur profonde..."></textarea>
+        </div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">Mon engagement envers moi-même…</div>
+          <textarea class="jm-q-textarea" id="jm-q3-m5" placeholder="Ce que je promets à la part de moi qui aspire à être pleinement soi..."></textarea>
+        </div>
+      </div>
+      <div class="jm-libre">
+        <div class="jm-libre-label">📓 Réflexions libres</div>
+        <textarea class="jm-libre-textarea" id="jm-libre-m5" placeholder="Espace libre — ce que vous ressentez après cette réconciliation intérieure, une résistance que vous observez, un moment de paix retrouvée…"></textarea>
+      </div>
+      <div class="jm-actions">
+        <button class="jm-save-btn" onclick="saveJournalV3()">💾 Sauvegarder dans mon journal</button>
+      </div>
+      <div class="jm-saved" id="jm-saved-m5">
+        ✓ Entrée sauvegardée — visible dans votre Journal de bord complet
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center;">
+      <button class="btn-next" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"><span>Terminer l'unification</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S6 — TERMINER ══ -->
+<section id="s6">
+  <div class="container" style="text-align:center">
+    <div style="font-size:4rem;margin-bottom:20px">🔵</div>
+    <p class="s-label" style="text-align:center">Module 5 complété</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:300;margin-bottom:16px">Vous avez <span style="color:var(--blue-light);font-style:italic">unifié</span> vos élans intérieurs</h2>
+    <p style="color:var(--muted);font-size:.95rem;line-height:1.75;max-width:560px;margin:0 auto 40px">Vous avez choisi la fidélité à votre valeur. Vous avez créé une alliance entre sécurité et authenticité. Le combat intérieur s&rsquo;apaise. Il ne reste plus qu&rsquo;à <strong style="color:var(--text)">ancrer</strong> ce nouvel équilibre dans l&rsquo;action quotidienne.</p>
+
+    <div class="final-grid" style="text-align:left">
+      <div class="final-card">
+        <div class="fc-icon">🤝</div>
+        <div class="fc-title">Alliance créée</div>
+        <div class="fc-text">Vous avez uni le besoin de sécurité et la valeur authentique — ils ne sont plus en guerre.</div>
+      </div>
+      <div class="final-card">
+        <div class="fc-icon">🎯</div>
+        <div class="fc-title">Action identifiée</div>
+        <div class="fc-text">Vous avez trouvé le compromis unificateur — la plus petite action qui honore les deux.</div>
+      </div>
+      <div class="final-card">
+        <div class="fc-icon">💙</div>
+        <div class="fc-title">Fidélité choisie</div>
+        <div class="fc-text">Vous avez pris une décision consciente : être fidèle à votre valeur malgré la peur.</div>
+      </div>
+    </div>
+
+    <div class="glass glass-blue" style="max-width:560px;margin:0 auto 36px;text-align:left">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.75;font-style:italic;color:var(--text)">
+        &ldquo;La prochaine étape&nbsp;? <span style="color:var(--blue-light)">Renforcer</span> — répéter ce nouveau choix jusqu&rsquo;à ce qu&rsquo;il devienne automatique. Les petites rivières font les grands fleuves.&rdquo;
+      </p>
+    </div>
+
+    <div class="nav-arrows">
+      <button class="btn-secondary" onclick="window.location.href='module4.html'">← Module 4 EXPLORER</button>
+      <button class="btn-primary" onclick="allerModule6()">Module 6 RENFORCER → 💜</button>
+    </div>
+
+    <div class="copyright-footer" style="margin-top:40px">© 2025 Méthode V.A.L.E.U.R© — Céline Bourbon · Tous droits réservés · Toute reproduction interdite</div>
+  </div>
+</section>
+
+<!-- JOURNAL FAB -->
+<button id="journal-fab" onclick="toggleJournal()">📓</button>
+<div id="journal-panel">
+  <div>
+    <div class="jp-title">Journal V.A.L.E.U.R©</div>
+    <div class="jp-date" id="jp-date"></div>
+  </div>
+  <textarea id="journal-text" placeholder="Mon acte d&rsquo;unification, ma phrase magique, ce que je ressens..."></textarea>
+  <div class="jp-footer">
+    <button class="btn-secondary" style="padding:8px 18px;font-size:.8rem" onclick="saveJournal()">Enregistrer</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ── PROTECTION ──
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&['c','u','s','p','a'].includes(e.key))e.preventDefault()});
+document.addEventListener('dragstart',e=>e.preventDefault());
+
+// ── NAVIGATION ──
+const sections=['s0','s1','s2','s3','s4','s5','s6'];
+const MODULES=[
+  {key:'module1',letter:'V',color:'#E53E3E'},
+  {key:'module2',letter:'A',color:'#ED8936'},
+  {key:'module3',letter:'L',color:'#D69E2E'},
+  {key:'module4',letter:'E',color:'#38A169'},
+  {key:'module5',letter:'U',color:'#3182CE'},
+  {key:'module6',letter:'R',color:'#805AD5'},
+];
+const PK='valeur_progress_v2';
+function getP(){try{return JSON.parse(localStorage.getItem(PK))||{};}catch(e){return{};}}
+function isDone(k){return!!getP()[k];}
+function markDone(k){const p=getP();p[k]=true;try{localStorage.setItem(PK,JSON.stringify(p));}catch(e){}}
+function renderProgress(){
+  const steps=document.getElementById('pb-steps');
+  const pct=document.getElementById('pb-pct');
+  if(!steps)return;
+  const done=MODULES.filter(m=>isDone(m.key)).length;
+  if(pct)pct.textContent=Math.round((done/MODULES.length)*100)+'%';
+  steps.innerHTML=MODULES.map(m=>{
+    const d=isDone(m.key);
+    const active=m.key==='module5';
+    return'<div class="pb-step'+(d?' done':active?' active':'')+'" title="'+m.letter+'"><span class="pb-letter">'+m.letter+'</span></div>';
+  }).join('');
+}
+window.addEventListener('scroll',()=>{
+  const scrolled=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+  document.getElementById('pb-pct').textContent=Math.round(scrolled*100)+'%';
+  detectSection();
+  animateSections();
+});
+setTimeout(animateSections,100);
+
+function detectSection(){
+  sections.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    if(r.top<=window.innerHeight/2&&r.bottom>=window.innerHeight/2){
+      document.querySelectorAll('.dot').forEach((d,j)=>d.classList.toggle('active',j===i));
+    }
+  });
+}
+
+function animateSections(){
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(el&&el.getBoundingClientRect().top<window.innerHeight*.85)el.classList.add('visible');
+  });
+}
+
+function goTo(i){
+  const el=document.getElementById(sections[i]);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+
+// ── SLIDERS ──
+function updateSlider(id){
+  const val=document.getElementById('sl-'+id).value;
+  document.getElementById('sv-'+id).textContent=val;
+}
+
+// ── CHECKLIST ──
+function toggleCheck(el){el.classList.toggle('checked')}
+
+// ── JOURNAL V3 ──
+const JV3='VALEUR_journal_v3';
+function getJournalV3(){try{return JSON.parse(localStorage.getItem(JV3))||[];}catch(e){return[];}}
+function saveJournalV3arr(arr){try{localStorage.setItem(JV3,JSON.stringify(arr));}catch(e){}}
+function toggleMemo(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
+
+function saveJournalV3(){
+  const q1=document.getElementById('jm-q1-m5')?.value.trim()||'';
+  const q2=document.getElementById('jm-q2-m5')?.value.trim()||'';
+  const q3=document.getElementById('jm-q3-m5')?.value.trim()||'';
+  const libre=document.getElementById('jm-libre-m5')?.value.trim()||'';
+  const masque=localStorage.getItem('valeur_dominant_masque')||'';
+  const arr=getJournalV3();
+  const idx=arr.findIndex(e=>e.module===5);
+  const entry={
+    module:5,module_name:'UNIFIER',
+    date:new Date().toISOString(),masque_dominant:masque,
+    reponses:[
+      {question:"Ma phrase d'unification personnelle…",reponse:q1},
+      {question:"L'acte de réconciliation que je m'engage à faire…",reponse:q2},
+      {question:"Mon engagement envers moi-même…",reponse:q3}
+    ],reflexion_libre:libre
+  };
+  if(idx>=0)arr[idx]=entry;else arr.push(entry);
+  saveJournalV3arr(arr);
+  try{
+    const v2=JSON.parse(localStorage.getItem('valeur_journal_v2'))||[];
+    v2.unshift({date:entry.date,text:(q1+'\n'+q2+'\n'+q3+'\n'+libre).trim(),module:'Module 5 — UNIFIER'});
+    localStorage.setItem('valeur_journal_v2',JSON.stringify(v2.slice(0,30)));
+  }catch(e){}
+  const saved=document.getElementById('jm-saved-m5');
+  if(saved){saved.classList.add('show');setTimeout(()=>saved.classList.remove('show'),4000);}
+  showToast('\u270D\uFE0F Journal Module 5 sauvegard\u00e9');
+}
+
+function prefillJournalV3(){
+  const arr=getJournalV3();
+  const entry=arr.find(e=>e.module===5);
+  if(!entry)return;
+  const ids=['jm-q1-m5','jm-q2-m5','jm-q3-m5','jm-libre-m5'];
+  const vals=[...entry.reponses.map(r=>r.reponse||''),entry.reflexion_libre||''];
+  ids.forEach((id,i)=>{const el=document.getElementById(id);if(el)el.value=vals[i]||'';});
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ── COMPLÉTER ──
+function completerModule(){
+  saveJournalV3();
+  try{
+    const p=JSON.parse(localStorage.getItem('valeur_progress_v2')||'{}');
+    p.module5=true;
+    localStorage.setItem('valeur_progress_v2',JSON.stringify(p));
+  }catch(e){}
+  lancerConfetti();
+  showToast('\uD83D\uDD35 Module 5 complété — RENFORCER débloqué !');
+  setTimeout(()=>{document.getElementById('s6').scrollIntoView({behavior:'smooth'});},1200);
+}
+function allerModule6(){
+  completerModule();
+  setTimeout(()=>window.location.href='module6.html',4000);
+}
+
+// ── CONFETTI ──
+function lancerConfetti(){
+  const canvas=document.getElementById('confetti-canvas');
+  canvas.style.display='block';
+  const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  const colors=['#3182CE','#63B3ED','#C9A84C','#F0D080','#805AD5','#38A169','#5A67D8'];
+  const pieces=[];
+  for(let i=0;i<160;i++){
+    pieces.push({
+      x:Math.random()*canvas.width,y:-20,
+      vx:(Math.random()-.5)*4,vy:Math.random()*4+2,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      size:Math.random()*8+4,rot:Math.random()*360,rv:(Math.random()-.5)*8,opacity:1
+    });
+  }
+  let frame=0;
+  (function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;
+      if(frame>90)p.opacity-=.015;
+      ctx.save();ctx.globalAlpha=Math.max(0,p.opacity);
+      ctx.translate(p.x,p.y);ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color;ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+      ctx.restore();
+    });
+    frame++;
+    if(frame<180)requestAnimationFrame(draw);
+    else{ctx.clearRect(0,0,canvas.width,canvas.height);canvas.style.display='none';}
+  })();
+}
+
+// ── LOAD PROGRESS ──
+(function(){
+  try{
+    const p=JSON.parse(localStorage.getItem('valeur_progress_v2')||'{}');
+    const mods=['module1','module2','module3','module4','module5','module6'];
+    document.querySelectorAll('.pb-step').forEach((el,i)=>{if(p[mods[i]])el.classList.add('done')});
+  }catch(e){}
+  prefillJournalV3();
+})();
+</script>
+</body>
+</html>

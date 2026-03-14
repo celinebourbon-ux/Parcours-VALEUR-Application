@@ -1,0 +1,1578 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Module 2 — ACCUEILLIR · La porte vers vos émotions · Méthode V.A.L.E.U.R©</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex, nofollow">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#C9A84C;--gold-light:#F0D080;--gold-glow:rgba(201,168,76,.22);
+  --navy:#070D1A;--navy2:#0D1526;--navy3:#131F35;
+  --glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);
+  --text:#F2EDE6;--muted:#8A9BB5;--text2:#C8D6E8;
+  --orange:#ED8936;--orange-light:#FBD38D;--orange-glow:rgba(237,137,54,.2);
+  --red:#E53E3E;--yellow:#D69E2E;--green:#38A169;--blue:#3182CE;--indigo:#5A67D8;--violet:#805AD5;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;overflow-x:hidden;user-select:none;-webkit-user-select:none;}
+
+/* ── AURORA ── */
+.bg-aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(130px);animation:drift 22s ease-in-out infinite;}
+.orb1{width:600px;height:600px;background:var(--orange);top:-180px;right:-150px;opacity:.07;}
+.orb2{width:450px;height:450px;background:var(--violet);bottom:-100px;left:-100px;opacity:.06;animation-delay:-9s;}
+.orb3{width:300px;height:300px;background:var(--gold);top:50%;left:40%;opacity:.04;animation-delay:-17s;}
+@keyframes drift{0%,100%{transform:translate(0,0);}33%{transform:translate(30px,-25px);}66%{transform:translate(-20px,30px);}}
+
+/* ── PROGRESS BAR ── */
+#progress-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,13,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(237,137,54,.15);padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.pb-back{display:flex;align-items:center;gap:6px;background:var(--glass);border:1px solid var(--gb);border-radius:8px;padding:6px 12px;color:var(--muted);font-size:12px;letter-spacing:.5px;text-decoration:none;transition:all .3s;white-space:nowrap;flex-shrink:0;}
+.pb-back:hover{background:var(--orange-glow);border-color:var(--orange);color:var(--orange);}
+.pb-steps{display:flex;gap:6px;flex:1;align-items:center;}
+.pb-step{flex:1;height:30px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .5s cubic-bezier(.34,1.56,.64,1);}
+.pb-step.done{background:linear-gradient(135deg,var(--gold),var(--gold-light));border-color:var(--gold-light);}
+.pb-step.active{background:rgba(237,137,54,.1);border-color:var(--orange);animation:pb-pulse 2.5s ease-in-out infinite;}
+@keyframes pb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(237,137,54,.3);}50%{box-shadow:0 0 0 4px rgba(237,137,54,0);}}
+.pb-letter{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--muted);}
+.pb-step.done .pb-letter{color:#070D1A;}
+.pb-step.active .pb-letter{color:var(--orange);}
+.pb-pct{font-size:13px;font-weight:700;color:var(--gold);min-width:36px;text-align:right;}
+@media(max-width:480px){.pb-letter{font-size:9px;}.pb-step{height:24px;}#progress-bar{padding:8px 12px;gap:8px;}.pb-back span{display:none;}}
+
+/* ── SCROLL LINE ── */
+#scroll-line{position:fixed;top:50px;left:0;height:2px;z-index:999;background:linear-gradient(90deg,var(--orange),var(--gold-light));width:0%;transition:width .1s linear;}
+
+/* ── DOT NAV ── */
+#dot-nav{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:500;display:flex;flex-direction:column;gap:10px;}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .4s;}
+.dot.active{background:var(--orange);border-color:var(--orange);box-shadow:0 0 8px rgba(237,137,54,.5);transform:scale(1.3);}
+.dot:hover{background:rgba(237,137,54,.5);}
+@media(max-width:768px){#dot-nav{display:none;}}
+
+/* ── MAIN ── */
+main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:72px 20px 140px;}
+
+/* ── SECTIONS ── */
+.section{padding:60px 0;opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.section.visible{opacity:1;transform:none;}
+.s-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:10px;font-weight:600;}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;line-height:1.1;color:var(--text);margin-bottom:20px;}
+.s-title em{font-style:italic;color:var(--orange);}
+.s-lead{font-size:1.05rem;line-height:1.88;color:var(--text2);font-weight:300;margin-bottom:24px;}
+.divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--orange),transparent);margin:30px 0;}
+.divider-gold{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:30px 0;}
+
+/* ── GLASS ── */
+.glass{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--gb);border-radius:20px;padding:28px;position:relative;overflow:hidden;}
+.glass::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 60%);pointer-events:none;}
+.glass-orange{border-color:rgba(237,137,54,.2);}
+.glass-orange::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);}
+.glass-gold{border-color:rgba(201,168,76,.25);}
+.glass-gold::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+/* ── HERO ── */
+.module-hero-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;padding:8px 18px;border-radius:100px;background:rgba(237,137,54,.08);border:1px solid rgba(237,137,54,.2);}
+.mhb-dot{width:8px;height:8px;border-radius:50%;background:var(--orange);box-shadow:0 0 8px var(--orange);animation:glow-pulse 2s ease-in-out infinite;}
+@keyframes glow-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.85);}}
+.mhb-text{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold,#C9A84C);font-weight:600;}
+.hero-big-letter{font-family:'Cormorant Garamond',serif;font-size:clamp(5rem,18vw,10rem);font-weight:300;color:transparent;background:linear-gradient(135deg,#C9A84C 0%,#F0D080 50%,#D4AF37 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;display:block;margin-bottom:-10px;}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,3vw,1.6rem);font-weight:300;font-style:italic;color:var(--gold);margin-bottom:20px;}
+.hero-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;}
+.hero-meta-pill{display:flex;align-items:center;gap:7px;background:var(--glass);border:1px solid var(--gb);border-radius:100px;padding:7px 16px;font-size:.8rem;color:var(--muted);}
+
+/* ── SCENE ACCROCHE ── */
+.paradox-split{display:grid;grid-template-columns:1fr 1fr;gap:3px;border-radius:18px;overflow:hidden;margin:28px 0;}
+.ps-resist{background:rgba(229,62,62,.05);border:1px solid rgba(229,62,62,.1);padding:22px 20px;}
+.ps-accueil{background:rgba(56,161,105,.05);border:1px solid rgba(56,161,105,.1);padding:22px 20px;}
+.ps-label{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;margin-bottom:10px;}
+.ps-resist .ps-label{color:rgba(229,62,62,.5);}
+.ps-accueil .ps-label{color:rgba(56,161,105,.5);}
+.ps-scenario{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--text);line-height:1.65;margin-bottom:8px;}
+.ps-result{font-size:.75rem;color:var(--muted);line-height:1.5;padding-top:8px;border-top:1px solid rgba(255,255,255,.05);}
+.ps-resist .ps-result{color:#FC8181;}
+.ps-accueil .ps-result{color:#68D391;}
+@media(max-width:540px){.paradox-split{grid-template-columns:1fr;}}
+
+.insight-banner{margin:20px 0;padding:22px 24px;border-radius:16px;background:linear-gradient(135deg,rgba(237,137,54,.06),rgba(201,168,76,.03));border:1px solid rgba(237,137,54,.15);text-align:center;}
+.ib-question{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.35rem);font-style:italic;color:var(--text);line-height:1.7;}
+.ib-question em{color:var(--orange);}
+
+/* ── PROCESSUS EMOTIONNEL ── */
+.process-frise{margin:28px 0;position:relative;}
+.pf-track{display:flex;align-items:center;gap:0;position:relative;}
+.pf-node{display:flex;flex-direction:column;align-items:center;flex:1;cursor:pointer;}
+.pf-circle{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;margin-bottom:8px;transition:all .3s;border:2px solid transparent;}
+.pf-node:hover .pf-circle{transform:scale(1.1);}
+.pf-num{font-size:.65rem;letter-spacing:1px;text-transform:uppercase;font-weight:700;color:var(--muted);text-align:center;line-height:1.3;}
+.pf-arrow{color:rgba(237,137,54,.3);font-size:1.2rem;flex-shrink:0;margin-bottom:22px;}
+.pf-detail{margin-top:16px;background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:16px 18px;display:none;animation:fadeIn .4s ease;}
+.pf-detail.show{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+.pfd-title{font-weight:600;font-size:.88rem;color:var(--text);margin-bottom:4px;}
+.pfd-desc{font-size:.83rem;color:var(--text2);line-height:1.65;}
+.pfd-badge{display:inline-block;font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;padding:2px 9px;border-radius:100px;font-weight:700;margin-bottom:6px;}
+.timing-bar{margin-top:14px;padding:10px 16px;background:rgba(237,137,54,.06);border:1px solid rgba(237,137,54,.15);border-radius:10px;font-size:.78rem;color:var(--orange);text-align:center;letter-spacing:.5px;}
+
+/* ── KEY INSIGHT ── */
+.key-insight{display:flex;gap:14px;align-items:flex-start;padding:18px 20px;border-radius:14px;background:linear-gradient(135deg,rgba(237,137,54,.05),rgba(201,168,76,.03));border:1px solid rgba(255,255,255,.06);margin:20px 0;}
+.ki-icon{font-size:1.3rem;flex-shrink:0;margin-top:2px;}
+.ki-text{font-size:.9rem;color:var(--text);line-height:1.72;font-weight:300;}
+.ki-text strong{color:var(--orange);font-weight:600;}
+
+/* ── VÉRITE QUIZ (vrai/faux) ── */
+.vf-card{background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:24px;margin:20px 0;}
+.vf-question{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);line-height:1.65;margin-bottom:18px;text-align:center;}
+.vf-btns{display:flex;gap:10px;}
+.vf-btn{flex:1;padding:13px;border-radius:12px;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .35s;border:1px solid;}
+.vf-true{background:rgba(56,161,105,.06);border-color:rgba(56,161,105,.2);color:#68D391;}
+.vf-false{background:rgba(229,62,62,.06);border-color:rgba(229,62,62,.2);color:#FC8181;}
+.vf-btn:hover{transform:translateY(-2px);}
+.vf-btn.correct{background:rgba(56,161,105,.15);border-color:rgba(56,161,105,.5);}
+.vf-btn.wrong{background:rgba(229,62,62,.15);border-color:rgba(229,62,62,.4);}
+.vf-reveal{margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);font-size:.87rem;color:var(--text2);line-height:1.65;display:none;}
+.vf-reveal.show{display:block;animation:fadeIn .4s ease;}
+
+/* ── BALLON SOUS L'EAU ── */
+.balloon-scene{position:relative;height:220px;border-radius:20px;overflow:hidden;margin:24px 0;background:linear-gradient(180deg,rgba(7,13,26,.6) 0%,rgba(49,130,206,.08) 40%,rgba(49,130,206,.15) 100%);border:1px solid rgba(49,130,206,.15);}
+.water-line{position:absolute;top:40%;left:0;right:0;height:1px;background:rgba(49,130,206,.3);}
+.water-label{position:absolute;top:40%;right:14px;transform:translateY(-50%);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(49,130,206,.5);}
+.surface-label{position:absolute;top:10px;left:14px;font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);}
+.balloon-wrap{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0;}
+.balloon-body{width:52px;height:66px;border-radius:50% 50% 50% 50% / 55% 55% 45% 45%;background:linear-gradient(135deg,var(--orange),#FBD38D);position:relative;animation:balloon-fight 2.8s ease-in-out infinite;}
+@keyframes balloon-fight{0%,100%{transform:translateY(0);}40%{transform:translateY(-14px);}60%{transform:translateY(-8px);}}
+.balloon-body::after{content:'';position:absolute;top:16px;left:12px;width:14px;height:10px;border-radius:50%;background:rgba(255,255,255,.35);transform:rotate(-30deg);}
+.balloon-knot{width:8px;height:10px;background:var(--orange-light);border-radius:50% 50% 50% 50% / 30% 30% 70% 70%;margin:-2px auto 0;}
+.balloon-string{width:1px;height:34px;background:rgba(237,137,54,.4);}
+.hand-hold{font-size:1.4rem;line-height:1;}
+.balloon-wrap.released .balloon-body{animation:balloon-fly 1.2s cubic-bezier(.34,1.56,.64,1) forwards;}
+@keyframes balloon-fly{0%{transform:translateY(0);}100%{transform:translateY(-260px);}}
+.balloon-wrap.released .hand-hold{animation:hand-open .4s ease forwards;}
+@keyframes hand-open{to{opacity:.3;}}
+.balloon-caption{position:absolute;bottom:12px;right:16px;font-size:.72rem;font-style:italic;color:rgba(255,255,255,.25);}
+.balloon-tabs{display:flex;gap:8px;margin-bottom:-1px;}
+.btab{padding:7px 18px;border-radius:10px 10px 0 0;font-size:.78rem;font-weight:600;cursor:pointer;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);color:var(--muted);transition:all .3s;border-bottom:none;}
+.btab.active-r{background:rgba(229,62,62,.1);border-color:rgba(229,62,62,.2);color:#FC8181;}
+.btab.active-g{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.2);color:#68D391;}
+.balloon-wrap.released{bottom:auto;top:-20px;}
+
+/* ── RÉSISTANCE GRID ── */
+.resist-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:24px 0;}
+.r-card{background:var(--glass);border:1px solid rgba(229,62,62,.1);border-radius:14px;padding:16px 18px;transition:all .35s;cursor:default;}
+.r-card:hover{border-color:rgba(229,62,62,.25);transform:translateY(-2px);}
+.r-icon{font-size:1.3rem;margin-bottom:8px;}
+.r-name{font-size:.85rem;font-weight:600;color:var(--text);margin-bottom:4px;}
+.r-desc{font-size:.78rem;color:var(--text2);line-height:1.55;}
+.r-masque{font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(229,62,62,.5);margin-top:6px;}
+@media(max-width:500px){.resist-grid{grid-template-columns:1fr;}}
+
+/* ── RÉSISTANCE QUIZ ── */
+.scenario-cards{display:flex;flex-direction:column;gap:10px;margin:20px 0;}
+.sc-card{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:18px 20px;cursor:pointer;transition:all .3s;}
+.sc-card:hover{border-color:rgba(237,137,54,.2);}
+.sc-scenario{font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;color:var(--text);margin-bottom:10px;line-height:1.6;}
+.sc-choices{display:flex;gap:8px;flex-wrap:wrap;}
+.sc-choice{padding:6px 14px;border-radius:100px;font-size:.76rem;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:var(--muted);cursor:pointer;transition:all .3s;}
+.sc-choice:hover{background:rgba(237,137,54,.07);border-color:rgba(237,137,54,.2);color:var(--text);}
+.sc-choice.correct{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.35);color:#68D391;}
+.sc-choice.wrong{background:rgba(229,62,62,.08);border-color:rgba(229,62,62,.25);color:#FC8181;}
+.sc-reveal{font-size:.82rem;color:var(--text2);line-height:1.6;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.05);display:none;}
+.sc-reveal.show{display:block;animation:fadeIn .4s ease;}
+
+/* ── FENÊTRE DE TOLÉRANCE ── */
+.tolerance-container{margin:28px 0;position:relative;}
+.tw-visual{border-radius:20px;overflow:hidden;border:1px solid rgba(255,255,255,.08);position:relative;}
+.tw-zone{padding:22px 24px;cursor:pointer;transition:all .35s;position:relative;}
+.tw-zone.hyper{background:rgba(229,62,62,.07);border-bottom:1px solid rgba(229,62,62,.1);}
+.tw-zone.optimal{background:rgba(56,161,105,.07);border-bottom:1px solid rgba(56,161,105,.1);}
+.tw-zone.hypo{background:rgba(49,130,206,.07);}
+.tw-zone-header{display:flex;align-items:center;justify-content:space-between;}
+.tw-zone-label{display:flex;align-items:center;gap:10px;}
+.tw-zone-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;}
+.tw-zone.hyper .tw-zone-dot{background:var(--red);box-shadow:0 0 6px rgba(229,62,62,.5);}
+.tw-zone.optimal .tw-zone-dot{background:var(--green);box-shadow:0 0 6px rgba(56,161,105,.5);}
+.tw-zone.hypo .tw-zone-dot{background:var(--blue);box-shadow:0 0 6px rgba(49,130,206,.5);}
+.tw-zone-name{font-weight:700;font-size:.88rem;}
+.tw-zone.hyper .tw-zone-name{color:#FC8181;}
+.tw-zone.optimal .tw-zone-name{color:#68D391;}
+.tw-zone.hypo .tw-zone-name{color:#63B3ED;}
+.tw-zone-badge{font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;padding:3px 10px;border-radius:100px;font-weight:700;}
+.tw-zone.hyper .tw-zone-badge{background:rgba(229,62,62,.1);color:rgba(229,62,62,.7);border:1px solid rgba(229,62,62,.2);}
+.tw-zone.optimal .tw-zone-badge{background:rgba(56,161,105,.1);color:rgba(56,161,105,.7);border:1px solid rgba(56,161,105,.2);}
+.tw-zone.hypo .tw-zone-badge{background:rgba(49,130,206,.1);color:rgba(49,130,206,.7);border:1px solid rgba(49,130,206,.2);}
+.tw-zone-detail{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);}
+.tw-zone.open .tw-zone-detail{max-height:250px;}
+.tw-zone-body{padding-top:14px;}
+.tw-zone-desc{font-size:.85rem;color:var(--text2);line-height:1.7;margin-bottom:10px;}
+.tw-zone-signs{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;}
+.tw-sign{padding:4px 11px;border-radius:100px;font-size:.73rem;}
+.tw-zone.hyper .tw-sign{background:rgba(229,62,62,.08);border:1px solid rgba(229,62,62,.15);color:rgba(252,129,129,.8);}
+.tw-zone.optimal .tw-sign{background:rgba(56,161,105,.08);border:1px solid rgba(56,161,105,.15);color:rgba(104,211,145,.8);}
+.tw-zone.hypo .tw-sign{background:rgba(49,130,206,.08);border:1px solid rgba(49,130,206,.15);color:rgba(99,179,237,.8);}
+.tw-zone-masques{font-size:.73rem;color:rgba(255,255,255,.25);font-style:italic;}
+
+.tw-locator{margin-top:16px;padding:18px 20px;background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.15);border-radius:14px;}
+.tw-loc-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:600;}
+.tw-loc-btns{display:flex;gap:8px;flex-wrap:wrap;}
+.tw-loc-btn{flex:1;min-width:120px;padding:10px 14px;border-radius:10px;font-family:'Jost',sans-serif;font-size:.8rem;font-weight:600;cursor:pointer;transition:all .35s;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:var(--muted);}
+.tw-loc-btn:hover{border-color:rgba(201,168,76,.3);color:var(--gold);}
+.tw-loc-result{margin-top:14px;padding:14px 16px;border-radius:12px;font-size:.87rem;color:var(--text);line-height:1.7;display:none;animation:fadeIn .4s ease;}
+.tw-loc-result.show{display:block;}
+
+/* ── FLIP CARDS ÉMOTIONS ── */
+.flip-emotions-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:28px 0;perspective:1000px;}
+.flip-emotion-card{height:180px;cursor:pointer;perspective:1000px;}
+.fec-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+.flip-emotion-card.flipped .fec-inner{transform:rotateY(180deg);}
+.fec-front,.fec-back{position:absolute;inset:0;border-radius:16px;backface-visibility:hidden;-webkit-backface-visibility:hidden;padding:20px 16px;display:flex;flex-direction:column;}
+.fec-back{transform:rotateY(180deg);}
+.fec-front{justify-content:space-between;border:1px solid rgba(255,255,255,.07);}
+.fec-back{border:1px solid rgba(255,255,255,.07);}
+.fec-emoji{font-size:2rem;margin-bottom:6px;}
+.fec-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--text);}
+.fec-signal{font-size:.72rem;color:var(--muted);font-style:italic;margin-top:4px;line-height:1.4;}
+.fec-tap{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.2);margin-top:auto;}
+.fec-back-label{font-size:.6rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:8px;}
+.fec-message{font-family:'Cormorant Garamond',serif;font-size:.9rem;font-style:italic;color:var(--text);line-height:1.55;margin-bottom:8px;}
+.fec-need{font-size:.78rem;color:var(--muted);margin-bottom:6px;}
+.fec-body-loc{font-size:.72rem;font-style:italic;color:rgba(255,255,255,.3);}
+/* Couleurs par famille */
+.fe-anxiete .fec-front{background:rgba(90,103,216,.06);}
+.fe-anxiete .fec-back{background:rgba(90,103,216,.09);}
+.fe-anxiete .fec-back-label{color:rgba(163,191,250,.6);}
+.fe-colere .fec-front{background:rgba(229,62,62,.06);}
+.fe-colere .fec-back{background:rgba(229,62,62,.09);}
+.fe-colere .fec-back-label{color:rgba(252,129,129,.6);}
+.fe-tristesse .fec-front{background:rgba(49,130,206,.06);}
+.fe-tristesse .fec-back{background:rgba(49,130,206,.09);}
+.fe-tristesse .fec-back-label{color:rgba(99,179,237,.6);}
+.fe-culpa .fec-front{background:rgba(128,90,213,.06);}
+.fe-culpa .fec-back{background:rgba(128,90,213,.09);}
+.fe-culpa .fec-back-label{color:rgba(214,188,250,.6);}
+.fec-flip-hint{text-align:center;font-size:.72rem;color:rgba(255,255,255,.2);margin-bottom:8px;font-style:italic;}
+@media(max-width:500px){.flip-emotions-grid{grid-template-columns:1fr;}.flip-emotion-card{height:160px;}}
+
+/* ── QUIZ EMOTION MINI ── */
+.emotion-quiz{margin:20px 0;}
+.eq-question{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);line-height:1.65;margin-bottom:14px;text-align:center;font-style:italic;}
+.eq-opts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;}
+.eq-opt{padding:8px 18px;border-radius:100px;font-size:.8rem;cursor:pointer;background:var(--glass);border:1px solid rgba(255,255,255,.07);color:var(--muted);transition:all .35s;}
+.eq-opt:hover{background:rgba(237,137,54,.07);border-color:rgba(237,137,54,.2);color:var(--text);}
+.eq-opt.correct{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.35);color:#68D391;}
+.eq-opt.wrong{background:rgba(229,62,62,.08);border-color:rgba(229,62,62,.25);color:#FC8181;}
+.eq-feedback{margin-top:14px;padding:14px 16px;border-radius:12px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);font-size:.87rem;color:var(--text2);line-height:1.65;display:none;}
+.eq-feedback.show{display:block;animation:fadeIn .4s ease;}
+
+/* ── COHÉRENCE CARDIAQUE ── */
+.cc-card{background:linear-gradient(135deg,rgba(237,137,54,.05),rgba(201,168,76,.03));border:1px solid rgba(237,137,54,.2);border-radius:24px;padding:36px 28px;text-align:center;position:relative;overflow:hidden;}
+.cc-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);}
+.cc-orb-wrap{position:relative;width:140px;height:140px;margin:28px auto;}
+.cc-orb{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,rgba(237,137,54,.25),rgba(237,137,54,.08));border:2px solid rgba(237,137,54,.4);position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);display:flex;align-items:center;justify-content:center;font-size:1.8rem;transition:all 5s cubic-bezier(.4,0,.2,1);}
+.cc-ring1{position:absolute;inset:-12px;border-radius:50%;border:1.5px solid rgba(237,137,54,.15);transition:all 5s cubic-bezier(.4,0,.2,1);}
+.cc-ring2{position:absolute;inset:-24px;border-radius:50%;border:1px solid rgba(237,137,54,.07);transition:all 5s cubic-bezier(.4,0,.2,1);}
+.cc-orb.inhale{width:118px;height:118px;background:linear-gradient(135deg,rgba(237,137,54,.4),rgba(237,137,54,.15));border-color:rgba(237,137,54,.6);box-shadow:0 0 28px rgba(237,137,54,.2);}
+.cc-orb.inhale .cc-ring1{inset:-8px;}
+.cc-orb.inhale .cc-ring2{inset:-16px;}
+.cc-orb.exhale{width:86px;height:86px;background:linear-gradient(135deg,rgba(237,137,54,.12),rgba(237,137,54,.04));border-color:rgba(237,137,54,.25);}
+.cc-orb.exhale .cc-ring1{inset:-16px;}
+.cc-orb.exhale .cc-ring2{inset:-30px;}
+.cc-phase{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--text);min-height:32px;margin-top:8px;transition:opacity .5s;}
+.cc-count{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:6px;}
+.cc-timer{font-family:'Cormorant Garamond',serif;font-size:2.5rem;font-weight:300;color:var(--orange);margin:10px 0;}
+.btn-cc{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(237,137,54,.15),rgba(237,137,54,.06));border:1px solid rgba(237,137,54,.35);border-radius:14px;padding:14px 28px;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:600;color:var(--orange);cursor:pointer;margin-top:20px;transition:all .3s;}
+.btn-cc:hover{background:rgba(237,137,54,.2);transform:translateY(-2px);}
+.cc-science{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin:24px 0;}
+.cs-item{background:var(--glass);border:1px solid var(--gb);border-radius:12px;padding:14px 12px;text-align:center;}
+.cs-val{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:300;color:var(--orange);}
+.cs-label{font-size:.68rem;letter-spacing:1px;text-transform:uppercase;color:var(--muted);margin-top:4px;line-height:1.4;}
+@media(max-width:500px){.cc-science{grid-template-columns:1fr;}}
+
+/* ── STEPPER 4 ÉTAPES ── */
+.stepper{display:flex;flex-direction:column;gap:3px;margin:28px 0;}
+.st-step{border-radius:16px;overflow:hidden;cursor:pointer;transition:all .3s;border:1px solid rgba(255,255,255,.07);}
+.st-step:hover{border-color:rgba(237,137,54,.2);}
+.st-step.active{border-color:rgba(237,137,54,.3);}
+.st-header{display:flex;align-items:center;gap:14px;padding:18px 20px;}
+.st-num{width:44px;height:44px;border-radius:12px;flex-shrink:0;background:linear-gradient(135deg,var(--orange),#FBD38D);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:600;color:var(--navy);}
+.st-info{flex:1;}
+.st-name{font-weight:600;font-size:.92rem;color:var(--text);}
+.st-sub{font-size:.77rem;color:var(--muted);margin-top:2px;font-weight:300;}
+.st-arrow{font-size:.9rem;color:var(--muted);transition:transform .3s;}
+.st-step.active .st-arrow{transform:rotate(90deg);color:var(--orange);}
+.st-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);}
+.st-step.active .st-body{max-height:400px;}
+.st-content{padding:0 20px 20px;}
+.st-phrase{font-family:'Cormorant Garamond',serif;font-size:1.02rem;font-style:italic;color:var(--text);padding:14px 18px;border-left:3px solid var(--orange);background:rgba(237,137,54,.05);border-radius:0 12px 12px 0;margin-bottom:12px;line-height:1.6;}
+.st-expl{font-size:.86rem;color:var(--muted);line-height:1.7;margin-bottom:10px;}
+.st-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px;}
+.st-tag{padding:4px 12px;border-radius:100px;font-size:.72rem;background:rgba(237,137,54,.06);border:1px solid rgba(237,137,54,.18);color:rgba(237,137,54,.8);}
+
+/* ── VIGNETTE COMPARAISON LÉA ── */
+.vignette-compare{margin:28px 0;border-radius:20px;overflow:hidden;}
+.vc-label{font-size:.62rem;letter-spacing:2.5px;text-transform:uppercase;font-weight:700;padding:10px 22px;display:block;}
+.vc-before{background:rgba(229,62,62,.04);border:1px solid rgba(229,62,62,.1);}
+.vc-after{background:rgba(56,161,105,.04);border:1px solid rgba(56,161,105,.1);margin-top:3px;}
+.vc-before .vc-label{color:rgba(229,62,62,.5);}
+.vc-after .vc-label{color:rgba(56,161,105,.5);}
+.vc-trigger{font-size:.68rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);padding:0 22px 6px;font-weight:600;}
+.vc-text{font-size:.88rem;color:var(--muted);line-height:1.75;padding:0 22px 18px;}
+
+/* ── QUIZ FINAL ── */
+.quiz-wrap{margin:28px 0;}
+.qz-card{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:28px;}
+.qz-prog{height:2px;background:rgba(255,255,255,.06);border-radius:1px;margin-bottom:20px;overflow:hidden;}
+.qzpb{height:100%;background:linear-gradient(90deg,var(--orange),var(--gold-light));border-radius:1px;transition:width .5s;}
+.qz-num{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:8px;font-weight:600;}
+.qz-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);line-height:1.65;margin-bottom:20px;}
+.qz-opts{display:flex;flex-direction:column;gap:8px;}
+.qz-opt{width:100%;text-align:left;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--muted);cursor:pointer;transition:all .3s;line-height:1.5;}
+.qz-opt:hover{background:rgba(237,137,54,.06);border-color:rgba(237,137,54,.2);color:var(--text);}
+.qz-opt.correct{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.4);color:#68D391;}
+.qz-opt.wrong{background:rgba(229,62,62,.08);border-color:rgba(229,62,62,.3);color:#FC8181;}
+.qz-expl{margin-top:14px;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;font-size:.85rem;color:var(--muted);line-height:1.65;display:none;}
+.qz-expl.show{display:block;animation:fadeIn .4s ease;}
+.qz-next{display:none;margin-top:14px;float:right;background:linear-gradient(135deg,var(--orange),#FBD38D);border:none;border-radius:10px;padding:11px 24px;font-family:'Jost',sans-serif;font-size:.88rem;font-weight:600;color:var(--navy);cursor:pointer;transition:all .3s;}
+.qz-next.show{display:block;}
+.qz-next:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(237,137,54,.4);}
+.qz-score{text-align:center;padding:32px 20px;display:none;}
+.qz-score.show{display:block;animation:fadeIn .5s ease;}
+.score-big{font-family:'Cormorant Garamond',serif;font-size:4.5rem;font-weight:300;color:var(--orange);line-height:1;}
+.score-msg{font-size:1rem;color:var(--text);margin-top:16px;font-weight:300;line-height:1.8;}
+
+/* ── BILAN ── */
+.bilan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;}
+.bilan-card{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:18px;text-align:center;}
+.bc-icon{font-size:1.6rem;margin-bottom:8px;}
+.bc-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:5px;}
+.bc-text{font-size:.78rem;color:var(--muted);font-weight:300;line-height:1.5;}
+@media(max-width:500px){.bilan-grid{grid-template-columns:1fr;}}
+
+/* ── COMPLÉTION ── */
+.complete-zone{text-align:center;padding:40px 20px;}
+.btn-complete{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--orange) 0%,var(--gold-light) 100%);border:none;border-radius:18px;padding:20px 40px;font-family:'Jost',sans-serif;font-size:1.05rem;font-weight:700;color:var(--navy);cursor:pointer;letter-spacing:.5px;transition:all .5s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 32px rgba(237,137,54,.4);}
+.btn-complete:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 16px 50px rgba(237,137,54,.6);}
+.complete-sub{margin-top:14px;font-size:.85rem;color:var(--muted);}
+.unlock-preview{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;padding:14px 24px;border-radius:14px;background:rgba(214,158,46,.06);border:1px solid rgba(214,158,46,.18);font-size:.85rem;color:var(--muted);opacity:0;transform:translateY(10px);transition:all .5s .2s ease;}
+
+.unlock-preview.show{opacity:1;transform:none;}
+
+/* ── BTN NEXT ── */
+.btn-next{display:flex;align-items:center;justify-content:center;gap:10px;margin:36px auto 0;width:100%;max-width:420px;background:linear-gradient(135deg,rgba(237,137,54,.12),rgba(237,137,54,.05));border:1px solid rgba(237,137,54,.3);border-radius:14px;padding:16px 28px;font-family:'Jost',sans-serif;font-size:.97rem;font-weight:500;color:var(--orange);cursor:pointer;transition:all .4s cubic-bezier(.34,1.2,.64,1);}
+.btn-next:hover{background:rgba(237,137,54,.18);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 24px rgba(237,137,54,.2);}
+.btn-next .bn-arrow{transition:transform .3s;font-size:1.1rem;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+
+/* ── JOURNAL MODULE ── */
+.journal-module{margin:40px 0 0;border-radius:22px;overflow:hidden;border:1px solid rgba(237,137,54,.2);background:rgba(255,255,255,.02);}
+.jm-header{background:linear-gradient(135deg,rgba(237,137,54,.08),rgba(237,137,54,.03));border-bottom:1px solid rgba(237,137,54,.12);padding:22px 28px;display:flex;align-items:center;gap:14px;}
+.jm-header-icon{font-size:1.5rem;}
+.jm-header-text h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:var(--text);margin-bottom:3px;}
+.jm-header-text p{font-size:.8rem;color:var(--muted);letter-spacing:.5px;}
+.jm-memo{border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-memo-toggle{width:100%;background:none;border:none;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;color:var(--text2);letter-spacing:.5px;text-align:left;}
+.jm-memo-toggle span{display:flex;align-items:center;gap:10px;}
+.jm-memo-chevron{font-size:.75rem;color:var(--muted);transition:transform .3s;}
+.jm-memo.open .jm-memo-chevron{transform:rotate(180deg);}
+.jm-memo-body{display:none;padding:0 28px 22px;}
+.jm-memo.open .jm-memo-body{display:block;}
+.jm-memo-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.jm-memo-item:last-child{border-bottom:none;}
+.jm-memo-num{width:26px;height:26px;border-radius:50%;background:rgba(237,137,54,.1);border:1px solid rgba(237,137,54,.2);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--orange);flex-shrink:0;}
+.jm-memo-text{font-size:.88rem;color:var(--text2);line-height:1.65;}
+.jm-memo-text strong{color:var(--text);}
+.jm-questions{padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-q-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--orange);margin-bottom:18px;font-weight:600;}
+.jm-q-item{margin-bottom:18px;}
+.jm-q-item:last-child{margin-bottom:0;}
+.jm-q-text{font-size:.88rem;color:var(--text2);line-height:1.6;margin-bottom:8px;font-style:italic;}
+.jm-q-textarea{width:100%;min-height:72px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.6;}
+.jm-q-textarea:focus{border-color:rgba(237,137,54,.3);}
+.jm-q-textarea::placeholder{color:rgba(255,255,255,.18);}
+.jm-libre{padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-libre-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;}
+.jm-libre-textarea{width:100%;min-height:100px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.65;}
+.jm-libre-textarea:focus{border-color:rgba(201,168,76,.25);}
+.jm-libre-textarea::placeholder{color:rgba(255,255,255,.15);}
+.jm-actions{padding:20px 28px;display:flex;align-items:center;gap:12px;}
+.jm-save-btn{flex:1;background:linear-gradient(135deg,rgba(237,137,54,.15),rgba(237,137,54,.06));border:1px solid rgba(237,137,54,.3);border-radius:12px;padding:14px 20px;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:600;color:var(--orange);cursor:pointer;transition:all .3s;}
+.jm-save-btn:hover{background:rgba(237,137,54,.22);}
+.jm-saved{display:none;padding:12px 28px 18px;font-size:.85rem;color:#4aab7a;background:rgba(74,171,122,.06);border-top:1px solid rgba(74,171,122,.15);}
+.jm-saved.show{display:flex;align-items:center;gap:8px;}
+.unlock-dot{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--yellow),#F6E05E);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;color:var(--navy);}
+
+/* ── JOURNAL SECTION ── */
+.journal-section-header{text-align:center;margin-bottom:32px;}
+.jblock{background:var(--glass);border:1px solid var(--gb);border-radius:20px;overflow:hidden;margin-bottom:14px;}
+.jblock-header{padding:20px 24px 0;display:flex;align-items:center;gap:10px;}
+.jblock-num{width:28px;height:28px;border-radius:50%;background:rgba(237,137,54,.1);border:1px solid rgba(237,137,54,.25);display:flex;align-items:center;justify-content:center;font-size:.75rem;color:var(--orange);font-weight:700;flex-shrink:0;}
+.jblock-prompt{font-family:'Cormorant Garamond',serif;font-size:1.02rem;font-style:italic;color:var(--text);line-height:1.5;flex:1;}
+.jblock-hint{font-size:.75rem;color:rgba(255,255,255,.2);padding:6px 24px 12px;font-style:italic;}
+.jblock-ta{width:100%;min-height:88px;background:transparent;border:none;border-top:1px solid rgba(255,255,255,.05);padding:14px 24px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;line-height:1.7;}
+.jblock-ta::placeholder{color:rgba(255,255,255,.18);}
+.journal-save-bar{display:flex;align-items:center;justify-content:space-between;margin-top:16px;}
+.j-char-count{font-size:.75rem;color:rgba(255,255,255,.2);}
+.btn-j-save{display:inline-flex;align-items:center;gap:7px;background:rgba(237,137,54,.1);border:1px solid rgba(237,137,54,.3);border-radius:12px;padding:11px 22px;font-family:'Jost',sans-serif;font-size:.87rem;font-weight:600;color:var(--orange);cursor:pointer;transition:all .3s;}
+.btn-j-save:hover{background:rgba(237,137,54,.18);}
+.btn-j-save.saved{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.3);color:#68D391;}
+.journal-past{margin-top:28px;}
+.jp-header{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:600;}
+.jp-empty{text-align:center;padding:28px;color:rgba(255,255,255,.2);font-size:.85rem;font-style:italic;}
+.jp-entry{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px;padding:15px 18px;margin-bottom:8px;}
+.jp-entry-meta{display:flex;justify-content:space-between;margin-bottom:7px;}
+.jp-entry-date{font-size:.68rem;color:var(--orange);letter-spacing:1px;text-transform:uppercase;}
+.jp-entry-module{font-size:.68rem;color:rgba(255,255,255,.2);}
+.jp-entry-text{font-size:.83rem;color:var(--muted);line-height:1.65;}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);z-index:2000;background:rgba(13,21,38,.97);backdrop-filter:blur(16px);border:1px solid rgba(237,137,54,.3);border-radius:14px;padding:14px 24px;font-size:.9rem;color:var(--text);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── JOURNAL FAB & DRAWER ── */
+#journal-fab{position:fixed;bottom:28px;right:24px;z-index:900;width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,rgba(237,137,54,.2),rgba(237,137,54,.07));border:1px solid rgba(237,137,54,.35);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 6px 24px rgba(237,137,54,.2);transition:all .4s cubic-bezier(.34,1.56,.64,1);animation:fab-breathe 3s ease-in-out infinite;}
+#journal-fab:hover{transform:scale(1.1);}
+@keyframes fab-breathe{0%,100%{box-shadow:0 6px 24px rgba(237,137,54,.2);}50%{box-shadow:0 6px 32px rgba(237,137,54,.35),0 0 0 8px rgba(237,137,54,.04);}}
+#journal-overlay{position:fixed;inset:0;z-index:1100;background:rgba(7,13,26,.6);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .4s;}
+#journal-overlay.open{opacity:1;pointer-events:all;}
+#journal-drawer{position:fixed;bottom:0;right:0;left:0;z-index:1200;max-width:560px;margin:0 auto;background:var(--navy3);border:1px solid rgba(237,137,54,.15);border-bottom:none;border-radius:28px 28px 0 0;padding:24px 24px 40px;transform:translateY(100%);transition:transform .5s cubic-bezier(.34,1.2,.64,1);max-height:80vh;overflow-y:auto;}
+#journal-drawer.open{transform:translateY(0);}
+.drawer-handle{width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.12);margin:0 auto 24px;}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.drawer-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--text);}
+.drawer-title span{color:var(--orange);}
+.drawer-close{width:32px;height:32px;border-radius:50%;background:var(--glass);border:1px solid var(--gb);color:var(--muted);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.j-date-label{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--orange);margin-bottom:12px;}
+#journal-textarea{width:100%;min-height:110px;background:rgba(255,255,255,.03);border:1px solid var(--gb);border-radius:12px;padding:14px;font-family:'Jost',sans-serif;font-size:.9rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.65;}
+#journal-textarea:focus{border-color:rgba(237,137,54,.3);}
+#journal-textarea::placeholder{color:rgba(255,255,255,.2);}
+.j-actions{display:flex;gap:10px;margin-top:12px;}
+.j-btn{flex:1;padding:11px;border-radius:10px;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;}
+.j-save{background:linear-gradient(135deg,rgba(237,137,54,.15),rgba(237,137,54,.05));border:1px solid rgba(237,137,54,.3);color:var(--orange);}
+.j-save:hover{background:rgba(237,137,54,.2);}
+.j-clear{background:var(--glass);border:1px solid var(--gb);color:var(--muted);}
+.j-entries{margin-top:20px;display:flex;flex-direction:column;gap:8px;}
+.j-entry{background:rgba(255,255,255,.02);border:1px solid var(--gb);border-radius:10px;padding:12px;}
+.j-entry-date{font-size:.68rem;color:var(--orange);letter-spacing:1px;margin-bottom:5px;text-transform:uppercase;}
+.j-entry-text{font-size:.83rem;color:var(--muted);line-height:1.6;}
+.j-no-entries{text-align:center;color:rgba(255,255,255,.2);font-size:.85rem;padding:18px 0;}
+
+/* ── CANVAS ── */
+#confetti-canvas{position:fixed;inset:0;z-index:3000;pointer-events:none;}
+footer{position:relative;z-index:1;text-align:center;padding:20px;font-size:.72rem;color:rgba(255,255,255,.15);letter-spacing:1px;border-top:1px solid rgba(255,255,255,.04);}
+</style>
+</head>
+<body>
+
+<div class="bg-aurora">
+  <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
+</div>
+
+<div id="progress-bar">
+  <a href="index.html" class="pb-back">← <span>Tableau de bord</span></a>
+  <div class="pb-steps" id="pb-steps"></div>
+  <div class="pb-pct" id="pb-pct">0%</div>
+</div>
+<div id="scroll-line"></div>
+
+<div id="dot-nav">
+  <div class="dot active" data-section="0" title="Introduction"></div>
+  <div class="dot" data-section="1" title="L'émotion"></div>
+  <div class="dot" data-section="2" title="La résistance"></div>
+  <div class="dot" data-section="3" title="Fenêtre de tolérance"></div>
+  <div class="dot" data-section="4" title="Les 4 messagères"></div>
+  <div class="dot" data-section="5" title="Cohérence cardiaque"></div>
+  <div class="dot" data-section="6" title="Les 4 étapes"></div>
+  <div class="dot" data-section="7" title="Quiz & Complétion"></div>
+  <div class="dot" data-section="8" title="Journal"></div>
+</div>
+
+<main>
+
+<!-- ══ S0 — ACCROCHE PARADOXALE ══ -->
+<section class="section" data-s="0" id="s0">
+  <div class="module-hero-badge" style="background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.25);">
+    <span class="mhb-dot" style="background:#C9A84C;box-shadow:0 0 8px rgba(201,168,76,.6);"></span>
+    <span class="mhb-text" style="color:#C9A84C;">Module 2 · A comme ACCUEILLIR</span>
+  </div>
+  <span class="hero-big-letter">ACCUEILLIR</span>
+  <div class="hero-subtitle">"Je reçois ce qui est là"</div>
+  <p class="s-lead">Vous avez appris à voir votre masque s'activer. Maintenant vient l'étape la plus contre-intuitive du parcours — et de loin la plus libératrice.</p>
+  <div class="hero-meta">
+    <div class="hero-meta-pill"><span>🕐</span> 40–45 min</div>
+    <div class="hero-meta-pill"><span>🫀</span> Cohérence cardiaque guidée</div>
+    <div class="hero-meta-pill"><span>✦</span> 3 compétences concrètes</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="s-label">La scène qui explique tout</p>
+  <div class="paradox-split">
+    <div class="ps-resist">
+      <div class="ps-label">🔴 Résistance</div>
+      <p class="ps-scenario">Emma ressent de l'anxiété avant une présentation. Elle se dit qu'elle ne devrait pas avoir peur. Elle fait tout pour ne plus y penser. Elle respire fort, se répète que c'est ridicule, essaie de se distraire.</p>
+      <p class="ps-result">→ L'anxiété monte. La présentation se passe mal. Emma passe la soirée à ruminer.</p>
+    </div>
+    <div class="ps-accueil">
+      <div class="ps-label">🟢 Accueil</div>
+      <p class="ps-scenario">Lucas ressent exactement la même chose avant sa présentation. Il remarque : <em>"Il y a de l'anxiété en moi. Mon masque a peur d'échouer."</em> Il pose une main sur sa poitrine. Il respire.</p>
+      <p class="ps-result">→ L'anxiété reste — mais ne grossit pas. Lucas fait sa présentation. Elle se passe bien.</p>
+    </div>
+  </div>
+
+  <div class="insight-banner">
+    <p class="ib-question">Et si votre souffrance ne venait pas de l'émotion elle-même —<br>mais de ce que vous <em>faites</em> avec elle ?</p>
+    <button class="btn-next" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"><span>Comprendre les émotions</span><span class="bn-arrow">→</span></button>
+</div>
+</section>
+
+<!-- ══ S1 — CE QU'EST VRAIMENT UNE ÉMOTION ══ -->
+<section class="section" data-s="1" id="s1">
+  <p class="s-label">Avant d'accueillir</p>
+  <h2 class="s-title">Comprendre<br><em>ce qu'on accueille</em></h2>
+  <p class="s-lead">On ne peut pas accueillir quelque chose qu'on croit être une faiblesse. Alors commençons là : vos émotions ne sont pas vos ennemies. Ce sont des messagères.</p>
+
+  <div class="glass glass-orange" style="margin-bottom:24px;">
+    <p style="font-family:'Cormorant Garamond',serif;font-size:1.08rem;color:var(--text);line-height:1.75;border-left:3px solid var(--orange);padding-left:18px;">Une émotion est une <strong style="color:var(--orange)">réaction automatique</strong> de votre corps et de votre esprit face à une situation, un événement, une pensée. Son unique objectif : vous alerter qu'il se passe quelque chose d'important pour votre équilibre intérieur.</p>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:24px 0;">
+    <div style="border-radius:14px;padding:18px;background:rgba(237,137,54,.05);border:1px solid rgba(237,137,54,.12);">
+      <div style="font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(237,137,54,.5);margin-bottom:6px;font-weight:700;">Pilier 1</div>
+      <div style="font-weight:600;font-size:.88rem;margin-bottom:4px;">Elles sont automatiques</div>
+      <p style="font-size:.8rem;color:var(--muted);line-height:1.55;">Vous ne choisissez pas de ressentir. C'est une réponse biologique involontaire. Ce n'est pas votre faute.</p>
+    </div>
+    <div style="border-radius:14px;padding:18px;background:rgba(237,137,54,.05);border:1px solid rgba(237,137,54,.12);">
+      <div style="font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(237,137,54,.5);margin-bottom:6px;font-weight:700;">Pilier 2</div>
+      <div style="font-weight:600;font-size:.88rem;margin-bottom:4px;">Elles sont des informations</div>
+      <p style="font-size:.8rem;color:var(--muted);line-height:1.55;">Il n'existe pas d'émotion mauvaise. Chacune — même la plus inconfortable — porte un message sur un besoin.</p>
+    </div>
+    <div style="border-radius:14px;padding:18px;background:rgba(237,137,54,.05);border:1px solid rgba(237,137,54,.12);">
+      <div style="font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(237,137,54,.5);margin-bottom:6px;font-weight:700;">Pilier 3</div>
+      <div style="font-weight:600;font-size:.88rem;margin-bottom:4px;">Le corps parle en premier</div>
+      <p style="font-size:.8rem;color:var(--muted);line-height:1.55;">La gorge qui se noue, le ventre serré — ces réactions arrivent <em>avant</em> toute pensée consciente.</p>
+    </div>
+    <div style="border-radius:14px;padding:18px;background:rgba(237,137,54,.05);border:1px solid rgba(237,137,54,.12);">
+      <div style="font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:rgba(237,137,54,.5);margin-bottom:6px;font-weight:700;">Pilier 4</div>
+      <div style="font-weight:600;font-size:.88rem;margin-bottom:4px;">Elles révèlent un besoin</div>
+      <p style="font-size:.8rem;color:var(--muted);line-height:1.55;">Derrière chaque émotion, un besoin non satisfait. Identifier ce besoin, c'est trouver l'action juste.</p>
+    </div>
+  </div>
+
+  <p class="s-label" style="margin-bottom:14px;">Le processus émotionnel — en moins de 2 secondes</p>
+  <p style="font-size:.83rem;color:var(--muted);margin-bottom:16px;line-height:1.7;">Appuyez sur chaque étape pour comprendre ce qui se passe réellement en vous à toute vitesse.</p>
+  <div class="process-frise">
+    <div class="pf-track">
+      <div class="pf-node" onclick="showPfDetail(0)">
+        <div class="pf-circle" style="background:rgba(229,62,62,.1);border-color:rgba(229,62,62,.3);" id="pfc0">⚡</div>
+        <div class="pf-num">1<br>Déclen-<br>cheur</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-node" onclick="showPfDetail(1)">
+        <div class="pf-circle" style="background:rgba(128,90,213,.1);border-color:rgba(128,90,213,.3);" id="pfc1">🧠</div>
+        <div class="pf-num">2<br>Scan<br>rapide</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-node" onclick="showPfDetail(2)">
+        <div class="pf-circle" style="background:rgba(237,137,54,.1);border-color:rgba(237,137,54,.3);" id="pfc2">🫀</div>
+        <div class="pf-num">3<br>Réaction<br>corporelle</div>
+      </div>
+      <div class="pf-arrow">→</div>
+      <div class="pf-node" onclick="showPfDetail(3)">
+        <div class="pf-circle" style="background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.3);" id="pfc3">💡</div>
+        <div class="pf-num">4<br>Conscience<br>+ étiquette</div>
+      </div>
+    </div>
+    <div class="pf-detail" id="pfd0">
+      <div class="pfd-badge" style="background:rgba(229,62,62,.1);color:rgba(229,62,62,.8);border:1px solid rgba(229,62,62,.2);">Étape 1</div>
+      <div class="pfd-title">Le déclencheur</div>
+      <div class="pfd-desc">Externe (une critique, un silence, un regard) ou interne (une pensée qui s'impose, un souvenir qui surgit). Vous n'avez pas toujours le contrôle sur le déclencheur — c'est normal, c'est biologique.</div>
+    </div>
+    <div class="pf-detail" id="pfd1">
+      <div class="pfd-badge" style="background:rgba(128,90,213,.1);color:rgba(128,90,213,.8);border:1px solid rgba(128,90,213,.2);">Étape 2 — &lt; 0.5 s</div>
+      <div class="pfd-title">Le scan instantané</div>
+      <div class="pfd-desc">Votre cerveau compare la situation à votre mémoire, vos croyances, votre programmation d'attachement. La question automatique : <em>"Menace ou opportunité ?"</em> — avant même que vous en soyez conscient·e.</div>
+    </div>
+    <div class="pf-detail" id="pfd2">
+      <div class="pfd-badge" style="background:rgba(237,137,54,.1);color:rgba(237,137,54,.8);border:1px solid rgba(237,137,54,.2);">Étape 3 — automatique</div>
+      <div class="pfd-title">L'activation corporelle</div>
+      <div class="pfd-desc">Votre système nerveux autonome s'active. Cœur qui s'emballe, muscles tendus, gorge serrée — c'est la réaction corps. Elle arrive <strong style="color:var(--text)">avant</strong> la pensée. C'est pourquoi vous tremblez avant de réaliser que vous avez peur.</div>
+    </div>
+    <div class="pf-detail" id="pfd3">
+      <div class="pfd-badge" style="background:rgba(56,161,105,.1);color:rgba(56,161,105,.8);border:1px solid rgba(56,161,105,.2);">Étape 4 — quelques secondes après</div>
+      <div class="pfd-title">La conscience arrive enfin</div>
+      <div class="pfd-desc"><em>"Oh — je reconnais cette sensation. C'est de l'anxiété."</em> — Vous êtes conscient·e après que le processus ait déjà commencé. C'est là que VOIR puis ACCUEILLIR interviennent. Pas pour bloquer les étapes 1 à 3 — pour choisir ce qu'on fait à l'étape 4.</div>
+    </div>
+    <div class="timing-bar" id="timing-bar" style="display:none;">⏱ Timing total : moins de 2 secondes — votre corps a déjà tout traité avant que vous pensiez quoi que ce soit.</div>
+  </div>
+
+  <div class="divider-gold"></div>
+
+  <div class="vf-card" id="vf0">
+    <div class="vf-question">Vrai ou faux — Les émotions naissent dans la tête, pas dans le corps.</div>
+    <div class="vf-btns">
+      <button class="vf-btn vf-true" onclick="answerVF(0,'true')">Vrai</button>
+      <button class="vf-btn vf-false" onclick="answerVF(0,'false')">Faux</button>
+    </div>
+    <div class="vf-reveal" id="vfr0">✓ Faux — et c'est fondamental. L'émotion est d'abord une <strong style="color:var(--orange)">réaction corporelle automatique</strong> (le cœur qui s'emballe, le ventre qui se serre) — la pensée arrive après. C'est pour ça que "contrôler ses émotions par la pensée" ne fonctionne pas : vous essayez d'agir sur l'effet en ignorant la cause.</div>
+    <button class="btn-next" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"><span>La résistance &amp; le masque</span><span class="bn-arrow">→</span></button>
+</div>
+</section>
+
+<!-- ══ S2 — LE MASQUE QUI RÉSISTE ══ -->
+<section class="section" data-s="2" id="s2">
+  <p class="s-label">L'insight central</p>
+  <h2 class="s-title">La souffrance vient<br><em>de la résistance</em></h2>
+  <p class="s-lead">Votre masque a appris une chose très tôt : ressentir certaines émotions, c'est dangereux. Alors il résiste. Et c'est cette résistance — pas l'émotion elle-même — qui crée la souffrance durable.</p>
+
+  <div class="glass glass-orange" style="text-align:center;margin-bottom:24px;padding:32px 24px;">
+    <div style="font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;">La formule fondamentale</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(2.5rem,8vw,4.5rem);font-weight:300;background:linear-gradient(135deg,var(--orange),var(--gold-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.1;margin-bottom:14px;">D = e × r²</div>
+    <div style="display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin-top:8px;">
+      <div style="text-align:center;"><span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--orange);display:block;">D</span><span style="font-size:.68rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase;">Durée de souffrance</span></div>
+      <div style="text-align:center;"><span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--text);display:block;">e</span><span style="font-size:.68rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase;">Émotion initiale</span></div>
+      <div style="text-align:center;"><span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--red);display:block;">r²</span><span style="font-size:.68rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase;">Résistance × résistance</span></div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:28px;">
+    <div style="border-radius:14px;padding:18px;background:rgba(56,161,105,.06);border:1px solid rgba(56,161,105,.15);text-align:center;">
+      <div style="font-size:1.3rem;margin-bottom:8px;">🌊</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;">Émotion 5 · Résistance 1</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#68D391;font-weight:300;">=&nbsp;5</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.4;">La vague traverse.<br>Vous restez debout.</div>
+    </div>
+    <div style="border-radius:14px;padding:18px;background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.15);text-align:center;">
+      <div style="font-size:1.3rem;margin-bottom:8px;">🌪️</div>
+      <div style="font-size:.72rem;color:var(--muted);margin-bottom:6px;">Émotion 5 · Résistance 5</div>
+      <div style="font-family:'Cormorant Garamond',serif;font-size:2rem;color:#FC8181;font-weight:300;">=&nbsp;125</div>
+      <div style="font-size:.78rem;color:var(--muted);margin-top:4px;line-height:1.4;">Vous luttez contre la vague.<br>Elle vous emporte.</div>
+    </div>
+  </div>
+
+  <!-- BALLON SOUS L'EAU -->
+  <p class="s-label" style="margin-bottom:10px;">Le ballon sous l'eau</p>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:12px;line-height:1.7;">Plus vous enfoncez un ballon sous l'eau, plus il remonte avec force quand vous lâchez. C'est exactement ce qui se passe avec une émotion refoulée.</p>
+  <div class="balloon-tabs">
+    <div class="btab active-r" id="btab-resist" onclick="setBalloon('resist')">🔴 Résistance</div>
+    <div class="btab" id="btab-accept" onclick="setBalloon('accept')">🟢 Accueil</div>
+  </div>
+  <div class="balloon-scene" id="balloon-scene">
+    <div class="water-line"></div>
+    <div class="water-label">Surface</div>
+    <div class="surface-label">Air · espace libre</div>
+    <div class="balloon-wrap" id="balloon-wrap">
+      <div class="balloon-body" id="balloon-body"></div>
+      <div class="balloon-knot"></div>
+      <div class="balloon-string"></div>
+      <div class="hand-hold" id="hand-hold">✊</div>
+    </div>
+    <div class="balloon-caption" id="balloon-caption">L'émotion essaie de passer — la main la repousse</div>
+  </div>
+
+  <div class="key-insight">
+    <div class="ki-icon">💡</div>
+    <div class="ki-text">Accueillir, ce n'est pas <em>aimer</em> ce qu'on ressent. Ce n'est pas de la résignation. C'est simplement <strong>laisser l'émotion exister sans lui ajouter la couche de résistance</strong> qui la transforme en souffrance chronique.</div>
+  </div>
+
+  <div class="divider"></div>
+
+  <p class="s-label" style="margin-bottom:14px;">Les 7 stratégies de résistance du masque</p>
+  <p style="font-size:.85rem;color:var(--muted);margin-bottom:16px;line-height:1.7;">Votre masque ne dit pas "je refuse de ressentir ça". Il agit. Reconnaissez-vous dans l'une de ces stratégies ?</p>
+  <div class="resist-grid">
+    <div class="r-card">
+      <div class="r-icon">🏃</div>
+      <div class="r-name">Évitement</div>
+      <div class="r-desc">Fuir les situations qui pourraient déclencher l'émotion redoutée. Annuler, reporter, disparaître.</div>
+      <div class="r-masque">Masques Vert · Orange · Rouge</div>
+    </div>
+    <div class="r-card">
+      <div class="r-icon">🧊</div>
+      <div class="r-name">Refoulement</div>
+      <div class="r-desc">Enfoncer l'émotion. "Je vais bien." "C'est pas grave." "Je ne dois pas pleurer." Museler ce qui veut s'exprimer.</div>
+      <div class="r-masque">Masques Orange · Indigo · Bleu</div>
+    </div>
+    <div class="r-card">
+      <div class="r-icon">📚</div>
+      <div class="r-name">Intellectualisation</div>
+      <div class="r-desc">Analyser l'émotion à l'infini pour ne pas la ressentir. Comprendre au lieu de traverser.</div>
+      <div class="r-masque">Masques Jaune · Violet · Indigo</div>
+    </div>
+    <div class="r-card">
+      <div class="r-icon">⚙️</div>
+      <div class="r-name">Hypercontrôle</div>
+      <div class="r-desc">Tout organiser, tout anticiper, ne rien laisser au hasard — pour ne jamais être surpris par une émotion.</div>
+      <div class="r-masque">Masques Jaune · Bleu</div>
+    </div>
+    <div class="r-card">
+      <div class="r-icon">🌪️</div>
+      <div class="r-name">Acting out</div>
+      <div class="r-desc">Agir impulsivement pour court-circuiter l'émotion. Envoyer un message qu'on regrettera, claquer une porte, faire une bêtise.</div>
+      <div class="r-masque">Masques Rouge · Bleu · Orange</div>
+    </div>
+    <div class="r-card">
+      <div class="r-icon">📱</div>
+      <div class="r-name">Addiction / Diversion</div>
+      <div class="r-desc">Écrans, nourriture, alcool, shopping — tout ce qui crée une anesthésie rapide pour ne pas ressentir.</div>
+      <div class="r-masque">Tous les masques</div>
+    </div>
+    <div class="r-card" style="grid-column:1/-1;">
+      <div class="r-icon">🌫️</div>
+      <div class="r-name">Dissociation</div>
+      <div class="r-desc">Se couper de ses émotions. "Je ne ressens plus rien." "Je me regarde de loin." Une anesthésie complète — souvent après une longue période de résistance intense.</div>
+      <div class="r-masque">Masques Orange · Violet · Rouge</div>
+    </div>
+  </div>
+
+  <p style="font-size:.8rem;color:rgba(255,255,255,.25);margin-bottom:16px;font-style:italic;">Identifiez la stratégie de résistance dans ces scénarios ↓</p>
+  <div class="scenario-cards">
+    <div class="sc-card">
+      <div class="sc-scenario">"Depuis que Sarah a eu une grosse dispute avec sa mère, elle ne rappelle plus. Elle est 'trop occupée'. Ça fait trois semaines."</div>
+      <div class="sc-choices">
+        <div class="sc-choice" onclick="answerScenario(this,0,'evitement')">Évitement</div>
+        <div class="sc-choice" onclick="answerScenario(this,0,'refoulement')">Refoulement</div>
+        <div class="sc-choice" onclick="answerScenario(this,0,'acting')">Acting out</div>
+      </div>
+      <div class="sc-reveal" id="scr0">✓ Évitement — Sarah fuit la situation pour ne pas ressentir la douleur de ce conflit. La distance "protège" son masque Vert de la peur du rejet ou de l'abandon. Mais la relation se détériore en silence.</div>
+    </div>
+    <div class="sc-card">
+      <div class="sc-scenario">"Paul est stressé par une deadline. Il se lève, ouvre le frigo, mange sans faim, reprend son téléphone, regarde trois vidéos, revient à son travail."</div>
+      <div class="sc-choices">
+        <div class="sc-choice" onclick="answerScenario(this,1,'evitement')">Évitement</div>
+        <div class="sc-choice" onclick="answerScenario(this,1,'diversion')">Diversion</div>
+        <div class="sc-choice" onclick="answerScenario(this,1,'intellectualisation')">Intellectualisation</div>
+      </div>
+      <div class="sc-reveal" id="scr1">✓ Diversion — Paul crée une anesthésie rapide pour ne pas ressentir le stress de la deadline. Son masque Jaune ou Indigo préfère la dispersion à l'inconfort de la pression. Le stress reste entier — juste temporairement mis en sourdine.</div>
+    </div>
+    <div class="sc-card">
+      <div class="sc-scenario">"Après sa rupture, Clara a lu six livres sur le deuil amoureux, fait trois séances de coaching, analysé tous les schémas de la relation. Elle explique tout très bien — mais ne pleure pas."</div>
+      <div class="sc-choices">
+        <div class="sc-choice" onclick="answerScenario(this,2,'refoulement')">Refoulement</div>
+        <div class="sc-choice" onclick="answerScenario(this,2,'hypercontrole')">Hypercontrôle</div>
+        <div class="sc-choice" onclick="answerScenario(this,2,'intellectualisation')">Intellectualisation</div>
+      </div>
+      <div class="sc-reveal" id="scr2">✓ Intellectualisation — Clara comprend brillamment sa situation. Mais comprendre n'est pas traverser. Son masque Orange ou Violet utilise l'analyse pour éviter de <em>ressentir</em> la perte. Le deuil émotionnel reste en suspens.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ S3 — FENÊTRE DE TOLÉRANCE ══ -->
+<section class="section" data-s="3" id="s3">
+  <p class="s-label">Le concept clé du Dr Siegel</p>
+  <h2 class="s-title">La fenêtre<br><em>de tolérance</em></h2>
+  <p class="s-lead">Chacun·e d'entre nous possède une <strong style="color:var(--text)">zone optimale</strong> dans laquelle le système nerveux peut fonctionner, ressentir et même accueillir les émotions difficiles. Quand on en sort — vers le haut ou vers le bas — accueillir devient quasi impossible.</p>
+
+  <p style="font-size:.82rem;color:rgba(255,255,255,.25);margin-bottom:14px;font-style:italic;">Appuyez sur chaque zone pour en apprendre plus ↓</p>
+  <div class="tolerance-container">
+    <div class="tw-visual">
+      <div class="tw-zone hyper" id="twz-hyper" onclick="toggleTW('hyper')">
+        <div class="tw-zone-header">
+          <div class="tw-zone-label">
+            <div class="tw-zone-dot"></div>
+            <div class="tw-zone-name">Hyperactivation</div>
+          </div>
+          <div class="tw-zone-badge">Zone rouge · Trop haut</div>
+        </div>
+        <div class="tw-zone-detail">
+          <div class="tw-zone-body">
+            <div class="tw-zone-desc">Le système nerveux est en mode survie — accélérateur à fond. L'émotion envahit tout l'espace. Impossible de penser clairement, impossible d'accueillir quoi que ce soit.</div>
+            <div class="tw-zone-signs">
+              <span class="tw-sign">Cœur qui s'emballe</span><span class="tw-sign">Hyperventilation</span><span class="tw-sign">Agitation impossible à calmer</span><span class="tw-sign">Pensées en boucle rapide</span><span class="tw-sign">Envie de fuir ou d'attaquer</span>
+            </div>
+            <div class="tw-zone-masques">Masques souvent actifs en hyperactivation : Rouge · Bleu · Indigo · Jaune</div>
+          </div>
+        </div>
+      </div>
+      <div class="tw-zone optimal" id="twz-optimal" onclick="toggleTW('optimal')">
+        <div class="tw-zone-header">
+          <div class="tw-zone-label">
+            <div class="tw-zone-dot"></div>
+            <div class="tw-zone-name">Zone optimale</div>
+          </div>
+          <div class="tw-zone-badge">Zone verte · Régulée</div>
+        </div>
+        <div class="tw-zone-detail">
+          <div class="tw-zone-body">
+            <div class="tw-zone-desc">Le système nerveux est régulé. Vous pouvez ressentir sans être submergé·e. Vous pouvez penser sans fuir. C'est dans cette zone que l'accueil, la réflexion, la connexion aux autres — et à soi — sont possibles.</div>
+            <div class="tw-zone-signs">
+              <span class="tw-sign">Respiration fluide</span><span class="tw-sign">Pensées claires</span><span class="tw-sign">Capacité à choisir</span><span class="tw-sign">Curiosité possible</span><span class="tw-sign">Connexion à l'autre</span>
+            </div>
+            <div class="tw-zone-masques">Objectif : revenir ici avant d'essayer d'accueillir une émotion difficile. La cohérence cardiaque vous y aide.</div>
+          </div>
+        </div>
+      </div>
+      <div class="tw-zone hypo" id="twz-hypo" onclick="toggleTW('hypo')">
+        <div class="tw-zone-header">
+          <div class="tw-zone-label">
+            <div class="tw-zone-dot"></div>
+            <div class="tw-zone-name">Hypoactivation</div>
+          </div>
+          <div class="tw-zone-badge">Zone bleue · Trop bas</div>
+        </div>
+        <div class="tw-zone-detail">
+          <div class="tw-zone-body">
+            <div class="tw-zone-desc">Le système nerveux s'est mis en mode gel — frein d'urgence activé. Les émotions semblent lointaines, le corps lourd, la pensée vide. Souvent le résultat d'une longue période d'hyperactivation ou de résistance intense.</div>
+            <div class="tw-zone-signs">
+              <span class="tw-sign">Engourdissement émotionnel</span><span class="tw-sign">Fatigue profonde</span><span class="tw-sign">Sensation de vide</span><span class="tw-sign">Difficulté à bouger</span><span class="tw-sign">Dissociation</span>
+            </div>
+            <div class="tw-zone-masques">Masques souvent actifs en hypoactivation : Orange · Violet · Vert (repli complet)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="tw-locator">
+      <div class="tw-loc-label">En ce moment, où vous situez-vous ?</div>
+      <div class="tw-loc-btns">
+        <button class="tw-loc-btn" onclick="locateTW('hyper')">🔴 Je suis agité·e, en boucle</button>
+        <button class="tw-loc-btn" onclick="locateTW('optimal')">🟢 Je suis calme et présent·e</button>
+        <button class="tw-loc-btn" onclick="locateTW('hypo')">🔵 Je me sens vide, flat</button>
+      </div>
+      <div class="tw-loc-result" id="tw-loc-result"></div>
+    </div>
+  </div>
+
+  <div class="key-insight" style="margin-top:20px;">
+    <div class="ki-icon">✦</div>
+    <div class="ki-text">L'objectif de la cohérence cardiaque — que vous pratiquerez dans le module suivant — est précisément de <strong>vous ramener dans votre fenêtre optimale</strong> avant d'essayer d'accueillir une émotion difficile. On ne peut pas accueillir depuis la zone rouge ou bleue.</div>
+    <button class="btn-next" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"><span>Les 4 messagères</span><span class="bn-arrow">→</span></button>
+</div>
+</section>
+
+<!-- ══ S4 — LES 4 MESSAGÈRES ══ -->
+<section class="section" data-s="4" id="s4">
+  <p class="s-label">Cartographie émotionnelle</p>
+  <h2 class="s-title">Les 4 messagères —<br><em>face cachée</em></h2>
+  <p class="s-lead">Chaque grande famille d'émotions porte un message précis et un besoin à satisfaire. Ce n'est pas l'émotion qu'on ressent qui compte le plus — c'est ce qu'elle essaie de nous dire. Retournez les cartes.</p>
+
+  <p class="fec-flip-hint">Touchez chaque carte pour révéler le message caché ↓</p>
+  <div class="flip-emotions-grid">
+    <div class="flip-emotion-card fe-anxiete" onclick="this.classList.toggle('flipped')">
+      <div class="fec-inner">
+        <div class="fec-front">
+          <div><div class="fec-emoji">😰</div><div class="fec-name">Anxiété · Peur</div><div class="fec-signal">"Un danger menace quelque chose d'important"</div></div>
+          <div class="fec-tap">Touchez pour révéler ↓</div>
+        </div>
+        <div class="fec-back">
+          <div class="fec-back-label">Message caché</div>
+          <div class="fec-message">"Je sens une menace — j'ai besoin d'évaluer ce qui est réellement contrôlable."</div>
+          <div class="fec-need">⚡ Besoin : Sécurité · Prévoyance · Être rassuré·e</div>
+          <div class="fec-body-loc">Corps : cœur rapide · souffle court · ventre noué · muscles tendus</div>
+        </div>
+      </div>
+    </div>
+    <div class="flip-emotion-card fe-colere" onclick="this.classList.toggle('flipped')">
+      <div class="fec-inner">
+        <div class="fec-front">
+          <div><div class="fec-emoji">😤</div><div class="fec-name">Colère · Frustration</div><div class="fec-signal">"Une limite est franchie — c'est injuste"</div></div>
+          <div class="fec-tap">Touchez pour révéler ↓</div>
+        </div>
+        <div class="fec-back">
+          <div class="fec-back-label">Message caché</div>
+          <div class="fec-message">"Mon besoin de respect ou de justice est bafoué — je dois poser une limite."</div>
+          <div class="fec-need">⚡ Besoin : Respect · Justice · Pouvoir d'agir</div>
+          <div class="fec-body-loc">Corps : chaleur · tension · mâchoires · poings fermés</div>
+        </div>
+      </div>
+    </div>
+    <div class="flip-emotion-card fe-tristesse" onclick="this.classList.toggle('flipped')">
+      <div class="fec-inner">
+        <div class="fec-front">
+          <div><div class="fec-emoji">😢</div><div class="fec-name">Tristesse · Deuil</div><div class="fec-signal">"J'ai perdu quelque chose d'important pour moi"</div></div>
+          <div class="fec-tap">Touchez pour révéler ↓</div>
+        </div>
+        <div class="fec-back">
+          <div class="fec-back-label">Message caché</div>
+          <div class="fec-message">"Cette perte compte vraiment — j'ai besoin de la reconnaître et d'intégrer."</div>
+          <div class="fec-need">⚡ Besoin : Réconfort · Soutien · Être entendu·e</div>
+          <div class="fec-body-loc">Corps : larmes · gorge nouée · lenteur · lourdeur poitrine</div>
+        </div>
+      </div>
+    </div>
+    <div class="flip-emotion-card fe-culpa" onclick="this.classList.toggle('flipped')">
+      <div class="fec-inner">
+        <div class="fec-front">
+          <div><div class="fec-emoji">😔</div><div class="fec-name">Culpabilité · Honte</div><div class="fec-signal">"J'ai agi contre mes propres valeurs"</div></div>
+          <div class="fec-tap">Touchez pour révéler ↓</div>
+        </div>
+        <div class="fec-back">
+          <div class="fec-back-label">Message caché</div>
+          <div class="fec-message">"Quelque chose en moi veut retrouver son intégrité — réparer, apprendre, se pardonner."</div>
+          <div class="fec-need">⚡ Besoin : Réparation · Pardon · Cohérence</div>
+          <div class="fec-body-loc">Corps : lourdeur poitrine · regard fuyant · nœud estomac</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider-gold"></div>
+
+  <p class="s-label" style="margin-bottom:14px;">Mini-quiz · Associez l'émotion à la situation</p>
+  <div style="display:flex;flex-direction:column;gap:16px;">
+    <div>
+      <div class="eq-question">"Vous attendez depuis trois jours un retour sur un dossier important que vous avez envoyé. Toujours rien. Vous commencez à imaginer le pire."</div>
+      <div class="eq-opts">
+        <div class="eq-opt" onclick="answerEQ(this,0,'anxiete')">Anxiété</div>
+        <div class="eq-opt" onclick="answerEQ(this,0,'colere')">Colère</div>
+        <div class="eq-opt" onclick="answerEQ(this,0,'tristesse')">Tristesse</div>
+        <div class="eq-opt" onclick="answerEQ(this,0,'culpa')">Culpabilité</div>
+      </div>
+      <div class="eq-feedback" id="eqf0"></div>
+    </div>
+    <div>
+      <div class="eq-question">"Un·e collègue prend votre idée en réunion et la présente comme si c'était la sienne. Vous sentez quelque chose monter en vous, chaud, tendu."</div>
+      <div class="eq-opts">
+        <div class="eq-opt" onclick="answerEQ(this,1,'anxiete')">Anxiété</div>
+        <div class="eq-opt" onclick="answerEQ(this,1,'colere')">Colère</div>
+        <div class="eq-opt" onclick="answerEQ(this,1,'tristesse')">Tristesse</div>
+        <div class="eq-opt" onclick="answerEQ(this,1,'culpa')">Culpabilité</div>
+      </div>
+      <div class="eq-feedback" id="eqf1"></div>
+    </div>
+    <div>
+      <div class="eq-question">"Vous avez dit quelque chose de blessant à quelqu'un que vous aimez dans un moment d'énervement. Deux jours après, ça revient en boucle."</div>
+      <div class="eq-opts">
+        <div class="eq-opt" onclick="answerEQ(this,2,'anxiete')">Anxiété</div>
+        <div class="eq-opt" onclick="answerEQ(this,2,'colere')">Colère</div>
+        <div class="eq-opt" onclick="answerEQ(this,2,'tristesse')">Tristesse</div>
+        <div class="eq-opt" onclick="answerEQ(this,2,'culpa')">Culpabilité</div>
+      </div>
+      <div class="eq-feedback" id="eqf2"></div>
+    </div>
+    <button class="btn-next" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"><span>La cohérence cardiaque</span><span class="bn-arrow">→</span></button>
+</div>
+</section>
+
+<!-- ══ S5 — COHÉRENCE CARDIAQUE ══ -->
+<section class="section" data-s="5" id="s5">
+  <p class="s-label">L'outil physiologique</p>
+  <h2 class="s-title">La cohérence<br><em>cardiaque</em></h2>
+  <p class="s-lead">Votre cœur ne fait pas que pomper du sang. Il envoie constamment des signaux à votre cerveau — plus qu'il n'en reçoit. Réguler votre respiration, c'est envoyer à votre cerveau un message de sécurité qui ouvre votre fenêtre de tolérance.</p>
+
+  <div class="cc-science">
+    <div class="cs-item"><div class="cs-val">20%</div><div class="cs-label">Réduction du cortisol en 5 minutes</div></div>
+    <div class="cs-item"><div class="cs-val">6/min</div><div class="cs-label">Fréquence respiratoire optimale</div></div>
+    <div class="cs-item"><div class="cs-val">5–5</div><div class="cs-label">Secondes inspir. / expir.</div></div>
+  </div>
+
+  <div class="glass" style="margin:20px 0;padding:18px 22px;">
+    <p style="font-size:.87rem;color:var(--muted);line-height:1.75;">Ce que fait la cohérence cardiaque sur votre biologie : elle active le nerf vague, qui déclenche la réponse parasympathique (le "frein" du système nerveux). Votre rythme cardiaque se régularise. Le cortisol baisse. Votre cerveau limbique se calme — et votre cortex préfrontal reprend le dessus. C'est exactement ce qui vous ramène dans votre <strong style="color:var(--green)">fenêtre de tolérance optimale</strong>.</p>
+  </div>
+
+  <div class="cc-card">
+    <div style="font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--orange);margin-bottom:6px;">Exercice · 5 minutes guidées</div>
+    <h3 style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--text);">Respirez avec le cercle</h3>
+    <p style="font-size:.83rem;color:var(--muted);margin-top:6px;">Laissez le cercle guider votre souffle naturellement.</p>
+    <div class="cc-orb-wrap">
+      <div class="cc-ring2" id="cc-ring2"></div>
+      <div class="cc-ring1" id="cc-ring1"></div>
+      <div class="cc-orb" id="cc-orb">🫀</div>
+    </div>
+    <div class="cc-phase" id="cc-phase">Appuyez pour commencer</div>
+    <div class="cc-count" id="cc-count">5 minutes · 30 cycles</div>
+    <div class="cc-timer" id="cc-timer">5:00</div>
+    <button class="btn-cc" id="btn-cc" onclick="toggleCC()">▶ Commencer la cohérence cardiaque</button>
+    <div id="cc-complete" style="display:none;margin-top:18px;padding:16px;background:rgba(56,161,105,.06);border:1px solid rgba(56,161,105,.2);border-radius:14px;text-align:center;">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:#68D391;">✓ Exercice terminé. Votre système nerveux est régulé. Vous êtes dans votre fenêtre de tolérance.</p>
+    </div>
+  </div>
+
+  <div class="key-insight" style="margin-top:8px;">
+    <div class="ki-icon">🎯</div>
+    <div class="ki-text">Utilisez cet exercice <strong>avant</strong> d'essayer d'accueillir une émotion difficile. Et aussi dans les moments de forte activation — vous sentez que ça monte, vous faites 2 minutes de 5-5 avant de répondre, avant d'agir.</div>
+    <button class="btn-next" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"><span>Le protocole d'accueil</span><span class="bn-arrow">→</span></button>
+</div>
+</section>
+
+<!-- ══ S6 — LES 4 ÉTAPES DE L'ACCUEIL ══ -->
+<section class="section" data-s="6" id="s6">
+  <p class="s-label">Le protocole complet</p>
+  <h2 class="s-title">Les 4 étapes<br><em>de l'accueil</em></h2>
+  <p class="s-lead">Un protocole utilisable en temps réel, dans n'importe quelle situation. Pas dans une séance de méditation — dans la voiture, en réunion, en pleine conversation difficile.</p>
+
+  <div class="stepper">
+    <div class="st-step active" onclick="toggleStepper(this)">
+      <div class="st-header">
+        <div class="st-num">1</div>
+        <div class="st-info"><div class="st-name">Pause · Nommer</div><div class="st-sub">30 secondes · Le premier acte de présence</div></div>
+        <div class="st-arrow">›</div>
+      </div>
+      <div class="st-body"><div class="st-content">
+        <div class="st-phrase">"Je remarque de la [émotion] en moi en ce moment."</div>
+        <div class="st-expl">Nommer une émotion réduit son intensité — c'est documenté en neurosciences (Lieberman, UCLA). L'acte d'étiqueter active le cortex préfrontal et réduit l'activité de l'amygdale. En cinq secondes, quelque chose change déjà dans votre cerveau.</div>
+        <div class="st-expl"><strong style="color:var(--text)">La nuance essentielle :</strong> "Je remarque de la colère en moi" — pas "je suis en colère". Cette petite différence de formulation crée la distance observatrice qui transforme tout. Vous avez l'émotion. Vous n'êtes pas l'émotion.</div>
+        <div class="st-tags"><span class="st-tag">Arrêtez-vous 5 secondes</span><span class="st-tag">Nommez l'émotion</span><span class="st-tag">Respirez une fois profondément</span></div>
+      </div></div>
+    </div>
+    <div class="st-step" onclick="toggleStepper(this)">
+      <div class="st-header">
+        <div class="st-num">2</div>
+        <div class="st-info"><div class="st-name">Localiser dans le corps</div><div class="st-sub">30 secondes · L'ancrage concret</div></div>
+        <div class="st-arrow">›</div>
+      </div>
+      <div class="st-body"><div class="st-content">
+        <div class="st-phrase">"Où est-ce dans mon corps ? Chaud ou froid ? Serré ou ouvert ?"</div>
+        <div class="st-expl">Les émotions ne sont pas abstraites — elles ont une adresse physique. Poser la question "où ?" sort du mental en boucle et reconnecte au ressenti concret. La pensée tourne en rond. Le corps, lui, est toujours ici, maintenant.</div>
+        <div class="st-tags"><span class="st-tag">Gorge serrée → tristesse</span><span class="st-tag">Ventre noué → anxiété</span><span class="st-tag">Chaleur nuque → colère</span><span class="st-tag">Poitrine lourde → culpabilité</span></div>
+      </div></div>
+    </div>
+    <div class="st-step" onclick="toggleStepper(this)">
+      <div class="st-header">
+        <div class="st-num">3</div>
+        <div class="st-info"><div class="st-name">Écouter le message</div><div class="st-sub">1–2 minutes · L'étape transformatrice</div></div>
+        <div class="st-arrow">›</div>
+      </div>
+      <div class="st-body"><div class="st-content">
+        <div class="st-phrase">"Quel besoin non satisfait se cache derrière cette émotion ?"</div>
+        <div class="st-expl">C'est l'étape la plus puissante du protocole. Chaque émotion porte une information sur un besoin. Quand vous identifiez ce besoin, l'émotion a rempli son rôle — et peut commencer à se dissiper naturellement. Elle n'a plus besoin de crier.</div>
+        <div class="st-expl">Posez-vous : <strong style="color:var(--text)">Sécurité ? Reconnaissance ? Connexion ? Autonomie ? Justice ? Réconfort ? Sens ?</strong></div>
+      </div></div>
+    </div>
+    <div class="st-step" onclick="toggleStepper(this)">
+      <div class="st-header">
+        <div class="st-num">4</div>
+        <div class="st-info"><div class="st-name">Agir avec justesse</div><div class="st-sub">Réponse choisie · Pas réaction automatique</div></div>
+        <div class="st-arrow">›</div>
+      </div>
+      <div class="st-body"><div class="st-content">
+        <div class="st-phrase">"Quelle action correspond à ce besoin — et non à mon masque ?"</div>
+        <div class="st-expl">Le masque réagit automatiquement pour vous "protéger". L'accueil vous donne le choix d'une réponse consciente, adaptée à la réalité présente — et non à la peur du passé. C'est la différence entre subir et choisir. Une réponse à la fois.</div>
+        <div class="st-tags"><span class="st-tag">Besoin de sécurité → respirer, évaluer</span><span class="st-tag">Besoin de justice → exprimer clairement</span><span class="st-tag">Besoin de réconfort → chercher une présence</span></div>
+      </div></div>
+    </div>
+  </div>
+
+  <div class="divider-gold"></div>
+
+  <p class="s-label" style="margin-bottom:14px;">Léa — avec et sans le protocole</p>
+  <div class="vignette-compare">
+    <div class="vc-before">
+      <span class="vc-label">🔴 Sans protocole — masque actif</span>
+      <div class="vc-trigger">DÉCLENCHEUR · Son manager lui fait une remarque devant l'équipe</div>
+      <div class="vc-text">Léa sent la honte monter. Elle ravale tout, sourit, acquiesce. En rentrant chez elle, elle rejoue la scène cent fois. Elle rédige un long email d'explication à son manager — puis l'efface. Elle mange sans faim. Elle s'endort avec un sentiment de nullité.</div>
+    </div>
+    <div class="vc-after">
+      <span class="vc-label">🟢 Avec le protocole d'accueil</span>
+      <div class="vc-trigger">Même déclencheur. Même masque Indigo — peur de l'échec.</div>
+      <div class="vc-text">Léa remarque la honte. Elle se dit intérieurement : <em>"Il y a de la honte en moi. Je localise — c'est dans la poitrine, serré. Le message : je crois que cette remarque confirme que je suis inadéquate. Le besoin : être reconnue dans mon travail."</em> Elle ne répond pas à l'email. Le soir, elle écrit dans son journal. Elle dort.</div>
+    </div>
+    <button class="btn-next" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})"><span>Quiz final &amp; bilan</span><span class="bn-arrow">→</span></button>
+</div>
+</section>
+
+<!-- ══ S7 — QUIZ FINAL & COMPLÉTION ══ -->
+<section class="section" data-s="7" id="s7">
+  <p class="s-label">Pour ancrer ce qui compte</p>
+  <h2 class="s-title">Quatre questions.<br><em>Trois insights.</em></h2>
+  <p class="s-lead">Pas un examen — une vérification. Le vrai test d'ACCUEILLIR, c'est ce que vous ferez la prochaine fois qu'une émotion difficile se lève. Ce quiz prépare ce moment-là.</p>
+
+  <div class="quiz-wrap">
+    <div class="qz-card" id="qz-card">
+      <div class="qz-prog"><div class="qzpb" id="qzpb" style="width:0%"></div></div>
+      <div class="qz-num" id="qz-num"></div>
+      <div class="qz-text" id="qz-text"></div>
+      <div class="qz-opts" id="qz-opts"></div>
+      <div class="qz-expl" id="qz-expl"></div>
+      <div style="display:flex;justify-content:flex-end;"><button class="qz-next" id="qz-next" onclick="nextQZ()">Suivant →</button></div>
+    </div>
+    <div class="qz-score" id="qz-score">
+      <div class="score-big" id="score-big"></div>
+      <div style="font-size:.82rem;color:var(--muted);margin-top:6px;">sur 4 questions</div>
+      <div class="score-msg" id="score-msg"></div>
+      <button onclick="restartQZ()" style="margin-top:18px;padding:9px 22px;border-radius:10px;background:var(--glass);border:1px solid var(--gb);color:var(--muted);cursor:pointer;font-family:'Jost',sans-serif;font-size:.84rem;">Refaire le quiz</button>
+    </div>
+  </div>
+
+  <div class="divider-gold"></div>
+
+  <div class="bilan-grid">
+    <div class="bilan-card"><div class="bc-icon">🌊</div><div class="bc-label">Compris</div><div class="bc-text">C'est la résistance — pas l'émotion — qui crée la souffrance durable</div></div>
+    <div class="bilan-card"><div class="bc-icon">🪟</div><div class="bc-label">Compris</div><div class="bc-text">La fenêtre de tolérance et comment y revenir</div></div>
+    <div class="bilan-card"><div class="bc-icon">🎯</div><div class="bc-label">Pratiqué</div><div class="bc-text">Le protocole d'accueil en 4 étapes — utilisable dès maintenant</div></div>
+  </div>
+
+  <div class="glass glass-gold" style="margin:24px 0;text-align:center;padding:24px;">
+    <div style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--text);line-height:1.8;">La phrase à retenir pour aujourd'hui :<br><strong style="color:var(--orange)">"Je remarque de la [émotion] en moi. Je l'accueille sans la combattre."</strong></div>
+  </div>
+
+  <div class="complete-zone">
+    <button class="btn-complete" onclick="completeModule()">✓ Module 2 terminé — Débloquer LOCALISER 🟡</button>
+    <p class="complete-sub">Vos progrès sont sauvegardés automatiquement</p>
+    <div class="unlock-preview" id="unlock-preview">
+      <div class="unlock-dot">L</div>
+      <span>Module 3 — <strong style="color:var(--yellow)">LOCALISER</strong> débloqué !</span>
+    </div>
+  </div>
+</section>
+
+  <button class="btn-next" onclick="document.getElementById('s8').scrollIntoView({behavior:'smooth'})"><span>✍️ Mon Journal de bord</span><span class="bn-arrow">→</span></button>
+
+<!-- ══ S8 — JOURNAL ACCUEILLIR ══ -->
+<section class="section" data-s="8" id="s8">
+  <p class="s-label">Mon journal de bord</p>
+  <h2 class="s-title">Ancrer<br><em>ce qui compte</em></h2>
+
+  <div class="journal-module" id="jm-module2">
+    <div class="jm-header">
+      <span class="jm-header-icon">📓</span>
+      <div class="jm-header-text">
+        <h3>Mon Journal de bord — ACCUEILLIR</h3>
+        <p>Sauvegardé dans votre parcours complet · Exportable en PDF en fin de parcours</p>
+      </div>
+    </div>
+
+    <div class="jm-memo" id="jm-memo-m2">
+      <button class="jm-memo-toggle" onclick="toggleMemo('jm-memo-m2')">
+        <span>🗂 Mémo — Les 5 concepts essentiels d’ACCUEILLIR</span>
+        <span class="jm-memo-chevron">▾</span>
+      </button>
+      <div class="jm-memo-body">
+        <div class="jm-memo-item">
+          <div class="jm-memo-num">1</div>
+          <div class="jm-memo-text"><strong>La résistance crée la souffrance</strong> — Ce n’est pas l’émotion qui fait mal, c’est la lutte contre elle. Éviter, refouler, analyser à l’excès maintient la tension. Accueillir la libère.</div>
+        </div>
+        <div class="jm-memo-item">
+          <div class="jm-memo-num">2</div>
+          <div class="jm-memo-text"><strong>L’émotion est une messagère</strong> — Chaque émotion porte un message (un besoin) et une information. La colère dit « une limite a été franchie ». La tristesse dit « j’ai perdu quelque chose d’important ». Accueillir, c’est écouter le message.</div>
+        </div>
+        <div class="jm-memo-item">
+          <div class="jm-memo-num">3</div>
+          <div class="jm-memo-text"><strong>La fenêtre de tolérance</strong> — Zone optimale entre hyper- et hypo-activation. Depuis cette zone, on peut accueillir. La cohérence cardiaque (5-5) y ramène en moins de 2 minutes.</div>
+        </div>
+        <div class="jm-memo-item">
+          <div class="jm-memo-num">4</div>
+          <div class="jm-memo-text"><strong>Le protocole STOP en 4 étapes</strong> — 1️⃣ Stopper → 2️⃣ Nommer l’émotion → 3️⃣ Localiser dans le corps → 4️⃣ Identifier le besoin. Utilisable en temps réel, même en réunion.</div>
+        </div>
+        <div class="jm-memo-item">
+          <div class="jm-memo-num">5</div>
+          <div class="jm-memo-text"><strong>La phrase d’accueil</strong> — « Je remarque de la [nom de l’émotion] en moi. Je l’accueille sans la combattre. » Cette formulation crée instantanément un espace entre vous et l’émotion.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="jm-questions">
+      <div class="jm-q-label">✍️ Mon bilan — Module 2 · ACCUEILLIR</div>
+      <div class="jm-q-item">
+        <div class="jm-q-text">L’émotion que j’évite le plus dans ma vie…</div>
+        <textarea class="jm-q-textarea" id="jm-q1-m2" placeholder="Colère, tristesse, honte, anxiété, peur ? La situation qui la déclenche le plus souvent…"></textarea>
+      </div>
+      <div class="jm-q-item">
+        <div class="jm-q-text">Le besoin caché derrière cette émotion…</div>
+        <textarea class="jm-q-textarea" id="jm-q2-m2" placeholder="Sécurité ? Reconnaissance ? Connexion ? Quel besoin cette émotion essaie-t-elle de signaler ?"></textarea>
+      </div>
+      <div class="jm-q-item">
+        <div class="jm-q-text">Mon protocole STOP — la dernière fois que je l’ai appliqué…</div>
+        <textarea class="jm-q-textarea" id="jm-q3-m2" placeholder="Situation, émotion nommée, sensation localisée, besoin identifié ? Résultat ?"></textarea>
+      </div>
+    </div>
+
+    <div class="jm-libre">
+      <div class="jm-libre-label">📝 Réflexions libres</div>
+      <textarea class="jm-libre-textarea" id="jm-libre-m2" placeholder="Espace libre — ce que ce module a éveillé, une prise de conscience, une résistance, une émotion difficile que vous avez commencé à accueillir…"></textarea>
+    </div>
+
+    <div class="jm-actions">
+      <button class="jm-save-btn" onclick="saveJournalV3()">💾 Sauvegarder dans mon journal</button>
+    </div>
+    <div class="jm-saved" id="jm-saved-m2">
+      ✓ Entrée sauvegardée — visible dans votre Journal de bord complet
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer>© Méthode V.A.L.E.U.R© — Céline Bourbon · Tous droits réservés · Reproduction interdite</footer>
+
+<button id="journal-fab" onclick="toggleJournal()" title="Note rapide">📓</button>
+<div id="journal-overlay" onclick="closeJournal()"></div>
+<div id="journal-drawer">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <div class="drawer-title">Journal <span>rapide</span></div>
+    <button class="drawer-close" onclick="closeJournal()">✕</button>
+  </div>
+  <div class="j-date-label" id="j-date"></div>
+  <textarea id="journal-textarea" placeholder="Ce que j'observe, ce que je ressens en ce moment..."></textarea>
+  <div class="j-actions">
+    <button class="j-btn j-save" onclick="saveDrawerEntry()">💾 Sauvegarder</button>
+    <button class="j-btn j-clear" onclick="document.getElementById('journal-textarea').value=''">✕ Effacer</button>
+  </div>
+  <div class="j-entries" id="j-list-drawer"></div>
+</div>
+
+<div id="toast"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+/* ── ANTI-COPY ── */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('copy',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&['c','u','p','s'].includes(e.key.toLowerCase()))e.preventDefault();});
+
+/* ── BASE & PROGRESS ── */
+const BASE=(location.hostname==='localhost'||location.hostname==='127.0.0.1')?'':'/HomePageAppliValeur/';
+const MODULES_LETTERS=['M0','V','A','L','E','U','R'];
+const DONE_KEYS=['module0_complete','module1_complete','module2_complete','module3_complete','module4_complete','module5_complete','module6_complete'];
+function getP(){try{return JSON.parse(localStorage.getItem('valeur_progress'))||{};}catch(e){return{};}}
+function markDone(k){const p=getP();p[k]=true;localStorage.setItem('valeur_progress',JSON.stringify(p));}
+function renderProgress(){
+  const p=getP();
+  const steps=document.getElementById('pb-steps');
+  if(!steps)return;
+  steps.innerHTML=MODULES_LETTERS.map((l,i)=>{
+    const k=DONE_KEYS[i];const d=p[k];const active=i===2&&!d&&p[DONE_KEYS[1]];
+    return '<div class="pb-step'+(d?' done':active?' active':'')+'"><span class="pb-letter">'+l+'</span></div>';
+  }).join('');
+  const total=DONE_KEYS.filter(k=>p[k]).length;
+  document.getElementById('pb-pct').textContent=Math.round(total/7*100)+'%';
+}
+
+/* ── SCROLL ── */
+const allSections=document.querySelectorAll('.section');
+const dots=document.querySelectorAll('.dot');
+function onScroll(){
+  const sc=window.scrollY;const h=document.body.scrollHeight-window.innerHeight;
+  document.getElementById('scroll-line').style.width=(h>0?sc/h*100:0)+'%';
+  let active=0;
+  allSections.forEach((s,i)=>{
+    if(s.getBoundingClientRect().top<window.innerHeight*.8)s.classList.add('visible');
+    if(s.getBoundingClientRect().top<=window.innerHeight*.5)active=i;
+  });
+  dots.forEach((d,i)=>d.classList.toggle('active',i===active));
+}
+window.addEventListener('scroll',onScroll,{passive:true});
+dots.forEach(d=>d.addEventListener('click',()=>{const s=document.querySelector('[data-s="'+d.dataset.section+'"]');if(s)s.scrollIntoView({behavior:'smooth',block:'start'});}));
+
+/* ── PROCESSUS ÉMOTIONNEL FRISE ── */
+let pfDone=[];
+function showPfDetail(i){
+  document.querySelectorAll('.pf-detail').forEach(d=>d.classList.remove('show'));
+  const el=document.getElementById('pfd'+i);if(el)el.classList.add('show');
+  document.querySelectorAll('.pf-circle').forEach((c,j)=>{c.style.transform=j===i?'scale(1.15)':'scale(1)';});
+  if(!pfDone.includes(i))pfDone.push(i);
+  if(pfDone.length>=4)document.getElementById('timing-bar').style.display='block';
+}
+
+/* ── VRAI/FAUX ── */
+const VF_ANSWERS={0:'false'};
+function answerVF(idx,ans){
+  const btns=document.querySelectorAll('#vf'+idx+' .vf-btn');
+  btns.forEach(b=>b.disabled=true);
+  const correct=VF_ANSWERS[idx];
+  btns.forEach(b=>{
+    if(b.classList.contains('vf-'+correct))b.classList.add('correct');
+    else if(b.classList.contains('vf-'+ans)&&ans!==correct)b.classList.add('wrong');
+  });
+  const r=document.getElementById('vfr'+idx);if(r)r.classList.add('show');
+}
+
+/* ── BALLON ── */
+function setBalloon(mode){
+  const btabR=document.getElementById('btab-resist');
+  const btabA=document.getElementById('btab-accept');
+  const wrap=document.getElementById('balloon-wrap');
+  const caption=document.getElementById('balloon-caption');
+  const hand=document.getElementById('hand-hold');
+  if(mode==='resist'){
+    btabR.className='btab active-r';btabA.className='btab';
+    wrap.classList.remove('released');
+    wrap.style.bottom='20px';wrap.style.top='auto';
+    caption.textContent="L\u2019\u00e9motion essaie de passer \u2014 la main la repousse";
+    hand.textContent='\u270a';
+    document.getElementById('balloon-body').style.animationPlayState='running';
+  } else {
+    btabR.className='btab';btabA.className='btab active-g';
+    caption.textContent="L\u2019\u00e9motion est lib\u00e9r\u00e9e \u2014 elle passe et se dissipe";
+    hand.textContent='\u270b';
+    wrap.classList.add('released');
+    setTimeout(()=>{
+      if(mode==='accept'){wrap.style.bottom='auto';wrap.style.top='-20px';}
+    },1300);
+  }
+}
+
+/* ── FENÊTRE DE TOLÉRANCE ── */
+function toggleTW(zone){
+  ['hyper','optimal','hypo'].forEach(z=>{
+    const el=document.getElementById('twz-'+z);
+    if(z===zone)el.classList.toggle('open');
+    else el.classList.remove('open');
+  });
+}
+const TW_MESSAGES={
+  hyper:"Vous êtes en zone rouge \u2014 votre syst\u00e8me nerveux est en suractivation. Avant d\u2019accueillir quoi que ce soit, commencez par la coh\u00e9rence cardiaque (section suivante). 2 minutes de 5\u20135 suffisent pour commencer \u00e0 revenir dans votre fen\u00eatre.",
+  optimal:"Vous \u00eates dans votre fen\u00eatre de tol\u00e9rance \u2014 c\u2019est le meilleur moment pour pratiquer l\u2019accueil. Profitez de cet espace pour travailler avec les \u00e9motions qui \u00e9mergent naturellement. C\u2019est ici que la transformation devient possible.",
+  hypo:"Vous \u00eates en zone bleue \u2014 votre syst\u00e8me est en sous-activation ou gel. \u00c9viter de s\u2019analyser depuis cet \u00e9tat. Ce dont vous avez besoin : mouvement doux (marche, \u00e9tirement), stimulation sensorielle douce (eau fra\u00eeche, musique), contact social bienveillant."
+};
+function locateTW(zone){
+  const r=document.getElementById('tw-loc-result');
+  r.textContent=TW_MESSAGES[zone];
+  r.className='tw-loc-result show';
+  const colors={hyper:'rgba(229,62,62,.08)',optimal:'rgba(56,161,105,.08)',hypo:'rgba(49,130,206,.08)'};
+  const bcolors={hyper:'rgba(229,62,62,.2)',optimal:'rgba(56,161,105,.2)',hypo:'rgba(49,130,206,.2)'};
+  r.style.background=colors[zone];r.style.borderColor=bcolors[zone];r.style.border='1px solid '+bcolors[zone];
+}
+
+/* ── QUIZ ÉMOTIONS (mini) ── */
+const EQ_CORRECT=['anxiete','colere','culpa'];
+const EQ_FEEDBACK=[
+  "\u2713 Anxi\u00e9t\u00e9 \u2014 l\u2019attente sans r\u00e9ponse active la peur de l\u2019inconnu et la catastrophisation. Message cach\u00e9 : besoin de s\u00e9curit\u00e9 et d\u2019information. Masques concern\u00e9s : Jaune, Vert, Indigo.",
+  "\u2713 Col\u00e8re \u2014 chaleur, tension, envie de r\u00e9agir. Une limite a \u00e9t\u00e9 franchie. Message cach\u00e9 : besoin de reconnaissance et de justice. L\u2019action juste : nommer ce qui s\u2019est pass\u00e9, exprimer clairement.",
+  "\u2713 Culpabilit\u00e9 \u2014 la rumination sur quelque chose qu\u2019on a fait est la signature de la culpabilit\u00e9. Message : un besoin de coh\u00e9rence et de r\u00e9paration. L\u2019action juste : s\u2019excuser si possible, puis se pardonner."
+];
+let eqDone=[];
+function answerEQ(el,idx,ans){
+  if(eqDone.includes(idx))return;eqDone.push(idx);
+  const row=el.closest('div').querySelectorAll('.eq-opt');
+  row.forEach(b=>b.style.pointerEvents='none');
+  if(ans===EQ_CORRECT[idx])el.classList.add('correct');else el.classList.add('wrong');
+  const fback=document.getElementById('eqf'+idx);
+  fback.textContent=EQ_FEEDBACK[idx];fback.classList.add('show');
+}
+
+/* ── SCÉNARIOS RÉSISTANCE ── */
+const SC_CORRECT=['evitement','diversion','intellectualisation'];
+function answerScenario(el,idx,ans){
+  if(el.classList.contains('correct')||el.classList.contains('wrong'))return;
+  const siblings=el.closest('.sc-choices').querySelectorAll('.sc-choice');
+  siblings.forEach(b=>b.style.pointerEvents='none');
+  if(ans===SC_CORRECT[idx])el.classList.add('correct');else el.classList.add('wrong');
+  const r=document.getElementById('scr'+idx);if(r)r.classList.add('show');
+}
+
+/* ── COHÉRENCE CARDIAQUE ── */
+let ccRunning=false,ccInterval=null,ccPhase='',ccSec=300,ccCycle=0;
+const ccOrb=()=>document.getElementById('cc-orb');
+function toggleCC(){
+  if(ccRunning){
+    clearInterval(ccInterval);ccRunning=false;
+    document.getElementById('btn-cc').textContent='\u25b6 Reprendre la coh\u00e9rence cardiaque';
+    document.getElementById('cc-phase').textContent='En pause \u2014 appuyez pour reprendre';
+  } else {
+    ccRunning=true;
+    document.getElementById('btn-cc').textContent='\u23f8 Pause';
+    startCCCycle();
+    ccInterval=setInterval(ccTick,1000);
+  }
+}
+let ccPhaseSec=0,ccPhaseDir='inhale';
+function startCCCycle(){
+  ccPhaseDir='inhale';ccPhaseSec=5;
+  setOrbPhase('inhale');
+  document.getElementById('cc-phase').textContent='Inspirez \u2026 ('+ccPhaseSec+')';
+}
+function setOrbPhase(phase){
+  const orb=document.getElementById('cc-orb');
+  orb.className='cc-orb '+phase;
+}
+function ccTick(){
+  ccSec=Math.max(0,ccSec-1);
+  const m=Math.floor(ccSec/60),s=ccSec%60;
+  document.getElementById('cc-timer').textContent=m+':'+(s<10?'0':'')+s;
+  ccPhaseSec--;
+  if(ccPhaseSec<=0){
+    if(ccPhaseDir==='inhale'){ccPhaseDir='exhale';ccPhaseSec=5;setOrbPhase('exhale');}
+    else{ccPhaseDir='inhale';ccPhaseSec=5;ccCycle++;setOrbPhase('inhale');document.getElementById('cc-count').textContent=ccCycle+' cycle'+(ccCycle>1?'s':'')+' / 30';}
+  }
+  const label=ccPhaseDir==='inhale'?'Inspirez \u2026 ('+ccPhaseSec+')':'Expirez \u2026 ('+ccPhaseSec+')';
+  document.getElementById('cc-phase').textContent=label;
+  if(ccSec<=0){
+    clearInterval(ccInterval);ccRunning=false;
+    document.getElementById('btn-cc').style.display='none';
+    document.getElementById('cc-complete').style.display='block';
+    document.getElementById('cc-phase').textContent='\u2713 Exercice termin\u00e9 \u2014 bien jou\u00e9';
+    document.getElementById('cc-timer').textContent='0:00';
+    setOrbPhase('');
+    showToast('\u2726 Coh\u00e9rence cardiaque compl\u00e9t\u00e9e \u2014 syst\u00e8me nerveux r\u00e9gul\u00e9');
+  }
+}
+
+/* ── STEPPER ── */
+function toggleStepper(el){
+  const was=el.classList.contains('active');
+  document.querySelectorAll('.st-step').forEach(s=>s.classList.remove('active'));
+  if(!was)el.classList.add('active');
+}
+
+/* ── QUIZ FINAL ── */
+const QZ=[
+  {q:"Accueillir une \u00e9motion, selon la m\u00e9thode V.A.L.E.U.R\u00a9, signifie :",opts:[
+    {t:"Approuver ce qu\u2019on ressent et trouver \u00e7a positif",ok:false,exp:"Accueillir n\u2019est pas approuver. L\u2019accueil est une posture neutre \u2014 ni combat, ni validation. L\u2019\u00e9motion peut \u00eatre d\u00e9sagr\u00e9able et \u00eatre accueillie."},
+    {t:"Laisser l\u2019\u00e9motion exister sans lui ajouter la couche de r\u00e9sistance",ok:true,exp:"Exact. C\u2019est la r\u00e9duction du r\u00b2 dans la formule D = e \u00d7 r\u00b2. L\u2019\u00e9motion initiale reste la m\u00eame \u2014 mais la souffrance qui en d\u00e9coule diminue drastiquement."},
+    {t:"Supprimer l\u2019\u00e9motion par la respiration",ok:false,exp:"La cohrence cardiaque ne supprime pas l\u2019\u00e9motion \u2014 elle r\u00e9gule le syst\u00e8me nerveux pour qu\u2019accueillir devienne possible."},
+    {t:"Ignorer ce qu\u2019on ressent et se concentrer sur l\u2019action",ok:false,exp:"C\u2019est exactement la strat\u00e9gie de l\u2019\u00e9vitement. Ignorer revient \u00e0 enfoncer le ballon sous l\u2019eau \u2014 il reviendra avec plus de force."}
+  ]},
+  {q:"Dans la formule D = e \u00d7 r\u00b2, qu\u2019est-ce qui fait vraiment grossir la souffrance ?",opts:[
+    {t:"L\u2019intensit\u00e9 de l\u2019\u00e9motion initiale",ok:false,exp:"L\u2019\u00e9motion (e) fait partie de la formule \u2014 mais elle est multipli\u00e9e par le carr\u00e9 de la r\u00e9sistance. M\u00eame une petite \u00e9motion peut devenir \u00e9norme si la r\u00e9sistance est forte."},
+    {t:"La r\u00e9sistance \u2014 parce qu\u2019elle est au carr\u00e9",ok:true,exp:"Exact. r\u00b2 signifie que la r\u00e9sistance se multiplie elle-m\u00eame. Une r\u00e9sistance de 5 cr\u00e9e 25 fois la souffrance \u2014 ind\u00e9pendamment de l\u2019\u00e9motion de base. C\u2019est pour \u00e7a qu\u2019accueillir change tout."},
+    {t:"La dur\u00e9e pendant laquelle on ressent l\u2019\u00e9motion",ok:false,exp:"La dur\u00e9e est le r\u00e9sultat (D) \u2014 pas la cause. C\u2019est pr\u00e9cis\u00e9ment ce qu\u2019on cherche \u00e0 r\u00e9duire en diminuant la r\u00e9sistance."},
+    {t:"L\u2019intensit\u00e9 du d\u00e9clencheur ext\u00e9rieur",ok:false,exp:"Le d\u00e9clencheur ext\u00e9rieur n\u2019est pas dans la formule. Deux personnes face au m\u00eame d\u00e9clencheur peuvent avoir des souffrances radicalement diff\u00e9rentes selon leur niveau de r\u00e9sistance."}
+  ]},
+  {q:"La fen\u00eatre de tol\u00e9rance est la zone dans laquelle :",opts:[
+    {t:"On ne ressent plus aucune \u00e9motion difficile",ok:false,exp:"La fen\u00eatre de tol\u00e9rance ne supprime pas les \u00e9motions. Elle permet de les traverser sans \u00eatre submerg\u00e9\u00b7e."},
+    {t:"Le syst\u00e8me nerveux est r\u00e9gul\u00e9 et l\u2019accueil devient possible",ok:true,exp:"Exact. Dans la zone verte, le cortex pr\u00e9frontal peut fonctionner, on peut penser, ressentir et accueillir. C\u2019est pour \u00e7a que la coh\u00e9rence cardiaque pr\u00e9c\u00e8de toujours le protocole d\u2019accueil."},
+    {t:"On peut enfin \u00e9viter toutes les situations stressantes",ok:false,exp:"L\u2019\u00e9vitement est une strat\u00e9gie de r\u00e9sistance du masque \u2014 pas une solution. La fen\u00eatre de tol\u00e9rance est l\u2019\u00e9tat interne qui permet d\u2019y faire face."},
+    {t:"Les masques ne s\u2019activent plus jamais",ok:false,exp:"Les masques continuent de s\u2019activer \u2014 c\u2019est biologique. Mais depuis la fen\u00eatre de tol\u00e9rance, on peut les voir, les accueillir, et choisir comment r\u00e9pondre."}
+  ]},
+  {q:"Quelle est la premi\u00e8re \u00e9tape du protocole d\u2019accueil ?",opts:[
+    {t:"Identifier le besoin cach\u00e9 derri\u00e8re l\u2019\u00e9motion",ok:false,exp:"Identifier le besoin est l\u2019\u00e9tape 3 \u2014 l\u2019\u00e9tape transformatrice. Mais avant d\u2019y arriver, il faut d\u2019abord pouvoir nommer et localiser ce qu\u2019on ressent."},
+    {t:"Changer de situation pour ne plus ressentir l\u2019\u00e9motion",ok:false,exp:"Changer de situation est souvent de l\u2019\u00e9vitement \u2014 une strat\u00e9gie de r\u00e9sistance du masque. Le protocole travaille avec l\u2019\u00e9motion pr\u00e9sente, pas contre elle."},
+    {t:"Pause et nommer \u2014 \"Je remarque de la []\u00e9motion en moi\"",ok:true,exp:"Exact. Nommer cr\u00e9e imm\u00e9diatement la distance observatrice. Cette formulation active le cortex pr\u00e9frontal et r\u00e9duit l\u2019activit\u00e9 de l\u2019amygdale \u2014 en quelques secondes, quelque chose change d\u00e9j\u00e0."},
+    {t:"Analyser pourquoi on ressent cette \u00e9motion",ok:false,exp:"L\u2019analyse est l\u2019intellectualisation \u2014 une strat\u00e9gie de r\u00e9sistance classique. La premi\u00e8re \u00e9tape est de nommer et ressentir, pas d\u2019analyser."}
+  ]}
+];
+let qzIdx=0,qzScore=0,qzAnswered=false;
+function renderQZ(){
+  const q=QZ[qzIdx];
+  document.getElementById('qz-num').textContent='Question '+(qzIdx+1)+' / '+QZ.length;
+  document.getElementById('qz-text').textContent=q.q;
+  document.getElementById('qzpb').style.width=(qzIdx/QZ.length*100)+'%';
+  document.getElementById('qz-expl').className='qz-expl';
+  document.getElementById('qz-next').className='qz-next';
+  qzAnswered=false;
+  document.getElementById('qz-opts').innerHTML=q.opts.map((o,i)=>'<button class="qz-opt" onclick="answerQZ('+i+')">'+o.t+'</button>').join('');
+}
+function answerQZ(i){
+  if(qzAnswered)return;qzAnswered=true;
+  const q=QZ[qzIdx];
+  document.querySelectorAll('.qz-opt').forEach((b,j)=>{b.style.pointerEvents='none';if(q.opts[j].ok)b.classList.add('correct');else if(j===i&&!q.opts[i].ok)b.classList.add('wrong');});
+  const expl=document.getElementById('qz-expl');
+  expl.textContent=(q.opts[i].ok?'\u2713 ':'\u2717 ')+q.opts[i].exp;expl.classList.add('show');
+  if(q.opts[i].ok)qzScore++;
+  document.getElementById('qz-next').classList.add('show');
+}
+function nextQZ(){
+  qzIdx++;
+  if(qzIdx<QZ.length){renderQZ();}
+  else{
+    document.getElementById('qz-card').style.display='none';
+    const sc=document.getElementById('qz-score');sc.classList.add('show');
+    document.getElementById('score-big').textContent=qzScore+'/4';
+    const msgs=[
+      'Prenez le temps de relire les sections \u2014 l\u2019accueil est un concept qui demande un peu de temps pour s\u2019installer.',
+      'Bonne base. Encore quelques r\u00e9visions et ce protocole deviendra naturel.',
+      'Tr\u00e8s bien jou\u00e9 \u2014 ou bravo parfait ! La compr\u00e9hension est l\u00e0. Il ne reste plus qu\u2019\u00e0 pratiquer. \ud83d\udfe1',
+      "Parfait. Vous avez compris l\u2019essentiel d\u2019ACCUEILLIR. La prochaine \u00e9tape : LOCALISER dans le corps \u2014 le module qui suit."
+    ];
+    document.getElementById('score-msg').textContent=msgs[Math.min(qzScore,3)];
+    document.getElementById('qzpb').style.width='100%';
+  }
+}
+function restartQZ(){qzIdx=0;qzScore=0;qzAnswered=false;document.getElementById('qz-card').style.display='block';document.getElementById('qz-score').classList.remove('show');renderQZ();}
+
+/* ── JOURNAL V3 ── */
+const JV3='VALEUR_journal_v3';
+function getJournalV3(){try{return JSON.parse(localStorage.getItem(JV3))||[];}catch(e){return[];}}
+function saveJournalV3arr(arr){try{localStorage.setItem(JV3,JSON.stringify(arr));}catch(e){}}
+
+function toggleMemo(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
+
+function saveJournalV3(){
+  const q1=document.getElementById('jm-q1-m2')?.value.trim()||'';
+  const q2=document.getElementById('jm-q2-m2')?.value.trim()||'';
+  const q3=document.getElementById('jm-q3-m2')?.value.trim()||'';
+  const libre=document.getElementById('jm-libre-m2')?.value.trim()||'';
+  const masque=localStorage.getItem('valeur_dominant_masque')||'';
+  const arr=getJournalV3();
+  const idx=arr.findIndex(e=>e.module===2);
+  const entry={
+    module:2,module_name:'ACCUEILLIR',
+    date:new Date().toISOString(),
+    masque_dominant:masque,
+    reponses:[
+      {question:"L\u2019\u00e9motion que j\u2019\u00e9vite le plus dans ma vie\u2026",reponse:q1},
+      {question:"Le besoin cach\u00e9 derri\u00e8re cette \u00e9motion\u2026",reponse:q2},
+      {question:"Mon protocole STOP \u2014 la derni\u00e8re fois que je l\u2019ai appliqu\u00e9\u2026",reponse:q3}
+    ],
+    reflexion_libre:libre
+  };
+  if(idx>=0)arr[idx]=entry;else arr.push(entry);
+  saveJournalV3arr(arr);
+  try{
+    const v2=JSON.parse(localStorage.getItem('valeur_journal_v2'))||[];
+    v2.unshift({date:entry.date,text:(q1+'\n'+q2+'\n'+q3+'\n'+libre).trim(),module:'Module 2 \u2014 ACCUEILLIR'});
+    localStorage.setItem('valeur_journal_v2',JSON.stringify(v2.slice(0,30)));
+  }catch(e){}
+  const saved=document.getElementById('jm-saved-m2');
+  if(saved){saved.classList.add('show');setTimeout(()=>saved.classList.remove('show'),4000);}
+  showToast('\u270D\uFE0F Journal Module 2 sauvegard\u00e9');
+}
+
+function prefillJournalV3(){
+  const arr=getJournalV3();
+  const entry=arr.find(e=>e.module===2);
+  if(!entry)return;
+  const q1=document.getElementById('jm-q1-m2');
+  const q2=document.getElementById('jm-q2-m2');
+  const q3=document.getElementById('jm-q3-m2');
+  const libre=document.getElementById('jm-libre-m2');
+  if(q1&&entry.reponses[0])q1.value=entry.reponses[0].reponse||'';
+  if(q2&&entry.reponses[1])q2.value=entry.reponses[1].reponse||'';
+  if(q3&&entry.reponses[2])q3.value=entry.reponses[2].reponse||'';
+  if(libre)libre.value=entry.reflexion_libre||'';
+}
+
+/* ── COMPLETE ── */
+function completeModule(){
+  saveJournalV3();
+  markDone('module2_complete');renderProgress();
+  document.getElementById('unlock-preview').classList.add('show');
+  launchConfetti();
+  showToast('\uD83C\uDF89 Module 2 compl\u00e9t\u00e9\u00a0! LOCALISER \uD83D\uDFE1 d\u00e9bloqu\u00e9\u00a0!');
+  setTimeout(()=>{
+    const s8=document.getElementById('s8');if(s8)s8.scrollIntoView({behavior:'smooth',block:'start'});
+  },1200);
+  setTimeout(()=>{
+    if(confirm('Excellent\u00b7e\u00a0! Passer au Module 3 \u2014 LOCALISER maintenant\u00a0?')){window.location.href='module3.html';}
+  },4000);
+}
+
+/* ── TOAST ── */
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3500);}
+
+/* ── JOURNAL DRAWER ── */
+function toggleJournal(){
+  const o=document.getElementById('journal-overlay'),d=document.getElementById('journal-drawer');
+  if(d.classList.contains('open')){closeJournal();}
+  else{o.classList.add('open');d.classList.add('open');document.getElementById('j-date').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});document.getElementById('journal-textarea').focus();}
+}
+function closeJournal(){document.getElementById('journal-overlay').classList.remove('open');document.getElementById('journal-drawer').classList.remove('open');}
+function saveEntry(){
+  const ta=document.getElementById('journal-textarea');const text=ta.value.trim();if(!text)return;
+  try{const v2=JSON.parse(localStorage.getItem('valeur_journal_v2'))||[];v2.unshift({date:new Date().toISOString(),text,module:'Module 2 \u2014 ACCUEILLIR'});localStorage.setItem('valeur_journal_v2',JSON.stringify(v2.slice(0,30)));}catch(e){}
+  ta.value='';showToast('\u270d\ufe0f Note sauvegard\u00e9e');
+}
+
+/* ── CONFETTI ── */
+const canvas=document.getElementById('confetti-canvas');const ctx=canvas.getContext('2d');let particles=[];
+const COLORS=['#E53E3E','#ED8936','#D69E2E','#38A169','#3182CE','#5A67D8','#805AD5','#C9A84C','#F0D080'];
+function launchConfetti(){
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  particles=Array.from({length:180},()=>({x:Math.random()*canvas.width,y:Math.random()*-canvas.height*.3,vx:(Math.random()-.5)*4,vy:Math.random()*4+2,r:Math.random()*7+3,color:COLORS[Math.floor(Math.random()*COLORS.length)],spin:Math.random()*Math.PI*2,spinV:(Math.random()-.5)*.3,shape:Math.random()>.5?'rect':'circle',opacity:1}));
+  animateConfetti();
+}
+function animateConfetti(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);let alive=false;
+  particles.forEach(p=>{
+    if(p.y>canvas.height+20)return;alive=true;p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.vx*=.99;p.spin+=p.spinV;p.opacity=Math.max(0,1-p.y/canvas.height);
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.spin);ctx.globalAlpha=p.opacity;ctx.fillStyle=p.color;
+    if(p.shape==='rect')ctx.fillRect(-p.r/2,-p.r*1.8,p.r,p.r*2);else{ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();}
+    ctx.restore();
+  });
+  if(alive)requestAnimationFrame(animateConfetti);else ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+document.addEventListener('DOMContentLoaded',()=>{
+  renderProgress();
+  renderQZ();
+  onScroll();
+  setTimeout(onScroll,100);
+  setBalloon('resist');
+  prefillJournalV3();
+  // Ouvrir stepper 1 par défaut
+  const st=document.querySelector('.st-step');if(st)st.classList.add('active');
+});
+</script>
+</body>
+</html>

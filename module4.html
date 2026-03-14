@@ -1,0 +1,1203 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Module 4 — Explorer · V.A.L.E.U.R©</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --gold:#C9A84C;--gold-light:#F0D080;--gold-glow:rgba(201,168,76,.22);
+  --navy:#070D1A;--navy2:#0D1526;--navy3:#131F35;--navy4:#1A2845;
+  --glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);
+  --text:#F2EDE6;--muted:#8A9BB5;--text2:#C8D6E8;
+  --green:#38A169;--green-light:#68D391;--green-glow:rgba(56,161,105,.25);
+  --red:#E53E3E;--orange:#ED8936;--yellow:#D69E2E;
+  --blue:#3182CE;--indigo:#5A67D8;--violet:#805AD5;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--navy);color:var(--text);
+  font-family:'Jost',sans-serif;font-weight:300;
+  overflow-x:hidden;
+  -webkit-user-select:none;-moz-user-select:none;user-select:none;
+}
+
+/* ── SCROLL LINE ── */
+/* ── PROGRESS BAR ── */
+#progress-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,13,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(56,161,105,.15);padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.pb-back{display:flex;align-items:center;gap:6px;background:var(--glass);border:1px solid var(--gb);border-radius:8px;padding:6px 12px;color:var(--muted);font-size:12px;letter-spacing:.5px;text-decoration:none;transition:all .3s;white-space:nowrap;flex-shrink:0;}
+.pb-back:hover{border-color:var(--green-light);color:var(--green-light);}
+.pb-steps{display:flex;gap:6px;flex:1;align-items:center;}
+.pb-step{flex:1;height:30px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .5s cubic-bezier(.34,1.56,.64,1);}
+.pb-step.done{background:linear-gradient(135deg,var(--gold),var(--gold-light));border-color:var(--gold-light);cursor:pointer;}
+.pb-step.active{background:rgba(56,161,105,.1);border-color:var(--green-light);animation:pb-pulse 2.5s ease-in-out infinite;}
+@keyframes pb-pulse{0%,100%{box-shadow:0 0 0 0 rgba(56,161,105,.3);}50%{box-shadow:0 0 0 4px rgba(56,161,105,0);}}
+.pb-letter{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--muted);}
+.pb-step.done .pb-letter{color:#070D1A;}
+.pb-step.active .pb-letter{color:var(--green-light);}
+.pb-pct{font-size:13px;font-weight:700;color:var(--gold);min-width:36px;text-align:right;}
+@media(max-width:480px){.pb-letter{font-size:9px;}.pb-step{height:24px;}#progress-bar{padding:8px 12px;gap:8px;}.pb-back span{display:none;}}
+/* ── AURORA ── */
+.aurora{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.orb{position:absolute;border-radius:50%;filter:blur(120px);opacity:.18;animation:drift 18s ease-in-out infinite}
+.orb1{width:700px;height:700px;background:var(--violet);top:-200px;left:-200px;animation-delay:0s}
+.orb2{width:600px;height:600px;background:var(--blue);bottom:-150px;right:-150px;animation-delay:-6s}
+.orb3{width:500px;height:500px;background:var(--green);top:40%;left:40%;animation-delay:-12s}
+@keyframes drift{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(60px,-40px) scale(1.1)}66%{transform:translate(-40px,60px) scale(.9)}}
+
+/* ── DOT NAV ── */
+#dot-nav{position:fixed;right:20px;top:50%;transform:translateY(-50%);z-index:900;display:flex;flex-direction:column;gap:10px}
+.dot{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(255,255,255,.3);background:transparent;cursor:pointer;transition:all .3s;position:relative}
+.dot.active{background:var(--green);border-color:var(--green);box-shadow:0 0 10px var(--green-glow)}
+.dot:hover::after{content:attr(data-label);position:absolute;right:20px;top:50%;transform:translateY(-50%);background:rgba(13,21,38,.95);color:var(--text);font-size:.7rem;white-space:nowrap;padding:4px 10px;border-radius:6px;border:1px solid var(--gb);pointer-events:none}
+@media(max-width:768px){#dot-nav{display:none}}
+
+/* ── SECTIONS ── */
+section{
+  min-height:100vh;padding:80px 20px 60px;
+  display:flex;flex-direction:column;position:relative;z-index:1;
+  opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;
+}
+section.visible{opacity:1;transform:translateY(0)}
+
+.container{width:100%;max-width:760px;margin:0 auto}
+
+/* ── GLASS CARD ── */
+.glass{
+  background:var(--glass);backdrop-filter:blur(20px);
+  border:1px solid var(--gb);border-radius:20px;padding:32px;
+  transition:transform .3s,box-shadow .3s;
+}
+.glass:hover{transform:translateY(-3px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+.glass-green{background:rgba(56,161,105,.08);border-color:rgba(56,161,105,.25)}
+.glass-gold{background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.3)}
+
+/* ── HERO ── */
+#s0{background:radial-gradient(ellipse at 30% 50%,rgba(56,161,105,.12) 0%,transparent 60%)}
+.module-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(56,161,105,.12);border:1px solid rgba(56,161,105,.35);
+  border-radius:30px;padding:8px 20px;margin-bottom:28px;
+  font-size:.75rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green-light);
+}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,9vw,6rem);font-weight:300;line-height:1;color:var(--text);margin-bottom:12px}
+.hero-title span{color:var(--green-light);font-style:italic}
+.hero-sub{font-size:1.05rem;color:var(--text2);max-width:560px;line-height:1.7;margin-bottom:32px}
+.hero-quote{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-size:1.2rem;
+  color:var(--green-light);border-left:3px solid var(--green);
+  padding:16px 24px;background:rgba(56,161,105,.07);border-radius:0 12px 12px 0;
+  max-width:560px;margin-bottom:36px;line-height:1.6;
+}
+.stats-row{display:flex;gap:20px;flex-wrap:wrap}
+.stat{text-align:center;background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:16px 24px}
+.stat-n{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--green-light)}
+.stat-l{font-size:.72rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;margin-top:2px}
+
+/* ── SECTION TITLES ── */
+.s-label{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:300;color:var(--text);margin-bottom:8px;line-height:1.2}
+.section-intro{color:var(--text2);line-height:1.75;margin-bottom:28px;font-size:.95rem}
+
+/* ── CONFLIT CARDS ── */
+.conflict-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:24px}
+@media(max-width:600px){.conflict-split{grid-template-columns:1fr}}
+.side-card{border-radius:16px;padding:24px}
+.side-masque{background:rgba(56,161,105,.08);border:1px solid rgba(56,161,105,.2)}
+.side-valeur{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25)}
+.side-icon{font-size:2rem;margin-bottom:10px}
+.side-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;margin-bottom:8px}
+.side-text{font-size:.85rem;color:var(--text2);line-height:1.6}
+.vs-badge{
+  display:flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--gold));
+  font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;
+  color:#fff;margin:0 auto 20px;box-shadow:0 0 20px var(--green-glow);
+}
+
+/* ── DIALOGUE 7 QUESTIONS ── */
+.dialogue-steps{display:flex;flex-direction:column;gap:0}
+.dialogue-step{
+  display:grid;grid-template-columns:48px 1fr;gap:0;align-items:start;
+  position:relative;
+}
+.dialogue-step:not(:last-child)::before{
+  content:'';position:absolute;left:23px;top:52px;bottom:0;width:2px;
+  background:linear-gradient(to bottom,rgba(56,161,105,.4),rgba(56,161,105,.1));
+}
+.step-bubble{
+  width:48px;height:48px;border-radius:50%;flex-shrink:0;
+  background:rgba(56,161,105,.15);border:2px solid rgba(56,161,105,.4);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:600;color:var(--green-light);
+  position:relative;z-index:1;
+}
+.step-content{padding:4px 0 32px 18px}
+.step-q{font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:var(--text);margin-bottom:6px;font-style:italic}
+.step-ex{font-size:.8rem;color:var(--text2);margin-bottom:10px;line-height:1.5;font-style:italic}
+.step-input{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid var(--gb);
+  border-radius:10px;padding:10px 14px;color:var(--text);font-family:'Jost',sans-serif;
+  font-size:.88rem;resize:vertical;min-height:56px;transition:border .3s;outline:none;
+}
+.step-input:focus{border-color:rgba(56,161,105,.5);background:rgba(56,161,105,.05)}
+
+/* ── 5 POURQUOI ── */
+.why-chain{display:flex;flex-direction:column;gap:0}
+.why-row{display:flex;align-items:flex-start;gap:12px;padding:12px 0}
+.why-row:not(:last-child){border-bottom:1px solid var(--gb)}
+.why-num{
+  min-width:32px;height:32px;border-radius:50%;
+  background:linear-gradient(135deg,var(--green),var(--green-light));
+  display:flex;align-items:center;justify-content:center;
+  font-size:.78rem;font-weight:600;color:#fff;flex-shrink:0;margin-top:4px;
+}
+.why-label{font-size:.82rem;color:var(--text2);margin-bottom:6px}
+.why-input{
+  width:100%;background:rgba(255,255,255,.04);border:1px solid var(--gb);
+  border-radius:8px;padding:8px 12px;color:var(--text);font-family:'Jost',sans-serif;
+  font-size:.85rem;outline:none;transition:border .3s;
+}
+.why-input:focus{border-color:rgba(56,161,105,.5);background:rgba(56,161,105,.05)}
+.why-arrow{color:var(--green);font-size:1.2rem;margin-top:22px;opacity:.6}
+
+/* ── COUT BÉNÉFICE ── */
+.cout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.cout-grid{grid-template-columns:1fr}}
+.cout-card{border-radius:14px;padding:20px}
+.cout-masque-av{background:rgba(56,161,105,.07);border:1px solid rgba(56,161,105,.2)}
+.cout-masque-in{background:rgba(229,62,62,.07);border:1px solid rgba(229,62,62,.2)}
+.cout-change-ga{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2)}
+.cout-change-ri{background:rgba(237,137,54,.07);border:1px solid rgba(237,137,54,.2)}
+.cout-head{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.cout-icon{font-size:1.2rem}
+.cout-title{font-size:.8rem;font-weight:500;letter-spacing:.08em;text-transform:uppercase}
+.cout-title.green{color:var(--green-light)}
+.cout-title.red{color:#FC8181}
+.cout-title.gold{color:var(--gold-light)}
+.cout-title.orange{color:#FBD38D}
+.cout-inputs{display:flex;flex-direction:column;gap:8px}
+.cout-input{
+  background:rgba(255,255,255,.04);border:1px solid var(--gb);
+  border-radius:8px;padding:8px 12px;color:var(--text);font-family:'Jost',sans-serif;
+  font-size:.83rem;outline:none;width:100%;transition:border .3s;
+}
+.cout-input:focus{border-color:rgba(56,161,105,.4);background:rgba(56,161,105,.04)}
+
+/* ── VALEURS ── */
+.values-intro{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:28px}
+@media(max-width:600px){.values-intro{grid-template-columns:1fr}}
+.test-val{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);border-radius:14px;padding:20px}
+.test-val-title{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--gold-light);margin-bottom:12px}
+.test-item{display:flex;align-items:flex-start;gap:8px;margin-bottom:8px}
+.test-bullet{width:6px;height:6px;border-radius:50%;background:var(--gold);flex-shrink:0;margin-top:6px}
+.test-text{font-size:.83rem;color:var(--text2);line-height:1.5}
+.test-yes{color:var(--green-light);font-weight:500}
+.values-grid{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.val-chip{
+  padding:7px 16px;border-radius:30px;border:1.5px solid rgba(255,255,255,.12);
+  font-size:.8rem;cursor:pointer;transition:all .25s;color:var(--muted);
+  background:transparent;user-select:none;
+}
+.val-chip:hover{border-color:rgba(56,161,105,.4);color:var(--text)}
+.val-chip.selected{background:rgba(56,161,105,.15);border-color:var(--green);color:var(--green-light);box-shadow:0 0 12px rgba(56,161,105,.2)}
+.my-values{margin-top:16px}
+.my-values-title{font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:12px}
+.my-values-display{
+  min-height:50px;border:1.5px dashed rgba(201,168,76,.3);border-radius:12px;
+  padding:12px 16px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;
+}
+.val-selected-badge{
+  padding:6px 14px;border-radius:20px;background:linear-gradient(135deg,rgba(56,161,105,.2),rgba(201,168,76,.15));
+  border:1px solid rgba(201,168,76,.35);font-size:.8rem;color:var(--gold-light);
+}
+.my-values-empty{font-size:.82rem;color:rgba(138,155,181,.4);font-style:italic}
+
+/* ── CONFLIT REVEAL ── */
+.conflict-reveal{
+  background:rgba(56,161,105,.06);border:1px solid rgba(56,161,105,.2);
+  border-radius:16px;padding:24px;margin-top:20px;
+}
+.cr-label{font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:10px}
+.cr-template{font-family:'Cormorant Garamond',serif;font-size:1.1rem;line-height:1.7;color:var(--text);font-style:italic}
+.cr-highlight{color:var(--green-light);font-weight:400}
+.cr-input{
+  width:100%;background:transparent;border:none;border-bottom:1px solid rgba(56,161,105,.3);
+  color:var(--green-light);font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;
+  outline:none;padding:4px 0;min-width:120px;
+}
+
+/* ── CHECKLIST ── */
+.checklist{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.check-item{display:flex;align-items:flex-start;gap:12px;cursor:pointer}
+.check-box{
+  width:22px;height:22px;border-radius:6px;flex-shrink:0;
+  border:1.5px solid rgba(56,161,105,.4);background:transparent;
+  display:flex;align-items:center;justify-content:center;transition:all .25s;margin-top:1px;
+}
+.check-item.checked .check-box{background:var(--green);border-color:var(--green)}
+.check-item.checked .check-box::after{content:'✓';color:#fff;font-size:.75rem;font-weight:700}
+.check-text{font-size:.88rem;color:var(--text2);line-height:1.5;transition:color .25s}
+.check-item.checked .check-text{color:var(--text);text-decoration:line-through;opacity:.6}
+
+/* ── BTN ── */
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:linear-gradient(135deg,var(--green),#2F855A);
+  border:none;border-radius:50px;padding:16px 36px;
+  color:#fff;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:500;
+  cursor:pointer;transition:all .3s;letter-spacing:.06em;
+  box-shadow:0 8px 30px rgba(56,161,105,.3);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 40px rgba(56,161,105,.4)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:transparent;border:1px solid rgba(56,161,105,.4);
+  border-radius:50px;padding:12px 28px;color:var(--green-light);
+  font-family:'Jost',sans-serif;font-size:.85rem;cursor:pointer;transition:all .3s;
+}
+.btn-secondary:hover{background:rgba(56,161,105,.1);border-color:var(--green)}
+
+/* ── JOURNAL FAB ── */
+#journal-fab{
+  position:fixed;bottom:28px;right:28px;z-index:800;
+  width:56px;height:56px;border-radius:50%;
+  background:linear-gradient(135deg,var(--gold),var(--gold-light));
+  border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:1.4rem;box-shadow:0 8px 25px rgba(201,168,76,.35);transition:all .3s;
+}
+#journal-fab:hover{transform:scale(1.08);box-shadow:0 12px 35px rgba(201,168,76,.5)}
+#journal-fab.active{border-radius:14px;width:auto;padding:0 20px;gap:8px;font-size:.85rem;color:var(--navy);font-family:'Jost',sans-serif;font-weight:600}
+
+/* ── JOURNAL PANEL ── */
+#journal-panel{
+  position:fixed;bottom:100px;right:28px;z-index:800;
+  width:min(420px,calc(100vw - 40px));
+  background:rgba(13,21,38,.97);backdrop-filter:blur(30px);
+  border:1px solid rgba(201,168,76,.25);border-radius:20px;padding:24px;
+  display:none;flex-direction:column;gap:16px;
+  box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+#journal-panel.open{display:flex}
+.jp-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold-light)}
+.jp-date{font-size:.72rem;color:var(--muted)}
+#journal-text{
+  background:rgba(255,255,255,.04);border:1px solid var(--gb);border-radius:12px;
+  padding:12px;color:var(--text);font-family:'Jost',sans-serif;font-size:.85rem;
+  resize:none;height:120px;outline:none;
+}
+.jp-footer{display:flex;gap:8px;justify-content:flex-end}
+
+/* ── TOAST ── */
+#toast{
+  position:fixed;bottom:100px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:rgba(56,161,105,.15);border:1px solid rgba(56,161,105,.4);
+  backdrop-filter:blur(20px);border-radius:30px;padding:12px 24px;
+  font-size:.85rem;color:var(--green-light);opacity:0;transition:all .4s;z-index:2000;
+  pointer-events:none;white-space:nowrap;
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ── CANVAS CONFETTI ── */
+#confetti-canvas{position:fixed;inset:0;pointer-events:none;z-index:9999;display:none}
+
+/* ── FINAL SECTION ── */
+.final-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:32px}
+@media(max-width:600px){.final-grid{grid-template-columns:1fr}}
+.final-card{background:var(--glass);border:1px solid var(--gb);border-radius:16px;padding:22px;text-align:center}
+.fc-icon{font-size:2rem;margin-bottom:10px}
+.fc-title{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--green-light);margin-bottom:6px}
+.fc-text{font-size:.8rem;color:var(--text2);line-height:1.5}
+
+/* ── NAV ARROWS ── */
+.nav-arrows{display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+
+/* ── ANTI-COPY ── */
+body::selection{background:transparent}
+
+/* ── COPYRIGHT FOOTER ── */
+.copyright-footer{
+  text-align:center;padding:8px;font-size:.65rem;color:rgba(138,155,181,.3);
+  letter-spacing:.1em;
+}
+
+/* ── RESPONSIVE ── */
+@media(max-width:600px){
+  .glass{padding:20px}
+  section{padding:70px 16px 50px}
+}
+
+/* ── BTN NEXT ── */
+.btn-next{display:flex;align-items:center;justify-content:center;gap:10px;margin:36px auto 0;width:100%;max-width:420px;background:linear-gradient(135deg,rgba(56,161,105,.12),rgba(56,161,105,.05));border:1px solid rgba(56,161,105,.3);border-radius:14px;padding:16px 28px;font-family:'Jost',sans-serif;font-size:.97rem;font-weight:500;color:var(--green-light);cursor:pointer;transition:all .4s cubic-bezier(.34,1.2,.64,1);}
+.btn-next:hover{background:rgba(56,161,105,.18);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 24px rgba(56,161,105,.2);}
+.btn-next .bn-arrow{transition:transform .3s;font-size:1.1rem;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+/* ── JOURNAL MODULE ── */
+.journal-module{margin:40px 0 0;border-radius:22px;overflow:hidden;border:1px solid rgba(56,161,105,.2);background:rgba(255,255,255,.02);}
+.jm-header{background:linear-gradient(135deg,rgba(56,161,105,.08),rgba(56,161,105,.03));border-bottom:1px solid rgba(56,161,105,.12);padding:22px 28px;display:flex;align-items:center;gap:14px;}
+.jm-header-icon{font-size:1.5rem;}
+.jm-header-text h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:var(--text);margin-bottom:3px;}
+.jm-header-text p{font-size:.8rem;color:var(--muted);letter-spacing:.5px;}
+.jm-memo{border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-memo-toggle{width:100%;background:none;border:none;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;color:var(--text2);letter-spacing:.5px;text-align:left;}
+.jm-memo-toggle span{display:flex;align-items:center;gap:10px;}
+.jm-memo-chevron{font-size:.75rem;color:var(--muted);transition:transform .3s;}
+.jm-memo.open .jm-memo-chevron{transform:rotate(180deg);}
+.jm-memo-body{display:none;padding:0 28px 22px;}
+.jm-memo.open .jm-memo-body{display:block;}
+.jm-memo-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.jm-memo-item:last-child{border-bottom:none;}
+.jm-memo-num{width:26px;height:26px;border-radius:50%;background:rgba(56,161,105,.1);border:1px solid rgba(56,161,105,.2);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--green-light);flex-shrink:0;}
+.jm-memo-text{font-size:.88rem;color:var(--text2);line-height:1.65;}
+.jm-memo-text strong{color:var(--text);}
+.jm-questions{padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-q-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--green-light);margin-bottom:18px;font-weight:600;}
+.jm-q-item{margin-bottom:18px;}
+.jm-q-item:last-child{margin-bottom:0;}
+.jm-q-text{font-size:.88rem;color:var(--text2);line-height:1.6;margin-bottom:8px;font-style:italic;}
+.jm-q-textarea{width:100%;min-height:72px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.6;}
+.jm-q-textarea:focus{border-color:rgba(56,161,105,.3);}
+.jm-q-textarea::placeholder{color:rgba(255,255,255,.18);}
+.jm-libre{padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-libre-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;}
+.jm-libre-textarea{width:100%;min-height:100px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.65;}
+.jm-libre-textarea:focus{border-color:rgba(201,168,76,.25);}
+.jm-libre-textarea::placeholder{color:rgba(255,255,255,.15);}
+.jm-actions{padding:20px 28px;display:flex;align-items:center;gap:12px;}
+.jm-save-btn{flex:1;background:linear-gradient(135deg,rgba(56,161,105,.15),rgba(56,161,105,.06));border:1px solid rgba(56,161,105,.3);border-radius:12px;padding:14px 20px;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:600;color:var(--green-light);cursor:pointer;transition:all .3s;}
+.jm-save-btn:hover{background:rgba(56,161,105,.22);}
+.jm-saved{display:none;padding:12px 28px 18px;font-size:.85rem;color:#4aab7a;background:rgba(74,171,122,.06);border-top:1px solid rgba(74,171,122,.15);}
+.jm-saved.show{display:flex;align-items:center;gap:8px;}
+
+/* ── HERO UNIFIED ── */
+.module-hero-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;padding:8px 18px;border-radius:100px;background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.25);}
+.mhb-dot{width:8px;height:8px;border-radius:50%;background:var(--gold, #C9A84C);box-shadow:0 0 8px rgba(201,168,76,.6);animation:glow-pulse 2s ease-in-out infinite;}
+@keyframes glow-pulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(201,168,76,.6);}50%{opacity:.6;box-shadow:0 0 14px rgba(201,168,76,.9);}}
+.mhb-text{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold,#C9A84C);font-weight:600;}
+.hero-big-letter{font-family:'Cormorant Garamond',serif;font-size:clamp(3.5rem,14vw,9rem);font-weight:300;color:transparent;background:linear-gradient(135deg,#C9A84C 0%,#F0D080 50%,#D4AF37 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;display:block;margin-bottom:8px;}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.5rem);font-weight:300;font-style:italic;color:var(--gold,#C9A84C);margin-bottom:20px;}
+.hero-meta-pill{display:flex;align-items:center;gap:7px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:100px;padding:7px 16px;font-size:.8rem;color:var(--muted);}
+.hero-meta-pill span{font-size:.9rem;}
+</style>
+</head>
+<body>
+
+<canvas id="confetti-canvas"></canvas>
+
+<!-- SCROLL LINE -->
+<!-- PROGRESS BAR -->
+<div id="progress-bar">
+  <a href="index.html" class="pb-back">← <span>Tableau de bord</span></a>
+  <div class="pb-steps" id="pb-steps"></div>
+
+
+  <span class="pb-pct" id="pb-pct">0%</span>
+</div>
+
+<!-- AURORA -->
+<div class="aurora">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<!-- DOT NAV -->
+<div id="dot-nav">
+  <div class="dot active" data-s="0" data-label="Accueil" onclick="goTo(0)"></div>
+  <div class="dot" data-s="1" data-label="Le conflit" onclick="goTo(1)"></div>
+  <div class="dot" data-s="2" data-label="Dialogue" onclick="goTo(2)"></div>
+  <div class="dot" data-s="3" data-label="5 Pourquoi" onclick="goTo(3)"></div>
+  <div class="dot" data-s="4" data-label="Coûts-Bénéfices" onclick="goTo(4)"></div>
+  <div class="dot" data-s="5" data-label="Mes Valeurs" onclick="goTo(5)"></div>
+  <div class="dot" data-s="6" data-label="Terminer" onclick="goTo(6)"></div>
+</div>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║   S0 — HERO                 ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section class="section" data-s="0" id="s0">
+  <div class="module-hero-badge" style="background:rgba(201,168,76,.08);border-color:rgba(201,168,76,.25);">
+    <span class="mhb-dot" style="background:#C9A84C;box-shadow:0 0 8px rgba(201,168,76,.6);"></span>
+    <span class="mhb-text" style="color:#C9A84C;">Module 4 · E comme EXPLORER</span>
+  </div>
+  <span class="hero-big-letter">EXPLORER</span>
+  <div class="hero-subtitle">"Je découvre ce que protège mon masque"</div>
+  <p class="s-lead">Votre masque n'est pas votre ennemi. C'est un gardien maladroit qui protège quelque chose de très précieux — une valeur profonde que vous n'osez pas exprimer. Explorer, c'est rencontrer ce gardien et comprendre ce qu'il surveille.</p>
+  <div class="hero-meta" style="display:flex;flex-wrap:wrap;gap:10px;margin:20px 0 24px;">
+      <div class="hero-meta-pill"><span>⏱</span> ~50 minutes</div>
+      <div class="hero-meta-pill"><span>🧩</span> 5 Pourquoi + Dialogue</div>
+      <div class="hero-meta-pill"><span>✦</span> Analyse valeurs</div>
+  </div>
+  <button class="btn-next" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})"><span>Le conflit intérieur</span><span class="bn-arrow">→</span></button>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║   S1 — LE CONFLIT           ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="s1">
+  <div class="container">
+    <p class="s-label">Le fondement</p>
+    <h2 class="s-title">Le masque protège une valeur précieuse</h2>
+    <p class="section-intro">Votre masque n&rsquo;est pas votre ennemi. C&rsquo;est un gardien maladroit qui protège quelque chose de très précieux&nbsp;: une valeur profonde que vous n&rsquo;osez pas exprimer.</p>
+
+    <div class="conflict-split">
+      <div class="side-card side-masque">
+        <div class="side-icon">🎭</div>
+        <div class="side-title" style="color:var(--green-light)">Le Masque</div>
+        <div class="side-text">Votre protection automatique. Il surveille, il anticipe les dangers, il vous garde &ldquo;en sécurité&rdquo;. Mais cette protection rigide vous empêche d&rsquo;être pleinement vous-même.</div>
+      </div>
+      <div class="side-card side-valeur">
+        <div class="side-icon">✨</div>
+        <div class="side-title" style="color:var(--gold-light)">Votre Valeur</div>
+        <div class="side-text">Ce qui compte vraiment pour vous, au-delà des attentes sociales. Votre boussole intérieure. Elle aspire à s&rsquo;exprimer — mais le masque lui barre la route.</div>
+      </div>
+    </div>
+
+    <div class="glass glass-green" style="margin-bottom:20px">
+      <div class="vs-badge">VS</div>
+      <p style="text-align:center;font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--text);font-style:italic;margin-bottom:12px">
+        &ldquo;Le masque veut me protéger — MAIS ma valeur veut s&rsquo;exprimer.&rdquo;
+      </p>
+      <p style="text-align:center;font-size:.85rem;color:var(--muted)">Ce conflit permanent <strong style="color:var(--text)">dépense votre énergie</strong> dans un combat intérieur. Explorer, c&rsquo;est enfin comprendre ce combat.</p>
+    </div>
+
+    <div class="glass glass-gold">
+      <p style="font-size:.72rem;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Exemple concret</p>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.05rem;line-height:1.7;color:var(--text);font-style:italic">
+        &ldquo;Mon masque <strong style="color:var(--green-light)">vert</strong> veut que je dise toujours oui pour éviter le rejet.<br>
+        Mais ma valeur <strong style="color:var(--gold-light)">d&rsquo;authenticité</strong> veut que j&rsquo;exprime mes vrais besoins.&rdquo;
+      </p>
+    </div>
+
+    <div style="margin-top:28px;display:flex;gap:12px">
+      <button class="btn-next" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})"><span>Le dialogue du masque</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║   S2 — DIALOGUE 7 QUESTIONS ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="s2">
+  <div class="container">
+    <p class="s-label">Exercice 1 · Dialogue du masque</p>
+    <h2 class="s-title">7 questions pour connaître votre masque</h2>
+    <p class="section-intro">Pas pour le juger. Pour le comprendre. Notez vos réponses spontanément, sans censure.</p>
+
+    <div class="glass">
+      <div class="dialogue-steps">
+
+        <div class="dialogue-step">
+          <div class="step-bubble">1</div>
+          <div class="step-content">
+            <div class="step-q">Identifier le masque</div>
+            <div class="step-ex">Ex&nbsp;: &ldquo;Je reconnais le masque VERT (peur du rejet)&rdquo;</div>
+            <textarea class="step-input" placeholder="Quel masque est actif en ce moment&#x00A0;?" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="dialogue-step">
+          <div class="step-bubble">2</div>
+          <div class="step-content">
+            <div class="step-q">Reconnaître le déclencheur</div>
+            <div class="step-ex">Ex&nbsp;: &ldquo;Mon partenaire n&rsquo;a pas répondu depuis 2h&rdquo;</div>
+            <textarea class="step-input" placeholder="Quelle situation a activé le masque&#x00A0;? (Soyez très précis·e)" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="dialogue-step">
+          <div class="step-bubble">3</div>
+          <div class="step-content">
+            <div class="step-q">Observer l&rsquo;automatisme</div>
+            <div class="step-ex">Ex&nbsp;: &ldquo;Mon réflexe&nbsp;: j&rsquo;appelle sans arrêt, je me dis qu&rsquo;il va me quitter&rdquo;</div>
+            <textarea class="step-input" placeholder="Quel est votre réflexe automatique dans cette situation&#x00A0;?" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="dialogue-step">
+          <div class="step-bubble">4</div>
+          <div class="step-content">
+            <div class="step-q">La peur sous-jacente</div>
+            <div class="step-ex">Observez le scénario catastrophe imaginaire. Ex&nbsp;: &ldquo;Qu&rsquo;il m&rsquo;abandonne&rdquo;</div>
+            <textarea class="step-input" placeholder="De QUOI avez-vous vraiment peur&#x00A0;? Quel est le scénario catastrophe&#x00A0;?" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="dialogue-step">
+          <div class="step-bubble">5</div>
+          <div class="step-content">
+            <div class="step-q">L&rsquo;origine de la peur</div>
+            <div class="step-ex">Ex&nbsp;: &ldquo;Quand j&rsquo;avais 8 ans, ma mère nous a quittés&rdquo;</div>
+            <textarea class="step-input" placeholder="Quand avez-vous appris cette peur pour la première fois&#x00A0;?" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="dialogue-step">
+          <div class="step-bubble">6</div>
+          <div class="step-content">
+            <div class="step-q">Le besoin réel</div>
+            <div class="step-ex">Ex&nbsp;: &ldquo;Besoin de sécurité affective, de savoir que je suis aimé·e&rdquo;</div>
+            <textarea class="step-input" placeholder="Qu&rsquo;est-ce que vous cherchez vraiment&#x00A0;? De quoi avez-vous réellement besoin&#x00A0;?" rows="2"></textarea>
+          </div>
+        </div>
+
+        <div class="dialogue-step">
+          <div class="step-bubble">7</div>
+          <div class="step-content">
+            <div class="step-q">La valeur en jeu</div>
+            <div class="step-ex">Ex&nbsp;: &ldquo;La valeur d&rsquo;authenticité — m&rsquo;exprimer sans peur d&rsquo;être abandonné·e&rdquo;</div>
+            <textarea class="step-input" placeholder="Quelle valeur profonde le masque empêche-t-il de s&rsquo;exprimer&#x00A0;?" rows="2"></textarea>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="conflict-reveal" id="conflict-reveal" style="margin-top:24px">
+        <div class="cr-label">Mon conflit clarifié</div>
+        <div class="cr-template">
+          Mon masque veut me protéger par
+          <input class="cr-input" id="cr1" placeholder="l&rsquo;automatisme" style="width:180px"/>,
+          mais ma valeur de
+          <input class="cr-input" id="cr2" placeholder="votre valeur" style="width:150px"/>
+          aspire à
+          <input class="cr-input" id="cr3" placeholder="s&rsquo;exprimer..." style="width:200px"/>.
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn-next" onclick="document.getElementById('s3').scrollIntoView({behavior:'smooth'})"><span>Les 5 pourquoi</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║   S3 — 5 POURQUOI           ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="s3">
+  <div class="container">
+    <p class="s-label">Exercice 2 · Technique des 5 pourquoi</p>
+    <h2 class="s-title">Sonder en profondeur</h2>
+    <p class="section-intro">Posez la question &ldquo;pourquoi&rdquo; cinq fois de suite sur le même sujet. Chaque réponse devient la question suivante. Vous descendez vers la peur fondamentale.</p>
+
+    <div class="glass" style="margin-bottom:20px">
+      <div class="glass-gold" style="border-radius:12px;padding:16px;margin-bottom:20px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2)">
+        <p style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px">Exemple</p>
+        <div style="font-size:.85rem;color:var(--muted);line-height:2">
+          Pourquoi je n&rsquo;ose pas m&rsquo;exprimer ? <span style="color:var(--text)">→ Parce que je crains le jugement</span><br>
+          Pourquoi je crains le jugement ? <span style="color:var(--text)">→ Parce que je veux être accepté·e</span><br>
+          Pourquoi être accepté·e est si important ? <span style="color:var(--text)">→ Parce que sans ça, je me sens seul·e</span><br>
+          Pourquoi la solitude me fait si peur ? <span style="color:var(--text)">→ Parce que j&rsquo;ai souvent été ignoré·e</span><br>
+          Pourquoi cela résonne encore aujourd&rsquo;hui ? <span style="color:var(--text)">→ Parce que cette blessure n&rsquo;a jamais été soignée</span>
+        </div>
+      </div>
+
+      <div class="why-chain">
+        <div class="why-row">
+          <div class="why-num">1</div>
+          <div style="flex:1">
+            <div class="why-label">Ma question de départ</div>
+            <input class="why-input" placeholder="Pourquoi je..."/>
+          </div>
+        </div>
+        <div class="why-arrow" style="padding-left:16px">↓</div>
+        <div class="why-row">
+          <div class="why-num">2</div>
+          <div style="flex:1">
+            <div class="why-label">Pourquoi cette réponse ?</div>
+            <input class="why-input" placeholder="Parce que..."/>
+          </div>
+        </div>
+        <div class="why-arrow" style="padding-left:16px">↓</div>
+        <div class="why-row">
+          <div class="why-num">3</div>
+          <div style="flex:1">
+            <div class="why-label">Pourquoi encore ?</div>
+            <input class="why-input" placeholder="Parce que..."/>
+          </div>
+        </div>
+        <div class="why-arrow" style="padding-left:16px">↓</div>
+        <div class="why-row">
+          <div class="why-num">4</div>
+          <div style="flex:1">
+            <div class="why-label">Et pourquoi cela ?</div>
+            <input class="why-input" placeholder="Parce que..."/>
+          </div>
+        </div>
+        <div class="why-arrow" style="padding-left:16px">↓</div>
+        <div class="why-row">
+          <div class="why-num">5</div>
+          <div style="flex:1">
+            <div class="why-label">La peur fondamentale</div>
+            <input class="why-input" placeholder="Au fond, parce que..." style="border-color:rgba(56,161,105,.4);color:var(--green-light)"/>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;background:rgba(56,161,105,.06);border:1px solid rgba(56,161,105,.15);border-radius:12px;padding:16px">
+        <p style="font-size:.78rem;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px">Insight clé</p>
+        <textarea class="step-input" placeholder="Ce que je découvre sur moi-même grâce à cet exercice..." rows="3"></textarea>
+      </div>
+    </div>
+
+    <div style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn-next" onclick="document.getElementById('s4').scrollIntoView({behavior:'smooth'})"><span>Analyse coûts-bénéfices</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║   S4 — COÛTS-BÉNÉFICES      ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="s4">
+  <div class="container">
+    <p class="s-label">Exercice 3 · Analyse coûts-bénéfices</p>
+    <h2 class="s-title">Peser le pour et le contre</h2>
+    <p class="section-intro">Votre masque a des avantages réels — c&rsquo;est pour ça qu&rsquo;il persiste. Nommez-les honnêtement. Puis regardez ce qu&rsquo;il vous coûte, et ce que le changement pourrait vous apporter.</p>
+
+    <div class="glass">
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:20px;font-style:italic">Listez 3 éléments dans chaque case. Soyez honnête et bienveillant·e avec vous-même.</p>
+
+      <!-- PORTER LE MASQUE -->
+      <p style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Porter le masque</p>
+      <div class="cout-grid" style="margin-bottom:20px">
+        <div class="cout-card cout-masque-av">
+          <div class="cout-head">
+            <div class="cout-icon">✅</div>
+            <div class="cout-title green">Avantages</div>
+          </div>
+          <div class="cout-inputs">
+            <input class="cout-input" placeholder="Avantage 1..."/>
+            <input class="cout-input" placeholder="Avantage 2..."/>
+            <input class="cout-input" placeholder="Avantage 3..."/>
+          </div>
+        </div>
+        <div class="cout-card cout-masque-in">
+          <div class="cout-head">
+            <div class="cout-icon">❌</div>
+            <div class="cout-title red">Inconvénients</div>
+          </div>
+          <div class="cout-inputs">
+            <input class="cout-input" placeholder="Inconvénient 1..."/>
+            <input class="cout-input" placeholder="Inconvénient 2..."/>
+            <input class="cout-input" placeholder="Inconvénient 3..."/>
+          </div>
+        </div>
+      </div>
+
+      <!-- CHANGER -->
+      <div style="height:1px;background:var(--gb);margin:4px 0 20px"></div>
+      <p style="font-size:.75rem;letter-spacing:.15em;text-transform:uppercase;color:var(--muted);margin-bottom:12px">Choisir le changement</p>
+      <div class="cout-grid">
+        <div class="cout-card cout-change-ga">
+          <div class="cout-head">
+            <div class="cout-icon">🌟</div>
+            <div class="cout-title gold">Gains potentiels</div>
+          </div>
+          <div class="cout-inputs">
+            <input class="cout-input" placeholder="Gain 1..."/>
+            <input class="cout-input" placeholder="Gain 2..."/>
+            <input class="cout-input" placeholder="Gain 3..."/>
+          </div>
+        </div>
+        <div class="cout-card cout-change-ri">
+          <div class="cout-head">
+            <div class="cout-icon">⚠️</div>
+            <div class="cout-title orange">Risques perçus</div>
+          </div>
+          <div class="cout-inputs">
+            <input class="cout-input" placeholder="Risque 1..."/>
+            <input class="cout-input" placeholder="Risque 2..."/>
+            <input class="cout-input" placeholder="Risque 3..."/>
+          </div>
+        </div>
+      </div>
+
+      <div style="margin-top:24px;background:rgba(56,161,105,.06);border:1px solid rgba(56,161,105,.2);border-radius:12px;padding:18px">
+        <p style="font-size:.78rem;color:var(--green);letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px">Ma conclusion</p>
+        <textarea class="step-input" placeholder="Après cet exercice, ce que je réalise c&rsquo;est que..." rows="3"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn-next" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})"><span>Mes valeurs profondes</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║   S5 — MES VALEURS          ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="s5">
+  <div class="container">
+    <p class="s-label">Exercice 4 · Mes valeurs profondes</p>
+    <h2 class="s-title">Votre boussole intérieure</h2>
+    <p class="section-intro">Les valeurs sont ce qui compte vraiment pour vous — au-delà des attentes sociales. Elles ne s&rsquo;expliquent pas, elles se ressentent. Sélectionnez celles qui résonnent le plus en vous.</p>
+
+    <div class="values-intro">
+      <div class="test-val">
+        <div class="test-val-title">💎 Test de vérification d&rsquo;une vraie valeur</div>
+        <div class="test-item">
+          <div class="test-bullet"></div>
+          <div class="test-text">Si je fais cela et que <strong style="color:var(--text)">personne ne le sait jamais</strong>, continuerais-je&nbsp;?</div>
+        </div>
+        <div class="test-item">
+          <div class="test-bullet"></div>
+          <div class="test-text">Si mes proches <strong style="color:var(--text)">désapprouvaient</strong> mon choix, ferais-je quand même ce choix&nbsp;?</div>
+        </div>
+        <div style="margin-top:14px;font-size:.8rem">
+          <span class="test-yes">OUI aux deux</span> <span style="color:var(--muted)">= c&rsquo;est une vraie valeur</span><br>
+          <span style="color:#FC8181">NON</span> <span style="color:var(--muted)">= c&rsquo;est peut-être une injonction du masque</span>
+        </div>
+      </div>
+      <div class="glass" style="padding:20px">
+        <p style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--green);margin-bottom:12px">Conseil pratique</p>
+        <p style="font-size:.85rem;color:var(--muted);line-height:1.7">Cliquez sur les valeurs qui vous parlent. Ensuite, choisissez vos <strong style="color:var(--text)">3 valeurs les plus importantes</strong> — celles dont l&rsquo;absence vous priverait d&rsquo;un sens profond à votre vie.</p>
+        <p style="margin-top:10px;font-size:.78rem;color:var(--muted);font-style:italic">D&rsquo;après la Liste des Valeurs de Russ Harris (2011)</p>
+      </div>
+    </div>
+
+    <div class="glass">
+      <p style="font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px">Sélectionnez les valeurs qui résonnent en vous</p>
+      <div class="values-grid" id="values-grid">
+        <!-- chips generated by JS -->
+      </div>
+
+      <div class="my-values">
+        <div class="my-values-title">Mes 3 valeurs les plus importantes</div>
+        <div class="my-values-display" id="my-values-display">
+          <span class="my-values-empty" id="values-empty">Cliquez sur les valeurs ci-dessus pour les sélectionner...</span>
+        </div>
+      </div>
+
+      <div style="margin-top:20px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);border-radius:12px;padding:16px">
+        <p style="font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px">Mon conflit valeur-masque final</p>
+        <textarea class="step-input" placeholder="Quelle valeur mon masque m&rsquo;empêche-t-il d&rsquo;exprimer en ce moment ? Comment se manifeste ce conflit dans ma vie quotidienne ?" rows="3"></textarea>
+      </div>
+    </div>
+
+    <div style="margin-top:24px;display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn-next" onclick="document.getElementById('s6').scrollIntoView({behavior:'smooth'})"><span>Bilan et complétion</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║   S6 — JOURNAL              ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="s6">
+  <div class="container">
+    <p class="s-label">Mon journal de bord</p>
+    <h2 class="s-title" style="font-family:'Cormorant Garamond',serif;font-weight:300;">Ancrer<br><em style="color:var(--green-light)">ce qui compte</em></h2>
+
+    <div class="journal-module" id="jm-module4">
+      <div class="jm-header">
+        <span class="jm-header-icon">📓</span>
+        <div class="jm-header-text">
+          <h3>Mon Journal de bord — EXPLORER</h3>
+          <p>Sauvegardé dans votre parcours complet · Exportable en PDF en fin de parcours</p>
+        </div>
+      </div>
+      <div class="jm-memo" id="jm-memo-m4">
+        <button class="jm-memo-toggle" onclick="toggleMemo('jm-memo-m4')">
+          <span>🗂 Mémo — Les 5 concepts essentiels d'EXPLORER</span>
+          <span class="jm-memo-chevron">▾</span>
+        </button>
+        <div class="jm-memo-body">
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">1</div>
+            <div class="jm-memo-text"><strong>Le conflit intérieur</strong> — Votre masque protège une valeur précieuse en la gardant prisonnière. Le conflit est entre le besoin de sécurité du masque et l'aspiration profonde de votre nature authentique.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">2</div>
+            <div class="jm-memo-text"><strong>Les 7 questions du dialogue</strong> — Interroger son masque comme un personnage : quand es-tu apparu ? qu'essaies-tu de me protéger ? quel est ton plus grand cauchemar ? Ces questions transforment l'ennemi en allié.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">3</div>
+            <div class="jm-memo-text"><strong>La technique des 5 pourquoi</strong> — Chaque comportement automatique cache une peur plus profonde. En posant "pourquoi" 5 fois, on descend jusqu'à la peur originelle qui alimente le masque.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">4</div>
+            <div class="jm-memo-text"><strong>L'analyse coûts-bénéfices</strong> — Peser honnêtement ce que le masque coûte et ce qu'il apporte. Cette clarté crée la motivation authentique pour changer — pas par devoir, mais par désir.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">5</div>
+            <div class="jm-memo-text"><strong>La valeur empêchée</strong> — Derrière chaque masque se cache une valeur profonde que vous n'osez pas exprimer. Identifier cette valeur, c'est trouver le trésor que votre masque gardait jalousement.</div>
+          </div>
+        </div>
+      </div>
+      <div class="jm-questions">
+        <div class="jm-q-label">✍️ Mon bilan — Module 4 · EXPLORER</div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">Le conflit intérieur que j'ai découvert…</div>
+          <textarea class="jm-q-textarea" id="jm-q1-m4" placeholder="Une part de moi voudrait... mais une autre a encore plus peur de..."></textarea>
+        </div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">La peur originelle de mon masque…</div>
+          <textarea class="jm-q-textarea" id="jm-q2-m4" placeholder="Au fond, ce que je crains vraiment c'est... (utilisez les 5 pourquoi)"></textarea>
+        </div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">La valeur empêchée que mon masque protège…</div>
+          <textarea class="jm-q-textarea" id="jm-q3-m4" placeholder="Ce que j'aspire vraiment à être / faire / vivre, mais que la peur bloque..."></textarea>
+        </div>
+      </div>
+      <div class="jm-libre">
+        <div class="jm-libre-label">📓 Réflexions libres</div>
+        <textarea class="jm-libre-textarea" id="jm-libre-m4" placeholder="Espace libre — ce que ce module a révélé, une prise de conscience sur votre masque, ce que vous comprenez maintenant de votre fonctionnement…"></textarea>
+      </div>
+      <div class="jm-actions">
+        <button class="jm-save-btn" onclick="saveJournalV3()">💾 Sauvegarder dans mon journal</button>
+      </div>
+      <div class="jm-saved" id="jm-saved-m4">
+        ✓ Entrée sauvegardée — visible dans votre Journal de bord complet
+      </div>
+    </div>
+
+    <div style="margin-top:36px;text-align:center;">
+      <button class="btn-next" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})"><span>Bilan et complétion</span><span class="bn-arrow">→</span></button>
+    </div>
+  </div>
+</section>
+
+<!-- ╔══════════════════════════════╗ -->
+<!-- ║   S7 — TERMINER             ║ -->
+<!-- ╚══════════════════════════════╝ -->
+<section id="s7">
+  <div class="container" style="text-align:center">
+    <div style="font-size:4rem;margin-bottom:20px">🟢</div>
+    <p class="s-label" style="text-align:center">Module 4 complété</p>
+    <h2 style="font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:300;margin-bottom:16px">Vous avez <span style="color:var(--green-light);font-style:italic">exploré</span> votre monde intérieur</h2>
+    <p style="color:var(--muted);font-size:.95rem;line-height:1.75;max-width:560px;margin:0 auto 40px">Vous avez dialogué avec votre masque, identifié la peur sous-jacente, pesé le pour et le contre — et découvert la valeur précieuse qu&rsquo;il garde. C&rsquo;est une révélation profonde.</p>
+
+    <div class="final-grid" style="text-align:left">
+      <div class="final-card">
+        <div class="fc-icon">🔍</div>
+        <div class="fc-title">Masque connu</div>
+        <div class="fc-text">Vous avez nommé votre automatisme et compris sa logique de protection.</div>
+      </div>
+      <div class="final-card">
+        <div class="fc-icon">💡</div>
+        <div class="fc-title">Peur nommée</div>
+        <div class="fc-text">Vous avez identifié la peur réelle qui se cache derrière le comportement.</div>
+      </div>
+      <div class="final-card">
+        <div class="fc-icon">✨</div>
+        <div class="fc-title">Valeur découverte</div>
+        <div class="fc-text">Vous savez maintenant ce que votre masque protège — et ce qui aspire à s&rsquo;exprimer.</div>
+      </div>
+    </div>
+
+    <div class="glass glass-green" style="max-width:560px;margin:0 auto 36px;text-align:left">
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.15rem;line-height:1.75;font-style:italic;color:var(--text)">
+        &ldquo;La prochaine étape&nbsp;? <span style="color:var(--green-light)">Unifier</span> — créer une alliance entre votre besoin de sécurité et votre désir d&rsquo;authenticité. L&rsquo;union fait la force.&rdquo;
+      </p>
+    </div>
+
+    <div class="checklist" style="max-width:480px;margin:0 auto 36px;text-align:left">
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">J&rsquo;ai identifié mon masque actif et son déclencheur</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">J&rsquo;ai observé mon automatisme et ma peur sous-jacente</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">J&rsquo;ai utilisé les 5 pourquoi pour sonder en profondeur</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">J&rsquo;ai fait l&rsquo;analyse coûts-bénéfices honnêtement</div>
+      </div>
+      <div class="check-item" onclick="toggleCheck(this)">
+        <div class="check-box"></div>
+        <div class="check-text">J&rsquo;ai identifié la valeur que mon masque empêche de s&rsquo;exprimer</div>
+      </div>
+    </div>
+
+    <div class="nav-arrows" style="justify-content:center">
+      <button class="btn-secondary" onclick="window.location.href='module3.html'">← Module 3 LOCALISER</button>
+      <button class="btn-primary" onclick="allerModule5()">Module 5 UNIFIER → 🔵</button>
+    </div>
+
+    <div class="copyright-footer" style="margin-top:40px">© 2025 Méthode V.A.L.E.U.R© — Céline Bourbon · Tous droits réservés · Toute reproduction interdite</div>
+  </div>
+</section>
+
+<!-- JOURNAL FAB -->
+<button id="journal-fab" onclick="toggleJournal()">📓</button>
+<div id="journal-panel">
+  <div>
+    <div class="jp-title">Journal V.A.L.E.U.R©</div>
+    <div class="jp-date" id="jp-date"></div>
+  </div>
+  <textarea id="journal-text" placeholder="Ce que j&rsquo;explore, ce que je réalise, ce que je ressens..."></textarea>
+  <div class="jp-footer">
+    <button class="btn-secondary" style="padding:8px 18px;font-size:.8rem" onclick="saveJournal()">Enregistrer</button>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div id="toast"></div>
+
+<script>
+// ── PROTECTION ──
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{if(e.ctrlKey&&['c','u','s','p','a'].includes(e.key))e.preventDefault()});
+document.addEventListener('dragstart',e=>e.preventDefault());
+
+// ── SCROLL LINE + PROGRESS ──
+const sections=['s0','s1','s2','s3','s4','s5','s6','s7'];
+let currentSection=0;
+const MODULES=[
+  {key:'module1',letter:'V',color:'#E53E3E'},
+  {key:'module2',letter:'A',color:'#ED8936'},
+  {key:'module3',letter:'L',color:'#D69E2E'},
+  {key:'module4',letter:'E',color:'#38A169'},
+  {key:'module5',letter:'U',color:'#3182CE'},
+  {key:'module6',letter:'R',color:'#805AD5'},
+];
+const PK='valeur_progress_v2';
+function getP(){try{return JSON.parse(localStorage.getItem(PK))||{};}catch(e){return{};}}
+function isDone(k){return!!getP()[k];}
+function markDone(k){const p=getP();p[k]=true;try{localStorage.setItem(PK,JSON.stringify(p));}catch(e){}}
+function renderProgress(){
+  const steps=document.getElementById('pb-steps');
+  const pct=document.getElementById('pb-pct');
+  if(!steps)return;
+  const done=MODULES.filter(m=>isDone(m.key)).length;
+  if(pct)pct.textContent=Math.round((done/MODULES.length)*100)+'%';
+  steps.innerHTML=MODULES.map(m=>{
+    const d=isDone(m.key);
+    const active=m.key==='module4';
+    return'<div class="pb-step'+(d?' done':active?' active':'')+'" title="'+m.letter+'"><span class="pb-letter">'+m.letter+'</span></div>';
+  }).join('');
+}
+window.addEventListener('scroll',()=>{
+  const scrolled=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight);
+  updateProgress(scrolled);
+  detectSection();
+  animateSections();
+});
+
+function updateProgress(scrolled){
+  const pct=Math.round(scrolled*100);
+  document.getElementById('pb-pct').textContent=pct+'%';
+}
+
+function detectSection(){
+  sections.forEach((id,i)=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    if(r.top<=window.innerHeight/2&&r.bottom>=window.innerHeight/2){
+      currentSection=i;
+      document.querySelectorAll('.dot').forEach((d,j)=>{d.classList.toggle('active',j===i)});
+    }
+  });
+}
+
+function animateSections(){
+  sections.forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el)return;
+    const r=el.getBoundingClientRect();
+    if(r.top<window.innerHeight*.85)el.classList.add('visible');
+  });
+}
+setTimeout(animateSections,100);
+
+function goTo(i){
+  const el=document.getElementById(sections[i]);
+  if(el)el.scrollIntoView({behavior:'smooth'});
+}
+
+// ── VALUES CHIPS ──
+const allValues=[
+  'Acceptation','Authenticité','Aventure','Affirmation de soi','Beauté',
+  'Bienveillance','Compassion','Confiance','Connexion','Contribution',
+  'Courage','Créativité','Curiosité','Équité','Enthousiasme',
+  'Générosité','Gratitude','Harmonie','Honnêteté','Humilité',
+  'Humour','Indépendance','Intimité','Justice','Liberté',
+  'Amour','Pleine conscience','Ordre','Ouverture d\u2019esprit','Patience',
+  'Persévérance','Plaisir','Réciprocité','Respect','Responsabilité',
+  'Sécurité','Conscience de soi','Soins de soi','Perfectionnement','Partage',
+  'Maîtrise de soi','Sensualité','Spiritualité','Soutien','Vaillance'
+];
+let selectedValues=[];
+
+function buildValues(){
+  const grid=document.getElementById('values-grid');
+  allValues.forEach(v=>{
+    const chip=document.createElement('div');
+    chip.className='val-chip';
+    chip.textContent=v;
+    chip.onclick=()=>toggleValue(v,chip);
+    grid.appendChild(chip);
+  });
+}
+
+function toggleValue(v,chip){
+  const idx=selectedValues.indexOf(v);
+  if(idx>-1){
+    selectedValues.splice(idx,1);
+    chip.classList.remove('selected');
+  } else {
+    selectedValues.push(v);
+    chip.classList.add('selected');
+  }
+  updateMyValues();
+}
+
+function updateMyValues(){
+  const display=document.getElementById('my-values-display');
+  const empty=document.getElementById('values-empty');
+  display.innerHTML='';
+  if(selectedValues.length===0){
+    display.appendChild(empty||document.createTextNode(''));
+    if(empty)display.appendChild(empty);
+    return;
+  }
+  selectedValues.forEach(v=>{
+    const badge=document.createElement('div');
+    badge.className='val-selected-badge';
+    badge.textContent=v;
+    display.appendChild(badge);
+  });
+}
+
+buildValues();
+
+// ── CHECKLIST ──
+function toggleCheck(el){
+  el.classList.toggle('checked');
+}
+
+// ── JOURNAL V3 ──
+const JV3='VALEUR_journal_v3';
+function getJournalV3(){try{return JSON.parse(localStorage.getItem(JV3))||[];}catch(e){return[];}}
+function saveJournalV3arr(arr){try{localStorage.setItem(JV3,JSON.stringify(arr));}catch(e){}}
+function toggleMemo(id){const el=document.getElementById(id);if(el)el.classList.toggle('open');}
+
+function saveJournalV3(){
+  const q1=document.getElementById('jm-q1-m4')?.value.trim()||'';
+  const q2=document.getElementById('jm-q2-m4')?.value.trim()||'';
+  const q3=document.getElementById('jm-q3-m4')?.value.trim()||'';
+  const libre=document.getElementById('jm-libre-m4')?.value.trim()||'';
+  const masque=localStorage.getItem('valeur_dominant_masque')||'';
+  const arr=getJournalV3();
+  const idx=arr.findIndex(e=>e.module===4);
+  const entry={
+    module:4,module_name:'EXPLORER',
+    date:new Date().toISOString(),masque_dominant:masque,
+    reponses:[
+      {question:"Le conflit intérieur que j'ai découvert…",reponse:q1},
+      {question:"La peur originelle de mon masque…",reponse:q2},
+      {question:"La valeur empêchée que mon masque protège…",reponse:q3}
+    ],reflexion_libre:libre
+  };
+  if(idx>=0)arr[idx]=entry;else arr.push(entry);
+  saveJournalV3arr(arr);
+  try{
+    const v2=JSON.parse(localStorage.getItem('valeur_journal_v2'))||[];
+    v2.unshift({date:entry.date,text:(q1+'\n'+q2+'\n'+q3+'\n'+libre).trim(),module:'Module 4 — EXPLORER'});
+    localStorage.setItem('valeur_journal_v2',JSON.stringify(v2.slice(0,30)));
+  }catch(e){}
+  const saved=document.getElementById('jm-saved-m4');
+  if(saved){saved.classList.add('show');setTimeout(()=>saved.classList.remove('show'),4000);}
+  showToast('✍️ Journal Module 4 sauvegardé');
+}
+
+function prefillJournalV3(){
+  const arr=getJournalV3();
+  const entry=arr.find(e=>e.module===4);
+  if(!entry)return;
+  const ids=['jm-q1-m4','jm-q2-m4','jm-q3-m4','jm-libre-m4'];
+  const vals=[...entry.reponses.map(r=>r.reponse||''),entry.reflexion_libre||''];
+  ids.forEach((id,i)=>{const el=document.getElementById(id);if(el)el.value=vals[i]||'';});
+}
+
+// ── TOAST ──
+function showToast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ── COMPLÉTER MODULE ──
+function completerModule(){
+  saveJournalV3();
+  try{
+    const p=JSON.parse(localStorage.getItem('valeur_progress_v2')||'{}');
+    p.module4=true;
+    localStorage.setItem('valeur_progress_v2',JSON.stringify(p));
+  }catch(e){}
+  lancerConfetti();
+  showToast('🟢 Module 4 complété — UNIFIER débloqué !');
+  setTimeout(()=>{document.getElementById('s7').scrollIntoView({behavior:'smooth'});},1200);
+}
+
+function allerModule5(){
+  completerModule();
+  setTimeout(()=>window.location.href='module5.html',4000);
+}
+
+// ── CONFETTI ──
+function lancerConfetti(){
+  const canvas=document.getElementById('confetti-canvas');
+  canvas.style.display='block';
+  const ctx=canvas.getContext('2d');
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+  const colors=['#38A169','#68D391','#C9A84C','#F0D080','#E53E3E','#805AD5','#3182CE'];
+  const pieces=[];
+  for(let i=0;i<160;i++){
+    pieces.push({
+      x:Math.random()*canvas.width,y:-20,
+      vx:(Math.random()-0.5)*4,vy:Math.random()*4+2,
+      color:colors[Math.floor(Math.random()*colors.length)],
+      size:Math.random()*8+4,rot:Math.random()*360,rv:(Math.random()-0.5)*8,
+      opacity:1
+    });
+  }
+  let frame=0;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    pieces.forEach(p=>{
+      p.x+=p.vx;p.y+=p.vy;p.rot+=p.rv;
+      if(frame>90)p.opacity-=0.015;
+      ctx.save();
+      ctx.globalAlpha=Math.max(0,p.opacity);
+      ctx.translate(p.x,p.y);
+      ctx.rotate(p.rot*Math.PI/180);
+      ctx.fillStyle=p.color;
+      ctx.fillRect(-p.size/2,-p.size/2,p.size,p.size);
+      ctx.restore();
+    });
+    frame++;
+    if(frame<180)requestAnimationFrame(draw);
+    else{ctx.clearRect(0,0,canvas.width,canvas.height);canvas.style.display='none';}
+  }
+  requestAnimationFrame(draw);
+}
+
+// ── LOAD PROGRESS ──
+(function(){
+  try{
+    const p=JSON.parse(localStorage.getItem('valeur_progress_v2')||'{}');
+    const steps=['module1','module2','module3','module4','module5','module6'];
+    document.querySelectorAll('.pb-step').forEach((el,i)=>{
+      const mod=steps[i];
+      if(p[mod])el.classList.add('done');
+    });
+  }catch(e){}
+  prefillJournalV3();
+})();
+</script>
+</body>
+</html>

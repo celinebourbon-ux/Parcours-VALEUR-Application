@@ -1,0 +1,2206 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Module 1 — VOIR · La Conscience Observatrice · Méthode V.A.L.E.U.R©</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<meta name="robots" content="noindex, nofollow">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --gold:#C9A84C;--gold-light:#F0D080;--gold-glow:rgba(201,168,76,.22);
+  --navy:#070D1A;--navy2:#0D1526;--navy3:#131F35;
+  --glass:rgba(255,255,255,.04);--gb:rgba(255,255,255,.08);
+  --text:#F2EDE6;--text2:#C8D6E8;--muted:#8A9BB5;
+  --red:#E53E3E;--red-light:#FEB2B2;--red-glow:rgba(229,62,62,.2);
+  --orange:#ED8936;--yellow:#D69E2E;--green:#38A169;--blue:#3182CE;--indigo:#5A67D8;--violet:#805AD5;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Jost',sans-serif;background:var(--navy);color:var(--text);min-height:100vh;overflow-x:hidden;user-select:none;-webkit-user-select:none;}
+
+/* ── AURORA ── */
+.bg-aurora{position:fixed;inset:0;z-index:0;overflow:hidden;pointer-events:none;}
+.orb{position:absolute;border-radius:50%;filter:blur(130px);animation:drift 22s ease-in-out infinite;}
+.orb1{width:600px;height:600px;background:var(--red);top:-180px;right:-150px;opacity:.07;}
+.orb2{width:450px;height:450px;background:var(--violet);bottom:-100px;left:-100px;opacity:.06;animation-delay:-9s;}
+.orb3{width:300px;height:300px;background:var(--gold);top:50%;left:40%;opacity:.04;animation-delay:-17s;}
+@keyframes drift{0%,100%{transform:translate(0,0);}33%{transform:translate(30px,-25px);}66%{transform:translate(-20px,30px);}}
+
+/* ── PROGRESS BAR ── */
+#progress-bar{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(7,13,26,.92);backdrop-filter:blur(20px);border-bottom:1px solid rgba(229,62,62,.15);padding:10px 20px;display:flex;align-items:center;gap:12px;}
+.pb-back{display:flex;align-items:center;gap:6px;background:var(--glass);border:1px solid var(--gb);border-radius:8px;padding:6px 12px;color:var(--muted);font-size:12px;letter-spacing:.5px;text-decoration:none;transition:all .3s;white-space:nowrap;flex-shrink:0;}
+.pb-back:hover{background:var(--red-glow);border-color:var(--red);color:var(--red);}
+.pb-steps{display:flex;gap:6px;flex:1;align-items:center;}
+.pb-step{flex:1;height:30px;border-radius:8px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);display:flex;align-items:center;justify-content:center;transition:all .5s cubic-bezier(.34,1.56,.64,1);}
+.pb-step.done{background:linear-gradient(135deg,var(--gold),var(--gold-light));border-color:var(--gold-light);cursor:pointer;}
+.pb-step.active{background:rgba(229,62,62,.1);border-color:var(--red);animation:pulse 2.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(229,62,62,.3);}50%{box-shadow:0 0 0 4px rgba(229,62,62,0);}}
+.pb-letter{font-size:11px;font-weight:700;letter-spacing:1.5px;color:var(--muted);}
+.pb-step.done .pb-letter{color:#070D1A;}
+.pb-step.active .pb-letter{color:var(--red);}
+.pb-pct{font-size:13px;font-weight:700;color:var(--gold);min-width:36px;text-align:right;}
+@media(max-width:480px){.pb-letter{font-size:9px;}.pb-step{height:24px;}#progress-bar{padding:8px 12px;gap:8px;}.pb-back span{display:none;}}
+
+/* ── SCROLL LINE ── */
+#scroll-line{position:fixed;top:50px;left:0;height:2px;z-index:999;background:linear-gradient(90deg,var(--red),var(--gold-light));width:0%;transition:width .1s linear;}
+
+/* ── DOT NAV ── */
+#dot-nav{position:fixed;right:18px;top:50%;transform:translateY(-50%);z-index:500;display:flex;flex-direction:column;gap:10px;}
+.dot{width:8px;height:8px;border-radius:50%;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.1);cursor:pointer;transition:all .4s;}
+.dot.active{background:var(--red);border-color:var(--red);box-shadow:0 0 8px rgba(229,62,62,.5);transform:scale(1.3);}
+.dot:hover{background:rgba(229,62,62,.5);}
+@media(max-width:768px){#dot-nav{display:none;}}
+
+/* ── MAIN ── */
+main{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:72px 20px 140px;}
+
+/* ── SECTIONS ── */
+.section{padding:60px 0;opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease;}
+.section.visible{opacity:1;transform:none;}
+.s-label{font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--red);margin-bottom:10px;font-weight:600;}
+.s-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2rem,5vw,3rem);font-weight:300;line-height:1.1;color:var(--text);margin-bottom:20px;}
+.s-title em{font-style:italic;color:var(--red);}
+.s-lead{font-size:1.05rem;line-height:1.88;color:var(--text2);font-weight:300;margin-bottom:24px;}
+.divider{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--red),transparent);margin:30px 0;}
+.divider-gold{width:60px;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);margin:30px 0;}
+
+/* ── GLASS ── */
+.glass{background:var(--glass);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid var(--gb);border-radius:20px;padding:28px;position:relative;overflow:hidden;}
+.glass::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.04) 0%,transparent 60%);pointer-events:none;}
+.glass-red{border-color:rgba(229,62,62,.2);}
+.glass-red::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),transparent);}
+.glass-gold{border-color:rgba(201,168,76,.25);}
+.glass-gold::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+
+/* ── HERO MODULE BADGE ── */
+.module-hero-badge{display:inline-flex;align-items:center;gap:10px;margin-bottom:28px;padding:8px 18px;border-radius:100px;background:rgba(229,62,62,.08);border:1px solid rgba(229,62,62,.2);}
+.mhb-dot{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 8px var(--red);animation:glow-pulse 2s ease-in-out infinite;}
+@keyframes glow-pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.85);}}
+.mhb-text{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);font-weight:600;}
+.hero-big-letter{font-family:'Cormorant Garamond',serif;font-size:clamp(5rem,18vw,10rem);font-weight:300;color:transparent;background:linear-gradient(135deg,#C9A84C 0%,#F0D080 50%,#D4AF37 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1;display:block;margin-bottom:-10px;}
+.hero-subtitle{font-family:'Cormorant Garamond',serif;font-size:clamp(1.2rem,3vw,1.6rem);font-weight:300;font-style:italic;color:var(--gold);margin-bottom:20px;}
+.hero-meta{display:flex;gap:16px;flex-wrap:wrap;margin-top:28px;}
+.hero-meta-pill{display:flex;align-items:center;gap:7px;background:var(--glass);border:1px solid var(--gb);border-radius:100px;padding:7px 16px;font-size:.8rem;color:var(--muted);}
+.hero-meta-pill span{font-size:.9rem;}
+
+/* ── FLIP CARDS (S1) ── */
+.flip-grid{display:flex;flex-direction:column;gap:12px;margin:28px 0;}
+.flip-card{perspective:900px;height:70px;cursor:pointer;}
+.flip-inner{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.4,0,.2,1);}
+.flip-card.flipped .flip-inner{transform:rotateX(180deg);}
+.flip-front,.flip-back{position:absolute;inset:0;border-radius:14px;display:flex;align-items:center;padding:16px 20px;backface-visibility:hidden;-webkit-backface-visibility:hidden;}
+.flip-front{background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.2);}
+.flip-back{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.25);transform:rotateX(180deg);}
+.flip-label{font-size:.7rem;letter-spacing:2px;text-transform:uppercase;margin-right:12px;flex-shrink:0;font-weight:600;}
+.flip-front .flip-label{color:rgba(229,62,62,.6);}
+.flip-back .flip-label{color:rgba(201,168,76,.6);}
+.flip-text{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;line-height:1.4;}
+.flip-front .flip-text{color:var(--muted);}
+.flip-back .flip-text{color:var(--text);}
+.flip-hint{text-align:center;font-size:.78rem;color:rgba(255,255,255,.25);margin-top:8px;letter-spacing:.5px;}
+
+/* ── OBSERVER WORLD (S2) ── */
+.observer-world{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:28px 0;border-radius:20px;overflow:hidden;}
+.world-panel{padding:28px 22px;position:relative;}
+.world-observé{background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.15);}
+.world-observateur{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);}
+.world-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;margin-bottom:6px;}
+.world-observé .world-title{color:#FEB2B2;}
+.world-observateur .world-title{color:var(--gold);}
+.world-tag{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;font-weight:600;display:block;}
+.world-observé .world-tag{color:rgba(229,62,62,.5);}
+.world-observateur .world-tag{color:rgba(201,168,76,.5);}
+.world-items{display:flex;flex-direction:column;gap:8px;}
+.world-item{font-size:.82rem;color:var(--muted);padding:8px 10px;border-radius:9px;line-height:1.4;display:flex;align-items:flex-start;gap:7px;}
+.world-observé .world-item{background:rgba(229,62,62,.05);}
+.world-observateur .world-item{background:rgba(201,168,76,.05);}
+.wi-dot{flex-shrink:0;width:5px;height:5px;border-radius:50%;margin-top:5px;}
+.world-observé .wi-dot{background:rgba(229,62,62,.5);}
+.world-observateur .wi-dot{background:rgba(201,168,76,.5);}
+.world-footer{margin-top:16px;font-size:.75rem;font-style:italic;line-height:1.6;padding-top:14px;border-top:1px solid;}
+.world-observé .world-footer{color:rgba(229,62,62,.5);border-color:rgba(229,62,62,.1);}
+.world-observateur .world-footer{color:rgba(201,168,76,.6);border-color:rgba(201,168,76,.12);}
+@media(max-width:560px){.observer-world{grid-template-columns:1fr;gap:6px;}}
+
+/* ── SKY METAPHOR ── */
+.sky-metaphor{position:relative;height:90px;border-radius:16px;overflow:hidden;margin:24px 0;background:linear-gradient(180deg,rgba(7,13,26,.8) 0%,rgba(13,21,38,.9) 100%);border:1px solid var(--gb);}
+.sky-cloud{position:absolute;border-radius:50px;filter:blur(8px);animation:cloud-drift linear infinite;}
+.sky-cloud:nth-child(1){width:120px;height:28px;background:rgba(229,62,62,.25);top:20px;animation-duration:12s;}
+.sky-cloud:nth-child(2){width:80px;height:22px;background:rgba(128,90,213,.2);top:45px;animation-duration:17s;animation-delay:-5s;}
+.sky-cloud:nth-child(3){width:60px;height:18px;background:rgba(49,130,206,.15);top:58px;animation-duration:9s;animation-delay:-3s;}
+@keyframes cloud-drift{from{left:-200px;}to{left:110%}}
+.sky-observer{position:absolute;right:24px;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,rgba(201,168,76,.2),rgba(201,168,76,.05));border:1px solid rgba(201,168,76,.4);display:flex;align-items:center;justify-content:center;font-size:1.3rem;box-shadow:0 0 20px rgba(201,168,76,.15);}
+.sky-label{position:absolute;right:72px;top:50%;transform:translateY(-50%);font-family:'Cormorant Garamond',serif;font-size:.8rem;font-style:italic;color:rgba(201,168,76,.7);text-align:right;line-height:1.4;}
+.sky-cloud-label{position:absolute;left:14px;top:8px;font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.2);}
+
+/* ── FUSION DETECTOR (S3) ── */
+.fusion-intro{display:flex;align-items:center;gap:14px;padding:16px 20px;border-radius:14px;background:rgba(255,255,255,.03);border:1px solid var(--gb);margin-bottom:20px;}
+.fi-icon{font-size:1.4rem;}
+.fi-text{font-size:.88rem;color:var(--muted);line-height:1.6;}
+.fusion-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0;}
+.fcard{padding:16px;border-radius:14px;cursor:pointer;border:1px solid var(--gb);background:rgba(255,255,255,.03);transition:all .4s;position:relative;overflow:hidden;}
+.fcard:hover{transform:translateY(-2px);}
+.fcard .fc-text{font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--text);line-height:1.55;margin-bottom:10px;}
+.fcard .fc-prompt{font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.25);}
+.fcard.revealed-fusion{background:rgba(229,62,62,.07);border-color:rgba(229,62,62,.3);}
+.fcard.revealed-obs{background:rgba(201,168,76,.07);border-color:rgba(201,168,76,.25);}
+.fcard .fc-verdict{display:none;margin-top:8px;font-size:.78rem;font-weight:600;letter-spacing:.5px;}
+.fcard.revealed-fusion .fc-verdict{display:block;color:var(--red);}
+.fcard.revealed-obs .fc-verdict{display:block;color:var(--gold);}
+.fcard .fc-explain{display:none;font-size:.75rem;color:var(--muted);line-height:1.5;margin-top:6px;}
+.fcard.revealed-fusion .fc-explain,.fcard.revealed-obs .fc-explain{display:block;}
+@media(max-width:560px){.fusion-grid{grid-template-columns:1fr;}}
+
+/* ── CYCLE ENRICHI (S4) ── */
+.cycle-enrichi{margin:28px 0;}
+.ce-step{display:flex;gap:16px;margin-bottom:6px;position:relative;}
+.ce-step:not(:last-child)::after{content:'';position:absolute;left:20px;top:52px;width:1px;height:calc(100% - 10px);background:linear-gradient(180deg,rgba(229,62,62,.2),transparent);z-index:0;}
+.ce-num{width:42px;height:42px;border-radius:50%;border:1px solid rgba(229,62,62,.25);background:rgba(229,62,62,.06);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--red);flex-shrink:0;position:relative;z-index:1;}
+.ce-content{flex:1;padding:10px 0;}
+.ce-title{font-weight:600;font-size:.9rem;color:var(--text);margin-bottom:4px;}
+.ce-desc{font-size:.82rem;color:var(--muted);line-height:1.6;}
+.voir-moment{margin:20px 0;border-radius:16px;overflow:hidden;}
+.vm-before,.vm-after{padding:18px 22px;display:flex;align-items:flex-start;gap:12px;}
+.vm-before{background:rgba(229,62,62,.05);border:1px solid rgba(229,62,62,.12);}
+.vm-after{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.18);margin-top:3px;}
+.vm-badge{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;padding:3px 10px;border-radius:100px;margin-right:4px;flex-shrink:0;font-weight:700;}
+.vm-before .vm-badge{background:rgba(229,62,62,.1);color:var(--red);border:1px solid rgba(229,62,62,.2);}
+.vm-after .vm-badge{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25);}
+.vm-text{font-size:.87rem;color:var(--muted);line-height:1.65;}
+
+/* ── 3 QUESTIONS (S5) ── */
+.q3-stack{display:flex;flex-direction:column;gap:10px;margin:28px 0;}
+.q3-card{background:var(--glass);border:1px solid var(--gb);border-radius:18px;overflow:hidden;cursor:pointer;transition:all .3s;}
+.q3-card:hover{border-color:rgba(229,62,62,.2);}
+.q3-header{display:flex;align-items:center;gap:14px;padding:18px 20px;}
+.q3-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--red),#FC8181);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:#fff;flex-shrink:0;}
+.q3-question{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--text);line-height:1.4;flex:1;}
+.q3-toggle{width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,.05);border:1px solid var(--gb);display:flex;align-items:center;justify-content:center;font-size:11px;color:var(--muted);flex-shrink:0;transition:transform .3s;}
+.q3-card.open .q3-toggle{transform:rotate(45deg);}
+.q3-body{max-height:0;overflow:hidden;transition:max-height .5s cubic-bezier(.4,0,.2,1);padding:0 20px;}
+.q3-card.open .q3-body{max-height:300px;padding:0 20px 20px;}
+.q3-what{font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:600;}
+.q3-expl{font-size:.87rem;color:var(--muted);line-height:1.7;margin-bottom:12px;}
+.q3-example{background:rgba(255,255,255,.03);border:1px solid var(--gb);border-radius:10px;padding:12px 14px;}
+.q3-example-label{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:6px;font-weight:600;}
+.q3-example-text{font-family:'Cormorant Garamond',serif;font-size:.92rem;font-style:italic;color:var(--text);line-height:1.55;}
+
+/* ── EXERCICE GUIDÉ (S6) ── */
+.practice-container{margin:28px 0;}
+.practice-card{background:linear-gradient(135deg,rgba(201,168,76,.04),rgba(201,168,76,.01));border:1px solid rgba(201,168,76,.2);border-radius:20px;padding:28px;position:relative;overflow:hidden;}
+.practice-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--gold),transparent);}
+.practice-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.practice-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:300;color:var(--text);}
+.practice-timer-display{font-family:'Cormorant Garamond',serif;font-size:2.2rem;font-weight:300;color:var(--gold);min-width:70px;text-align:right;letter-spacing:-1px;}
+.practice-steps{display:flex;flex-direction:column;gap:0;}
+.pstep{padding:16px 0;border-bottom:1px solid rgba(255,255,255,.04);display:none;animation:fadeIn .5s ease;}
+.pstep.active{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:none;}}
+.pstep-num{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--gold);margin-bottom:8px;font-weight:600;}
+.pstep-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);margin-bottom:8px;}
+.pstep-text{font-size:.9rem;color:var(--muted);line-height:1.75;}
+.pstep-breathe{display:flex;align-items:center;gap:12px;margin-top:12px;padding:12px 16px;background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.12);border-radius:10px;}
+.breathe-orb{width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px rgba(201,168,76,.4);}
+.pstep-breathe.expand .breathe-orb{animation:breathe-expand 4s ease-in-out infinite;}
+.pstep-breathe.normal .breathe-orb{animation:breathe-normal 2s ease-in-out infinite;}
+@keyframes breathe-expand{0%,100%{transform:scale(1);opacity:.6;}50%{transform:scale(2.2);opacity:1;}}
+@keyframes breathe-normal{0%,100%{transform:scale(1);}50%{transform:scale(1.4);}}
+.breathe-label{font-size:.8rem;color:rgba(201,168,76,.7);font-style:italic;}
+.practice-progress{display:flex;gap:6px;margin-bottom:20px;}
+.pp-dot{flex:1;height:3px;border-radius:2px;background:rgba(255,255,255,.06);transition:background .5s;}
+.pp-dot.done{background:var(--gold);}
+.pp-dot.active{background:rgba(201,168,76,.4);}
+.btn-practice{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.06));border:1px solid rgba(201,168,76,.3);border-radius:12px;padding:13px 24px;font-family:'Jost',sans-serif;font-size:.88rem;font-weight:600;color:var(--gold);cursor:pointer;transition:all .3s;margin-top:16px;}
+.btn-practice:hover{background:linear-gradient(135deg,rgba(201,168,76,.22),rgba(201,168,76,.1));transform:translateY(-1px);}
+.practice-complete{display:none;text-align:center;padding:24px 0;}
+.practice-complete.show{display:block;}
+.pc-icon{font-size:2.5rem;margin-bottom:12px;}
+.pc-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;font-weight:300;color:var(--gold);margin-bottom:8px;}
+.pc-text{font-size:.9rem;color:var(--muted);line-height:1.7;}
+
+/* ── QUOTE BLOCK ── */
+.quote-block{border-left:2px solid var(--gold);padding:20px 24px;margin:24px 0;background:rgba(201,168,76,.04);border-radius:0 14px 14px 0;}
+.qb-text{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-style:italic;color:var(--text);line-height:1.7;margin-bottom:10px;}
+.qb-source{font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.5);font-weight:600;}
+.quote-block-red{border-left-color:var(--red);background:rgba(229,62,62,.04);}
+.quote-block-red .qb-text{color:var(--text);}
+.quote-block-red .qb-source{color:rgba(229,62,62,.5);}
+
+/* ── KEY INSIGHT ── */
+.key-insight{margin:24px 0;padding:20px 24px;border-radius:16px;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.2);display:flex;gap:14px;align-items:flex-start;}
+.ki-icon{font-size:1.4rem;flex-shrink:0;margin-top:2px;}
+.ki-text{font-size:.92rem;color:var(--text);line-height:1.7;}
+.ki-text strong{color:var(--gold);}
+
+/* ── QUIZ ── */
+.quiz-container{margin:24px 0;}
+.quiz-progress-bar{height:3px;background:rgba(255,255,255,.08);border-radius:2px;margin-bottom:24px;overflow:hidden;}
+.qpb-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold-light));border-radius:2px;transition:width .5s ease;}
+.quiz-card{background:var(--glass);border:1px solid var(--gb);border-radius:20px;padding:28px;}
+.quiz-q-num{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:10px;}
+.quiz-q-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--text);line-height:1.65;margin-bottom:20px;font-weight:400;}
+.quiz-options{display:flex;flex-direction:column;gap:8px;}
+.quiz-opt{width:100%;text-align:left;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:14px 18px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--muted);cursor:pointer;transition:all .3s;line-height:1.5;}
+.quiz-opt:hover{background:rgba(229,62,62,.06);border-color:rgba(229,62,62,.2);color:var(--text);}
+.quiz-opt.correct{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.4);color:#68D391;}
+.quiz-opt.wrong{background:rgba(229,62,62,.08);border-color:rgba(229,62,62,.3);color:#FC8181;}
+.quiz-expl{margin-top:14px;padding:14px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;font-size:.85rem;color:var(--muted);line-height:1.65;display:none;}
+.quiz-expl.show{display:block;}
+.quiz-nav{display:flex;justify-content:flex-end;margin-top:16px;}
+.btn-quiz-next{background:linear-gradient(135deg,var(--red),#FC8181);border:none;border-radius:10px;padding:11px 24px;font-family:'Jost',sans-serif;font-size:.88rem;font-weight:600;color:#fff;cursor:pointer;transition:all .3s;display:none;}
+.btn-quiz-next.show{display:block;}
+.btn-quiz-next:hover{transform:translateY(-1px);box-shadow:0 5px 18px rgba(229,62,62,.4);}
+.quiz-score{text-align:center;padding:32px 20px;display:none;}
+.quiz-score.show{display:block;}
+.score-big{font-family:'Cormorant Garamond',serif;font-size:4rem;font-weight:300;color:var(--red);line-height:1;}
+.score-label{font-size:.85rem;color:var(--muted);margin-top:8px;}
+.score-msg{font-size:1rem;color:var(--text);margin-top:16px;font-weight:300;line-height:1.7;}
+
+/* ── BILAN CARDS ── */
+.bilan-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:24px 0;}
+.bilan-card{background:var(--glass);border:1px solid var(--gb);border-radius:14px;padding:18px;text-align:center;}
+.bc-icon{font-size:1.6rem;margin-bottom:8px;}
+.bc-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:5px;}
+.bc-text{font-size:.78rem;color:var(--muted);font-weight:300;line-height:1.5;}
+@media(max-width:500px){.bilan-grid{grid-template-columns:1fr;}}
+
+/* ── COMPLETE ── */
+.complete-zone{text-align:center;padding:48px 20px;}
+.btn-complete{display:inline-flex;align-items:center;gap:12px;background:linear-gradient(135deg,var(--red) 0%,#FC8181 100%);border:none;border-radius:18px;padding:20px 40px;font-family:'Jost',sans-serif;font-size:1.05rem;font-weight:700;color:#fff;cursor:pointer;letter-spacing:.5px;transition:all .5s cubic-bezier(.34,1.56,.64,1);box-shadow:0 8px 32px rgba(229,62,62,.4);}
+.btn-complete:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 16px 50px rgba(229,62,62,.6);}
+.complete-sub{margin-top:14px;font-size:.85rem;color:var(--muted);}
+.unlock-preview{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:20px;padding:14px 24px;border-radius:14px;background:rgba(237,137,54,.06);border:1px solid rgba(237,137,54,.18);font-size:.85rem;color:var(--muted);opacity:0;transform:translateY(10px);transition:all .5s .2s ease;}
+.unlock-preview.show{opacity:1;transform:none;}
+.unlock-dot{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--orange),#FBD38D);display:flex;align-items:center;justify-content:center;font-family:'Cormorant Garamond',serif;font-weight:700;font-size:1.1rem;color:var(--navy);}
+
+/* ── FRANKEL BANNER ── */
+.frankl-banner{margin:28px 0;padding:22px 26px;background:linear-gradient(135deg,rgba(229,62,62,.04),rgba(201,168,76,.04));border:1px solid rgba(255,255,255,.06);border-radius:18px;text-align:center;}
+.fb-top{font-size:.7rem;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;}
+.fb-quote{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.4rem);font-style:italic;color:var(--text);line-height:1.65;margin-bottom:10px;}
+.fb-accent{color:var(--red);}
+.fb-gold{color:var(--gold);}
+.fb-source{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.4);}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:90px;left:50%;transform:translateX(-50%) translateY(20px);z-index:2000;background:rgba(13,21,38,.97);backdrop-filter:blur(16px);border:1px solid rgba(229,62,62,.3);border-radius:14px;padding:14px 24px;font-size:.9rem;color:var(--text);opacity:0;transition:all .4s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none;}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* ── JOURNAL FAB ── */
+#journal-fab{position:fixed;bottom:28px;right:24px;z-index:900;width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--red) 0%,#FC8181 100%);border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;box-shadow:0 8px 28px rgba(229,62,62,.4);transition:all .4s cubic-bezier(.34,1.56,.64,1);animation:fab-breathe 3s ease-in-out infinite;}
+#journal-fab:hover{transform:scale(1.12);}
+@keyframes fab-breathe{0%,100%{box-shadow:0 8px 28px rgba(229,62,62,.4),0 0 0 0 rgba(229,62,62,0);}50%{box-shadow:0 8px 28px rgba(229,62,62,.4),0 0 0 10px rgba(229,62,62,.05);}}
+
+/* ── JOURNAL DRAWER ── */
+#journal-overlay{position:fixed;inset:0;z-index:1100;background:rgba(7,13,26,.6);backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity .4s;}
+#journal-overlay.open{opacity:1;pointer-events:all;}
+#journal-drawer{position:fixed;bottom:0;right:0;left:0;z-index:1200;max-width:560px;margin:0 auto;background:var(--navy3);border:1px solid rgba(229,62,62,.15);border-bottom:none;border-radius:28px 28px 0 0;padding:24px 24px 40px;transform:translateY(100%);transition:transform .5s cubic-bezier(.34,1.2,.64,1);max-height:80vh;overflow-y:auto;}
+#journal-drawer.open{transform:translateY(0);}
+.drawer-handle{width:40px;height:4px;border-radius:2px;background:rgba(255,255,255,.12);margin:0 auto 24px;}
+.drawer-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;}
+.drawer-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--text);}
+.drawer-title span{color:var(--red);}
+.drawer-close{width:32px;height:32px;border-radius:50%;background:var(--glass);border:1px solid var(--gb);color:var(--muted);cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center;}
+.j-date-label{font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+#journal-textarea{width:100%;min-height:120px;background:rgba(255,255,255,.03);border:1px solid var(--gb);border-radius:14px;padding:16px;font-family:'Jost',sans-serif;font-size:.9rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.65;}
+#journal-textarea:focus{border-color:rgba(229,62,62,.3);}
+#journal-textarea::placeholder{color:rgba(255,255,255,.2);}
+.j-actions{display:flex;gap:10px;margin-top:12px;}
+.j-btn{flex:1;padding:11px;border-radius:10px;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;}
+.j-save{background:linear-gradient(135deg,rgba(229,62,62,.15),rgba(229,62,62,.06));border:1px solid rgba(229,62,62,.3);color:var(--red);}
+.j-save:hover{background:rgba(229,62,62,.2);}
+.j-clear{background:var(--glass);border:1px solid var(--gb);color:var(--muted);}
+.j-entries{margin-top:20px;display:flex;flex-direction:column;gap:10px;}
+.j-no-entries{text-align:center;color:rgba(255,255,255,.2);font-size:.85rem;padding:20px 0;}
+.j-entry{background:rgba(255,255,255,.02);border:1px solid var(--gb);border-radius:12px;padding:14px;}
+.j-entry-date{font-size:.7rem;color:var(--red);letter-spacing:1px;margin-bottom:6px;text-transform:uppercase;}
+.j-entry-text{font-size:.85rem;color:var(--muted);line-height:1.6;}
+
+/* ── FOOTER ── */
+footer{position:relative;z-index:1;text-align:center;padding:20px;font-size:.72rem;color:rgba(255,255,255,.15);letter-spacing:1px;border-top:1px solid rgba(255,255,255,.04);}
+
+/* ── CANVAS ── */
+#confetti-canvas{position:fixed;inset:0;z-index:3000;pointer-events:none;}
+
+/* ══ PARTIE 2 — DÉCLENCHEURS ══ */
+
+/* ── SOULAGEMENT BANNER ── */
+.relief-banner{margin:28px 0;border-radius:18px;overflow:hidden;position:relative;}
+.rb-top{background:rgba(201,168,76,.07);border:1px solid rgba(201,168,76,.2);padding:22px 24px;border-radius:18px 18px 0 0;}
+.rb-bottom{background:rgba(229,62,62,.04);border:1px solid rgba(229,62,62,.12);border-top:none;padding:18px 24px;border-radius:0 0 18px 18px;}
+.rb-label{font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,.6);margin-bottom:10px;font-weight:600;}
+.rb-big{font-family:'Cormorant Garamond',serif;font-size:clamp(1.1rem,3vw,1.35rem);color:var(--text);line-height:1.6;}
+.rb-big strong{color:var(--gold);}
+.rb-sub{font-size:.87rem;color:var(--muted);line-height:1.7;}
+
+/* ── TRIGGER COLUMNS ── */
+.trigger-cols{display:grid;grid-template-columns:1fr 1fr;gap:3px;margin:24px 0;border-radius:18px;overflow:hidden;}
+.tc-panel{padding:24px 20px;}
+.tc-ext{background:rgba(229,62,62,.05);border:1px solid rgba(229,62,62,.12);}
+.tc-int{background:rgba(128,90,213,.05);border:1px solid rgba(128,90,213,.15);}
+.tc-title{font-weight:700;font-size:.82rem;letter-spacing:1px;text-transform:uppercase;margin-bottom:14px;}
+.tc-ext .tc-title{color:rgba(229,62,62,.7);}
+.tc-int .tc-title{color:rgba(128,90,213,.7);}
+.tc-tags{display:flex;flex-wrap:wrap;gap:7px;}
+.tc-tag{padding:6px 12px;border-radius:100px;font-size:.76rem;cursor:pointer;transition:all .35s;position:relative;}
+.tc-ext .tc-tag{background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.18);color:var(--muted);}
+.tc-int .tc-tag{background:rgba(128,90,213,.06);border:1px solid rgba(128,90,213,.2);color:var(--muted);}
+.tc-ext .tc-tag:hover,.tc-ext .tc-tag.revealed{background:rgba(229,62,62,.14);border-color:rgba(229,62,62,.4);color:var(--text);}
+.tc-int .tc-tag:hover,.tc-int .tc-tag.revealed{background:rgba(128,90,213,.14);border-color:rgba(128,90,213,.4);color:var(--text);}
+.tc-tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:50%;transform:translateX(-50%);background:rgba(13,21,38,.97);border:1px solid var(--gb);border-radius:10px;padding:9px 13px;font-size:.74rem;color:var(--text);line-height:1.5;white-space:nowrap;z-index:50;pointer-events:none;max-width:200px;white-space:normal;text-align:center;}
+.tc-tag.revealed .tc-tooltip{display:block;}
+@media(max-width:560px){.trigger-cols{grid-template-columns:1fr;gap:6px;}}
+
+/* ── SÉQUENCE LOGIQUE ── */
+.logic-chain{display:flex;flex-direction:column;gap:0;margin:24px 0;}
+.lc-row{display:flex;align-items:stretch;gap:0;}
+.lc-arrow{display:flex;flex-direction:column;align-items:center;justify-content:center;width:36px;flex-shrink:0;}
+.lc-arrow-line{width:1px;flex:1;background:linear-gradient(180deg,rgba(229,62,62,.3),rgba(201,168,76,.3));}
+.lc-arrow-head{font-size:14px;color:rgba(201,168,76,.5);line-height:1;}
+.lc-box{flex:1;padding:14px 18px;border-radius:14px;margin-bottom:3px;}
+.lc-trigger{background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.15);}
+.lc-peur{background:rgba(128,90,213,.05);border:1px solid rgba(128,90,213,.15);}
+.lc-masque{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.18);}
+.lc-comport{background:rgba(56,161,105,.04);border:1px solid rgba(56,161,105,.15);}
+.lc-label{font-size:.65rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:4px;}
+.lc-trigger .lc-label{color:rgba(229,62,62,.6);}
+.lc-peur .lc-label{color:rgba(128,90,213,.6);}
+.lc-masque .lc-label{color:rgba(201,168,76,.6);}
+.lc-comport .lc-label{color:rgba(56,161,105,.6);}
+.lc-val{font-size:.88rem;color:var(--text);line-height:1.5;}
+.lc-sub{font-size:.75rem;color:var(--muted);margin-top:3px;}
+.voir-badge-inline{display:inline-flex;align-items:center;gap:5px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);border-radius:100px;padding:3px 10px;font-size:.68rem;color:var(--gold);font-weight:700;letter-spacing:.5px;margin-left:8px;}
+
+/* ── CYCLE STEPPER ── */
+.cycle-stepper{margin:28px 0;}
+.cs-track{position:relative;}
+.cs-step-item{display:none;animation:csIn .45s cubic-bezier(.34,1.2,.64,1);}
+.cs-step-item.active{display:block;}
+@keyframes csIn{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:none;}}
+.cs-card{border-radius:18px;padding:28px;position:relative;overflow:hidden;}
+.cs-card-1{background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.2);}
+.cs-card-2{background:rgba(128,90,213,.06);border:1px solid rgba(128,90,213,.2);}
+.cs-card-3{background:rgba(214,158,46,.05);border:1px solid rgba(214,158,46,.2);}
+.cs-card-4{background:rgba(56,161,105,.05);border:1px solid rgba(56,161,105,.2);}
+.cs-step-num{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;font-weight:700;margin-bottom:6px;}
+.cs-card-1 .cs-step-num{color:rgba(229,62,62,.6);}
+.cs-card-2 .cs-step-num{color:rgba(128,90,213,.6);}
+.cs-card-3 .cs-step-num{color:rgba(214,158,46,.7);}
+.cs-card-4 .cs-step-num{color:rgba(56,161,105,.6);}
+.cs-step-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--text);margin-bottom:12px;}
+.cs-step-body{font-size:.9rem;color:var(--muted);line-height:1.75;margin-bottom:16px;}
+.cs-neuro{display:flex;align-items:flex-start;gap:10px;background:rgba(255,255,255,.03);border:1px solid var(--gb);border-radius:10px;padding:12px 14px;margin-bottom:12px;}
+.cs-neuro-icon{font-size:1.1rem;flex-shrink:0;}
+.cs-neuro-text{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.55;font-style:italic;}
+.cs-voir-moment{background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.2);border-radius:10px;padding:12px 14px;font-size:.82rem;color:rgba(201,168,76,.9);line-height:1.6;display:none;}
+.cs-voir-moment.show{display:block;}
+.cs-nav{display:flex;align-items:center;justify-content:space-between;margin-top:18px;gap:12px;}
+.cs-dots-track{display:flex;gap:8px;}
+.cs-dot{width:28px;height:4px;border-radius:2px;background:rgba(255,255,255,.08);transition:all .4s;cursor:pointer;}
+.cs-dot.active{background:var(--gold);width:36px;}
+.cs-dot.done{background:rgba(201,168,76,.4);}
+.btn-cs{padding:10px 22px;border-radius:10px;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;border:none;}
+.btn-cs-next{background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.06));border:1px solid rgba(201,168,76,.3);color:var(--gold);}
+.btn-cs-next:hover{background:rgba(201,168,76,.2);}
+.btn-cs-prev{background:var(--glass);border:1px solid var(--gb);color:var(--muted);}
+.btn-cs-prev:hover{color:var(--text);}
+.cs-counter{font-size:.78rem;color:var(--muted);letter-spacing:.5px;}
+
+/* ── VIGNETTE STORIES ── */
+.vignette-tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;}
+.vtab{padding:8px 18px;border-radius:100px;font-size:.8rem;font-weight:600;cursor:pointer;border:1px solid var(--gb);background:var(--glass);color:var(--muted);transition:all .3s;}
+.vtab.active-indigo{background:rgba(90,103,216,.12);border-color:rgba(90,103,216,.4);color:#B794F4;}
+.vtab.active-vert{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.35);color:#9AE6B4;}
+.vtab.active-rouge{background:rgba(229,62,62,.1);border-color:rgba(229,62,62,.35);color:#FEB2B2;}
+.vignette-panel{display:none;}
+.vignette-panel.active{display:block;animation:csIn .4s ease;}
+.vig-scene{border-radius:16px;overflow:hidden;margin-bottom:10px;}
+.vig-auto{background:rgba(229,62,62,.04);border:1px solid rgba(229,62,62,.12);padding:20px 22px;}
+.vig-voir{background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.18);padding:20px 22px;margin-top:3px;}
+.vig-badge{display:inline-flex;align-items:center;gap:6px;font-size:.65rem;letter-spacing:2px;text-transform:uppercase;font-weight:700;margin-bottom:10px;padding:3px 10px;border-radius:100px;}
+.vig-auto .vig-badge{background:rgba(229,62,62,.1);color:var(--red);border:1px solid rgba(229,62,62,.2);}
+.vig-voir .vig-badge{background:rgba(201,168,76,.1);color:var(--gold);border:1px solid rgba(201,168,76,.25);}
+.vig-trigger{font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600;}
+.vig-text{font-size:.88rem;color:var(--muted);line-height:1.75;}
+.vig-text em{color:var(--text);font-style:italic;}
+.vig-chain{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px;align-items:center;}
+.vc-pill{padding:4px 11px;border-radius:100px;font-size:.7rem;font-weight:600;border:1px solid;}
+.vc-trigger{background:rgba(229,62,62,.08);color:rgba(229,62,62,.8);border-color:rgba(229,62,62,.2);}
+.vc-scan{background:rgba(128,90,213,.07);color:rgba(128,90,213,.8);border-color:rgba(128,90,213,.2);}
+.vc-corps{background:rgba(214,158,46,.07);color:rgba(214,158,46,.9);border-color:rgba(214,158,46,.2);}
+.vc-masque{background:rgba(56,161,105,.06);color:rgba(56,161,105,.8);border-color:rgba(56,161,105,.2);}
+.vc-arr{color:rgba(255,255,255,.2);font-size:.75rem;}
+
+/* ── DÉFUSION CINÉMA ── */
+.cinema-exercise{border-radius:20px;overflow:hidden;margin:24px 0;}
+.cinema-screen{background:linear-gradient(135deg,rgba(7,13,26,.9),rgba(13,21,38,.95));border:1px solid rgba(201,168,76,.15);border-radius:20px;padding:28px;position:relative;overflow:hidden;}
+.cinema-screen::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,rgba(201,168,76,.04) 0%,transparent 70%);pointer-events:none;}
+.cinema-label{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:20px;font-weight:600;}
+.cinema-steps{display:flex;flex-direction:column;gap:0;}
+.cstep{display:none;animation:csIn .5s ease;}
+.cstep.active{display:block;}
+.cstep-num{font-size:.68rem;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.5);margin-bottom:6px;font-weight:600;}
+.cstep-title{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--text);margin-bottom:10px;}
+.cstep-text{font-size:.9rem;color:var(--muted);line-height:1.78;margin-bottom:14px;}
+.cstep-text em{color:var(--text);font-style:italic;}
+.cstep-focus{background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.15);border-radius:12px;padding:14px 16px;font-size:.84rem;color:rgba(201,168,76,.8);line-height:1.65;font-style:italic;}
+.cinema-progress{display:flex;gap:6px;margin-bottom:20px;}
+.cp-seg{flex:1;height:2px;border-radius:1px;background:rgba(255,255,255,.06);transition:background .5s;}
+.cp-seg.done{background:var(--gold);}
+.cp-seg.active{background:rgba(201,168,76,.4);}
+.cinema-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px;}
+.btn-cinema{padding:10px 22px;border-radius:10px;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;cursor:pointer;transition:all .3s;}
+.btn-cinema-next{background:linear-gradient(135deg,rgba(201,168,76,.15),rgba(201,168,76,.06));border:1px solid rgba(201,168,76,.3);color:var(--gold);}
+.btn-cinema-next:hover{background:rgba(201,168,76,.22);}
+.btn-cinema-prev{background:var(--glass);border:1px solid var(--gb);color:var(--muted);}
+.cinema-done{display:none;text-align:center;padding:20px 0;}
+.cinema-done.show{display:block;}
+.cd-icon{font-size:2rem;margin-bottom:10px;}
+.cd-text{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-style:italic;color:var(--gold);line-height:1.6;}
+
+/* ── QUIZ DÉCLENCHEURS ── */
+.qd-container{margin:24px 0;}
+.qd-scenario{background:var(--glass);border:1px solid var(--gb);border-radius:18px;padding:24px;}
+.qd-progress{height:3px;background:rgba(255,255,255,.06);border-radius:2px;margin-bottom:20px;overflow:hidden;}
+.qd-fill{height:100%;background:linear-gradient(90deg,var(--red),var(--gold-light));border-radius:2px;transition:width .5s;}
+.qd-num{font-size:.7rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:8px;font-weight:600;}
+.qd-scene-label{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:8px;font-weight:600;}
+.qd-scene{font-family:'Cormorant Garamond',serif;font-size:1.05rem;font-style:italic;color:var(--text);line-height:1.65;padding:14px 18px;background:rgba(255,255,255,.03);border:1px solid var(--gb);border-radius:12px;margin-bottom:16px;}
+.qd-question{font-size:.9rem;color:var(--muted);margin-bottom:14px;font-weight:500;}
+.qd-options{display:flex;flex-direction:column;gap:8px;}
+.qd-opt{width:100%;text-align:left;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:13px 17px;font-family:'Jost',sans-serif;font-size:.86rem;color:var(--muted);cursor:pointer;transition:all .3s;line-height:1.5;}
+.qd-opt:hover{background:rgba(229,62,62,.06);border-color:rgba(229,62,62,.2);color:var(--text);}
+.qd-opt.correct{background:rgba(56,161,105,.1);border-color:rgba(56,161,105,.4);color:#68D391;}
+.qd-opt.wrong{background:rgba(229,62,62,.08);border-color:rgba(229,62,62,.3);color:#FC8181;}
+.qd-expl{margin-top:12px;padding:13px 15px;background:rgba(255,255,255,.03);border:1px solid var(--gb);border-radius:10px;font-size:.83rem;color:var(--muted);line-height:1.65;display:none;}
+.qd-expl.show{display:block;}
+.qd-nav{display:flex;justify-content:flex-end;margin-top:14px;}
+.btn-qd-next{background:linear-gradient(135deg,var(--red),#FC8181);border:none;border-radius:10px;padding:10px 22px;font-family:'Jost',sans-serif;font-size:.86rem;font-weight:600;color:#fff;cursor:pointer;transition:all .3s;display:none;}
+.btn-qd-next.show{display:block;}
+.btn-qd-next:hover{transform:translateY(-1px);box-shadow:0 5px 16px rgba(229,62,62,.4);}
+.qd-score{text-align:center;padding:28px 16px;display:none;}
+.qd-score.show{display:block;}
+.qd-score-big{font-family:'Cormorant Garamond',serif;font-size:3.5rem;font-weight:300;color:var(--red);line-height:1;}
+.qd-score-msg{font-size:.9rem;color:var(--muted);margin-top:12px;line-height:1.7;}
+
+/* ── BTN NEXT ── */
+.btn-next{display:flex;align-items:center;justify-content:center;gap:10px;margin:36px auto 0;width:100%;max-width:420px;background:linear-gradient(135deg,rgba(229,62,62,.12),rgba(229,62,62,.05));border:1px solid rgba(229,62,62,.3);border-radius:14px;padding:16px 28px;font-family:'Jost',sans-serif;font-size:.97rem;font-weight:500;color:var(--red);cursor:pointer;transition:all .4s cubic-bezier(.34,1.2,.64,1);}
+.btn-next:hover{background:rgba(229,62,62,.18);transform:translateY(-2px) scale(1.02);box-shadow:0 8px 24px rgba(229,62,62,.2);}
+.btn-next .bn-arrow{transition:transform .3s;font-size:1.1rem;}
+.btn-next:hover .bn-arrow{transform:translateX(4px);}
+
+/* ── JOURNAL MODULE ── */
+.journal-module{margin:40px 0 0;border-radius:22px;overflow:hidden;border:1px solid rgba(229,62,62,.2);background:rgba(255,255,255,.02);}
+.jm-header{background:linear-gradient(135deg,rgba(229,62,62,.08),rgba(229,62,62,.03));border-bottom:1px solid rgba(229,62,62,.12);padding:22px 28px;display:flex;align-items:center;gap:14px;}
+.jm-header-icon{font-size:1.5rem;}
+.jm-header-text h3{font-family:'Cormorant Garamond',serif;font-size:1.25rem;font-weight:400;color:var(--text);margin-bottom:3px;}
+.jm-header-text p{font-size:.8rem;color:var(--muted);letter-spacing:.5px;}
+.jm-memo{border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-memo-toggle{width:100%;background:none;border:none;padding:18px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;color:var(--text2);letter-spacing:.5px;text-align:left;}
+.jm-memo-toggle span{display:flex;align-items:center;gap:10px;}
+.jm-memo-chevron{font-size:.75rem;color:var(--muted);transition:transform .3s;}
+.jm-memo.open .jm-memo-chevron{transform:rotate(180deg);}
+.jm-memo-body{display:none;padding:0 28px 22px;}
+.jm-memo.open .jm-memo-body{display:block;}
+.jm-memo-item{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);}
+.jm-memo-item:last-child{border-bottom:none;}
+.jm-memo-num{width:26px;height:26px;border-radius:50%;background:rgba(229,62,62,.1);border:1px solid rgba(229,62,62,.2);display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;color:var(--red);flex-shrink:0;}
+.jm-memo-text{font-size:.88rem;color:var(--text2);line-height:1.65;}
+.jm-memo-text strong{color:var(--text);}
+.jm-questions{padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-q-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:18px;font-weight:600;}
+.jm-q-item{margin-bottom:18px;}
+.jm-q-item:last-child{margin-bottom:0;}
+.jm-q-text{font-size:.88rem;color:var(--text2);line-height:1.6;margin-bottom:8px;font-style:italic;}
+.jm-q-textarea{width:100%;min-height:72px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.6;}
+.jm-q-textarea:focus{border-color:rgba(229,62,62,.3);}
+.jm-q-textarea::placeholder{color:rgba(255,255,255,.18);}
+.jm-libre{padding:24px 28px;border-bottom:1px solid rgba(255,255,255,.05);}
+.jm-libre-label{font-size:.72rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;}
+.jm-libre-textarea{width:100%;min-height:100px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:12px 14px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--text);resize:none;outline:none;transition:border-color .3s;line-height:1.65;}
+.jm-libre-textarea:focus{border-color:rgba(201,168,76,.25);}
+.jm-libre-textarea::placeholder{color:rgba(255,255,255,.15);}
+.jm-actions{padding:20px 28px;display:flex;align-items:center;gap:12px;}
+.jm-save-btn{flex:1;background:linear-gradient(135deg,rgba(229,62,62,.15),rgba(229,62,62,.06));border:1px solid rgba(229,62,62,.3);border-radius:12px;padding:14px 20px;font-family:'Jost',sans-serif;font-size:.9rem;font-weight:600;color:var(--red);cursor:pointer;transition:all .3s;}
+.jm-save-btn:hover{background:rgba(229,62,62,.22);}
+.jm-saved{display:none;padding:12px 28px 18px;font-size:.85rem;color:#4aab7a;background:rgba(74,171,122,.06);border-top:1px solid rgba(74,171,122,.15);}
+.jm-saved.show{display:flex;align-items:center;gap:8px;}
+
+
+.journal-prompt-block{margin:28px 0;border-radius:18px;overflow:hidden;}
+.jpb-header{background:rgba(229,62,62,.05);border:1px solid rgba(229,62,62,.15);border-radius:18px 18px 0 0;padding:16px 22px;display:flex;align-items:center;gap:12px;}
+.jpb-icon{font-size:1.4rem;}
+.jpb-title{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--text);}
+.jpb-title span{color:var(--red);}
+.jpb-body{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-top:none;border-radius:0 0 18px 18px;padding:20px 22px;}
+.jpb-prompts{display:flex;flex-direction:column;gap:12px;margin-bottom:16px;}
+.jp-item{display:flex;gap:10px;align-items:flex-start;}
+.jp-num{width:22px;height:22px;border-radius:50%;background:rgba(229,62,62,.1);border:1px solid rgba(229,62,62,.25);display:flex;align-items:center;justify-content:center;font-size:.72rem;color:var(--red);font-weight:700;flex-shrink:0;margin-top:1px;}
+.jp-text{font-size:.87rem;color:var(--muted);line-height:1.65;font-style:italic;}
+.jp-text strong{color:rgba(255,255,255,.5);font-style:normal;}
+.btn-open-journal{display:inline-flex;align-items:center;gap:8px;background:rgba(229,62,62,.08);border:1px solid rgba(229,62,62,.25);border-radius:10px;padding:11px 20px;font-family:'Jost',sans-serif;font-size:.85rem;font-weight:600;color:var(--red);cursor:pointer;transition:all .3s;}
+.btn-open-journal:hover{background:rgba(229,62,62,.14);}
+
+</style>
+</head>
+<body>
+
+<div class="bg-aurora">
+  <div class="orb orb1"></div>
+  <div class="orb orb2"></div>
+  <div class="orb orb3"></div>
+</div>
+
+<div id="progress-bar">
+  <a href="index.html" class="pb-back">← <span>Tableau de bord</span></a>
+  <div class="pb-steps" id="pb-steps"></div>
+  <div class="pb-pct" id="pb-pct">0%</div>
+</div>
+
+<div id="scroll-line"></div>
+
+<div id="dot-nav">
+  <div class="dot active" data-section="0" title="Introduction"></div>
+  <div class="dot" data-section="1" title="La question fondamentale"></div>
+  <div class="dot" data-section="2" title="Observateur / Observé"></div>
+  <div class="dot" data-section="3" title="Fusion vs Observation"></div>
+  <div class="dot" data-section="4" title="Votre masque dort"></div>
+  <div class="dot" data-section="5" title="Le déclencheur"></div>
+  <div class="dot" data-section="6" title="Le cycle invisible"></div>
+  <div class="dot" data-section="7" title="3 histoires vraies"></div>
+  <div class="dot" data-section="8" title="Exercice défusion"></div>
+  <div class="dot" data-section="9" title="Quiz déclencheurs"></div>
+  <div class="dot" data-section="10" title="Le cycle VOIR"></div>
+  <div class="dot" data-section="11" title="Les 3 questions"></div>
+  <div class="dot" data-section="12" title="Exercice guidé"></div>
+  <div class="dot" data-section="13" title="Quiz final"></div>
+  <div class="dot" data-section="14" title="Terminer"></div>
+</div>
+
+<main>
+
+  <!-- ══ S0 — HERO ══ -->
+  <section class="section" data-s="0" id="s0">
+    <div class="module-hero-badge">
+      <span class="mhb-dot"></span>
+      <span class="mhb-text">Module 1 · V.A.L.E.U.R©</span>
+    </div>
+    <span class="hero-big-letter">VOIR</span>
+    <div class="hero-subtitle">"Je vois ce qui m'active"</div>
+    <p class="s-lead">VOIR, c'est apprendre à repérer le déclencheur qui réveille votre masque — <em>au moment où il arrive</em>. Pas analyser. Pas comprendre l'origine. Juste nommer : <strong style="color:var(--red);">"quelque chose vient de s'activer en moi."</strong> Cet acte seul crée une distance entre vous et la réaction automatique. Et cette distance, c'est le début de la liberté.</p>
+
+    <!-- ── VOIR DEFINITION BOX ── -->
+    <div style="border-radius:16px;overflow:hidden;margin:24px 0;">
+      <div style="background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.2);border-radius:16px;padding:22px 24px;">
+        <div style="font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:rgba(229,62,62,.6);font-weight:700;margin-bottom:16px;">✦ Ce que VOIR signifie concrètement</div>
+        <div style="display:flex;flex-direction:column;gap:14px;">
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(229,62,62,.1);border:1px solid rgba(229,62,62,.25);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--red);flex-shrink:0;">1</div>
+            <div style="font-size:.9rem;color:var(--muted);line-height:1.65;"><strong style="color:var(--text);">Voir le déclencheur</strong> — repérer ce qui a mis le cycle en marche : un événement, une sensation, un mot, un silence.</div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(229,62,62,.1);border:1px solid rgba(229,62,62,.25);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--red);flex-shrink:0;">2</div>
+            <div style="font-size:.9rem;color:var(--muted);line-height:1.65;"><strong style="color:var(--text);">Voir l'activation</strong> — reconnaître que le masque s'est réveillé, que la réaction corporelle est là, que le pilote automatique vient de prendre les commandes.</div>
+          </div>
+          <div style="display:flex;gap:14px;align-items:flex-start;">
+            <div style="width:28px;height:28px;border-radius:50%;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.3);display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;color:var(--gold);flex-shrink:0;">✦</div>
+            <div style="font-size:.9rem;color:var(--muted);line-height:1.65;"><strong style="color:var(--gold);">Créer la distance</strong> — passer de <em style="color:rgba(229,62,62,.8);">"je suis ma réaction"</em> à <em style="color:rgba(201,168,76,.9);">"je remarque que mon masque réagit"</em>. Ce glissement de langage suffit à ouvrir un espace.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-meta">
+      <div class="hero-meta-pill"><span>⏱</span> ~45 minutes</div>
+      <div class="hero-meta-pill"><span>🧠</span> Ontologique + Pratique</div>
+      <div class="hero-meta-pill"><span>✦</span> Exercice guidé inclus</div>
+    </div>
+    <div style="margin-top:24px;" class="glass glass-red">
+      <div style="font-size:.75rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:600;">Ce que vous allez découvrir</div>
+      <div style="display:flex;flex-direction:column;gap:10px;">
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--muted);line-height:1.6;"><span style="color:var(--red);flex-shrink:0;margin-top:2px;">→</span> Ce qu'est la <strong style="color:var(--text);">fusion cognitive</strong> — et pourquoi vous y êtes piégé·e sans le savoir</div>
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--muted);line-height:1.6;"><span style="color:var(--red);flex-shrink:0;margin-top:2px;">→</span> La distinction fondamentale entre l'Observateur et l'Observé</div>
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--muted);line-height:1.6;"><span style="color:var(--red);flex-shrink:0;margin-top:2px;">→</span> Pourquoi votre masque dort — et ce qui le réveille (vos déclencheurs)</div>
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--muted);line-height:1.6;"><span style="color:var(--red);flex-shrink:0;margin-top:2px;">→</span> Le cycle invisible en 4 étapes — et où VOIR peut intervenir</div>
+        <div style="display:flex;align-items:flex-start;gap:12px;font-size:.9rem;color:var(--muted);line-height:1.6;"><span style="color:var(--red);flex-shrink:0;margin-top:2px;">→</span> Les 3 questions qui créent un espace de liberté dans vos réactions</div>
+      </div>
+    </div>
+    <button class="btn-next" onclick="document.getElementById('s1').scrollIntoView({behavior:'smooth'})">
+      La question fondamentale <span class="bn-arrow">→</span>
+    </button>
+  </section>
+
+  <!-- ══ S1 — LA QUESTION FONDAMENTALE ══ -->
+  <section class="section" data-s="1" id="s1">
+    <div class="s-label">La question que personne ne pose</div>
+    <h2 class="s-title"><em>Qui souffre…</em><br>quand je souffre ?</h2>
+    <p class="s-lead">Prenez un instant. La dernière fois que vous étiez anxieux, en colère, submergé·e — qui était là, à l'intérieur ? Était-ce vraiment <em>vous</em> ? Ou quelque chose qui vous traversait en vous faisant croire qu'il n'y avait pas d'autre issue ?</p>
+
+    <div class="quote-block-red quote-block">
+      <div class="qb-text">"Si la souffrance a besoin d'un témoin pour exister — alors il y a en vous quelque chose qui observe. Cette part-là ne souffre pas."</div>
+      <div class="qb-source">Conscience Observatrice — Méthode V.A.L.E.U.R©</div>
+    </div>
+
+    <p style="font-size:.92rem;color:var(--muted);line-height:1.75;margin-bottom:20px;">C'est la question centrale de VOIR. Non pas : <em>pourquoi souffrez-vous ?</em> Mais : <em>qui observe cette souffrance ?</em> Parce qu'il y a toujours une part de vous qui regarde — même quand vous croyez être entièrement submergé·e.</p>
+
+    <div style="font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:14px;font-weight:600;">Appuyez sur chaque carte pour voir la transformation ↓</div>
+    <div class="flip-grid">
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><span class="flip-label">FUSION</span><span class="flip-text">"Je suis anxieux."</span></div>
+          <div class="flip-back"><span class="flip-label">VOIR</span><span class="flip-text">"Je remarque de l'anxiété en moi."</span></div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><span class="flip-label">FUSION</span><span class="flip-text">"Je suis nul, je n'y arriverai jamais."</span></div>
+          <div class="flip-back"><span class="flip-label">VOIR</span><span class="flip-text">"Je remarque une pensée : je ne vaux rien."</span></div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><span class="flip-label">FUSION</span><span class="flip-text">"Je suis en danger, je le sens."</span></div>
+          <div class="flip-back"><span class="flip-label">VOIR</span><span class="flip-text">"Je remarque une alarme dans mon corps."</span></div>
+        </div>
+      </div>
+      <div class="flip-card" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><span class="flip-label">FUSION</span><span class="flip-text">"Je suis rejeté — c'est toujours pareil."</span></div>
+          <div class="flip-back"><span class="flip-label">VOIR</span><span class="flip-text">"Je remarque une pensée de rejet qui réactive une peur ancienne."</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="flip-hint">↑ Touchez pour basculer</div>
+
+    <div class="key-insight" style="margin-top:28px;">
+      <span class="ki-icon">💡</span>
+      <div class="ki-text">Ces deux formulations vivent la même émotion — mais depuis deux endroits radicalement différents. La première vous <strong>fusionne</strong> avec le masque. La seconde crée l'espace de <strong>VOIR</strong>. Cet espace, c'est le début de tout.</div>
+    </div>
+    <button class="btn-next" onclick="document.getElementById('s2').scrollIntoView({behavior:'smooth'})">
+      Observateur vs Observé <span class="bn-arrow">→</span>
+    </button>
+  </section>
+
+  <!-- ══ S2 — OBSERVATEUR VS OBSERVÉ ══ -->
+  <section class="section" data-s="2" id="s2">
+    <div class="s-label">Le cœur de VOIR</div>
+    <h2 class="s-title">Vous n'êtes pas<br><em>vos pensées</em></h2>
+    <p class="s-lead">C'est la distinction la plus simple — et la plus révolutionnaire. Il y a ce qui passe en vous. Et il y a ce qui regarde passer. Ces deux réalités ne sont pas la même chose.</p>
+
+    <div class="observer-world">
+      <div class="world-panel world-observé">
+        <span class="world-tag">L'Observé</span>
+        <div class="world-title">Ce qui passe</div>
+        <div class="world-items">
+          <div class="world-item"><span class="wi-dot"></span>Vos pensées — "je suis nul", "ça va mal tourner"</div>
+          <div class="world-item"><span class="wi-dot"></span>Vos émotions — peur, honte, colère, tristesse</div>
+          <div class="world-item"><span class="wi-dot"></span>Vos sensations — nœud au ventre, tension, oppression</div>
+          <div class="world-item"><span class="wi-dot"></span>Vos masques de défense — fuir, contrôler, plaire</div>
+          <div class="world-item"><span class="wi-dot"></span>Vos scénarios — projections, ruminations, anticipations</div>
+        </div>
+        <div class="world-footer">Transitoire · changeant · construit par l'histoire</div>
+      </div>
+      <div class="world-panel world-observateur">
+        <span class="world-tag">L'Observateur</span>
+        <div class="world-title">Ce qui reste</div>
+        <div class="world-items">
+          <div class="world-item"><span class="wi-dot"></span>Stable — ne change pas même quand tout tremble</div>
+          <div class="world-item"><span class="wi-dot"></span>Spacieux — peut contenir toutes les émotions sans être submergé</div>
+          <div class="world-item"><span class="wi-dot"></span>Présent — toujours ici et maintenant, témoin de tout</div>
+          <div class="world-item"><span class="wi-dot"></span>Neutre — observe avec curiosité, sans jugement</div>
+          <div class="world-item"><span class="wi-dot"></span>Permanent — là quelles que soient les vagues qui passent</div>
+        </div>
+        <div class="world-footer">Continu · inchangé · votre vraie nature</div>
+      </div>
+    </div>
+
+    <div class="sky-metaphor">
+      <div class="sky-cloud-label">Pensées · émotions · masques</div>
+      <div class="sky-cloud"></div>
+      <div class="sky-cloud"></div>
+      <div class="sky-cloud"></div>
+      <div class="sky-label">Votre observateur<br>intérieur</div>
+      <div class="sky-observer">👁</div>
+    </div>
+
+    <div class="quote-block">
+      <div class="qb-text">"C'est la part de vous qui ne change pas pendant que tout le reste change. Celle qui peut dire : il y a de la colère en moi en ce moment — plutôt que : je suis en colère."</div>
+      <div class="qb-source">Conscience Observatrice — Méthode V.A.L.E.U.R©</div>
+    </div>
+
+    <p style="font-size:.92rem;color:var(--muted);line-height:1.75;margin:20px 0;">La conscience observatrice n'est pas un concept à comprendre. C'est une expérience à <em>reconnaître</em>. Vous l'avez déjà vécu — ces instants où vous vous êtes vu réagir et où, l'espace d'une seconde, vous avez pensé : <em>"c'est bizarre, ce n'est pas vraiment moi qui parle là."</em> C'était votre observateur.</p>
+
+    <div class="key-insight">
+      <span class="ki-icon">✦</span>
+      <div class="ki-text"><strong>La conscience observatrice n'est pas quelque chose à créer.</strong> Elle est déjà là. Elle a toujours été là. Ce module vous apprend seulement à la reconnaître — et à l'activer délibérément.</div>
+    </div>
+  </section>
+
+  <!-- ══ S2b — LA FUSION COGNITIVE ══ -->
+  <section class="section" id="s2b">
+    <div class="s-label">Concept clé — à comprendre avant tout</div>
+    <h2 class="s-title">La fusion cognitive —<br><em>quand vous devenez votre pensée</em></h2>
+    <p class="s-lead">Vous avez probablement déjà entendu : <em>"arrête de te prendre la tête."</em> Comme si c'était simple. Si ce n'est pas simple, c'est parce qu'il se passe quelque chose de précis dans votre cerveau — quelque chose qui a un nom : la <strong style="color:var(--red);">fusion cognitive.</strong></p>
+
+    <!-- Définition -->
+    <div style="border-radius:18px;overflow:hidden;margin:24px 0;">
+      <div style="background:rgba(229,62,62,.05);border:1px solid rgba(229,62,62,.15);padding:24px;border-radius:18px 18px 0 0;">
+        <div style="font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:rgba(229,62,62,.6);margin-bottom:14px;font-weight:700;">Définition simple</div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:clamp(1rem,2.5vw,1.2rem);color:var(--text);line-height:1.65;">La fusion cognitive, c'est quand vous <strong>fusionnez</strong> avec une pensée — au point de croire qu'elle est la réalité. Qu'elle est une vérité absolue. Qu'elle est vous.</div>
+      </div>
+      <div style="background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-top:none;padding:18px 24px;border-radius:0 0 18px 18px;">
+        <div style="font-size:.87rem;color:var(--muted);line-height:1.75;">Quand vous pensez <em style="color:var(--text);">"je suis incapable"</em> — vous ne vous demandez pas si c'est vrai. Vous y croyez. Comme si c'était votre propre voix qui parlait, vous êtes infiniment moins critique avec elle qu'avec n'importe qui d'autre. Et c'est exactement ce piège que la méthode V.A.L.E.U.R© vous apprend à déjouer.</div>
+      </div>
+    </div>
+
+    <!-- Distinction capitale -->
+    <div style="font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:600;">La distinction qui change tout ↓</div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:4px;margin-bottom:24px;border-radius:14px;overflow:hidden;">
+      <div style="background:rgba(229,62,62,.06);border:1px solid rgba(229,62,62,.15);padding:18px 20px;">
+        <div style="font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(229,62,62,.6);font-weight:700;margin-bottom:10px;">⚡ Fusion — faux</div>
+        <div style="font-size:.92rem;color:rgba(229,62,62,.8);font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.6;">"Je suis en colère."<br>"Je suis effrayé·e."<br>"Je suis incapable."<br>"Je suis en danger."</div>
+        <div style="font-size:.76rem;color:var(--muted);margin-top:10px;line-height:1.5;">Vous <em>êtes</em> l'émotion. Elle vous définit. Elle vous dicte quoi faire.</div>
+      </div>
+      <div style="background:rgba(201,168,76,.05);border:1px solid rgba(201,168,76,.18);padding:18px 20px;">
+        <div style="font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:rgba(201,168,76,.7);font-weight:700;margin-bottom:10px;">✦ Observation — vrai</div>
+        <div style="font-size:.92rem;color:rgba(201,168,76,.9);font-family:'Cormorant Garamond',serif;font-style:italic;line-height:1.6;">"Il y a de la colère en moi."<br>"Je remarque de la peur."<br>"Je me dis que je suis incapable."<br>"Mon masque perçoit un danger."</div>
+        <div style="font-size:.76rem;color:var(--muted);margin-top:10px;line-height:1.5;">L'émotion vous <em>traverse</em>. Elle a un début et une fin. Elle ne vous définit pas.</div>
+      </div>
+    </div>
+
+    <!-- Explication pourquoi c'est difficile -->
+    <div class="key-insight">
+      <span class="ki-icon">🧠</span>
+      <div class="ki-text"><strong>Pourquoi c'est si difficile de ne pas fusionner ?</strong> Parce que c'est <em>votre propre voix</em> qui vous parle. Avec une autre personne, vous écoutez et vous décidez. Avec votre dialogue intérieur, vous êtes généralement d'accord avec presque tout ce que vous pensez — sans le questionner. La fusion est automatique. La défusion, elle, s'apprend.</div>
+    </div>
+
+    <!-- 3 phrases révélatrices -->
+    <div style="margin:24px 0;">
+      <div style="font-size:.78rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:14px;font-weight:600;">Trois formulations qui révèlent une fusion en cours ↓</div>
+      <div style="display:flex;flex-direction:column;gap:8px;">
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 18px;display:flex;gap:14px;align-items:center;">
+          <span style="color:rgba(229,62,62,.5);font-size:1.1rem;flex-shrink:0;">→</span>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--text);margin-bottom:4px;">"Je suis comme ça, j'ai toujours été comme ça."</div>
+            <div style="font-size:.76rem;color:var(--muted);line-height:1.5;">La pensée est prise pour une identité permanente — alors que c'est votre masque qui parle depuis une peur ancienne.</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 18px;display:flex;gap:14px;align-items:center;">
+          <span style="color:rgba(229,62,62,.5);font-size:1.1rem;flex-shrink:0;">→</span>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--text);margin-bottom:4px;">"Je sais que ça va mal tourner."</div>
+            <div style="font-size:.76rem;color:var(--muted);line-height:1.5;">Une anticipation anxieuse est traitée comme un fait réel. L'urgence que ça crée est neurobiologiquement réelle — mais la menace, elle, ne l'est pas.</div>
+          </div>
+        </div>
+        <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:14px 18px;display:flex;gap:14px;align-items:center;">
+          <span style="color:rgba(229,62,62,.5);font-size:1.1rem;flex-shrink:0;">→</span>
+          <div>
+            <div style="font-family:'Cormorant Garamond',serif;font-size:.95rem;font-style:italic;color:var(--text);margin-bottom:4px;">"Je dois absolument contrôler / réparer / fuir / savoir."</div>
+            <div style="font-size:.76rem;color:var(--muted);line-height:1.5;">Le sentiment d'urgence est tel que votre masque dicte déjà la direction à suivre — avant même que vous ayez pu y réfléchir.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ce que la défusion n'est pas -->
+    <div style="background:rgba(201,168,76,.04);border:1px solid rgba(201,168,76,.14);border-radius:16px;padding:20px 22px;margin-bottom:8px;">
+      <div style="font-size:.68rem;letter-spacing:2.5px;text-transform:uppercase;color:rgba(201,168,76,.6);font-weight:700;margin-bottom:10px;">Important — ce que VOIR ne demande pas</div>
+      <div style="font-size:.87rem;color:var(--muted);line-height:1.75;">VOIR ne vous demande pas de supprimer vos pensées. Pas d'être positif·ve. Pas de faire semblant que ça va. Il vous demande seulement de <strong style="color:var(--text);">voir la pensée comme une pensée</strong> — pas comme une vérité. De voir l'émotion comme une émotion — pas comme vous. La souffrance peut rester là. Elle a juste besoin d'un témoin, pas d'un otage.</div>
+    </div>
+  </section>
+
+  <!-- ══ S3 — FUSION VS OBSERVATION ══ -->
+  <section class="section" data-s="3" id="s3">
+    <div class="s-label">Basculement</div>
+    <h2 class="s-title">Deux façons de vivre<br><em>la même émotion</em></h2>
+    <p class="s-lead">Le masque parle toujours depuis la fusion. L'observateur crée toujours de l'espace. La différence ne se fait pas dans l'émotion ressentie — elle se fait dans le langage intérieur qui l'accompagne.</p>
+
+    <div class="fusion-intro">
+      <span class="fi-icon">👆</span>
+      <div class="fi-text">Lisez chaque phrase — puis appuyez pour révéler si elle reflète la <span style="color:var(--red)">fusion</span> ou <span style="color:var(--gold)">l'observation</span>. Reconnaissez-vous vos propres formulations ?</div>
+    </div>
+
+    <div class="fusion-grid">
+      <div class="fcard" onclick="revealFcard(this,'fusion','🔴 Fusion — vous êtes le masque','Le masque Rouge parle à travers vous. Vous êtes devenu l\'alarme.')">
+        <div class="fc-text">"Je suis malade, je le sens dans mon corps."</div>
+        <div class="fc-prompt">Appuyez pour révéler →</div>
+        <div class="fc-verdict">🔴 Fusion</div>
+        <div class="fc-explain"></div>
+      </div>
+      <div class="fcard" onclick="revealFcard(this,'obs','✦ Observation — l\'observateur est actif','Vous nommez la sensation sans lui obéir. Votre masque Rouge est visible.')">
+        <div class="fc-text">"Je remarque une anxiété dans mon corps — mon masque Rouge s'active."</div>
+        <div class="fc-prompt">Appuyez pour révéler →</div>
+        <div class="fc-verdict">✦ Observation</div>
+        <div class="fc-explain"></div>
+      </div>
+      <div class="fcard" onclick="revealFcard(this,'fusion','🟢 Fusion — vous êtes la peur','Votre masque Vert vous fait croire que le silence de l\'autre est une condamnation.')">
+        <div class="fc-text">"Il ne répond pas — c'est qu'il ne m'aime plus."</div>
+        <div class="fc-prompt">Appuyez pour révéler →</div>
+        <div class="fc-verdict">🔴 Fusion</div>
+        <div class="fc-explain"></div>
+      </div>
+      <div class="fcard" onclick="revealFcard(this,'obs','✦ Observation — distance créée','Vous reconnaissez votre masque Vert sans vous y dissoudre.')">
+        <div class="fc-text">"Je remarque une pensée catastrophiste — mon masque Vert s'active face au silence."</div>
+        <div class="fc-prompt">Appuyez pour révéler →</div>
+        <div class="fc-verdict">✦ Observation</div>
+        <div class="fc-explain"></div>
+      </div>
+      <div class="fcard" onclick="revealFcard(this,'fusion','🟡 Fusion — le masque aux commandes','Votre masque Jaune confond l\'imprévu avec la menace.')">
+        <div class="fc-text">"Je dois tout prévoir — sinon quelque chose de grave va arriver."</div>
+        <div class="fc-prompt">Appuyez pour révéler →</div>
+        <div class="fc-verdict">🔴 Fusion</div>
+        <div class="fc-explain"></div>
+      </div>
+      <div class="fcard" onclick="revealFcard(this,'obs','✦ Observation — lucidité','Vous voyez votre masque Jaune à l\'œuvre sans lui obéir automatiquement.')">
+        <div class="fc-text">"Je remarque l'envie de tout contrôler — mon masque Jaune réagit à l'incertitude."</div>
+        <div class="fc-prompt">Appuyez pour révéler →</div>
+        <div class="fc-verdict">✦ Observation</div>
+        <div class="fc-explain"></div>
+      </div>
+      <div class="fcard" onclick="revealFcard(this,'fusion','🟣 Fusion — identité submergée','Votre masque Indigo vous présente l\'échec comme votre identité.')">
+        <div class="fc-text">"Je suis incapable. Je rate toujours tout."</div>
+        <div class="fc-prompt">Appuyez pour révéler →</div>
+        <div class="fc-verdict">🔴 Fusion</div>
+        <div class="fc-explain"></div>
+      </div>
+      <div class="fcard" onclick="revealFcard(this,'obs','✦ Observation — vraie nature préservée','Vous distinguez une pensée passagère de votre vraie nature.')">
+        <div class="fc-text">"Je remarque une pensée d'échec — ce n'est pas ma vraie nature, c'est mon masque Indigo."</div>
+        <div class="fc-prompt">Appuyez pour révéler →</div>
+        <div class="fc-verdict">✦ Observation</div>
+        <div class="fc-explain"></div>
+      </div>
+    </div>
+
+    <div class="glass" style="margin-top:8px;">
+      <div style="font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;">À retenir</div>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.75;">La fusion n'est pas un échec — c'est simplement un signal. Le simple fait de remarquer <em>"ah, je suis en train de fusionner"</em> est déjà un premier acte de conscience observatrice. <strong style="color:var(--text)">La reconnaissance, c'est déjà VOIR.</strong></p>
+    </div>
+    <button class="btn-next" onclick="document.getElementById('s3b').scrollIntoView({behavior:'smooth'})">
+      Votre masque dort <span class="bn-arrow">→</span>
+    </button>
+  </section>
+
+  <!-- ══ S3b — VOTRE MASQUE DORT ══ -->
+  <section class="section" id="s3b">
+    <div class="s-label">Révélation essentielle</div>
+    <h2 class="s-title">Votre masque dort —<br><em>jusqu'à ce que quelque chose le réveille</em></h2>
+    <p class="s-lead">Voici ce que personne ne vous dit jamais — et qui change tout : votre masque n'est pas actif en permanence. Il est en veille. La plupart du temps, vous êtes simplement vous. Et puis quelque chose arrive. Et le masque se réveille.</p>
+
+    <div class="relief-banner">
+      <div class="rb-top">
+        <div class="rb-label">✦ Un soulagement d'abord</div>
+        <div class="rb-big">Vous n'êtes pas <strong>toujours</strong> anxieux·se. Vous n'êtes pas <strong>fondamentalement</strong> abîmé. Vous n'êtes pas <strong>condamné·e</strong> à réagir comme ça.</div>
+      </div>
+      <div class="rb-bottom">
+        <div class="rb-sub">Vous êtes quelqu'un qui a un masque — qui se réveille dans certaines conditions précises. Ce n'est pas la même chose. Et ces conditions, elles ont un nom : ce sont vos <strong style="color:var(--text)">déclencheurs</strong>.</div>
+      </div>
+    </div>
+
+    <p style="font-size:.92rem;color:var(--muted);line-height:1.75;margin:20px 0;">Voici comment les choses se passent réellement — et pourquoi VOIR commence par là :</p>
+
+    <div class="logic-chain">
+      <div class="lc-row">
+        <div class="lc-box lc-trigger">
+          <div class="lc-label">1. Le déclencheur</div>
+          <div class="lc-val">Quelque chose se produit — un message, un regard, un silence, une sensation.</div>
+          <div class="lc-sub">C'est lui qui réveille tout le reste.</div>
+        </div>
+      </div>
+      <div class="lc-row">
+        <div class="lc-arrow"><div class="lc-arrow-line"></div><div class="lc-arrow-head">▾</div></div>
+        <div class="lc-box lc-peur" style="margin-left:0;flex:1;">
+          <div class="lc-label">2. La peur universelle se réveille</div>
+          <div class="lc-val">Le cerveau archaïque perçoit une menace sur votre besoin fondamental — rejet, échec, maladie, perte de contrôle…</div>
+        </div>
+      </div>
+      <div class="lc-row">
+        <div class="lc-arrow"><div class="lc-arrow-line"></div><div class="lc-arrow-head">▾</div></div>
+        <div class="lc-box lc-masque" style="margin-left:0;flex:1;">
+          <div class="lc-label">3. Le masque s'active</div>
+          <div class="lc-val">Votre stratégie de protection entre en scène — automatiquement, sans que vous l'ayez décidé.</div>
+        </div>
+      </div>
+      <div class="lc-row">
+        <div class="lc-arrow"><div class="lc-arrow-line"></div><div class="lc-arrow-head">▾</div></div>
+        <div class="lc-box lc-comport" style="margin-left:0;flex:1;">
+          <div class="lc-label">4. Le comportement automatique</div>
+          <div class="lc-val">Vous fuyez, contrôlez, plaisez, vérifiez, compensez. Depuis le masque — pas depuis vous.</div>
+          <div class="lc-sub">C'est ici que VOIR intervient. <span class="voir-badge-inline">↑ L'espace de liberté</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-insight">
+      <span class="ki-icon">💡</span>
+      <div class="ki-text"><strong>Ce que VOIR vous demande en premier :</strong> repérer le déclencheur — le signal qui a tout mis en marche. Pas analyser, pas comprendre l'origine. Juste nommer : <em style="color:var(--gold);">"quelque chose vient de réveiller mon masque."</em></div>
+    </div>
+  </section>
+
+  <!-- ══ S3c — QU'EST-CE QU'UN DÉCLENCHEUR ══ -->
+  <section class="section" id="s3c">
+    <div class="s-label">Anatomie du signal</div>
+    <h2 class="s-title">Qu'est-ce qu'un<br><em>déclencheur ?</em></h2>
+    <p class="s-lead">Un déclencheur n'est pas la cause de votre souffrance. C'est le signal d'alarme qui réveille une peur qui était déjà là, en attente. Il peut venir de l'extérieur — ou de l'intérieur de vous.</p>
+
+    <div style="font-size:.8rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:12px;font-weight:600;">Appuyez sur chaque tag pour voir quel masque il active typiquement ↓</div>
+
+    <div class="trigger-cols">
+      <div class="tc-panel tc-ext">
+        <div class="tc-title">⚡ Déclencheurs externes</div>
+        <div class="tc-tags">
+          <div class="tc-tag" onclick="revealTag(this)">Un silence prolongé<div class="tc-tooltip">Active souvent le Masque Vert — peur du rejet</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Une critique reçue<div class="tc-tooltip">Active souvent le Masque Indigo — peur de l'échec</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Un regard perçu<div class="tc-tooltip">Active souvent le Masque Vert ou Indigo — peur du jugement</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Un changement imprévu<div class="tc-tooltip">Active souvent le Masque Jaune — peur de l'inconnu</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Une information médicale<div class="tc-tooltip">Active souvent le Masque Rouge — peur de la maladie</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Un conflit en cours<div class="tc-tooltip">Active souvent le Masque Bleu — peur de l'impuissance</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Une décision à prendre<div class="tc-tooltip">Active souvent le Masque Jaune — besoin de tout contrôler</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Être ignoré ou mis de côté<div class="tc-tooltip">Active souvent le Masque Vert — peur de l'abandon</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Un regard de désapprobation<div class="tc-tooltip">Active souvent le Masque Orange — peur de la souffrance émotionnelle</div></div>
+        </div>
+      </div>
+      <div class="tc-panel tc-int">
+        <div class="tc-title">🧠 Déclencheurs internes</div>
+        <div class="tc-tags">
+          <div class="tc-tag" onclick="revealTag(this)">Une sensation physique bizarre<div class="tc-tooltip">Active souvent le Masque Rouge — hypervigilance somatique</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Un souvenir douloureux<div class="tc-tooltip">Active souvent le Masque Orange — peur de revivre la souffrance</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Une pensée "et si…"<div class="tc-tooltip">Active souvent le Masque Jaune — rumination anticipatoire</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Un sentiment de vide<div class="tc-tooltip">Active souvent le Masque Violet — angoisse existentielle</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">L'image d'un échec passé<div class="tc-tooltip">Active souvent le Masque Indigo — peur de répéter l'échec</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Un rêve anxiogène<div class="tc-tooltip">Peut activer plusieurs masques selon le contenu</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">Une accélération cardiaque<div class="tc-tooltip">Active souvent le Masque Rouge — interprétation catastrophiste</div></div>
+          <div class="tc-tag" onclick="revealTag(this)">L'impression de ne pas être à sa place<div class="tc-tooltip">Active souvent le Masque Violet — peur de perte d'identité</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote-block-red quote-block" style="margin-top:20px;">
+      <div class="qb-text">"Le déclencheur ne crée pas la peur. Il la révèle. La peur était déjà là, en attente d'un signal."</div>
+      <div class="qb-source">Méthode V.A.L.E.U.R© · Fondements de VOIR</div>
+    </div>
+
+    <div class="key-insight">
+      <span class="ki-icon">🔍</span>
+      <div class="ki-text">Reconnaître vos déclencheurs habituels, c'est <strong>anticiper</strong> le réveil du masque. Avant même qu'il soit aux commandes, vous savez déjà : <em style="color:var(--gold);">"Ah — c'est ce type de situation qui réveille ma peur."</em> C'est ça, VOIR en amont.</div>
+    </div>
+  </section>
+
+  <!-- ══ S3d — LE CYCLE INVISIBLE ══ -->
+  <section class="section" id="s3d">
+    <div class="s-label">Neurobiologie accessible</div>
+    <h2 class="s-title">Le cycle invisible —<br><em>ce qui se passe à votre insu</em></h2>
+    <p class="s-lead">Vous n'avez aucune prise sur les trois premières étapes. Elles se déroulent avant que votre conscience puisse intervenir. Ce n'est pas de la faiblesse — c'est de la biologie. Découvrez-les une par une.</p>
+
+    <div class="cycle-stepper">
+      <div class="cs-dots-track" id="cs-dots" style="margin-bottom:18px;">
+        <div class="cs-dot active" onclick="goCsStep(0)"></div>
+        <div class="cs-dot" onclick="goCsStep(1)"></div>
+        <div class="cs-dot" onclick="goCsStep(2)"></div>
+        <div class="cs-dot" onclick="goCsStep(3)"></div>
+      </div>
+
+      <div class="cs-track">
+        <!-- Étape 1 -->
+        <div class="cs-step-item active" id="cs0">
+          <div class="cs-card cs-card-1">
+            <div class="cs-step-num">Étape 1 / 4 — Le déclencheur</div>
+            <div class="cs-step-title">Quelque chose arrive</div>
+            <div class="cs-step-body">Un événement se produit — interne ou externe. Un message. Un regard. Une pensée. Une sensation. Il n'a pas besoin d'être objectivement dangereux pour déclencher la chaîne. Il suffit qu'il <em>ressemble</em> à quelque chose que votre cerveau a appris à craindre.</div>
+            <div class="cs-neuro">
+              <span class="cs-neuro-icon">🧠</span>
+              <div class="cs-neuro-text">Le cortex préfrontal — siège de la raison — n'a pas encore reçu l'information. Vous n'avez pas encore "décidé" quoi que ce soit.</div>
+            </div>
+            <div class="cs-voir-moment" id="cs-voir-0">
+              <strong style="color:var(--gold);">VOIR ici :</strong> Nommer le déclencheur — "ce message vient de réveiller quelque chose en moi."
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 2 -->
+        <div class="cs-step-item" id="cs1">
+          <div class="cs-card cs-card-2">
+            <div class="cs-step-num">Étape 2 / 4 — Le scan automatique</div>
+            <div class="cs-step-title">0,2 secondes — votre cerveau décide</div>
+            <div class="cs-step-body">L'amygdale — votre détecteur de danger — scanne la situation en une fraction de seconde. Elle compare avec des expériences passées stockées dans la mémoire émotionnelle. Si elle détecte une ressemblance avec un danger ancien, elle envoie l'alarme. Vous n'avez rien décidé. Ça s'est fait tout seul.</div>
+            <div class="cs-neuro">
+              <span class="cs-neuro-icon">⚡</span>
+              <div class="cs-neuro-text">Ce scan est plus rapide que votre conscience. Il se produit avant que vous puissiez "raisonner" sur la situation. C'est pourquoi vous ne pouvez pas "juste vous calmer" sur commande.</div>
+            </div>
+            <div class="cs-voir-moment" id="cs-voir-1">
+              <strong style="color:var(--gold);">VOIR ici :</strong> Reconnaître l'alarme sans lui obéir — "mon système nerveux vient de percevoir un danger. Est-il réel ?"
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 3 -->
+        <div class="cs-step-item" id="cs2">
+          <div class="cs-card cs-card-3">
+            <div class="cs-step-num">Étape 3 / 4 — La réaction corporelle</div>
+            <div class="cs-step-title">Le corps répond avant la pensée</div>
+            <div class="cs-step-body">Le corps reçoit le signal d'alarme et se prépare à la survie. Rythme cardiaque accéléré, tension musculaire, oppression thoracique, nœud au ventre, chaleur ou froid soudain. Ce sont des signaux de protection — pas des preuves que quelque chose va mal. Ce n'est pas un choix. Ce n'est pas un défaut.</div>
+            <div class="cs-neuro">
+              <span class="cs-neuro-icon">💓</span>
+              <div class="cs-neuro-text">Le système nerveux autonome prend le relais. Il prépare le corps à fuir ou combattre. Vous ne pouvez pas "décider" de ne pas avoir ces sensations — mais vous pouvez apprendre à les nommer sans les redouter.</div>
+            </div>
+            <div class="cs-voir-moment" id="cs-voir-2">
+              <strong style="color:var(--gold);">VOIR ici :</strong> Nommer la sensation — "je remarque de la tension dans mes épaules" — sans l'interpréter comme une catastrophe.
+            </div>
+          </div>
+        </div>
+
+        <!-- Étape 4 -->
+        <div class="cs-step-item" id="cs3">
+          <div class="cs-card cs-card-4">
+            <div class="cs-step-num">Étape 4 / 4 — Le masque s'active</div>
+            <div class="cs-step-title">La stratégie de survie entre en scène</div>
+            <div class="cs-step-body">Votre masque dominant répond à la peur par son comportement automatique — fuir, contrôler, plaire, vérifier, performer, s'effacer. Sans que vous l'ayez choisi. C'est ici — <strong style="color:var(--text)">entre l'étape 3 et l'étape 4</strong> — que l'espace de VOIR existe. Cet espace est parfois d'une fraction de seconde. Mais il est toujours là.</div>
+            <div class="cs-neuro">
+              <span class="cs-neuro-icon">🎭</span>
+              <div class="cs-neuro-text">Le masque n'est pas vous — c'est une réponse apprise, automatisée, efficace à l'époque où votre cerveau l'a construite. Il croit encore vous protéger.</div>
+            </div>
+            <div class="cs-voir-moment show" id="cs-voir-3">
+              <strong style="color:var(--gold);">C'est ici que VOIR intervient :</strong> nommer le masque avant d'agir depuis lui — "je remarque mon masque [couleur] qui s'active." Cet acte seul crée l'espace de liberté.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cs-nav">
+        <button class="btn-cs btn-cs-prev" id="btn-cs-prev" onclick="navCs(-1)" style="visibility:hidden;">← Précédent</button>
+        <span class="cs-counter" id="cs-counter">1 / 4</span>
+        <button class="btn-cs btn-cs-next" id="btn-cs-next" onclick="navCs(1)">Suivant →</button>
+      </div>
+    </div>
+
+    <div class="glass glass-gold" style="margin-top:8px;">
+      <div style="font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:10px;font-weight:600;">La règle fondamentale</div>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.75;">Vous n'êtes responsable d'aucune des 3 premières étapes. Vous êtes seulement responsable de ce que vous faites à partir de l'étape 4. Et VOIR est le premier outil pour exercer cette responsabilité — non pas avec culpabilité, mais avec <strong style="color:var(--text)">conscience bienveillante.</strong></p>
+    </div>
+  </section>
+
+  <!-- ══ S3e — 3 HISTOIRES : L'OBSERVATEUR EN ACTION ══ -->
+  <section class="section" id="s3e">
+    <div class="s-label">La conscience observatrice en action</div>
+    <h2 class="s-title">3 histoires —<br><em>le même déclencheur, deux destins</em></h2>
+    <p class="s-lead">Voici ce que le cycle invisible ressemble dans la vie réelle — et ce que VOIR change concrètement. Trois personnes. Trois masques. Trois déclencheurs. Ce qui se passe sans VOIR, et avec VOIR.</p>
+
+    <div class="vignette-tabs">
+      <div class="vtab active-indigo" onclick="showVig(this,'indigo')">🟣 Thomas — Masque Indigo</div>
+      <div class="vtab" onclick="showVig(this,'vert')">🟢 Sophie — Masque Vert</div>
+      <div class="vtab" onclick="showVig(this,'rouge')">🔴 Marc — Masque Rouge</div>
+    </div>
+
+    <!-- Thomas Indigo -->
+    <div class="vignette-panel active" id="vig-indigo">
+      <div class="vig-scene">
+        <div class="vig-auto">
+          <div class="vig-badge">⚡ Sans VOIR — pilote automatique</div>
+          <div class="vig-trigger">Déclencheur : son collègue reçoit une promotion que Thomas espérait</div>
+          <div class="vig-text">Thomas apprend la nouvelle en réunion. Quelque chose se serre en lui. Immédiatement, son cerveau scanne : <em>"je ne suis pas assez bien."</em> Son corps se tait, ses épaules se crispent. En rentrant chez lui ce soir, il travaille jusqu'à 23h sur un dossier que personne ne lui a demandé. Il ne sait pas pourquoi. Il croit "être professionnel".</div>
+          <div class="vig-chain">
+            <span class="vc-pill vc-trigger">Promotion du collègue</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-scan">Scan : "je suis inférieur"</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-corps">Tension · repli</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-masque">Surperformance compensatoire</span>
+          </div>
+        </div>
+        <div class="vig-voir">
+          <div class="vig-badge">✦ Avec VOIR — l'observateur actif</div>
+          <div class="vig-text">Thomas sent la tension monter. Cette fois, une part de lui remarque : <em>"ah — je suis en train de me sentir insuffisant. Mon masque Indigo vient de s'activer."</em> Il ne supprime rien. La douleur est là. Mais il ne travaille pas jusqu'à 23h pour la noyer. Il pose une seule question : <em>"qu'est-ce que j'ai vraiment besoin de faire ce soir ?"</em></div>
+          <div class="vig-chain">
+            <span class="vc-pill vc-trigger">Même déclencheur</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-scan">Même scan</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-corps">Même sensation</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-masque" style="background:rgba(201,168,76,.1);color:rgba(201,168,76,.9);border-color:rgba(201,168,76,.25);">Choix conscient</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sophie Vert -->
+    <div class="vignette-panel" id="vig-vert">
+      <div class="vig-scene">
+        <div class="vig-auto">
+          <div class="vig-badge">⚡ Sans VOIR — pilote automatique</div>
+          <div class="vig-trigger">Déclencheur : son ami ne répond pas à son message depuis 2 heures</div>
+          <div class="vig-text">Sophie regarde son téléphone pour la sixième fois. Son cerveau scanne : <em>"il m'en veut — j'ai dit quelque chose de mal."</em> Un nœud s'installe dans son ventre. Elle lui envoie un deuxième message pour "vérifier". Puis un troisième, plus long, qui s'excuse d'avance. Elle ne sait pas de quoi. Elle croit "maintenir la relation".</div>
+          <div class="vig-chain">
+            <span class="vc-pill vc-trigger">Silence de 2h</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-scan">Scan : "il m'en veut"</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-corps">Nœud au ventre</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-masque">3 messages · excuse préventive</span>
+          </div>
+        </div>
+        <div class="vig-voir">
+          <div class="vig-badge">✦ Avec VOIR — l'observateur actif</div>
+          <div class="vig-text">Sophie remarque l'impulsion d'envoyer un deuxième message. Une part d'elle observe : <em>"je remarque une pensée — il ne m'aime plus. Mon masque Vert vient de s'activer face à ce silence."</em> Elle pose son téléphone. Elle ne sait pas encore si son ami est fâché. Mais elle sait que sa réaction appartient à son masque — pas à la réalité.</div>
+          <div class="vig-chain">
+            <span class="vc-pill vc-trigger">Même silence</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-scan">Même scan</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-corps">Même nœud</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-masque" style="background:rgba(201,168,76,.1);color:rgba(201,168,76,.9);border-color:rgba(201,168,76,.25);">Pause · observation</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Marc Rouge -->
+    <div class="vignette-panel" id="vig-rouge">
+      <div class="vig-scene">
+        <div class="vig-auto">
+          <div class="vig-badge">⚡ Sans VOIR — pilote automatique</div>
+          <div class="vig-trigger">Déclencheur interne : une oppression thoracique en lisant un article sur les AVC</div>
+          <div class="vig-text">Marc lit un article de santé. Il ressent une légère gêne dans la poitrine. Son cerveau scanne en 0,2 secondes : <em>"j'ai eu ce symptôme la semaine dernière."</em> L'alarme retentit. Son cœur s'accélère. Il consulte trois sites médicaux, mesure sa tension, appelle son médecin. La gêne disparaît — mais revient dès le lendemain avec le prochain article.</div>
+          <div class="vig-chain">
+            <span class="vc-pill vc-trigger">Article + gêne thoracique</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-scan">Scan : "danger grave"</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-corps">Cœur accéléré</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-masque">Vérification · consultation</span>
+          </div>
+        </div>
+        <div class="vig-voir">
+          <div class="vig-badge">✦ Avec VOIR — l'observateur actif</div>
+          <div class="vig-text">Marc sent la gêne. Son observateur remarque : <em>"je remarque une sensation dans mon thorax — et une pensée catastrophiste qui l'accompagne. Mon masque Rouge vient de s'activer."</em> Il pose l'article. Il respire. Il pose la question : <em>"cette gêne est-elle une information médicale — ou mon masque qui interprète ?"</em> Il ne consulte pas encore. Il attend 20 minutes. La gêne passe.</div>
+          <div class="vig-chain">
+            <span class="vc-pill vc-trigger">Même gêne</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-scan">Même alarme</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-corps">Même sensation</span>
+            <span class="vc-arr">→</span>
+            <span class="vc-pill vc-masque" style="background:rgba(201,168,76,.1);color:rgba(201,168,76,.9);border-color:rgba(201,168,76,.25);">Question · attente</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="key-insight" style="margin-top:20px;">
+      <span class="ki-icon">✦</span>
+      <div class="ki-text">Dans les trois histoires, <strong>le déclencheur, le scan et la réaction corporelle sont identiques.</strong> Ce qui change, c'est ce qui se passe à l'étape 4. L'observateur n'efface pas la souffrance — il crée l'espace pour ne pas en être prisonnier.</div>
+    </div>
+  </section>
+
+  <!-- ══ S3f — EXERCICE DE DÉFUSION APPLIQUÉE ══ -->
+  <section class="section" id="s3f">
+    <div class="s-label">Pratique — Défusion appliquée</div>
+    <h2 class="s-title">La salle de cinéma —<br><em>exercice de recul intérieur</em></h2>
+    <p class="s-lead">Cet exercice vient de la thérapie ACT (Steven Hayes). Il vous donne un outil concret pour observer votre propre réaction depuis une position de témoin — pas de victime, pas de juge. De témoin bienveillant.</p>
+
+    <div class="cinema-exercise">
+      <div class="cinema-screen">
+        <div class="cinema-label">✦ Exercice guidé — La salle de cinéma</div>
+        <div class="cinema-progress">
+          <div class="cp-seg active" id="cp0"></div>
+          <div class="cp-seg" id="cp1"></div>
+          <div class="cp-seg" id="cp2"></div>
+          <div class="cp-seg" id="cp3"></div>
+          <div class="cp-seg" id="cp4"></div>
+        </div>
+
+        <div class="cinema-steps">
+          <div class="cstep active" id="cst0">
+            <div class="cstep-num">Étape 1 / 5 · Ancrage</div>
+            <div class="cstep-title">Choisissez votre déclencheur</div>
+            <div class="cstep-text">Pensez à une situation récente — dans les derniers jours — où vous avez réagi fortement. Une réaction que vous avez eue et qui vous a peut-être surpris·e après coup. Un comportement automatique que vous reconnaissez comme celui de votre masque.</div>
+            <div class="cstep-focus">Ne cherchez pas la situation la plus douloureuse. Choisissez une situation ordinaire — suffisamment présente pour que vous puissiez la revivre mentalement.</div>
+          </div>
+
+          <div class="cstep" id="cst1">
+            <div class="cstep-num">Étape 2 / 5 · Le film</div>
+            <div class="cstep-title">Revoyez la scène complète</div>
+            <div class="cstep-text">Fermez les yeux si vous le pouvez. Laissez la scène se rejouer. Le déclencheur arrive. Le scan automatique se fait. La réaction corporelle monte. Le masque entre en scène. Regardez tout cela se dérouler — sans chercher à le modifier.</div>
+            <div class="cstep-focus">Observez le cycle en entier : déclencheur → scan → corps → comportement automatique. Vous n'avez rien à changer pour l'instant. Juste regarder.</div>
+          </div>
+
+          <div class="cstep" id="cst2">
+            <div class="cstep-num">Étape 3 / 5 · La salle</div>
+            <div class="cstep-title">Installez-vous au fond de la salle</div>
+            <div class="cstep-text">Maintenant — imaginez que cette scène se déroule <em>sur un grand écran de cinéma</em>. Vous êtes assis·e au fond de la salle, dans un fauteuil confortable. L'écran est devant vous. Ce que vous voyez sur l'écran, c'est vous — votre masque en action.</div>
+            <div class="cstep-focus">Qui est assis dans ce fauteuil ? Ce n'est pas votre masque. C'est votre observateur. Il regarde — il ne souffre pas, il ne juge pas, il voit.</div>
+          </div>
+
+          <div class="cstep" id="cst3">
+            <div class="cstep-num">Étape 4 / 5 · Le recul</div>
+            <div class="cstep-title">Posez les 3 questions depuis le fauteuil</div>
+            <div class="cstep-text">Depuis votre fauteuil d'observateur — posez ces trois questions à propos de ce qui se passe sur l'écran :</div>
+            <div class="cstep-focus">"Qu'est-ce que mon masque est en train de faire là ?" <br><br>"Quel déclencheur l'a réveillé ?" <br><br>"Y a-t-il une part de moi qui regarde cela — et qui, elle, n'a pas peur ?"</div>
+          </div>
+
+          <div class="cstep" id="cst4">
+            <div class="cstep-num">Étape 5 / 5 · L'ancrage</div>
+            <div class="cstep-title">Revenez avec une phrase</div>
+            <div class="cstep-text">Avant de quitter la salle de cinéma — posez une main sur votre cœur et dites intérieurement cette phrase :</div>
+            <div class="cstep-focus" style="text-align:center;font-size:.95rem;">"Je vois mon masque. Je ne suis pas mon masque.<br>Je vois mon déclencheur. Il ne me définit pas.<br>Il y a en moi une part qui observe — et cette part est libre."</div>
+          </div>
+        </div>
+
+        <div class="cinema-done" id="cinema-done">
+          <div class="cd-icon">✦</div>
+          <div class="cd-text">"L'observateur était là, au fond de la salle, tout du long.<br>Il attend toujours — il suffit de s'y asseoir."</div>
+        </div>
+
+        <div class="cinema-nav">
+          <button class="btn-cinema btn-cinema-prev" id="btn-cin-prev" onclick="navCinema(-1)" style="visibility:hidden;">← Précédent</button>
+          <button class="btn-cinema btn-cinema-next" id="btn-cin-next" onclick="navCinema(1)">Commencer →</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S3g — QUIZ DÉCLENCHEURS ══ -->
+  <section class="section" id="s3g">
+    <div class="s-label">Quiz — La conscience en action</div>
+    <h2 class="s-title">Reconnaissez-vous<br><em>le déclencheur ?</em></h2>
+    <p class="s-lead">5 scénarios tirés de la vie réelle. Pour chacun : identifiez le déclencheur et le masque qui s'active. Ce quiz ne note pas — il entraîne votre observateur.</p>
+
+    <div class="qd-container">
+      <div class="qd-scenario" id="qd-scenario">
+        <div class="qd-progress"><div class="qd-fill" id="qd-fill" style="width:0%"></div></div>
+        <div class="qd-num" id="qd-num">Scénario 1 / 5</div>
+        <div class="qd-scene-label">La scène</div>
+        <div class="qd-scene" id="qd-scene"></div>
+        <div class="qd-question" id="qd-question"></div>
+        <div class="qd-options" id="qd-opts"></div>
+        <div class="qd-expl" id="qd-expl"></div>
+        <div class="qd-nav"><button class="btn-qd-next" id="qd-next" onclick="nextQd()">Scénario suivant →</button></div>
+      </div>
+      <div class="qd-score" id="qd-score">
+        <div class="qd-score-big" id="qd-score-big"></div>
+        <div style="font-size:.8rem;color:var(--muted);margin-top:6px;">scénarios identifiés</div>
+        <div class="qd-score-msg" id="qd-score-msg"></div>
+        <button onclick="restartQd()" style="margin-top:18px;background:rgba(229,62,62,.08);border:1px solid rgba(229,62,62,.25);border-radius:10px;padding:10px 20px;font-family:'Jost',sans-serif;font-size:.85rem;color:var(--red);cursor:pointer;">&#8634; Recommencer</button>
+      </div>
+    </div>
+
+    <!-- Journal prompt -->
+    <div class="journal-prompt-block" style="margin-top:32px;">
+      <div class="jpb-header">
+        <span class="jpb-icon">✍️</span>
+        <div class="jpb-title">Journal guidé — <span>Vos déclencheurs à vous</span></div>
+      </div>
+      <div class="jpb-body">
+        <div style="font-size:.78rem;color:var(--muted);margin-bottom:14px;line-height:1.6;">Prenez 3 minutes. Répondez à ces 3 questions sur votre semaine. Il n'y a pas de bonne réponse — seulement votre vérité du moment.</div>
+        <div class="jpb-prompts">
+          <div class="jp-item">
+            <div class="jp-num">1</div>
+            <div class="jp-text"><strong>Mon déclencheur le plus fréquent cette semaine était…</strong> (une situation, un mot, une sensation, un silence — soyez précis·e)</div>
+          </div>
+          <div class="jp-item">
+            <div class="jp-num">2</div>
+            <div class="jp-text"><strong>Ce déclencheur a réveillé en moi la peur de…</strong> (rejet, échec, maladie, perte de contrôle, abandon…)</div>
+          </div>
+          <div class="jp-item">
+            <div class="jp-num">3</div>
+            <div class="jp-text"><strong>Ce que mon masque m'a fait faire automatiquement…</strong> (fuir, contrôler, plaire, vérifier, me justifier, m'effacer…)</div>
+          </div>
+        </div>
+        <button class="btn-open-journal" onclick="openJournalWithPrompt()">✍️ Ouvrir mon journal et répondre</button>
+      </div>
+    </div>
+  </section>
+  <section class="section" data-s="4" id="s4">
+    <div class="s-label">L'espace entre le stimulus et la réponse</div>
+    <h2 class="s-title">Viktor Frankl —<br><em>le fondement de VOIR</em></h2>
+    <p class="s-lead">Vous connaissez maintenant le cycle. Vous savez que vous n'avez aucune prise sur les trois premières étapes. Ce que Viktor Frankl a découvert — et que la méthode V.A.L.E.U.R© applique — c'est qu'entre l'étape 3 et l'étape 4, il existe toujours un espace. Même infime. Et cet espace, c'est là que tout se joue.</p>
+
+    <div class="frankl-banner">
+      <div class="fb-top">Viktor Frankl — Fondement de VOIR</div>
+      <div class="fb-quote">"Entre le <span class="fb-accent">stimulus</span> et la <span class="fb-accent">réponse</span>, il y a un <span class="fb-gold">espace</span>.<br>Dans cet espace réside notre liberté."</div>
+      <div class="fb-source">Psychologue · Fondateur de la logothérapie</div>
+    </div>
+
+    <div style="font-size:.88rem;color:var(--muted);line-height:1.75;margin-bottom:20px;">VOIR, c'est apprendre à habiter cet espace. Il est souvent très court — parfois une fraction de seconde. Mais il existe. Et avec de la pratique, il grandit.</div>
+
+    <div class="voir-moment">
+      <div class="vm-before">
+        <span class="vm-badge">AVANT VOIR</span>
+        <div class="vm-text">Vous <em>êtes</em> votre masque. La réaction s'impose. Vous agissez depuis la peur sans le savoir. La souffrance vous traverse sans témoin. Vous vous demandez après pourquoi vous avez réagi comme ça.</div>
+      </div>
+      <div class="vm-after">
+        <span class="vm-badge">AVEC VOIR</span>
+        <div class="vm-text">Vous <em>observez</em> votre masque. Un espace s'ouvre entre le déclencheur et votre réponse. Vous choisissez — ou vous choisissez de ne pas choisir. Ce n'est plus automatique. C'est le début de la liberté.</div>
+      </div>
+    </div>
+    <button class="btn-next" onclick="document.getElementById('s5').scrollIntoView({behavior:'smooth'})">
+      Les 3 questions de l'observateur <span class="bn-arrow">→</span>
+    </button>
+  </section>
+
+  <!-- ══ S5 — LES 3 QUESTIONS DE L'OBSERVATEUR ══ -->
+  <section class="section" data-s="5" id="s5">
+    <div class="s-label">Votre outil de base</div>
+    <h2 class="s-title">3 questions pour<br><em>activer l'observateur</em></h2>
+    <p class="s-lead">Dans le feu d'une réaction, vous n'avez pas le temps d'analyser. Mais vous avez toujours le temps de poser trois questions. Ce sont vos ancres — les trois points de retour à vous-même.</p>
+
+    <div class="q3-stack">
+      <div class="q3-card" onclick="toggleQ3(this)">
+        <div class="q3-header">
+          <div class="q3-num">1</div>
+          <div class="q3-question">"Qu'est-ce que je suis en train de faire là ?"</div>
+          <div class="q3-toggle">+</div>
+        </div>
+        <div class="q3-body">
+          <div class="q3-what">Nommer le comportement observable</div>
+          <div class="q3-expl">Cette première question vous demande de nommer ce que vous faites concrètement — pas ce que vous ressentez, pas pourquoi. Juste : quel est le comportement visible depuis l'extérieur en ce moment ?</div>
+          <div class="q3-example">
+            <div class="q3-example-label">Exemple</div>
+            <div class="q3-example-text">"Je suis en train de tout réexpliquer pour convaincre. Je cherche à contrôler la situation."<br>"Je suis en train de m'effacer, de ne plus répondre."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q3-card" onclick="toggleQ3(this)">
+        <div class="q3-header">
+          <div class="q3-num">2</div>
+          <div class="q3-question">"Quel masque est en train de parler ?"</div>
+          <div class="q3-toggle">+</div>
+        </div>
+        <div class="q3-body">
+          <div class="q3-what">Identifier la peur activée</div>
+          <div class="q3-expl">Une fois le comportement nommé, vous pouvez reconnaître quel masque l'alimente. Quel est la peur universelle qui se cache derrière ce que vous venez de nommer ? C'est votre cartographie personnelle — celle que vous connaissez depuis le questionnaire.</div>
+          <div class="q3-example">
+            <div class="q3-example-label">Exemple</div>
+            <div class="q3-example-text">"Je cherche à contrôler — c'est mon masque Jaune. Il a peur de l'incertitude."<br>"Je m'efface — c'est mon masque Vert. Il a peur d'être rejeté."</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="q3-card" onclick="toggleQ3(this)">
+        <div class="q3-header">
+          <div class="q3-num">3</div>
+          <div class="q3-question">"Y a-t-il une part de moi qui observe cela ?"</div>
+          <div class="q3-toggle">+</div>
+        </div>
+        <div class="q3-body">
+          <div class="q3-what">Trouver le fond stable</div>
+          <div class="q3-expl">La troisième question est la plus puissante. Elle vous demande de chercher — même ténu, même minuscule — l'espace intérieur stable qui regarde. Pas pour fuir la réaction. Pour la traverser depuis un endroit plus grand qu'elle.</div>
+          <div class="q3-example">
+            <div class="q3-example-label">Exemple</div>
+            <div class="q3-example-text">"Oui — il y a une part de moi qui voit que je suis en train de fuir. Cette part-là n'a pas peur."<br>"Je remarque mon masque. Je ne suis pas mon masque."</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass glass-gold" style="margin-top:20px;">
+      <div style="font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--gold);margin-bottom:12px;font-weight:600;">Comment les utiliser ?</div>
+      <p style="font-size:.9rem;color:var(--muted);line-height:1.75;">Ces 3 questions ne s'analysent pas — elles se <em>posent</em>. Dans le vif d'une réaction, vous n'avez pas besoin de la bonne réponse. Juste de la question. Le simple fait de la poser crée l'espace. <strong style="color:var(--text)">La question elle-même est l'acte de VOIR.</strong></p>
+    </div>
+  </section>
+
+  <!-- ══ S6 — EXERCICE GUIDÉ ══ -->
+  <section class="section" data-s="6" id="s6">
+    <div class="s-label">Pratique</div>
+    <h2 class="s-title">Rencontrez<br><em>votre observateur</em></h2>
+    <p class="s-lead">Trois minutes. Pas besoin de méditer, pas besoin d'être en paix. Juste de suivre les étapes. C'est votre premier rendez-vous avec la part de vous qui regarde.</p>
+
+    <div class="practice-container">
+      <div class="practice-card">
+        <div class="practice-header">
+          <div class="practice-title">Exercice guidé — L'Observateur</div>
+          <div class="practice-timer-display" id="timer-display">3:00</div>
+        </div>
+        <div class="practice-progress">
+          <div class="pp-dot active" id="pp0"></div>
+          <div class="pp-dot" id="pp1"></div>
+          <div class="pp-dot" id="pp2"></div>
+          <div class="pp-dot" id="pp3"></div>
+        </div>
+
+        <div class="pstep active" id="pstep0">
+          <div class="pstep-num">Étape 1 / 4 · 45 secondes</div>
+          <div class="pstep-title">Installez-vous</div>
+          <div class="pstep-text">Posez vos mains à plat. Relâchez vos épaules. Fermez les yeux si vous le pouvez. Vous n'avez rien à faire — seulement être là.</div>
+          <div class="pstep-breathe expand">
+            <div class="breathe-orb"></div>
+            <span class="breathe-label">Respirez lentement — inspirez 4 secondes, expirez 6 secondes</span>
+          </div>
+        </div>
+
+        <div class="pstep" id="pstep1">
+          <div class="pstep-num">Étape 2 / 4 · 1 minute</div>
+          <div class="pstep-title">Revisitez une réaction récente</div>
+          <div class="pstep-text">Pensez à une situation des derniers jours où vous avez réagi fortement — une contrariété, une anxiété, un conflit. Ne cherchez pas à analyser. Laissez la scène revenir. Qui étiez-vous dans ce moment ? Est-ce que c'était vraiment vous — ou votre masque ?</div>
+          <div class="pstep-breathe normal">
+            <div class="breathe-orb"></div>
+            <span class="breathe-label">Restez avec l'image — sans la fuir, sans vous y perdre</span>
+          </div>
+        </div>
+
+        <div class="pstep" id="pstep2">
+          <div class="pstep-num">Étape 3 / 4 · 1 minute</div>
+          <div class="pstep-title">Cherchez l'observateur</div>
+          <div class="pstep-text">Pendant que cette scène se rejoue dans votre esprit — posez-vous : <em>"y a-t-il en moi une part qui regarde cela, maintenant ?"</em> Elle est peut-être petite, peut-être à peine perceptible. Cherchez-la. Elle est toujours là.</div>
+          <div class="pstep-breathe normal">
+            <div class="breathe-orb"></div>
+            <span class="breathe-label">L'observateur ne juge pas — il regarde seulement</span>
+          </div>
+        </div>
+
+        <div class="pstep" id="pstep3">
+          <div class="pstep-num">Étape 4 / 4 · 15 secondes</div>
+          <div class="pstep-title">Posez votre intention</div>
+          <div class="pstep-text">Avant d'ouvrir les yeux — posez une seule phrase intérieure : <em>"Je remarque mes réactions. Je ne suis pas mes réactions."</em> C'est votre ancre pour la suite du parcours.</div>
+          <div class="pstep-breathe expand">
+            <div class="breathe-orb"></div>
+            <span class="breathe-label">Inspiration profonde — puis expirez lentement</span>
+          </div>
+        </div>
+
+        <div class="practice-complete" id="practice-complete">
+          <div class="pc-icon">✦</div>
+          <div class="pc-title">Vous avez rencontré votre observateur</div>
+          <div class="pc-text">C'est la compétence la plus précieuse que vous puissiez développer. Elle grandit avec la pratique. Chaque fois que vous remarquez un masque sans être ce masque — vous renforcez cette capacité.</div>
+        </div>
+
+        <button class="btn-practice" id="btn-practice" onclick="startPractice()">▶ Démarrer l'exercice guidé</button>
+      </div>
+    </div>
+
+    <div class="glass" style="margin-top:12px;">
+      <div style="font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px;font-weight:600;">Micro-pratique quotidienne (30 secondes)</div>
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.75;margin-bottom:12px;">Tout au long de la journée — quand une émotion surgit — posez-vous cette seule question : <em style="color:var(--text);">"Qu'est-ce que je remarque en moi en ce moment ?"</em></p>
+      <p style="font-size:.88rem;color:var(--muted);line-height:1.75;">Nommez ce que vous remarquez. Une pensée. Une sensation. Un masque. Le simple fait de nommer crée la distance. C'est suffisant pour commencer.</p>
+    </div>
+    <button class="btn-next" onclick="document.getElementById('s7').scrollIntoView({behavior:'smooth'})">
+      Quiz — valider les acquis <span class="bn-arrow">→</span>
+    </button>
+  </section>
+
+  <!-- ══ S7 — QUIZ ══ -->
+  <section class="section" data-s="7" id="s7">
+    <div class="s-label">Validation des acquis</div>
+    <h2 class="s-title">Quiz —<br><em>avez-vous rencontré l'observateur ?</em></h2>
+    <p class="s-lead">4 questions pour ancrer votre compréhension. Ce n'est pas un test — c'est une intégration.</p>
+
+    <div class="quiz-container">
+      <div class="quiz-progress-bar"><div class="qpb-fill" id="qpb" style="width:0%"></div></div>
+      <div class="quiz-card" id="quiz-card">
+        <div class="quiz-q-num" id="q-num">Question 1 / 4</div>
+        <div class="quiz-q-text" id="q-text"></div>
+        <div class="quiz-options" id="q-opts"></div>
+        <div class="quiz-expl" id="q-expl"></div>
+        <div class="quiz-nav"><button class="btn-quiz-next" id="q-next" onclick="nextQ()">Question suivante →</button></div>
+      </div>
+      <div class="quiz-score" id="quiz-score">
+        <div class="score-big" id="score-big"></div>
+        <div class="score-label">bonnes réponses</div>
+        <div class="score-msg" id="score-msg"></div>
+        <button onclick="restartQuiz()" style="margin-top:20px;background:rgba(229,62,62,.1);border:1px solid rgba(229,62,62,.3);border-radius:12px;padding:12px 24px;font-family:'Jost',sans-serif;font-size:.88rem;color:var(--red);cursor:pointer;transition:all .3s;">&#8634; Recommencer le quiz</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ S8 — COMPLÉTION ══ -->
+  <section class="section" data-s="8" id="s8">
+    <div class="s-label">Prêt·e pour la suite</div>
+    <h2 class="s-title"><em>Vous avez fait le premier pas —</em><br>le plus rare</h2>
+    <p class="s-lead">Avant VOIR, on est le masque. Avec VOIR, on le regarde. Cette distinction, qui semble simple, change tout. Elle est le fondement de tous les modules qui suivent.</p>
+
+    <div class="bilan-grid">
+      <div class="bilan-card">
+        <div class="bc-icon">👁</div>
+        <div class="bc-label">Découvert</div>
+        <div class="bc-text">La distinction Observateur&nbsp;/ Observé</div>
+      </div>
+      <div class="bilan-card">
+        <div class="bc-icon">🗣</div>
+        <div class="bc-label">Intégré</div>
+        <div class="bc-text">Le langage de la conscience observatrice</div>
+      </div>
+      <div class="bilan-card">
+        <div class="bc-icon">✦</div>
+        <div class="bc-label">Pratiqué</div>
+        <div class="bc-text">Les 3 questions qui créent l'espace de liberté</div>
+      </div>
+    </div>
+
+    <div class="quote-block" style="margin:28px 0;">
+      <div class="qb-text">"Chaque fois que vous remarquez que vous êtes fusionné — et que vous revenez à l'observation — vous renforcez la capacité la plus précieuse que vous puissiez développer."</div>
+      <div class="qb-source">Méthode V.A.L.E.U.R© — Conscience Observatrice</div>
+    </div>
+
+    <!-- ══ JOURNAL DE BORD UNIFIÉ — MODULE 1 ══ -->
+    <div class="journal-module" id="jm-module1">
+      <div class="jm-header">
+        <span class="jm-header-icon">📓</span>
+        <div class="jm-header-text">
+          <h3>Mon Journal de bord — VOIR</h3>
+          <p>Sauvegardé dans votre parcours complet · Exportable en PDF en fin de parcours</p>
+        </div>
+      </div>
+
+      <!-- Mémo accordéon -->
+      <div class="jm-memo" id="jm-memo-m1">
+        <button class="jm-memo-toggle" onclick="toggleMemo('jm-memo-m1')">
+          <span>🗂 Mémo — Les 5 concepts essentiels de VOIR</span>
+          <span class="jm-memo-chevron">▾</span>
+        </button>
+        <div class="jm-memo-body">
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">1</div>
+            <div class="jm-memo-text"><strong>La fusion cognitive</strong> — quand vous devenez votre pensée et croyez qu'elle est la réalité. Le langage trahit la fusion : "je suis anxieux" vs "je remarque de l'anxiété".</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">2</div>
+            <div class="jm-memo-text"><strong>L'Observateur vs l'Observé</strong> — en vous, il y a ce qui passe (pensées, émotions, masques) et ce qui regarde passer (stable, permanent, votre vraie nature).</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">3</div>
+            <div class="jm-memo-text"><strong>Le cycle invisible en 4 étapes</strong> — déclencheur → scan automatique (0,2s) → réaction corporelle → comportement du masque. Vous n'êtes responsable d'aucune des 3 premières.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">4</div>
+            <div class="jm-memo-text"><strong>L'espace de Frankl</strong> — entre le stimulus et la réponse, il y a toujours un espace. Même infime. VOIR consiste à habiter cet espace avant d'agir depuis le masque.</div>
+          </div>
+          <div class="jm-memo-item">
+            <div class="jm-memo-num">5</div>
+            <div class="jm-memo-text"><strong>Les 3 questions de l'observateur</strong> — "Qu'est-ce que je fais là ?", "Quel masque parle ?", "Y a-t-il une part de moi qui observe ?" Ces questions créent l'espace à elles seules.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 questions M1 -->
+      <div class="jm-questions">
+        <div class="jm-q-label">✍️ Mon bilan — Module 1 · VOIR</div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">Mon déclencheur principal cette semaine était…</div>
+          <textarea class="jm-q-textarea" id="jm-q1-m1" placeholder="Une situation, un mot, un silence, une sensation précise…"></textarea>
+        </div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">Ce que mon masque m'a fait faire automatiquement…</div>
+          <textarea class="jm-q-textarea" id="jm-q2-m1" placeholder="Fuir, contrôler, plaire, vérifier, me justifier, m'effacer…"></textarea>
+        </div>
+        <div class="jm-q-item">
+          <div class="jm-q-text">Ce que j'ai observé en moi pour la première fois…</div>
+          <textarea class="jm-q-textarea" id="jm-q3-m1" placeholder="Un moment où j'ai créé l'espace entre le déclencheur et ma réaction…"></textarea>
+        </div>
+      </div>
+
+      <!-- Réflexion libre -->
+      <div class="jm-libre">
+        <div class="jm-libre-label">📝 Réflexions libres</div>
+        <textarea class="jm-libre-textarea" id="jm-libre-m1" placeholder="Espace libre — ce que ce module a éveillé, une prise de conscience, une résistance, une question qui reste ouverte…"></textarea>
+      </div>
+
+      <!-- Actions -->
+      <div class="jm-actions">
+        <button class="jm-save-btn" onclick="saveJournalV3()">💾 Sauvegarder dans mon journal</button>
+      </div>
+      <div class="jm-saved" id="jm-saved-m1">
+        ✓ Entrée sauvegardée — visible dans votre Journal de bord complet
+      </div>
+    </div>
+
+    <div class="complete-zone">
+      <button class="btn-complete" onclick="completeModule()">
+        &#10003; Terminer VOIR — Débloquer ACCUEILLIR 🟠
+      </button>
+      <p class="complete-sub">Votre progression est sauvegardée automatiquement</p>
+      <div class="unlock-preview" id="unlock-preview">
+        <div class="unlock-dot">A</div>
+        <span>Module 2 — <strong style="color:var(--text)">ACCUEILLIR</strong> · Recevoir sans fuir · débloqué&nbsp;!</span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <p>© Céline Bourbon — Méthode V.A.L.E.U.R© — Tous droits réservés · Reproduction interdite</p>
+</footer>
+
+<button id="journal-fab" onclick="toggleJournal()" aria-label="Journal">✍️</button>
+<div id="journal-overlay" onclick="closeJournal()"></div>
+<div id="journal-drawer">
+  <div class="drawer-handle"></div>
+  <div class="drawer-header">
+    <h2 class="drawer-title">Mon <span>Journal</span></h2>
+    <button class="drawer-close" onclick="closeJournal()">✕</button>
+  </div>
+  <p class="j-date-label" id="j-date"></p>
+  <textarea id="journal-textarea" placeholder="Quel masque avez-vous observé aujourd'hui ? Avez-vous réussi à créer un espace entre le déclencheur et votre réaction ? Décrivez le moment où vous vous êtes vu·e réagir..."></textarea>
+  <div class="j-actions">
+    <button class="j-btn j-save" onclick="saveEntry()">Enregistrer ✓</button>
+    <button class="j-btn j-clear" onclick="document.getElementById('journal-textarea').value=''">Effacer</button>
+  </div>
+  <div class="j-entries" id="j-list"></div>
+</div>
+
+<div id="toast"></div>
+<canvas id="confetti-canvas"></canvas>
+
+<script>
+/* ── ANTI-COPY ── */
+document.addEventListener('contextmenu',e=>e.preventDefault());
+document.addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&['c','u','s','a','p'].includes(e.key.toLowerCase()))e.preventDefault();
+  if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&['i','j'].includes(e.key.toLowerCase())))e.preventDefault();
+});
+document.addEventListener('dragstart',e=>e.preventDefault());
+
+/* ── CONFIG ── */
+const BASE='https://celinebourbon-ux.github.io/HomePageAppliValeur/';
+const MODULES=[
+  {key:'module1',letter:'V',color:'#E53E3E'},
+  {key:'module2',letter:'A',color:'#ED8936'},
+  {key:'module3',letter:'L',color:'#D69E2E'},
+  {key:'module4',letter:'E',color:'#38A169'},
+  {key:'module5',letter:'U',color:'#3182CE'},
+  {key:'module6',letter:'R',color:'#805AD5'},
+];
+const PK='valeur_progress_v2';
+function getP(){try{return JSON.parse(localStorage.getItem(PK))||{};}catch(e){return{};}}
+function isDone(k){return!!getP()[k];}
+function markDone(k){const p=getP();p[k]=true;try{localStorage.setItem(PK,JSON.stringify(p));}catch(e){}}
+
+/* ── PROGRESS BAR ── */
+function renderProgress(){
+  const steps=document.getElementById('pb-steps');
+  const pct=document.getElementById('pb-pct');
+  const done=MODULES.filter(m=>isDone(m.key)).length;
+  pct.textContent=Math.round((done/MODULES.length)*100)+'%';
+  steps.innerHTML=MODULES.map(m=>{
+    const d=isDone(m.key);
+    const active=m.key==='module1';
+    return'<div class="pb-step'+(d?' done':active?' active':'')+'" title="'+m.letter+'"><span class="pb-letter">'+m.letter+'</span></div>';
+  }).join('');
+}
+
+/* ── SCROLL ── */
+function updateScrollLine(){
+  const el=document.getElementById('scroll-line');
+  const h=document.documentElement.scrollHeight-window.innerHeight;
+  el.style.width=(h>0?Math.min(100,(window.scrollY/h)*100):0)+'%';
+}
+const sections=document.querySelectorAll('.section');
+const dots=document.querySelectorAll('.dot');
+function onScroll(){
+  updateScrollLine();
+  sections.forEach(s=>{if(s.getBoundingClientRect().top<window.innerHeight*.82)s.classList.add('visible');});
+  let active=0;
+  sections.forEach((s,i)=>{if(s.getBoundingClientRect().top<=window.innerHeight/2)active=i;});
+  dots.forEach((d,i)=>d.classList.toggle('active',i===active));
+}
+dots.forEach(d=>d.addEventListener('click',()=>{sections[+d.dataset.section]?.scrollIntoView({behavior:'smooth',block:'start'});}));
+window.addEventListener('scroll',onScroll,{passive:true});
+window.addEventListener('resize',onScroll);
+
+/* ── TRIGGER TAGS ── */
+function revealTag(el){
+  el.classList.toggle('revealed');
+}
+
+/* ── CYCLE STEPPER ── */
+let csIdx=0;
+const CS_TOTAL=4;
+function goCsStep(i){
+  csIdx=i;
+  for(let j=0;j<CS_TOTAL;j++){
+    const s=document.getElementById('cs'+j);
+    const d=document.querySelectorAll('#cs-dots .cs-dot')[j];
+    if(s)s.classList.toggle('active',j===csIdx);
+    if(d){d.classList.toggle('active',j===csIdx);d.classList.toggle('done',j<csIdx);}
+  }
+  document.getElementById('cs-counter').textContent=(csIdx+1)+' / '+CS_TOTAL;
+  document.getElementById('btn-cs-prev').style.visibility=csIdx===0?'hidden':'visible';
+  document.getElementById('btn-cs-next').textContent=csIdx===CS_TOTAL-1?'Compris ✓':'Suivant →';
+}
+function navCs(dir){
+  const next=csIdx+dir;
+  if(next<0||next>=CS_TOTAL)return;
+  goCsStep(next);
+}
+
+/* ── VIGNETTE TABS ── */
+function showVig(tab,id){
+  document.querySelectorAll('.vtab').forEach(t=>t.className='vtab');
+  document.querySelectorAll('.vignette-panel').forEach(p=>p.classList.remove('active'));
+  tab.className='vtab active-'+id;
+  const panel=document.getElementById('vig-'+id);
+  if(panel)panel.classList.add('active');
+}
+
+/* ── CINEMA EXERCISE ── */
+let cinIdx=0;
+const CIN_TOTAL=5;
+function navCinema(dir){
+  const next=cinIdx+dir;
+  if(next<0||next>CIN_TOTAL)return;
+  if(cinIdx<CIN_TOTAL){document.getElementById('cst'+cinIdx).classList.remove('active');document.getElementById('cp'+cinIdx).classList.remove('active');}
+  cinIdx=next;
+  if(cinIdx<CIN_TOTAL){
+    document.getElementById('cst'+cinIdx).classList.add('active');
+    for(let i=0;i<CIN_TOTAL;i++){
+      const seg=document.getElementById('cp'+i);
+      if(seg){seg.classList.toggle('done',i<cinIdx);seg.classList.toggle('active',i===cinIdx);}
+    }
+    document.getElementById('btn-cin-prev').style.visibility=cinIdx===0?'hidden':'visible';
+    document.getElementById('btn-cin-next').textContent=cinIdx===CIN_TOTAL-1?'Terminer ✦':'Suivant →';
+  }else{
+    document.querySelector('.cinema-steps').style.display='none';
+    document.getElementById('cinema-done').classList.add('show');
+    document.getElementById('btn-cin-next').style.display='none';
+    document.getElementById('btn-cin-prev').style.display='none';
+    for(let i=0;i<CIN_TOTAL;i++){const seg=document.getElementById('cp'+i);if(seg)seg.classList.add('done');}
+    showToast('\u2736 Exercice de d\u00e9fusion termin\u00e9');
+  }
+}
+
+/* ── QUIZ DÉCLENCHEURS ── */
+const QD=[
+  {
+    scene:"Lucie attend depuis 3 jours la réponse de son chef concernant sa demande de congé. Elle consulte ses mails toutes les 20 minutes, et refait sa demande en changeant les mots.",
+    question:"Quel est le déclencheur de ce comportement ?",
+    opts:[
+      {t:"Le chef qui ne répond pas — déclencheur externe",ok:true,exp:"Exact. Le silence du chef est un déclencheur externe qui réveille la peur de l'impuissance (Masque Bleu) ou du rejet (Masque Vert). Le comportement de vérification compulsive est la réponse automatique du masque."},
+      {t:"La fatigue de Lucie — déclencheur interne",ok:false,exp:"La fatigue peut amplifier une réaction, mais ce n'est pas le déclencheur ici. C'est le silence du chef qui a lancé le cycle."},
+      {t:"La demande de congé elle-même",ok:false,exp:"La demande n'est pas le déclencheur — c'est le contexte. Le déclencheur est le silence prolongé qui suit. C'est lui qui réveille la peur."},
+      {t:"L'anxiété chronique de Lucie",ok:false,exp:"L'anxiété chronique est la toile de fond — pas le déclencheur spécifique. Chaque cycle commence par un signal précis. Ici : le silence de 3 jours."},
+    ]
+  },{
+    scene:"Pierre lit un article sur les risques cardiaques. Il ressent une légère oppression dans la poitrine. Il passe les 2 heures suivantes à chercher ses symptômes en ligne.",
+    question:"Ce déclencheur est-il interne ou externe ?",
+    opts:[
+      {t:"Uniquement externe — l'article",ok:false,exp:"L'article est le premier déclencheur externe — mais ce qui lance vraiment le cycle, c'est la sensation physique qui suit. Les deux s'enchaînent : externe → interne."},
+      {t:"Interne seulement — la sensation corporelle",ok:false,exp:"La sensation corporelle est un déclencheur interne — mais elle a été éveillée par l'article. Les déclencheurs peuvent être en cascade : un externe réveille un interne."},
+      {t:"Les deux — l'article réveille la sensation, la sensation active le masque",ok:true,exp:"Exact. C'est souvent ainsi que ça fonctionne : un déclencheur externe (l'article) réveille un déclencheur interne (la sensation). C'est le Masque Rouge — peur de la maladie — qui entre en action."},
+      {t:"Ni l'un ni l'autre — c'est juste de la prudence médicale",ok:false,exp:"Chercher 2 heures des symptômes en ligne après une légère gêne dépasse la prudence médicale. C'est le masque en action. Reconnaître cela n'est pas un jugement — c'est VOIR."},
+    ]
+  },{
+    scene:"En pleine réunion, Sarah entend son prénom dans une conversation à côté. Elle ne saisit pas le reste. Elle passe le reste de la journée à se demander ce qu'on a dit sur elle.",
+    question:"Quel masque ce comportement révèle-t-il le plus probablement ?",
+    opts:[
+      {t:"Masque Rouge — peur de la maladie",ok:false,exp:"Le Masque Rouge répond à des menaces sur l'intégrité physique. Ici la peur est d'ordre relationnel et social — pas somatique."},
+      {t:"Masque Vert — peur du rejet / du jugement",ok:true,exp:"Exact. Entendre son prénom et imaginer qu'on parle mal d'elle — c'est le Masque Vert (peur du rejet) ou Indigo (peur du jugement) qui s'active. La rumination qui suit est la réaction automatique du masque."},
+      {t:"Masque Jaune — peur de l'inconnu",ok:false,exp:"Le Masque Jaune réagit à l'incertitude des situations — pas à la peur du jugement social. Ici c'est le regard des autres qui est au centre."},
+      {t:"Aucun masque — c'est une réaction normale",ok:false,exp:"Être attentif à son nom est normal. Mais ruminer toute une journée sur une conversation incomplète, c'est un masque qui interprète. Reconnaître cela est un acte de VOIR."},
+    ]
+  },{
+    scene:"Antoine doit rendre un rapport demain. Depuis ce matin, il le relit pour la 5e fois, change des virgules, reformule des phrases qui étaient déjà bonnes.",
+    question:"Quelle étape du cycle invisible est la plus visible ici ?",
+    opts:[
+      {t:"Étape 1 — le déclencheur (l'échéance du rapport)",ok:false,exp:"L'échéance est bien le déclencheur — mais la question porte sur ce qui est le plus visible dans le comportement d'Antoine. La 5e relecture, c'est l'étape 4."},
+      {t:"Étape 2 — le scan automatique ('je ne suis pas assez bien')",ok:false,exp:"Le scan a bien eu lieu — mais il est invisible depuis l'extérieur. Ce qu'on observe chez Antoine, c'est sa réponse comportementale."},
+      {t:"Étape 4 — le masque activé (surcontrôle perfectionniste)",ok:true,exp:"Exact. La 5e relecture pour changer des virgules, c'est le Masque Indigo — peur de l'échec — en action. C'est l'étape 4 : le comportement automatique du masque. VOIR interviendrait entre l'étape 3 et celle-ci."},
+      {t:"Étape 3 — la réaction corporelle",ok:false,exp:"La réaction corporelle (tension, stress) a sans doute eu lieu — mais ce que le scénario décrit, c'est le comportement. La 5e relecture est l'expression visible du masque Indigo à l'étape 4."},
+    ]
+  },{
+    scene:"Emma reçoit un message de son ami : 'On parle ?' Trois mots. Elle les lit 10 fois. Elle imagine toutes les raisons possibles. Elle attend 1h avant de répondre 'Ok' — par peur de dire la mauvaise chose.",
+    question:"Quel déclencheur a lancé ce cycle ?",
+    opts:[
+      {t:"L'attente avant de répondre — déclencheur interne",ok:false,exp:"L'attente est une conséquence de la réaction, pas un déclencheur. Elle vient après. Le cycle s'est lancé avant."},
+      {t:"Le message ambigu de 3 mots — déclencheur externe",ok:true,exp:"Exact. Le message 'On parle ?' est un déclencheur externe ambigu — et l'ambiguïté est l'un des déclencheurs les plus puissants du Masque Vert (peur du rejet) et du Masque Jaune (peur de l'inconnu). Les 3 mots ont suffi à lancer tout le cycle."},
+      {t:"La relation avec cet ami — déclencheur externe",ok:false,exp:"La relation est le contexte — pas le déclencheur. Un déclencheur est un événement précis, dans un instant précis. Ici : les 3 mots du message, à ce moment-là."},
+      {t:"La peur d'Emma — déclencheur interne",ok:false,exp:"La peur est la réponse au déclencheur, pas le déclencheur lui-même. La peur était en veille — jusqu'à ce que le message arrive."},
+    ]
+  }
+];
+let qdIdx=0,qdScore=0,qdAnswered=false;
+function renderQd(){
+  const q=QD[qdIdx];
+  document.getElementById('qd-num').textContent='Sc\u00e9nario '+(qdIdx+1)+' / '+QD.length;
+  document.getElementById('qd-scene').textContent=q.scene;
+  document.getElementById('qd-question').textContent=q.question;
+  document.getElementById('qd-fill').style.width=(qdIdx/QD.length*100)+'%';
+  document.getElementById('qd-expl').className='qd-expl';
+  document.getElementById('qd-expl').textContent='';
+  document.getElementById('qd-next').className='btn-qd-next';
+  qdAnswered=false;
+  document.getElementById('qd-opts').innerHTML=q.opts.map((o,i)=>
+    '<button class="qd-opt" onclick="answerQd('+i+')">'+o.t+'</button>'
+  ).join('');
+}
+function answerQd(i){
+  if(qdAnswered)return;
+  qdAnswered=true;
+  const q=QD[qdIdx];
+  const btns=document.querySelectorAll('.qd-opt');
+  btns.forEach((b,j)=>{b.style.pointerEvents='none';if(q.opts[j].ok)b.classList.add('correct');else if(j===i&&!q.opts[j].ok)b.classList.add('wrong');});
+  const expl=document.getElementById('qd-expl');
+  expl.textContent=(q.opts[i].ok?'\u2713 ':'\u2717 ')+q.opts[i].exp;
+  expl.classList.add('show');
+  if(q.opts[i].ok)qdScore++;
+  document.getElementById('qd-next').classList.add('show');
+}
+function nextQd(){
+  qdIdx++;
+  if(qdIdx<QD.length){renderQd();}
+  else{
+    document.getElementById('qd-scenario').style.display='none';
+    const sc=document.getElementById('qd-score');sc.classList.add('show');
+    document.getElementById('qd-score-big').textContent=qdScore+'/'+QD.length;
+    const msgs=[
+      'Continuez \u00e0 vous entra\u00eener — chaque sc\u00e9nario affine votre observateur.',
+      'Bonne base. Vous commencez \u00e0 reconna\u00eetre les signaux.',
+      'Tr\u00e8s bien ! Votre observateur est de plus en plus pr\u00e9cis.',
+      'Excellent ! Vous identifiez vos d\u00e9clencheurs avec finesse.',
+      'Parfait. Vous ma\u00eetrisez l\u2019anatomie du cycle invisible.'
+    ];
+    document.getElementById('qd-score-msg').textContent=msgs[Math.min(qdScore,4)];
+    document.getElementById('qd-fill').style.width='100%';
+  }
+}
+function restartQd(){
+  qdIdx=0;qdScore=0;qdAnswered=false;
+  document.getElementById('qd-scenario').style.display='block';
+  document.getElementById('qd-score').classList.remove('show');
+  renderQd();
+}
+
+/* ── JOURNAL WITH PROMPT ── */
+function openJournalWithPrompt(){
+  const prompt='Mon d\u00e9clencheur le plus fr\u00e9quent cette semaine \u00e9tait\u00a0: ...\n\nCe d\u00e9clencheur a r\u00e9veill\u00e9 en moi la peur de\u00a0: ...\n\nCe que mon masque m\u2019a fait faire automatiquement\u00a0: ...';
+  const ta=document.getElementById('journal-textarea');
+  if(ta&&!ta.value.trim()){ta.value=prompt;}
+  toggleJournal();
+}
+
+/* ── FUSION CARDS ── */
+function revealFcard(el,type,verdict,explain){
+  if(el.classList.contains('revealed-fusion')||el.classList.contains('revealed-obs'))return;
+  if(type==='fusion'){el.classList.add('revealed-fusion');}
+  else{el.classList.add('revealed-obs');}
+  el.querySelector('.fc-verdict').textContent=verdict;
+  el.querySelector('.fc-explain').textContent=explain;
+  el.querySelector('.fc-prompt').style.display='none';
+}
+
+/* ── Q3 ACCORDION ── */
+function toggleQ3(el){
+  const was=el.classList.contains('open');
+  document.querySelectorAll('.q3-card.open').forEach(c=>c.classList.remove('open'));
+  if(!was)el.classList.add('open');
+}
+
+/* ── PRACTICE TIMER ── */
+let practiceTimer=null;
+let practiceRunning=false;
+const STEPS=[
+  {id:'pstep0',dots:'pp0',duration:45},
+  {id:'pstep1',dots:'pp1',duration:60},
+  {id:'pstep2',dots:'pp2',duration:60},
+  {id:'pstep3',dots:'pp3',duration:15}
+];
+let currentStep=0;
+let stepRemaining=0;
+let totalRemaining=180;
+
+function startPractice(){
+  if(practiceRunning)return;
+  practiceRunning=true;
+  document.getElementById('btn-practice').style.display='none';
+  currentStep=0;
+  totalRemaining=180;
+  stepRemaining=STEPS[0].duration;
+  showStep(0);
+  practiceTimer=setInterval(tickPractice,1000);
+}
+
+function showStep(i){
+  STEPS.forEach((s,j)=>{
+    const el=document.getElementById(s.id);
+    el.classList.toggle('active',j===i);
+    const dot=document.getElementById(s.dots);
+    if(j<i)dot.classList.add('done');
+    dot.classList.toggle('active',j===i);
+  });
+}
+
+function tickPractice(){
+  totalRemaining--;
+  stepRemaining--;
+  const m=Math.floor(totalRemaining/60);
+  const s=totalRemaining%60;
+  document.getElementById('timer-display').textContent=m+':'+(s<10?'0':'')+s;
+  if(stepRemaining<=0){
+    currentStep++;
+    if(currentStep>=STEPS.length){
+      clearInterval(practiceTimer);
+      practiceRunning=false;
+      STEPS.forEach(s=>document.getElementById(s.dots).classList.add('done'));
+      document.querySelectorAll('.pstep').forEach(el=>el.classList.remove('active'));
+      document.getElementById('practice-complete').classList.add('show');
+      document.getElementById('timer-display').textContent='0:00';
+      showToast('✦ Exercice terminé — votre observateur est actif');
+    }else{
+      stepRemaining=STEPS[currentStep].duration;
+      showStep(currentStep);
+    }
+  }
+}
+
+/* ── QUIZ ── */
+const QUIZ=[
+  {
+    q:"Marie dit : \"Je suis tellement anxieuse\". Louis dit : \"Je remarque de l'anxiété en moi\". Lequel est en conscience observatrice ?",
+    opts:[
+      {t:"Marie — elle exprime ce qu'elle ressent vraiment",ok:false,exp:"Exprimer ses émotions est précieux — mais la formulation de Marie fusionne l'observateur et l'observé. Elle devient son anxiété."},
+      {t:"Louis — il crée une distance entre lui et l'émotion",ok:true,exp:"Exact. Louis utilise le langage de l'observation : il a une émotion sans être cette émotion. Cette distance — même linguistique — change tout."},
+      {t:"Ni l'un ni l'autre — la conscience observatrice ne parle pas d'anxiété",ok:false,exp:"La conscience observatrice peut tout traverser — y compris l'anxiété. Ce qui change, c'est la position : être l'émotion ou l'observer."},
+      {t:"Les deux — ils ressentent la même chose",ok:false,exp:"Ils ressentent peut-être la même intensité — mais ils l'habitent depuis des endroits radicalement différents."},
+    ]
+  },{
+    q:"Viktor Frankl parlait d'un espace entre le stimulus et la réponse. Dans la méthode V.A.L.E.U.R©, cet espace correspond à :",
+    opts:[
+      {t:"Le moment où on supprime la réaction émotionnelle",ok:false,exp:"VOIR ne supprime rien. Il crée de la distance — pas de l'évitement. Les émotions sont toujours là, mais vous n'y êtes plus prisonnier."},
+      {t:"VOIR — nommer le masque avant d'agir depuis lui",ok:true,exp:"Exact. L'espace de Frankl, c'est le moment de VOIR : entre le déclencheur et la réaction automatique, il y a un instant où la conscience peut intervenir."},
+      {t:"La méditation quotidienne",ok:false,exp:"La méditation peut renforcer la conscience observatrice — mais VOIR, c'est un outil applicable dans l'instant, pas une pratique séparée."},
+      {t:"L'analyse de l'origine du masque",ok:false,exp:"L'exploration de l'origine vient plus tard (étape EXPLORER). VOIR est ancré dans le moment présent — pas dans le passé."},
+    ]
+  },{
+    q:"Vous êtes en réunion. Un collègue vous critique publiquement. Vous sentez une montée de chaleur et vous commencez immédiatement à vous justifier longuement. Quelle est la première question de l'observateur à poser ?",
+    opts:[
+      {t:"\"Pourquoi ce collègue m'a-t-il fait ça ?\"",ok:false,exp:"Cette question cherche une explication externe. Elle ne vous ramène pas à vous — elle vous éloigne. L'observateur regarde vers l'intérieur."},
+      {t:"\"Est-ce que j'ai vraiment eu tort ?\"",ok:false,exp:"Cette question analyse le contenu — pas le processus. L'observateur ne juge pas le bien-fondé, il observe ce qui se passe en vous."},
+      {t:"\"Qu'est-ce que je suis en train de faire là ?\"",ok:true,exp:"Exact. La première question de l'observateur nomme le comportement visible : je me justifie, je me défends, je compense. Ce simple nommage crée l'espace de VOIR."},
+      {t:"\"Comment calmer ma réaction le plus vite possible ?\"",ok:false,exp:"Vouloir calmer rapidement est une forme d'évitement. L'observateur ne fuit pas — il regarde. La vitesse n'est pas l'objectif."},
+    ]
+  },{
+    q:"La conscience observatrice, selon la méthode V.A.L.E.U.R©, est :",
+    opts:[
+      {t:"Un état de calme parfait qu'on atteint après des années de pratique",ok:false,exp:"La conscience observatrice n'est pas un état de calme — vous pouvez l'activer en plein chaos. Ce n'est pas un résultat, c'est une position."},
+      {t:"Une compétence à développer à partir de zéro",ok:false,exp:"Elle est déjà là. Vous n'avez pas à la créer — vous avez à la reconnaître. Elle existe en vous depuis toujours."},
+      {t:"La part stable de vous qui observe pensées, émotions et masques sans y être fusionné",ok:true,exp:"Exact. L'observateur ne change pas. Il est présent à travers toutes les vagues. Il n'est pas au-dessus de l'expérience — il est à l'intérieur d'elle, mais non submergé."},
+      {t:"La suppression des émotions négatives par la pensée positive",ok:false,exp:"La méthode V.A.L.E.U.R© ne supprime rien. Elle traverse. L'observateur accueille tout — y compris ce qui est difficile."},
+    ]
+  }
+];
+let qIdx=0,score=0,answered=false;
+
+function renderQ(){
+  const q=QUIZ[qIdx];
+  document.getElementById('q-num').textContent='Question '+(qIdx+1)+' / '+QUIZ.length;
+  document.getElementById('q-text').textContent=q.q;
+  document.getElementById('qpb').style.width=(qIdx/QUIZ.length*100)+'%';
+  document.getElementById('q-expl').className='quiz-expl';
+  document.getElementById('q-expl').textContent='';
+  document.getElementById('q-next').className='btn-quiz-next';
+  answered=false;
+  document.getElementById('q-opts').innerHTML=q.opts.map((o,i)=>
+    '<button class="quiz-opt" onclick="answerQ('+i+')">'+o.t+'</button>'
+  ).join('');
+}
+
+function answerQ(i){
+  if(answered)return;
+  answered=true;
+  const q=QUIZ[qIdx];
+  const btns=document.querySelectorAll('.quiz-opt');
+  btns.forEach((b,j)=>{
+    b.style.pointerEvents='none';
+    if(q.opts[j].ok)b.classList.add('correct');
+    else if(j===i&&!q.opts[j].ok)b.classList.add('wrong');
+  });
+  const expl=document.getElementById('q-expl');
+  expl.textContent=(q.opts[i].ok?'✓ ':'✗ ')+q.opts[i].exp;
+  expl.classList.add('show');
+  if(q.opts[i].ok)score++;
+  document.getElementById('q-next').classList.add('show');
+}
+
+function nextQ(){
+  qIdx++;
+  if(qIdx<QUIZ.length){renderQ();}
+  else{
+    document.getElementById('quiz-card').style.display='none';
+    const sc=document.getElementById('quiz-score');
+    sc.classList.add('show');
+    document.getElementById('score-big').textContent=score+'/'+QUIZ.length;
+    const msgs=[
+      'Reprenez les sections et retentez — chaque lecture approfondit la compréhension.',
+      'Bonne base. Encore un peu de pratique et cela devient naturel.',
+      'Très bien. Vous commencez à habiter la position de l\'observateur.',
+      'Parfait. L\'observateur est actif en vous — prêt·e pour ACCUEILLIR 🟠'
+    ];
+    document.getElementById('score-msg').textContent=msgs[Math.min(score,3)];
+    document.getElementById('qpb').style.width='100%';
+  }
+}
+
+function restartQuiz(){
+  qIdx=0;score=0;answered=false;
+  document.getElementById('quiz-card').style.display='block';
+  document.getElementById('quiz-score').classList.remove('show');
+  renderQ();
+}
+
+/* ── VALEUR_JOURNAL_V3 ── */
+const JV3='VALEUR_journal_v3';
+function getJournalV3(){try{return JSON.parse(localStorage.getItem(JV3))||[];}catch(e){return[];}}
+function saveJournalV3arr(arr){try{localStorage.setItem(JV3,JSON.stringify(arr));}catch(e){}}
+
+function toggleMemo(id){
+  const el=document.getElementById(id);
+  if(el)el.classList.toggle('open');
+}
+
+function saveJournalV3(){
+  const q1=document.getElementById('jm-q1-m1')?.value.trim()||'';
+  const q2=document.getElementById('jm-q2-m1')?.value.trim()||'';
+  const q3=document.getElementById('jm-q3-m1')?.value.trim()||'';
+  const libre=document.getElementById('jm-libre-m1')?.value.trim()||'';
+  const masque=localStorage.getItem('valeur_dominant_masque')||'';
+  const arr=getJournalV3();
+  const idx=arr.findIndex(e=>e.module===1);
+  const entry={
+    module:1,module_name:'VOIR',
+    date:new Date().toISOString(),
+    masque_dominant:masque,
+    reponses:[
+      {question:'Mon déclencheur principal cette semaine était…',reponse:q1},
+      {question:'Ce que mon masque m\u2019a fait faire automatiquement…',reponse:q2},
+      {question:'Ce que j\u2019ai observé en moi pour la première fois…',reponse:q3}
+    ],
+    reflexion_libre:libre
+  };
+  if(idx>=0)arr[idx]=entry;else arr.push(entry);
+  saveJournalV3arr(arr);
+  /* rétrocompatibilité v2 */
+  try{
+    const v2=JSON.parse(localStorage.getItem('valeur_journal_v2'))||[];
+    v2.unshift({date:entry.date,text:(q1+'\n'+q2+'\n'+q3+'\n'+libre).trim(),module:'Module 1 \u2014 VOIR'});
+    localStorage.setItem('valeur_journal_v2',JSON.stringify(v2.slice(0,30)));
+  }catch(e){}
+  const saved=document.getElementById('jm-saved-m1');
+  if(saved){saved.classList.add('show');setTimeout(()=>saved.classList.remove('show'),4000);}
+  showToast('\u270D\uFE0F Journal Module 1 sauvegardé');
+}
+
+function prefillJournalV3(){
+  const arr=getJournalV3();
+  const entry=arr.find(e=>e.module===1);
+  if(!entry)return;
+  const q1=document.getElementById('jm-q1-m1');
+  const q2=document.getElementById('jm-q2-m1');
+  const q3=document.getElementById('jm-q3-m1');
+  const libre=document.getElementById('jm-libre-m1');
+  if(q1&&entry.reponses[0])q1.value=entry.reponses[0].reponse||'';
+  if(q2&&entry.reponses[1])q2.value=entry.reponses[1].reponse||'';
+  if(q3&&entry.reponses[2])q3.value=entry.reponses[2].reponse||'';
+  if(libre)libre.value=entry.reflexion_libre||'';
+}
+
+/* ── COMPLETE ── */
+function completeModule(){
+  /* Auto-save journal avant complétion */
+  saveJournalV3();
+  markDone('module1');
+  renderProgress();
+  document.getElementById('unlock-preview').classList.add('show');
+  launchConfetti();
+  showToast('\uD83C\uDF89 Module 1 complété\u00a0! ACCUEILLIR \uD83D\uDFE0 débloqué\u00a0!');
+  setTimeout(()=>{
+    if(confirm('Excellent\u00a0! Passer au Module 2 \u2014 ACCUEILLIR maintenant\u00a0?')){
+      window.location.href='module2.html';
+    }
+  },3500);
+}
+
+/* ── TOAST ── */
+function showToast(msg){
+  const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3500);
+}
+
+/* ── JOURNAL ── */
+const JK='valeur_journal_v2';
+function getJournal(){try{return JSON.parse(localStorage.getItem(JK))||[];}catch(e){return[];}}
+function saveJournal(a){try{localStorage.setItem(JK,JSON.stringify(a));}catch(e){}}
+function toggleJournal(){
+  const o=document.getElementById('journal-overlay');
+  const d=document.getElementById('journal-drawer');
+  if(d.classList.contains('open')){closeJournal();}
+  else{
+    o.classList.add('open');d.classList.add('open');
+    document.getElementById('j-date').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
+    renderJournal();
+    document.getElementById('journal-textarea').focus();
+  }
+}
+function closeJournal(){
+  document.getElementById('journal-overlay').classList.remove('open');
+  document.getElementById('journal-drawer').classList.remove('open');
+}
+function saveEntry(){
+  const ta=document.getElementById('journal-textarea');
+  const text=ta.value.trim();if(!text)return;
+  const e=getJournal();
+  e.unshift({date:new Date().toISOString(),text,module:'Module 1 — VOIR'});
+  saveJournal(e);ta.value='';
+  renderJournal();showToast('✍️ Entrée sauvegardée');
+}
+function renderJournal(){
+  const entries=getJournal();
+  const list=document.getElementById('j-list');
+  if(!entries.length){list.innerHTML='<p class="j-no-entries">Votre journal est vide. Notez votre premier masque observé ✨</p>';return;}
+  list.innerHTML='<p style="font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--red);margin-bottom:10px;">Entrées précédentes</p>'+
+    entries.slice(0,6).map(e=>{
+      const d=new Date(e.date);
+      return'<div class="j-entry"><div class="j-entry-date">'+d.toLocaleDateString('fr-FR',{day:'numeric',month:'short',year:'numeric'})+' · '+(e.module||'')+'</div><div class="j-entry-text">'+e.text.slice(0,200)+(e.text.length>200?'…':'')+'</div></div>';
+    }).join('');
+}
+
+/* ── CONFETTI ── */
+const canvas=document.getElementById('confetti-canvas');
+const ctx=canvas.getContext('2d');
+let particles=[];
+const COLORS=['#E53E3E','#ED8936','#D69E2E','#38A169','#3182CE','#5A67D8','#805AD5','#C9A84C'];
+function launchConfetti(){
+  canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+  particles=Array.from({length:150},()=>({
+    x:Math.random()*canvas.width,y:Math.random()*-canvas.height*.3,
+    vx:(Math.random()-.5)*4,vy:Math.random()*4+2,
+    r:Math.random()*7+3,color:COLORS[Math.floor(Math.random()*COLORS.length)],
+    spin:Math.random()*Math.PI*2,spinV:(Math.random()-.5)*.3,
+    shape:Math.random()>.5?'rect':'circle',opacity:1,
+  }));
+  animateConfetti();
+}
+function animateConfetti(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  let alive=false;
+  particles.forEach(p=>{
+    if(p.y>canvas.height+20)return;
+    alive=true;
+    p.x+=p.vx;p.y+=p.vy;p.vy+=.06;p.vx*=.99;p.spin+=p.spinV;
+    p.opacity=Math.max(0,1-p.y/canvas.height);
+    ctx.save();ctx.translate(p.x,p.y);ctx.rotate(p.spin);
+    ctx.globalAlpha=p.opacity;ctx.fillStyle=p.color;
+    if(p.shape==='rect'){ctx.fillRect(-p.r/2,-p.r*1.8,p.r,p.r*2);}
+    else{ctx.beginPath();ctx.arc(0,0,p.r,0,Math.PI*2);ctx.fill();}
+    ctx.restore();
+  });
+  if(alive)requestAnimationFrame(animateConfetti);
+  else ctx.clearRect(0,0,canvas.width,canvas.height);
+}
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded',()=>{
+  renderProgress();
+  renderQ();
+  renderQd();
+  prefillJournalV3();
+  onScroll();
+  setTimeout(onScroll,100);
+});
+</script>
+</body>
+</html>

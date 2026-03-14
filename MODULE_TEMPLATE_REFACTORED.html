@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>V.A.L.E.U.R© | Module [X] : [Nom Module]</title>
+
+  <!-- Fonts Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Design System v2 (Premium) -->
+  <link rel="stylesheet" href="valeur-design-system-v2.css">
+
+  <!-- Module-specific CSS (optional) -->
+  <style>
+    /* Override colors pour ce module */
+    :root {
+      --module-color: #E74C3C;  /* À adapter par module (--c-red, --c-orange, etc.) */
+    }
+
+    .module-intro-card {
+      background: linear-gradient(135deg, rgba(231, 76, 60, 0.1) 0%, rgba(255, 255, 255, 0.02) 100%);
+      border-color: rgba(231, 76, 60, 0.25);
+    }
+
+    .pb-accordion-item:hover {
+      border-color: var(--module-color);
+    }
+
+    .pb-badge-module {
+      background: rgba(231, 76, 60, 0.15);
+      color: #E74C3C;
+      border-color: rgba(231, 76, 60, 0.3);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Background Aurora -->
+  <div class="bg-aurora">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="grid-tex"></div>
+
+  <!-- Main Container -->
+  <main class="module-container">
+
+    <!-- === INTRO CARD === -->
+    <section class="module-intro-card glass glass-gold animate-fadeup" style="margin-bottom: var(--space-2xl);">
+      <div style="display: flex; align-items: start; gap: var(--space-lg);">
+        <div style="font-size: 2.5rem; opacity: 0.8;">📖</div>
+        <div>
+          <h1 style="margin-bottom: var(--space-sm); color: #E74C3C;">Module V : VOIR LES MASQUES</h1>
+          <p style="color: var(--text-secondary); line-height: var(--lh-relaxed); margin-bottom: var(--space-md);">
+            Découvrez comment les masques psychologiques se forment et fonctionnent. Cette section vous guide à travers les mécanismes de défense et comment les reconnaître chez vous.
+          </p>
+          <div style="display: flex; gap: var(--space-md); flex-wrap: wrap;">
+            <span class="pb-badge pb-badge-module">4 sections</span>
+            <span class="pb-badge pb-badge-active">🕐 15-20 min</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- === PROGRESS INTRA-MODULE === -->
+    <div class="pb-module-progress animate-slidein" style="margin-bottom: var(--space-xl);">
+      <span class="pb-progress-label">Progression : <span id="pb-current-section">0</span> / <span id="pb-total-sections">4</span></span>
+      <progress class="pb-progress-bar" id="pb-progress" value="0" max="4"></progress>
+    </div>
+
+    <!-- === ACCORDION SECTIONS (Progressive Disclosure) === -->
+    <div class="pb-accordion" id="main-accordion" data-accordion-init="#main-accordion" style="margin-bottom: var(--space-2xl);">
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECTION 1 : Comprendre le Masque -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <div class="pb-accordion-item open" data-section="1">
+        <button class="pb-accordion-btn" type="button" aria-expanded="true" aria-controls="panel1">
+          <span>
+            <span style="font-size: 1.3rem; margin-right: var(--space-sm);">1️⃣</span>
+            <span style="color: #E74C3C; font-weight: var(--fw-bold);">Comprendre le Masque</span>
+          </span>
+          <span class="pb-accordion-chevron">▼</span>
+        </button>
+        <div class="pb-accordion-content" id="panel1">
+          <div class="pb-accordion-content-inner">
+            <h3 style="color: var(--text); margin-bottom: var(--space-md);">Qu'est-ce qu'un masque psychologique ?</h3>
+            <p>
+              Un masque psychologique est une stratégie d'adaptation que nous développons pour nous protéger. Il s'agit d'une persona que nous présentons au monde, souvent différente de notre vrai moi.
+            </p>
+            <p>
+              <strong>Caractéristiques principales :</strong>
+            </p>
+            <ul style="margin: var(--space-md) 0; padding-left: var(--space-lg);">
+              <li>Protection face à des situations menaçantes</li>
+              <li>Développé généralement durant l'enfance</li>
+              <li>Devient souvent automatique et inconscient</li>
+              <li>Peut apporter de la sécurité ET limiter notre authenticité</li>
+            </ul>
+            <p style="color: var(--text-dim); font-style: italic; margin-top: var(--space-md);">
+              💡 <strong>Rappel :</strong> Les masques ne sont pas "mauvais" — ce sont des outils d'adaptation. L'objectif est de les reconnaître pour en reprendre le contrôle.
+            </p>
+            <button class="btn btn-secondary" style="margin-top: var(--space-md);" onclick="PB_Components.showToast('✓ Section 1 lue', 'success');">✓ J'ai compris</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECTION 2 : Mon Masque Personnel -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <div class="pb-accordion-item" data-section="2">
+        <button class="pb-accordion-btn" type="button" aria-expanded="false" aria-controls="panel2">
+          <span>
+            <span style="font-size: 1.3rem; margin-right: var(--space-sm);">2️⃣</span>
+            <span style="color: #E74C3C; font-weight: var(--fw-bold);">Mon Masque Personnel</span>
+          </span>
+          <span class="pb-accordion-chevron">▼</span>
+        </button>
+        <div class="pb-accordion-content" id="panel2">
+          <div class="pb-accordion-content-inner">
+            <h3 style="color: var(--text); margin-bottom: var(--space-md);">Identifier Votre Masque</h3>
+            <p>
+              Prenez un moment pour réfléchir. Quel "personnage" jouez-vous souvent ?
+            </p>
+            <div style="background: var(--glass); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-md) 0; border: 1px solid var(--glass-border);">
+              <p style="color: var(--text-muted); font-weight: var(--fw-medium); margin-bottom: var(--space-sm);">Quelques types de masques courants :</p>
+              <ul style="padding-left: var(--space-lg);">
+                <li><strong>Le Parfait :</strong> Tout doit être impeccable, sans faille</li>
+                <li><strong>L'Aidant :</strong> Toujours disponible pour les autres, oublie ses propres besoins</li>
+                <li><strong>L'Intellectuel :</strong> Se réfugie dans la logique, évite les émotions</li>
+                <li><strong>Le Rebelle :</strong> Oppose une résistance systématique à l'autorité</li>
+                <li><strong>La Victime :</strong> Se voit comme impuissant face aux événements</li>
+              </ul>
+            </div>
+            <p style="margin-top: var(--space-md);">👇 <strong>Écrivez votre réflexion ci-dessous dans le journal de bord</strong></p>
+            <button class="btn btn-primary" style="margin-top: var(--space-md);" onclick="PB_Components.showToast('✓ Section 2 complétée', 'success');">✓ J'ai réfléchi</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECTION 3 : L'Impact du Masque -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <div class="pb-accordion-item" data-section="3">
+        <button class="pb-accordion-btn" type="button" aria-expanded="false" aria-controls="panel3">
+          <span>
+            <span style="font-size: 1.3rem; margin-right: var(--space-sm);">3️⃣</span>
+            <span style="color: #E74C3C; font-weight: var(--fw-bold);">L'Impact du Masque</span>
+          </span>
+          <span class="pb-accordion-chevron">▼</span>
+        </button>
+        <div class="pb-accordion-content" id="panel3">
+          <div class="pb-accordion-content-inner">
+            <h3 style="color: var(--text); margin-bottom: var(--space-md);">Comment le Masque Affecte Votre Vie</h3>
+            <p>
+              Alors que le masque vous protégeait, il peut devenir une prison :
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-lg); margin: var(--space-lg) 0;">
+              <div style="background: rgba(46, 204, 113, 0.1); padding: var(--space-lg); border-radius: var(--radius-md); border: 1px solid rgba(46, 204, 113, 0.2);">
+                <p style="color: #2ECC71; font-weight: var(--fw-bold); margin-bottom: var(--space-sm);">✓ Bénéfices du Masque</p>
+                <ul style="padding-left: var(--space-lg); color: var(--text-secondary);">
+                  <li>Protection émotionnelle</li>
+                  <li>Acceptation sociale</li>
+                  <li>Contrôle perçu</li>
+                  <li>Stabilité</li>
+                </ul>
+              </div>
+              <div style="background: rgba(229, 62, 62, 0.1); padding: var(--space-lg); border-radius: var(--radius-md); border: 1px solid rgba(229, 62, 62, 0.2);">
+                <p style="color: #E74C3C; font-weight: var(--fw-bold); margin-bottom: var(--space-sm);">⚠ Coûts du Masque</p>
+                <ul style="padding-left: var(--space-lg); color: var(--text-secondary);">
+                  <li>Anxiété d'authenticité</li>
+                  <li>Fatigue émotionnelle</li>
+                  <li>Relations superficielles</li>
+                  <li>Déconnexion du vrai moi</li>
+                </ul>
+              </div>
+            </div>
+            <button class="btn btn-secondary" style="margin-top: var(--space-md);" onclick="PB_Components.showToast('✓ Section 3 terminée', 'success');">✓ Continuer</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <!-- SECTION 4 : Exercice Pratique -->
+      <!-- ═══════════════════════════════════════════════════════════════ -->
+      <div class="pb-accordion-item" data-section="4">
+        <button class="pb-accordion-btn" type="button" aria-expanded="false" aria-controls="panel4">
+          <span>
+            <span style="font-size: 1.3rem; margin-right: var(--space-sm);">4️⃣</span>
+            <span style="color: #E74C3C; font-weight: var(--fw-bold);">Exercice Pratique</span>
+          </span>
+          <span class="pb-accordion-chevron">▼</span>
+        </button>
+        <div class="pb-accordion-content" id="panel4">
+          <div class="pb-accordion-content-inner">
+            <h3 style="color: var(--text); margin-bottom: var(--space-md);">Reconnaître Votre Masque en Action</h3>
+            <p>
+              <strong>Exercice (5-10 minutes) :</strong>
+            </p>
+            <ol style="padding-left: var(--space-lg); margin: var(--space-md) 0;">
+              <li><strong>Situation :</strong> Pensez à une moment cette semaine où vous avez activé votre masque</li>
+              <li><strong>Déclencheur :</strong> Qu'a provoqué le masque ? Stress ? Jugement ? Rejet ?</li>
+              <li><strong>Réaction :</strong> Quel était votre comportement masqué ?</li>
+              <li><strong>Conséquence :</strong> Comment vous sentiez-vous après ?</li>
+              <li><strong>Alternatives :</strong> Comment auriez-vous pu réagir autrement ?</li>
+            </ol>
+            <div style="background: var(--glass); padding: var(--space-lg); border-radius: var(--radius-md); margin: var(--space-lg) 0; border: 1px solid var(--glass-border);">
+              <p style="color: var(--text-muted); font-size: var(--text-sm);">✍️ <strong>Notez vos réflexions dans le journal ci-dessous</strong></p>
+            </div>
+            <button class="btn btn-primary btn-block" style="margin-top: var(--space-lg);" onclick="PB_Components.showToast('🎉 Exercice terminé !', 'success'); PB_Components.shootConfetti();">✓ Exercice Complété</button>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- Fin .pb-accordion -->
+
+    <!-- === DIVIDER === -->
+    <div class="divider" style="margin: var(--space-2xl) 0;"></div>
+
+    <!-- === CTA BUTTONS === -->
+    <div style="display: flex; gap: var(--space-lg); justify-content: center; margin: var(--space-2xl) 0; flex-wrap: wrap;">
+      <button class="btn btn-secondary" onclick="window.history.back();">← Retour</button>
+      <button class="btn btn-primary" onclick="PB_Components.showToast('✓ Module marqué comme complété', 'success'); PB_Components.shootConfetti(); setTimeout(() => window.location.href = './index.html', 1500);">Module Complété ✓</button>
+    </div>
+
+  </main><!-- Fin .module-container -->
+
+  <!-- === JOURNAL FAB + DRAWER === -->
+  <button class="pb-journal-fab" id="journal-fab" title="Ouvrir le journal de bord">📝</button>
+
+  <div class="pb-journal-overlay" id="journal-overlay"></div>
+  <div class="pb-journal-drawer" id="pb-journal">
+    <div class="pb-drawer-handle"></div>
+    <div class="pb-drawer-header">
+      <h3>Journal de Bord — Module V</h3>
+      <p>Exprimez vos pensées, réflexions et émotions. Cet espace est entièrement confidentiel.</p>
+    </div>
+    <textarea 
+      class="pb-journal-input" 
+      id="journal-textarea"
+      placeholder="Écrivez vos observations, ressentis, découvertes..."
+      maxlength="1500"
+      spellcheck="true"
+    ></textarea>
+    <div class="pb-journal-footer">
+      <span class="pb-char-count">0 / 1500</span>
+      <button class="btn btn-secondary pb-btn-clear">Effacer</button>
+      <button class="btn btn-primary pb-btn-save">💾 Enregistrer</button>
+    </div>
+  </div>
+
+  <!-- === TOAST NOTIFICATION === -->
+  <div class="pb-toast" id="pb-toast-container"></div>
+
+  <!-- === CONFETTI CANVAS === -->
+  <canvas id="confetti-canvas"></canvas>
+
+  <!-- Scripts -->
+  <script src="valeur-config.js"></script>
+  <script src="valeur-components.js"></script>
+  <script src="valeur-storage.js"></script>
+
+  <!-- Module-specific initialization -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      // Init accordion
+      PB_Components.initAccordion('#main-accordion');
+
+      // Init journal drawer
+      var journalDrawer = PB_Components.initJournalDrawer({
+        fabSelector: '#journal-fab',
+        drawerId: 'pb-journal',
+        moduleKey: 'module1',  // À adapter par module
+        maxLength: 1500
+      });
+
+      // Update progress bar
+      var sections = document.querySelectorAll('[data-section]');
+      var totalSections = sections.length;
+      document.getElementById('pb-total-sections').textContent = totalSections;
+
+      // Track section opens
+      var accordion = document.querySelector('.pb-accordion');
+      if (accordion) {
+        accordion.addEventListener('click', function(e) {
+          var btn = e.target.closest('.pb-accordion-btn');
+          if (btn) {
+            var item = btn.closest('.pb-accordion-item');
+            var sectionNum = item.getAttribute('data-section');
+            document.getElementById('pb-current-section').textContent = sectionNum;
+            document.getElementById('pb-progress').value = sectionNum;
+          }
+        });
+      }
+
+      // Mark module as complete on CTA
+      var completeBtn = document.querySelector('.btn-primary');
+      if (completeBtn && completeBtn.textContent.includes('Complété')) {
+        completeBtn.addEventListener('click', function() {
+          try {
+            VALEUR_PROGRESS.complete('module1');  // À adapter
+          } catch (e) {
+            console.log('Module progress tracking not available');
+          }
+        });
+      }
+
+      console.log('✓ Module initialized with premium components');
+    });
+  </script>
+</body>
+</html>
