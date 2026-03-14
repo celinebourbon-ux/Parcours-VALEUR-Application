@@ -1135,9 +1135,9 @@ function sendTrackingSilent() {
       modulesStatus += (i+1) + '. ' + labels[i] + ' : ' + (done ? '\u2713 ' + date : 'non compl\u00e9t\u00e9') + '\n';
     });
     const payload = {
-      service_id:  'EMAILJS_SERVICE_ID',   // \u2190 remplacer par votre Service ID EmailJS
-      template_id: 'EMAILJS_TEMPLATE_TRACKING', // \u2190 remplacer par votre Template ID de tracking
-      user_id:     'EMAILJS_PUBLIC_KEY',   // \u2190 remplacer par votre Public Key EmailJS
+      service_id:  'Questionnaire VALEUR',   // \u2190 remplacer par votre Service ID EmailJS
+      template_id: 'template_xp8cfww', // \u2190 remplacer par votre Template ID de tracking
+      user_id:     'Qamyb35cCRJ5Pulqs',   // \u2190 remplacer par votre Public Key EmailJS
       template_params: {
         to_email:        'celine.bourbon@gmail.com',
         masque_dominant: masque,
